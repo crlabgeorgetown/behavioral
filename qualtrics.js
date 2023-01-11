@@ -318,11 +318,3 @@ class Experiment {
 		// Qualtrics.SurveyEngine.showNextButton()
 	}
 }
-
-fetch("https://raw.githubusercontent.com/jslawjslaw/js-crlab/main/test.csv")
-	.then(response => response.text())
-	.then(text => {
-		const parsed = d3.csvParse(text)
-		const stimuli = Object.keys(parsed).map((key) => parsed[key]["Item"]).filter(item => item !== undefined)
-		new Experiment(stimuli, this).initialize()
-	})
