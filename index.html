@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<title></title>
+		
+</head>
+<body>
+	<canvas id="root"></canvas>
+	<script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+	<script src="./qualtrics.js"></script>
+	<script>
+		fetch("https://raw.githubusercontent.com/jslawjslaw/js-crlab/main/test.csv")
+			.then(response => response.text())
+			.then(text => {
+				const parsed = d3.csvParse(text)
+				const stimuli = Object.keys(parsed).map((key) => parsed[key]["Item"]).filter(item => item !== undefined)
+				new Experiment(stimuli, this).initialize()
+			})
+	</script>
+</body>
+</html>
