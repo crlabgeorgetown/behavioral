@@ -201,7 +201,7 @@ class Renderer {
 	}
 }
 
-class Experiment {
+export class Experiment {
 	constructor(stimuli, engine) {
 		this.engine = engine
 		this.canvas = document.getElementById("root")
