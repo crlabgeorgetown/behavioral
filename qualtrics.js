@@ -238,12 +238,12 @@ class Experiment {
 			let callback
 			if (this.game.isPractice) {
 				this.game = null
-				this.renderer.renderThankYou(this.ctx)
 				callback = () => this.renderer.renderInstructions(this.ctx)
 			} else {
 				callback = () => this.tearDown()
 			}
 
+			this.renderer.renderThankYou(this.ctx)
 			setTimeout(callback, 3000)
 			return
 		}
