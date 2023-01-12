@@ -228,8 +228,12 @@ class Experiment {
 	}
 
 	submitResponse(response, endTime) {
-		Qualtrics.SurveyEngine.addEmbeddedData(`response${this.trial + 1}`, response)
-		Qualtrics.SurveyEngine.addEmbeddedData(`responseTime${this.trial + 1}`, endTime - this.startTime)
+		const key = `response${this.trial + 1}`
+		const timeKey = `responseTime${this.trial + 1}`
+		Qualtrics.SurveyEngine.addEmbeddedData(key, response)
+		Qualtrics.SurveyEngine.setEmbeddedData(key, response)
+		Qualtrics.SurveyEngine.addEmbeddedData(timeKey, endTime - this.startTime)
+		Qualtrics.SurveyEngine.setEmbeddedData(timeKey, endTime - this.startTime)
 	}
 
 	recursiveRender() {
