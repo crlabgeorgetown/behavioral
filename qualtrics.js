@@ -201,7 +201,7 @@ class Renderer {
 	}
 }
 
-export class Experiment {
+class Experiment {
 	constructor(stimuli, engine) {
 		this.engine = engine
 		this.canvas = document.getElementById("root")
@@ -264,7 +264,7 @@ export class Experiment {
 		}, 500)
 	}
 
-	handleResponse(response) {
+	handleResponse(response, endTime) {
 		if (this.game.isPractice && !this.game.isCorrect(response)) {
 			this.renderer.renderGame(this.ctx, "Incorrect!")
 			return () => setTimeout(() => this.recursiveRender(), 2000)
@@ -296,10 +296,10 @@ export class Experiment {
 					callback = this.recursiveRender
 					break
 				case TRUE_RESPONSE:
-					callback = this.handleResponse(true)
+					callback = this.handleResponse(true, endTime)
 					break
 				case FALSE_RESPONSE:
-					callback = this.handleResponse(false)
+					callback = this.handleResponse(false, endTime)
 					break
 			}
 
