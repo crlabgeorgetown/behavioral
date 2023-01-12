@@ -315,6 +315,6 @@ class Experiment {
 
 	tearDown() {
 		this.canvas.remove()
-		Qualtrics.SurveyEngine.showNextButton()
+		this.engine.clickNextButton()
 	}
 }
