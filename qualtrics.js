@@ -228,8 +228,8 @@ class Experiment {
 	}
 
 	submitResponse(response, endTime) {
-		// Qualtrics.SurveyEngine.addEmbeddedData(`response${this.trial + 1}`, response)
-		// Qualtrics.SurveyEngine.addEmbeddedData(`responseTime${this.trial + 1}`, endTime - this.startTime)
+		Qualtrics.SurveyEngine.addEmbeddedData(`response${this.trial + 1}`, response)
+		Qualtrics.SurveyEngine.addEmbeddedData(`responseTime${this.trial + 1}`, endTime - this.startTime)
 	}
 
 	recursiveRender() {
@@ -308,13 +308,13 @@ class Experiment {
 	}
 
 	initialize() {
-		// this.engine.hideNextButton()
-		// document.getElementById("QID1-1-label").remove()`
+		this.engine.hideNextButton()
+		document.getElementById("QID1-1-label").remove()
 		this.renderer.renderInstructions(this.ctx)
 	}
 
 	tearDown() {
 		this.canvas.remove()
-		// Qualtrics.SurveyEngine.showNextButton()
+		Qualtrics.SurveyEngine.showNextButton()
 	}
 }
