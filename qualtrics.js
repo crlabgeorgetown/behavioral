@@ -228,6 +228,7 @@ class Experiment {
 	}
 
 	submitResponse(response, endTime) {
+		debugger
 		this.engine.addEmbeddedData(`response${this.trial + 1}`, response)
 		this.engine.addEmbeddedData(`responseTime${this.trial + 1}`, endTime - this.startTime)
 	}
