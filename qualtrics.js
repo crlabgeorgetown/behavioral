@@ -228,9 +228,8 @@ class Experiment {
 	}
 
 	submitResponse(response, endTime) {
-		debugger
-		this.engine.addEmbeddedData(`response${this.trial + 1}`, response)
-		this.engine.addEmbeddedData(`responseTime${this.trial + 1}`, endTime - this.startTime)
+		Qualtrics.SurveyEngine.addEmbeddedData(`response${this.trial + 1}`, response)
+		Qualtrics.SurveyEngine.addEmbeddedData(`responseTime${this.trial + 1}`, endTime - this.startTime)
 	}
 
 	recursiveRender() {
