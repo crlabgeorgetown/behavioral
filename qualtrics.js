@@ -234,6 +234,7 @@ class Experiment {
 		Qualtrics.SurveyEngine.setEmbeddedData(key, response)
 		Qualtrics.SurveyEngine.addEmbeddedData(timeKey, endTime - this.startTime)
 		Qualtrics.SurveyEngine.setEmbeddedData(timeKey, endTime - this.startTime)
+		debugger
 	}
 
 	recursiveRender() {
