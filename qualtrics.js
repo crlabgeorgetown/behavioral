@@ -232,7 +232,6 @@ class Experiment {
 		const key = `response${this.trial + 1}`
 		const timeKey = `responseTime${this.trial + 1}`
 		if (this.isQualtrics) {
-			debugger
 			Qualtrics.SurveyEngine.addEmbeddedData(key, response)
 			Qualtrics.SurveyEngine.setEmbeddedData(key, response)
 			Qualtrics.SurveyEngine.addEmbeddedData(timeKey, endTime - this.startTime)
