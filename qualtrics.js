@@ -202,7 +202,8 @@ class Renderer {
 }
 
 class Experiment {
-	constructor(stimuli, engine) {
+	constructor(stimuli, engine, isQualtrics) {
+		this.isQualtrics = isQualtrics
 		this.engine = engine
 		this.canvas = document.getElementById("root")
 		this.ctx = this.canvas.getContext("2d")
@@ -230,11 +231,13 @@ class Experiment {
 	submitResponse(response, endTime) {
 		const key = `response${this.trial + 1}`
 		const timeKey = `responseTime${this.trial + 1}`
-		Qualtrics.SurveyEngine.addEmbeddedData(key, response)
-		Qualtrics.SurveyEngine.setEmbeddedData(key, response)
-		Qualtrics.SurveyEngine.addEmbeddedData(timeKey, endTime - this.startTime)
-		Qualtrics.SurveyEngine.setEmbeddedData(timeKey, endTime - this.startTime)
-		debugger
+		if (this.isQualtrics) {
+			debugger
+			Qualtrics.SurveyEngine.addEmbeddedData(key, response)
+			Qualtrics.SurveyEngine.setEmbeddedData(key, response)
+			Qualtrics.SurveyEngine.addEmbeddedData(timeKey, endTime - this.startTime)
+			Qualtrics.SurveyEngine.setEmbeddedData(timeKey, endTime - this.startTime)
+		}
 	}
 
 	recursiveRender() {
@@ -313,13 +316,15 @@ class Experiment {
 	}
 
 	initialize() {
-		this.engine.hideNextButton()
-		document.getElementById("QID1-1-label").remove()
+		if (this.isQualtrics) {
+			this.engine.hideNextButton()
+			document.getElementById("QID1-1-label").remove()
+		}
 		this.renderer.renderInstructions(this.ctx)
 	}
 
 	tearDown() {
 		this.canvas.remove()
-		this.engine.clickNextButton()
+		if (this.isQualtrics) this.engine.clickNextButton()
 	}
 }
