@@ -107,6 +107,10 @@ class Game {
 		return this.stimuli[this.#trial]
 	}
 
+	getTrial() {
+		return this.#trial
+	}
+
 	isCorrect(response) {
 		return this.responses[this.#trial - 1] === response
 	}
@@ -229,8 +233,8 @@ class Experiment {
 	}
 
 	submitResponse(response, endTime) {
-		const key = `response${this.trial + 1}`
-		const timeKey = `responseTime${this.trial + 1}`
+		const key = `response${this.game.getTrial()}`
+		const timeKey = `responseTime${this.game.getTrial()}`
 		if (this.isQualtrics) {
 			Qualtrics.SurveyEngine.setEmbeddedData(key, response)
 			Qualtrics.SurveyEngine.setEmbeddedData(timeKey, endTime - this.startTime)
