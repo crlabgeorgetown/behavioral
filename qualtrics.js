@@ -207,6 +207,7 @@ class Renderer {
 
 class Experiment {
 	constructor(stimuli, engine, isQualtrics) {
+		debugger
 		this.isQualtrics = isQualtrics
 		this.engine = engine
 		this.canvas = document.getElementById("root")
@@ -318,7 +319,6 @@ class Experiment {
 	}
 
 	initialize() {
-		debugger
 		if (this.isQualtrics) {
 			this.engine.hideNextButton()
 			document.getElementById("QID1-1-label").remove()
