@@ -18,7 +18,7 @@
 			.then(text => {
 				const parsed = d3.csvParse(text)
 				const stimuli = Object.keys(parsed).map((key) => parsed[key]["Item"]).filter(item => item !== undefined)
-				new Experiment(stimuli, this, window.location.host === "georgetown.az1.qualtrics.com").initialize()
+				new Experiment(stimuli, this).initialize()
 			})
 	</script>
 </body>

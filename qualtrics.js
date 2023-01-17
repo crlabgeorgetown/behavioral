@@ -206,9 +206,8 @@ class Renderer {
 }
 
 class Experiment {
-	constructor(stimuli, engine, isQualtrics) {
-		debugger
-		this.isQualtrics = isQualtrics
+	constructor(stimuli, engine) {
+		this.isQualtrics = window.location.host === "georgetown.az1.qualtrics.com"
 		this.engine = engine
 		this.canvas = document.getElementById("root")
 		this.ctx = this.canvas.getContext("2d")
