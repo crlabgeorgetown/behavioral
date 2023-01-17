@@ -225,6 +225,8 @@ class Experiment {
 
 		this.clickDisabled = false
 		this.canvasOnClick = this.canvasOnClick.bind(this)
+		this.handleResponse = this.handleResponse.bind(this)
+		this.initialize = this.initialize.bind(this)
 		this.recursiveRender = this.recursiveRender.bind(this)
 		this.submitResponse = this.submitResponse.bind(this)
 		this.tearDown = this.tearDown.bind(this)
@@ -238,7 +240,6 @@ class Experiment {
 		if (this.isQualtrics) {
 			Qualtrics.SurveyEngine.setEmbeddedData(key, response)
 			Qualtrics.SurveyEngine.setEmbeddedData(timeKey, endTime - this.startTime)
-			debugger
 		}
 	}
 
@@ -318,6 +319,7 @@ class Experiment {
 	}
 
 	initialize() {
+		debugger
 		if (this.isQualtrics) {
 			this.engine.hideNextButton()
 			document.getElementById("QID1-1-label").remove()
