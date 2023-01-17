@@ -318,6 +318,7 @@ class Experiment {
 	}
 
 	initialize() {
+		debugger
 		if (this.isQualtrics) {
 			this.engine.hideNextButton()
 			document.getElementById("QID1-1-label").remove()
