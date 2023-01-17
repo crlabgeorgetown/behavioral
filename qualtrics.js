@@ -234,9 +234,10 @@ class Experiment {
 		this.canvas.addEventListener('click', this.canvasOnClick)
 	}
 
-	submitResponse(response, endTime) {
-		const key = `response${this.game.getTrial()}`
-		const timeKey = `responseTime${this.game.getTrial()}`
+	submitResponse(response, endTime, trial) {
+		const key = `response${trial}`
+		const timeKey = `responseTime${trial}`
+		console.log(key)
 		if (this.isQualtrics) {
 			Qualtrics.SurveyEngine.setEmbeddedData(key, response)
 			Qualtrics.SurveyEngine.setEmbeddedData(timeKey, endTime - this.startTime)
@@ -281,7 +282,7 @@ class Experiment {
 			return () => setTimeout(() => this.recursiveRender(), 2000)
 		} 
 		if (!this.game.isPractice) {
-			this.submitResponse(response, endTime)
+			this.submitResponse(response, endTime, this.game.getTrial())
 		}
 		return this.recursiveRender
 	}
@@ -319,7 +320,6 @@ class Experiment {
 	}
 
 	initialize() {
-		debugger
 		if (this.isQualtrics) {
 			this.engine.hideNextButton()
 			document.getElementById("QID1-1-label").remove()
