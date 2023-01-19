@@ -218,33 +218,28 @@ class Experiment {
 		this.stimuli = stimuli
 		this.practiceStimuli = ['bean', 'forer', 'keln']
 		this.practiceStimuliResponses = [true, false, false]
+		this.responses = new Array(stimuli.length).fill("null")
+		this.responseTimes = new Array(stimuli.length).fill("null")
 		this.renderer = new Renderer(
 			'https://as1.ftcdn.net/v2/jpg/01/09/34/96/1000_F_109349658_4J4rge1gHrbVsMcEa2pZeMYQ6v0CetJZ.jpg',
 			'https://as1.ftcdn.net/v2/jpg/01/44/05/94/1000_F_144059489_2zFsnEA3seaxRzTNQg7NVg3SK5jhc8mV.jpg',
 		)
 
+		this.startTime = Date.now()
 		this.clickDisabled = false
 		this.canvasOnClick = this.canvasOnClick.bind(this)
 		this.handleResponse = this.handleResponse.bind(this)
 		this.initialize = this.initialize.bind(this)
 		this.recursiveRender = this.recursiveRender.bind(this)
-		this.submitResponse = this.submitResponse.bind(this)
+		this.submitResponses = this.submitResponses.bind(this)
 		this.tearDown = this.tearDown.bind(this)
 
 		this.canvas.addEventListener('click', this.canvasOnClick)
 	}
 
-	submitResponse(response, endTime, trial) {
-		const key = `response${trial}`
-		const timeKey = `responseTime${trial}`
-		console.log(key)
-		console.log(timeKey)
-		console.log(response)
-		console.log(endTime)
-		if (this.isQualtrics) {
-			Qualtrics.SurveyEngine.setEmbeddedData(key, response)
-			Qualtrics.SurveyEngine.setEmbeddedData(timeKey, endTime - this.startTime)
-		}
+	submitResponses() {
+		Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
+		Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
 	}
 
 	recursiveRender() {
@@ -270,6 +265,7 @@ class Experiment {
 		this.renderer.renderGame(this.ctx, "+")
 		this.clickDisabled = true
 		setTimeout(() => {
+			this.startTime = Date.now()
 			this.renderer.renderGame(this.ctx, this.game.getStimuli())
 			this.clickDisabled = false
 			this.game.advance()
@@ -279,13 +275,14 @@ class Experiment {
 		}, 500)
 	}
 
-	handleResponse(response, endTime) {
+	handleResponse(response, responseTime) {
 		if (this.game.isPractice && !this.game.isCorrect(response)) {
 			this.renderer.renderGame(this.ctx, "Incorrect!")
 			return () => setTimeout(() => this.recursiveRender(), 2000)
 		} 
 		if (!this.game.isPractice) {
-			this.submitResponse(response, endTime, this.game.getTrial())
+			this.responses[this.game.getTrial() - 1] = response
+			this.responseTimes[this.game.getTrial() - 1] = responseTime
 		}
 		return this.recursiveRender
 	}
@@ -311,10 +308,10 @@ class Experiment {
 					callback = this.recursiveRender
 					break
 				case TRUE_RESPONSE:
-					callback = this.handleResponse(true, endTime)
+					callback = this.handleResponse(true, endTime - this.startTime)
 					break
 				case FALSE_RESPONSE:
-					callback = this.handleResponse(false, endTime)
+					callback = this.handleResponse(false, endTime - this.startTime)
 					break
 			}
 
@@ -332,6 +329,9 @@ class Experiment {
 
 	tearDown() {
 		this.canvas.remove()
-		if (this.isQualtrics) this.engine.clickNextButton()
+		if (this.isQualtrics) {
+			this.submitResponses()
+			this.engine.clickNextButton()
+		}
 	}
 }
