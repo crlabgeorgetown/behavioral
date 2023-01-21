@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="./styles.css">
+	<title>Cognitive Recovery Lab</title>
+
+</head>
+<body id="root">  
+    <script
+        src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
+    <script src="./qualtrics_v2.js"></script>
+    <script>
+        fetch("config.json")
+			.then(response => response.json())
+			.then(data => {
+				new Experiment(stimuli, this).initialize()
+			})
+	</script>  
+</body>
+</html>
