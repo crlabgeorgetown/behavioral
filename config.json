@@ -4,6 +4,11 @@
         "forer",
         "keln"
     ],
+    "practiceStimuliAnswers": [
+        true,
+        false,
+        false
+    ],
     "stimuli": [
         "rill",
         "kouse",

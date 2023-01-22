@@ -15,11 +15,9 @@
         crossorigin="anonymous"></script>
     <script src="./qualtrics_v2.js"></script>
     <script>
-        fetch("config.json")
+        fetch("https://jslawjslaw.github.io/js-crlab/config.json")
 			.then(response => response.json())
-			.then(data => {
-				new Experiment(stimuli, this).initialize()
-			})
+			.then(config => new Experiment(config, this))
 	</script>  
 </body>
 </html>
