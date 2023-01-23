@@ -2,7 +2,7 @@ class Experiment {
 	constructor(config, engine) {
 		this.isQualtrics = window.location.host === "georgetown.az1.qualtrics.com"
 		this.engine = engine
-        this.game = new Game(config.stimuli, config.practiceStimuli)
+        this.game = new Game(config.stimuli, config.practiceStimuli, config.practiceStimuliAnswers)
 	}
 }
 
@@ -41,8 +41,10 @@ class Renderer {
     }
 
     setButtonClickHandlers(callbacks) {
-        this.greenButton.on("click", callbacks.greenCallback)
-        this.redButton.on("click", callbacks.redCallback)
+        this.greenButton.off("click")
+        this.redButton.off("click")
+        this.greenButton.click(callbacks.greenCallback)
+        this.redButton.click(callbacks.redCallback)
     }
 
     setClickHandler(callback) {
@@ -60,9 +62,10 @@ class Game {
         trial: 0
     }
 
-	constructor(stimuli, practiceStimuli) {
+	constructor(stimuli, practiceStimuli, practiceStimuliAnswers) {
         this.stimuli = stimuli
         this.practiceStimuli = practiceStimuli
+        this.practiceStimuliAnswers = practiceStimuliAnswers
         this.responses = new Array(stimuli.length).fill("null")
 		this.responseTimes = new Array(stimuli.length).fill("null")
         this.renderer = new Renderer()
@@ -99,10 +102,14 @@ class Game {
         this.#state.hasPracticed = true
         this.#state.trial = 0
         this.renderer.updateText(this.getInstructions())
+        this.renderer.setButtonClickHandlers({
+            greenCallback: () => this.ButtonClickHandler(false),
+            redCallback: () => this.ButtonClickHandler(true)
+        })
     }
 
 	isCorrect(response) {
-		return this.responses[this.#state.trial - 1] === response
+        return this.practiceStimuliAnswers[this.#state.trial - 1] === response
 	}
 
 	advance() {
@@ -118,21 +125,40 @@ class Game {
         }
     }
 
+    ButtonClickHandler(isPracticeRound) {
+        this.#state.isPracticeRound = isPracticeRound
+        this.renderer.setButtonClickHandlers({
+            greenCallback: () => this.ButtonClickResponseHandler(true),
+            redCallback: () => this.ButtonClickResponseHandler(false)
+        })
+        this.start()
+    }
+
     ButtonClickResponseHandler(response) {
-        if (this.#state.isPracticeRound && !this.isCorrect(response)) {
-            this.renderer.updateText("Incorrect")
-            setTimeout(() => this.start(), 2000)
+        if (this.#state.isPracticeRound) {
             clearTimeout(this.timeoutID)
+            if (!this.isCorrect(response)) {
+                this.renderer.updateText("Incorrect")
+                setTimeout(() => this.start(), 2000)
+            } else {
+                this.start()
+            }
+        } else {
+            this.responses[this.#state.trial - 1] = response
+			this.responseTimes[this.#state.trial - 1] = Date.now() - this.startTime
+            debugger
+            this.start()
         }
-        // if (!this.#state.isPracticeRound) {
-        //     consol
-        // }
     }
 
     start() {
         if (this.isDone()) {
 			this.reset()
 			return
+		}
+
+        if (this.timeoutID != null) {
+			clearTimeout(this.timeoutID)
 		}
 
         this.renderer.updateText("+")
