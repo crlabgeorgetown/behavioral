@@ -4,11 +4,11 @@ class Renderer {
     
     constructor(engine) {
         this.engine = engine
-        this.container = $("<div/>", {id: "container", class: "container"})
-        this.textContainer = $("<div/>", {id: "text", class: "text"})
-        this.greenButton = $("<div/>", {id: "greenButton", class: "button green"})
-        this.redButton = $("<div/>", {id: "redButton", class: "button red"})
-        this.buttonContainer = $("<div/>", {id: "buttonContainer", class: "button-container"})
+        this.container = jQuery("<div/>", {id: "container", class: "container"})
+        this.textContainer = jQuery("<div/>", {id: "text", class: "text"})
+        this.greenButton = jQuery("<div/>", {id: "greenButton", class: "button green"})
+        this.redButton = jQuery("<div/>", {id: "redButton", class: "button red"})
+        this.buttonContainer = jQuery("<div/>", {id: "buttonContainer", class: "button-container"})
 
         this.setButtonClickHandlers = this.setButtonClickHandlers.bind(this)
     }
@@ -16,11 +16,11 @@ class Renderer {
     initialize() {
         if (IS_QUALTRICS) {
             this.engine.hideNextButton()
-            $("QID1-1-label").remove()
+            jQuery("QID1-1-label").remove()
         }
     
         debugger
-        $("#root").append(
+        jQuery("#root").append(
             this.container.append(
                 this.textContainer, 
                 this.buttonContainer.append([
@@ -51,7 +51,7 @@ class Renderer {
     }
 
     setClickHandler(callback) {
-        $("#root").one("click", () => {
+        jQuery("#root").one("click", () => {
             this.showButtons()
             callback()
         })
