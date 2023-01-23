@@ -13,11 +13,11 @@
         src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
         crossorigin="anonymous"></script>
-    <script src="./qualtrics_v2.js"></script>
+    <script src="./qualtrics.js"></script>
     <script>
-        fetch("https://jslawjslaw.github.io/js-crlab/config.json")
+        fetch("https://jslawjslaw.github.io/js-crlab/v2/config.json")
 			.then(response => response.json())
-			.then(config => new Experiment(config, this))
+			.then(config => new Game(config, this))
 	</script>  
 </body>
 </html>

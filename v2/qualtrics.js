@@ -1,11 +1,3 @@
-class Experiment {
-	constructor(config, engine) {
-		this.isQualtrics = window.location.host === "georgetown.az1.qualtrics.com"
-		this.engine = engine
-        this.game = new Game(config.stimuli, config.practiceStimuli, config.practiceStimuliAnswers)
-	}
-}
-
 class Renderer {
     
     constructor() {
@@ -62,12 +54,14 @@ class Game {
         trial: 0
     }
 
-	constructor(stimuli, practiceStimuli, practiceStimuliAnswers) {
-        this.stimuli = stimuli
-        this.practiceStimuli = practiceStimuli
-        this.practiceStimuliAnswers = practiceStimuliAnswers
-        this.responses = new Array(stimuli.length).fill("null")
-		this.responseTimes = new Array(stimuli.length).fill("null")
+	constructor(config, engine) {
+        this.engine = engine
+        this.stimuli = config.stimuli
+        this.practiceStimuli = config.practiceStimuli
+        this.practiceStimuliAnswers = config.practiceStimuliAnswers
+        this.responses = new Array(config.stimuli.length).fill("null")
+		this.responseTimes = new Array(config.stimuli.length).fill("null")
+        this.isQualtrics = window.location.host === "georgetown.az1.qualtrics.com"
         this.renderer = new Renderer()
 
         this.start = this.start.bind(this)
@@ -146,19 +140,18 @@ class Game {
         } else {
             this.responses[this.#state.trial - 1] = response
 			this.responseTimes[this.#state.trial - 1] = Date.now() - this.startTime
-            debugger
             this.start()
         }
     }
 
     start() {
-        if (this.isDone()) {
-			this.reset()
-			return
-		}
-
         if (this.timeoutID != null) {
 			clearTimeout(this.timeoutID)
+		}
+
+        if (this.isDone()) {
+			this.teardown()
+			return
 		}
 
         this.renderer.updateText("+")
@@ -168,5 +161,19 @@ class Game {
 			this.advance()
 			this.timeoutID = setTimeout(this.start, 5000)
 		}, 500)
+    }
+
+    teardown() {
+        if (this.#state.isPracticeRound) {
+            this.reset()
+        } else {
+            this.renderer.hideButtons()
+            this.renderer.updateText("You've completed this exercise!")
+            if (this.isQualtrics) {
+                Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
+		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
+                this.engine.clickNextButton()
+            }
+        }
     }
 }
