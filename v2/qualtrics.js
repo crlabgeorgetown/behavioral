@@ -19,6 +19,7 @@ class Renderer {
             $("QID1-1-label").remove()
         }
     
+        debugger
         $("#root").append(
             this.container.append(
                 this.textContainer, 
