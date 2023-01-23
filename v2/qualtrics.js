@@ -1,11 +1,23 @@
+const IS_QUALTRICS = window.location.host === "georgetown.az1.qualtrics.com"
+
 class Renderer {
     
-    constructor() {
+    constructor(engine) {
+        this.engine = engine
         this.container = $("<div/>", {id: "container", class: "container"})
         this.textContainer = $("<div/>", {id: "text", class: "text"})
         this.greenButton = $("<div/>", {id: "greenButton", class: "button green"})
         this.redButton = $("<div/>", {id: "redButton", class: "button red"})
         this.buttonContainer = $("<div/>", {id: "buttonContainer", class: "button-container"})
+
+        this.setButtonClickHandlers = this.setButtonClickHandlers.bind(this)
+    }
+
+    initialize() {
+        if (IS_QUALTRICS) {
+            this.engine.hideNextButton()
+            $("QID1-1-label").remove()
+        }
     
         $("#root").append(
             this.container.append(
@@ -16,8 +28,6 @@ class Renderer {
                 ])
             )
         )
-
-        this.setButtonClickHandlers = this.setButtonClickHandlers.bind(this)
     }
 
     hideButtons() {
@@ -61,12 +71,12 @@ class Game {
         this.practiceStimuliAnswers = config.practiceStimuliAnswers
         this.responses = new Array(config.stimuli.length).fill("null")
 		this.responseTimes = new Array(config.stimuli.length).fill("null")
-        this.isQualtrics = window.location.host === "georgetown.az1.qualtrics.com"
-        this.renderer = new Renderer()
+        this.renderer = new Renderer(engine)
 
         this.start = this.start.bind(this)
         this.ButtonClickResponseHandler = this.ButtonClickResponseHandler.bind(this)
 
+        this.renderer.initialize()
         this.renderer.hideButtons()
         this.renderer.updateText(this.getInstructions())
         this.renderer.setClickHandler(this.start)
@@ -169,7 +179,7 @@ class Game {
         } else {
             this.renderer.hideButtons()
             this.renderer.updateText("You've completed this exercise!")
-            if (this.isQualtrics) {
+            if (IS_QUALTRICS) {
                 Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
                 this.engine.clickNextButton()
