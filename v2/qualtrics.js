@@ -53,7 +53,8 @@ class Renderer {
             this.engine.hideNextButton()
         }
     
-        jQuery("body").empty().append(
+        jQuery("body").children().hide()
+        jQuery("body").append(
             this.container.append(
                 this.textContainer, 
                 this.buttonContainer.append([

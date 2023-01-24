@@ -5,9 +5,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Cognitive Recovery Lab</title>
-
-</head>
-<body> 
     <script
         src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
@@ -15,8 +12,11 @@
     <script src="./qualtrics.js"></script>
     <script>
         fetch("https://jslawjslaw.github.io/js-crlab/v2/test.config.json")
-			.then(response => response.json())
-			.then(config => new Game(config, this))
-	</script>  
+            .then(response => response.json())
+            .then(config => new Game(config, this))
+    </script>  
+
+</head>
+<body> 
 </body>
 </html>
