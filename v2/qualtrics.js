@@ -232,7 +232,10 @@ class Game {
             if (IS_QUALTRICS) {
                 Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
-                setTimeout(this.engine.clickNextButton, 2000)                
+                setTimeout(() => {
+                    this.engine.clickNextButton()
+                    debugger
+                }, 2000)                
             }
         }
     }
