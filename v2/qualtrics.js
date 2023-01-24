@@ -118,6 +118,7 @@ class Game {
         this.start = this.start.bind(this)
         this.ButtonClickResponseHandler = this.ButtonClickResponseHandler.bind(this)
         this.ButtonClickHandler = this.ButtonClickHandler.bind(this)
+        this.teardown = this.teardown.bind(this)
 
         this.renderer.initialize()
         this.renderer.hideButtons()
@@ -231,8 +232,7 @@ class Game {
             if (IS_QUALTRICS) {
                 Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
-                this.engine.clickNextButton()
-                debugger
+                setTimeout(this.engine.clickNextButton, 2000)                
             }
         }
     }
