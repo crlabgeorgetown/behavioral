@@ -18,8 +18,7 @@ class Renderer {
             this.engine.hideNextButton()
         }
     
-        debugger
-        jQuery(".Wrapper").empty().append(
+        jQuery("body").empty().append(
             this.container.append(
                 this.textContainer, 
                 this.buttonContainer.append([
@@ -45,12 +44,18 @@ class Renderer {
     setButtonClickHandlers(callbacks) {
         this.greenButton.off("click")
         this.redButton.off("click")
-        this.greenButton.click(callbacks.greenCallback)
-        this.redButton.click(callbacks.redCallback)
+        this.greenButton.click((event) => {
+            event.preventDefault()
+            callbacks.greenCallback()
+        })
+        this.redButton.click((event) => {
+            event.preventDefault()
+            callbacks.redCallback()
+        })
     }
 
     setClickHandler(callback) {
-        jQuery(".Wrapper").one("click", () => {
+        jQuery("body").one("click", () => {
             this.showButtons()
             callback()
         })
@@ -61,7 +66,8 @@ class Game {
     #state = {
         hasPracticed: false,
         isPracticeRound: true,
-        trial: 0
+        trial: 0,
+        clickIsDisabled: false
     }
 
 	constructor(config, engine) {
@@ -75,6 +81,7 @@ class Game {
 
         this.start = this.start.bind(this)
         this.ButtonClickResponseHandler = this.ButtonClickResponseHandler.bind(this)
+        this.ButtonClickHandler = this.ButtonClickHandler.bind(this)
 
         this.renderer.initialize()
         this.renderer.hideButtons()
@@ -139,10 +146,14 @@ class Game {
     }
 
     ButtonClickResponseHandler(response) {
+        if (this.#state.clickIsDisabled) {
+            return
+        }
         if (this.#state.isPracticeRound) {
             clearTimeout(this.timeoutID)
             if (!this.isCorrect(response)) {
                 this.renderer.updateText("Incorrect")
+                this.#state.clickIsDisabled = true
                 setTimeout(() => this.start(), 2000)
             } else {
                 this.start()
@@ -165,9 +176,11 @@ class Game {
 		}
 
         this.renderer.updateText("+")
+        this.#state.clickIsDisabled = true
         setTimeout(() => {
 			this.startTime = Date.now()
 			this.renderer.updateText(this.getStimuli())
+            this.#state.clickIsDisabled = false
 			this.advance()
 			this.timeoutID = setTimeout(this.start, 5000)
 		}, 500)
