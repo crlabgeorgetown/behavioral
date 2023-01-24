@@ -65,6 +65,10 @@ class Renderer {
         )
     }
 
+    showBody() {
+        jQuery("body").children().show()
+    }
+
     hideButtons() {
         this.buttonContainer.hide()
     }
@@ -233,8 +237,8 @@ class Game {
                 Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
                 setTimeout(() => {
+                    this.renderer.showBody()
                     this.engine.clickNextButton()
-                    debugger
                 }, 2000)                
             }
         }
