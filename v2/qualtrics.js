@@ -16,11 +16,9 @@ class Renderer {
     initialize() {
         if (IS_QUALTRICS) {
             this.engine.hideNextButton()
-            jQuery("QID1-1-label").remove()
         }
     
-        debugger
-        jQuery("#root").append(
+        jQuery(".Wrapper").empty().append(
             this.container.append(
                 this.textContainer, 
                 this.buttonContainer.append([
@@ -51,7 +49,7 @@ class Renderer {
     }
 
     setClickHandler(callback) {
-        jQuery("#root").one("click", () => {
+        jQuery(".Wrapper").one("click", () => {
             this.showButtons()
             callback()
         })
