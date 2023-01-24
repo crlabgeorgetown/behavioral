@@ -18,6 +18,7 @@ class Renderer {
             this.engine.hideNextButton()
         }
     
+        debugger
         jQuery(".Wrapper").empty().append(
             this.container.append(
                 this.textContainer, 
