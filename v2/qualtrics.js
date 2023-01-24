@@ -4,11 +4,46 @@ class Renderer {
     
     constructor(engine) {
         this.engine = engine
-        this.container = jQuery("<div/>", {id: "container", class: "container"})
-        this.textContainer = jQuery("<div/>", {id: "text", class: "text"})
-        this.greenButton = jQuery("<div/>", {id: "greenButton", class: "button green"})
-        this.redButton = jQuery("<div/>", {id: "redButton", class: "button red"})
-        this.buttonContainer = jQuery("<div/>", {id: "buttonContainer", class: "button-container"})
+        this.container = jQuery("<div/>", {id: "container", css: {
+            "display": "flex",
+            "flex-direction": "column",
+            "min-height": "100vh"
+        }})
+        this.textContainer = jQuery("<div/>", {id: "text", css: {
+            "text-align": "center",
+            "padding-top": "15vh",
+            "padding-bottom": "15vh",
+            "font-size": "40pt"
+        }})
+        this.greenButton = jQuery("<div/>", {id: "greenButton", css: {
+            "margin-left": "auto",
+            "margin-right": "auto",
+            "justify-content": "center",
+            "border-radius": "50%",
+            "width": "200px",
+            "height": "200px",
+            "background-color": "#34eb43"
+        }}).hover(
+            () => this.greenButton.css("background-color", "#2dc93a"),
+            () => this.greenButton.css("background-color", "#34eb43")
+        )
+        this.redButton = jQuery("<div/>", {id: "redButton", css: {
+            "margin-left": "auto",
+            "margin-right": "auto",
+            "justify-content": "center",
+            "border-radius": "50%",
+            "width": "200px",
+            "height": "200px",
+            "background-color": "#eb3434"
+        }}).hover(
+            () => this.redButton.css("background-color", "#d52f2f"),
+            () => this.redButton.css("background-color", "#eb3434")
+        )
+        this.buttonContainer = jQuery("<div/>", {id: "buttonContainer", css: {
+            "display": "flex",
+            "flex-direction": "row",
+            "justify-content": "center"
+        }})
 
         this.setButtonClickHandlers = this.setButtonClickHandlers.bind(this)
     }
