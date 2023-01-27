@@ -7,7 +7,8 @@ class Renderer {
         this.container = jQuery("<div/>", {id: "container", css: {
             "display": "flex",
             "flex-direction": "column",
-            "min-height": "100vh"
+            "min-height": "100vh",
+            "background-color": "#f0f0f0"
         }})
         this.textContainer = jQuery("<div/>", {id: "text", css: {
             "text-align": "center",
