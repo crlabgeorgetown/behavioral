@@ -49,12 +49,7 @@ class Renderer {
     }
 
     initialize() {
-        debugger
-        if (IS_QUALTRICS) {
-            this.engine.hideNextButton()
-        }
-    
-        jQuery("#Questions").remove()
+        jQuery("body").children().hide()
         jQuery("body").append(
             this.container.append(
                 this.textContainer, 
@@ -64,6 +59,11 @@ class Renderer {
                 ])
             )
         )
+    }
+
+    showNextButton() {
+        debugger
+        jQuery("#NextButton").show()
     }
 
     hideButtons() {
