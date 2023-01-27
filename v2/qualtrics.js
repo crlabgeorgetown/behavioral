@@ -235,6 +235,7 @@ class Game {
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
                 setTimeout(() => {
                     // this.engine.showNextButton()
+                    this.renderer.showNextButton()
                     this.engine.clickNextButton()
                 }, 500)                
             }
