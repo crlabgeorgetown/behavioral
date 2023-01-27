@@ -66,6 +66,7 @@ class Renderer {
     }
 
     showNextButton() {
+        debugger
         jQuery("#NextButton").show()
     }
 
@@ -239,7 +240,7 @@ class Game {
                 setTimeout(() => {
                     this.renderer.showNextButton()
                     this.engine.clickNextButton()
-                }, 2000)                
+                }, 500)                
             }
         }
     }
