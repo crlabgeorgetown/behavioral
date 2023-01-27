@@ -238,7 +238,7 @@ class Game {
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
                 setTimeout(() => {
                     this.renderer.showBody()
-                    this.engine.clickNextButton()
+                    // this.engine.clickNextButton()
                 }, 2000)                
             }
         }
