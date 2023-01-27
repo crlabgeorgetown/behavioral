@@ -49,6 +49,7 @@ class Renderer {
     }
 
     initialize() {
+        debugger
         if (IS_QUALTRICS) {
             this.engine.hideNextButton()
         }
