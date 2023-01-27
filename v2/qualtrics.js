@@ -49,7 +49,6 @@ class Renderer {
     }
 
     initialize() {
-        jQuery("body").append(jQuery("#NextButton"))
         jQuery("body").children().hide()
         jQuery("body").append(
             this.container.append(
@@ -63,7 +62,7 @@ class Renderer {
     }
 
     showNextButton() {
-        jQuery("#NextButton").show()
+        jQuery("body").children().show()
     }
 
     hideButtons() {
