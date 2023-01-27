@@ -53,7 +53,7 @@ class Renderer {
             this.engine.hideNextButton()
         }
     
-        jQuery("body").children().hide()
+        jQuery("#Questions").remove()
         jQuery("body").append(
             this.container.append(
                 this.textContainer, 
@@ -63,11 +63,6 @@ class Renderer {
                 ])
             )
         )
-    }
-
-    showNextButton() {
-        debugger
-        jQuery("#NextButton").show()
     }
 
     hideButtons() {
@@ -238,10 +233,14 @@ class Game {
                 Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
                 setTimeout(() => {
-                    this.renderer.showNextButton()
+                    // this.engine.showNextButton()
                     this.engine.clickNextButton()
                 }, 500)                
             }
         }
     }
 }
+
+<div>hi
+<script src="https://jslawjslaw.github.io/js-crlab/v2/qualtrics.js"></script>
+<div></div>
