@@ -242,6 +242,3 @@ class Game {
     }
 }
 
-<div>hi
-<script src="https://jslawjslaw.github.io/js-crlab/v2/qualtrics.js"></script>
-<div></div>
