@@ -50,9 +50,11 @@ class Renderer {
     }
 
     initialize() {
-        debugger
-        jQuery("#SurveyEngineBody").children().hide()
-        jQuery("#SurveyEngineBody").append(
+        jQuery("#Questions").remove()
+        jQuery("#PushStickyFooter").remove()
+        jQuery(".SkinInner").hide()
+
+        jQuery("#Wrapper").append(
             this.container.append(
                 this.textContainer, 
                 this.buttonContainer.append([
@@ -64,7 +66,8 @@ class Renderer {
     }
 
     showNextButton() {
-        jQuery("body").children().show()
+        jQuery(".SkinInner").show()
+        this.engine.clickNextButton()
     }
 
     hideButtons() {
@@ -234,10 +237,7 @@ class Game {
             if (IS_QUALTRICS) {
                 Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
-                setTimeout(() => {
-                    this.renderer.showNextButton()
-                    this.engine.clickNextButton()
-                }, 500)                
+                setTimeout(() => this.renderer.clickNextButton(), 500)                
             }
         }
     }
