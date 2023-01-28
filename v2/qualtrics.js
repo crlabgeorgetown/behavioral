@@ -50,8 +50,9 @@ class Renderer {
     }
 
     initialize() {
-        jQuery("body").children().hide()
-        jQuery("body").append(
+        debugger
+        jQuery("#SurveyEngineBody").children().hide()
+        jQuery("#SurveyEngineBody").append(
             this.container.append(
                 this.textContainer, 
                 this.buttonContainer.append([
@@ -166,7 +167,7 @@ class Game {
 	}
 
     getInstructions() {
-        const instructions = "Instructions: click the green circle if the text is a word, otherwise click the red circle."
+        const instructions = "You will see a string of letters on the screen. Some of these letter strings are real words. Others are not real words"
         if (!this.#state.hasPracticed) {
             return instructions + " Click anywhere to begin."
         } else {
