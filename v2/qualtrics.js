@@ -65,7 +65,7 @@ class Renderer {
         )
     }
 
-    showNextButton() {
+    clickNextButton() {
         jQuery(".SkinInner").show()
         this.engine.clickNextButton()
     }
