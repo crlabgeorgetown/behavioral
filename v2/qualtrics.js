@@ -1,5 +1,15 @@
 const IS_QUALTRICS = window.location.host === "georgetown.az1.qualtrics.com"
 
+class TrialType {
+    static Practice = new TrialType("practice")
+    static Experiment = new TrialType("experiment")
+  
+    constructor(name) {
+      this.name = name
+    }
+}
+
+
 class Renderer {
     
     constructor(engine) {
@@ -65,11 +75,6 @@ class Renderer {
         )
     }
 
-    clickNextButton() {
-        // jQuery(".SkinInner").show()
-        this.engine.clickNextButton()
-    }
-
     hideButtons() {
         this.buttonContainer.hide()
     }
@@ -104,20 +109,21 @@ class Renderer {
 }
 
 class Game {
-    #state = {
+    state = {
         hasPracticed: false,
-        isPracticeRound: true,
+        trialType: TrialType.Practice,
         trial: 0,
         clickIsDisabled: false
     }
 
 	constructor(config, engine) {
         this.engine = engine
-        this.stimuli = config.stimuli
-        this.practiceStimuli = config.practiceStimuli
-        this.practiceStimuliAnswers = config.practiceStimuliAnswers
-        this.responses = new Array(config.stimuli.length).fill("null")
-		this.responseTimes = new Array(config.stimuli.length).fill("null")
+        this.config = config
+        this.stimuli = []
+        this.responses = []
+        this.answers = []
+        this.trialType = []
+		this.responseTimes = []
         this.renderer = new Renderer(engine)
 
         this.start = this.start.bind(this)
@@ -152,8 +158,8 @@ class Game {
 	}
 
     reset() {
-        this.#state.hasPracticed = true
-        this.#state.trial = 0
+        this.state.hasPracticed = true
+        this.state.trial = 0
         this.renderer.updateText(this.getInstructions())
         this.renderer.setButtonClickHandlers({
             greenCallback: () => this.ButtonClickHandler(false),
@@ -162,15 +168,15 @@ class Game {
     }
 
 	isCorrect(response) {
-        return this.practiceStimuliAnswers[this.#state.trial - 1] === response
+        return this.config[this.state.trialType][this.state.trial - 1] === response
 	}
 
 	advance() {
-		this.#state.trial++
+		this.state.trial++
 	}
 
     getInstructions() {
-        const instructions = "You will see a string of letters on the screen. Some of these letter strings are real words. Others are not real words"
+        const instructions = "You will see a string of letters on the screen. Some of these letter strings are real words. Others are not real words."
         if (!this.#state.hasPracticed) {
             return instructions + " Click anywhere to begin."
         } else {
@@ -179,7 +185,7 @@ class Game {
     }
 
     ButtonClickHandler(isPracticeRound) {
-        this.#state.isPracticeRound = isPracticeRound
+        this.state.isPracticeRound = isPracticeRound
         this.renderer.setButtonClickHandlers({
             greenCallback: () => this.ButtonClickResponseHandler(true),
             redCallback: () => this.ButtonClickResponseHandler(false)
@@ -188,7 +194,7 @@ class Game {
     }
 
     ButtonClickResponseHandler(response) {
-        if (this.#state.clickIsDisabled) {
+        if (this.state.clickIsDisabled) {
             return
         }
         if (this.#state.isPracticeRound) {
@@ -237,7 +243,7 @@ class Game {
             if (IS_QUALTRICS) {
                 Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
 		        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
-                setTimeout(() => this.renderer.clickNextButton(), 500)                
+                setTimeout(() => this.engine.clickNextButton(), 500)                
             }
         }
     }

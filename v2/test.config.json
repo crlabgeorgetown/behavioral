@@ -1,23 +1,54 @@
 {
-    "practiceStimuli": [
-        "bean",
-        "forer",
-        "keln"
+    "practice": [
+        {
+            "stimuli": "bean",
+            "answer": true
+        },
+        {
+            "stimuli": "forer",
+            "answer": false
+        },
+        {
+            "stimuli": "keln",
+            "answer": false
+        }
     ],
-    "practiceStimuliAnswers": [
-        true,
-        false,
-        false
-    ],
-    "stimuli": [
-        "rill",
-        "kouse",
-        "skirp",
-        "thumb",
-        "toast",
-        "belve",
-        "rough",
-        "hoap",
-        "sown"
+    "experiment": [
+        {
+            "stimuli": "rill",
+            "answer": true
+        },
+        {
+            "stimuli": "kouse",
+            "answer": false
+        },
+        {
+            "stimuli": "skirp",
+            "answer": false
+        },
+        {
+            "stimuli": "thumb",
+            "answer": true
+        },
+        {
+            "stimuli": "toast",
+            "answer": true
+        },
+        {
+            "stimuli": "belve",
+            "answer": false
+        },
+        {
+            "stimuli": "rough",
+            "answer": true
+        },
+        {
+            "stimuli": "hoap",
+            "answer": false
+        },
+        {
+            "stimuli": "sown",
+            "answer": true
+        }
     ]
 }
