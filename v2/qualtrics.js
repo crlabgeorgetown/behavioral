@@ -159,6 +159,7 @@ class Renderer {
     initialize(clickHandlers) {
         jQuery("#Questions").remove()
         jQuery("#PushStickyFooter").remove()
+        jQuery("#Plug").hide()
         jQuery(".SkinInner").hide()
 
         jQuery("#Wrapper").append(
@@ -351,7 +352,7 @@ class Game {
         Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
         Qualtrics.SurveyEngine.setEmbeddedData("stimuli", this.stimuli.join(","))
         Qualtrics.SurveyEngine.setEmbeddedData("answers", this.answers.join(","))
-        Qualtrics.SurveyEngine.setEmbeddedData("trialType", this.trialType.join(","))
+        Qualtrics.SurveyEngine.setEmbeddedData("trialTypes", this.trialTypes.join(","))
     }
 
     teardown() {
