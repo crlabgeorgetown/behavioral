@@ -353,6 +353,7 @@ class Game {
         Qualtrics.SurveyEngine.setEmbeddedData("stimuli", this.stimuli.join(","))
         Qualtrics.SurveyEngine.setEmbeddedData("answers", this.answers.join(","))
         Qualtrics.SurveyEngine.setEmbeddedData("trialTypes", this.trialTypes.join(","))
+        Qualtrics.SurveyEngine.setEmbeddedData("userAgent", navigator.userAgent)
     }
 
     teardown() {
