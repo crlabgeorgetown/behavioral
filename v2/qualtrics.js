@@ -157,16 +157,37 @@ class Renderer {
     }
 
     renderInstructions() {
-        this.nextButton.show()
-        this.previousButton.show()
-        this.buttonContainer.hide()
-        this.labelContainer.hide()
-        if (this.state.instructionScreen === 0) {
-            this.previousButton.hide()
-        }
-        if (this.state.instructionScreen === 1) {
-            this.buttonContainer.show()
-            this.labelContainer.show()
+        switch (this.state.instructionScreen) {
+            case 0:
+                this.labelContainer.hide()
+                this.instructionButtonContainer.hide()
+                this.buttonContainer.show()
+                this.redButton.hide()
+                this.greenButton.hide()
+                this.mouseButton.show()
+                this.trackpadButton.show()
+                this.touchscreenButton.show()
+                break
+            case 1:
+                this.labelContainer.hide()
+                this.instructionButtonContainer.show()
+                this.buttonContainer.hide()
+                this.nextButton.show()
+                this.previousButton.hide()
+                break
+            case 2:
+                this.labelContainer.show()
+                this.buttonContainer.show()
+                this.mouseButton.hide()
+                this.trackpadButton.hide()
+                this.touchscreenButton.hide()
+                break
+            default:
+                this.nextButton.show()
+                this.previousButton.show()
+                this.buttonContainer.hide()
+                this.labelContainer.hide()
+                break  
         }
         this.updateText(this.state.getInstructions())
     }
