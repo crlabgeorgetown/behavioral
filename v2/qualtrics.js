@@ -118,75 +118,77 @@ class Renderer {
             () => this.previousButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
             () => this.previousButton.css("background-color", "#A8A8A8")
         )
-        this.mouseButton = jQuery('<div id="mouseButton">Next &raquo;</div>').css({
-            "color": "#000000",
+        this.inputDeviceContainer = jQuery("<div/>", {id: "buttonContainer", css: {
+            "display": "flex",
+            "flex-direction": "row",
+            "justify-content": "flex-end",
+            "min-width": "100%",
+            "margin-top": "5%",
+            "margin-bottom": "auto",
+        }})
+        this.touchscreenButton = jQuery('<img id="touchscreenButton" src="https://jslawjslaw.github.io/js-crlab/static/touchscreen.png"/>').css({
             "background": "#A8A8A8",
-            "font-size": "3vw",
-            "padding": "0.5em",
+            "width": "15%",
             "margin-left": "auto",
-            "margin-right": "5vw"
-
+            "margin-right": "auto"
         }).hover(
-            () => this.nextButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
-            () => this.nextButton.css("background-color", "#A8A8A8")
+            () => this.nextButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+            () => this.nextButton.css("background", "#A8A8A8")
         )
-        this.trackpadButton = jQuery('<div id="mouseButton">Next &raquo;</div>').css({
-            "color": "#000000",
+        this.trackpadButton = jQuery('<img id="trackpadButton" src="https://jslawjslaw.github.io/js-crlab/static/trackpad.png"/>').css({
             "background": "#A8A8A8",
-            "font-size": "3vw",
-            "padding": "0.5em",
+            "width": "15%",
             "margin-left": "auto",
-            "margin-right": "5vw"
-
+            "margin-right": "auto"
         }).hover(
-            () => this.nextButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
-            () => this.nextButton.css("background-color", "#A8A8A8")
+            () => this.nextButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+            () => this.nextButton.css("background", "#A8A8A8")
         )
-        this.touchscreenButton = jQuery('<div id="mouseButton">Next &raquo;</div>').css({
-            "color": "#000000",
+        this.mouseButton = jQuery('<img id="mouseButton" src="https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png"/>').css({
             "background": "#A8A8A8",
-            "font-size": "3vw",
-            "padding": "0.5em",
+            "width": "15%",
             "margin-left": "auto",
-            "margin-right": "5vw"
-
+            "margin-right": "auto"
         }).hover(
-            () => this.nextButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
-            () => this.nextButton.css("background-color", "#A8A8A8")
+            () => this.nextButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+            () => this.nextButton.css("background", "#A8A8A8")
+        )
+        this.otherButton = jQuery('<img id="otherButton" src="https://jslawjslaw.github.io/js-crlab/static/joystick.png"/>').css({
+            "background": "#A8A8A8",
+            "width": "15%",
+            "margin-left": "auto",
+            "margin-right": "auto"
+        }).hover(
+            () => this.nextButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+            () => this.nextButton.css("background", "#A8A8A8")
         )
     }
 
     renderInstructions() {
         switch (this.state.instructionScreen) {
             case 0:
-                this.labelContainer.hide()
                 this.instructionButtonContainer.hide()
-                this.buttonContainer.show()
-                this.redButton.hide()
-                this.greenButton.hide()
-                this.mouseButton.show()
-                this.trackpadButton.show()
-                this.touchscreenButton.show()
+                this.buttonContainer.hide()
+                this.labelContainer.hide()
+                this.inputDeviceContainer.show()
                 break
             case 1:
-                this.labelContainer.hide()
                 this.instructionButtonContainer.show()
                 this.buttonContainer.hide()
-                this.nextButton.show()
-                this.previousButton.hide()
+                this.labelContainer.hide()
+                this.inputDeviceContainer.hide()
                 break
             case 2:
-                this.labelContainer.show()
+                this.instructionButtonContainer.show()
                 this.buttonContainer.show()
-                this.mouseButton.hide()
-                this.trackpadButton.hide()
-                this.touchscreenButton.hide()
+                this.labelContainer.show()
+                this.inputDeviceContainer.hide()
                 break
             default:
-                this.nextButton.show()
-                this.previousButton.show()
+                this.instructionButtonContainer.show()
                 this.buttonContainer.hide()
                 this.labelContainer.hide()
+                this.inputDeviceContainer.hide()
                 break  
         }
         this.updateText(this.state.getInstructions())
@@ -225,12 +227,14 @@ class Renderer {
         jQuery("#Wrapper").append(
             this.container.append(
                 this.textContainer,
+                this.inputDeviceContainer.append([
+                    this.mouseButton,
+                    this.touchscreenButton,
+                    this.trackpadButton,
+                ]),
                 this.buttonContainer.append([
                     this.greenButton, 
                     this.redButton,
-                    this.mouseButton,
-                    this.touchscreenButton,
-                    this.trackpadButton
                 ]),
                 this.labelContainer.append([
                     this.greenLabel,
@@ -313,16 +317,27 @@ class Game {
         this.previousButtonClickHandler = this.previousButtonClickHandler.bind(this)
         this.responseClickHandler = this.responseClickHandler.bind(this)
         this.againButtonClickHandler = this.againButtonClickHandler.bind(this)
+        this.inputDeviceClickHandler = this.inputDeviceClickHandler.bind(this)
         this.teardown = this.teardown.bind(this)
 
         this.renderer.initialize({
             "nextButton": this.nextButtonClickHandler,
             "previousButton": this.previousButtonClickHandler,
             "greenButton": () => this.responseClickHandler(true),
-            "redButton": () => this.responseClickHandler(false)
+            "redButton": () => this.responseClickHandler(false),
+            "mouseButton": () => this.inputDeviceClickHandler("mouse"),
+            "trackpadButton": () => this.inputDeviceClickHandler("trackpad"),
+            "touchscreenButton": () => this.inputDeviceClickHandler("touchscreen"),
+            "other": () => this.inputDeviceClickHandler("other"),
         })
         this.renderer.renderInstructions()
 	}
+
+    inputDeviceClickHandler(inputDevice) {
+        this.state.instructionScreen++
+        this.inputDevice = inputDevice
+        this.renderer.renderInstructions()
+    }
     
     nextButtonClickHandler() {
         this.state.instructionScreen++
@@ -417,6 +432,7 @@ class Game {
         Qualtrics.SurveyEngine.setEmbeddedData("answers", this.answers.join(","))
         Qualtrics.SurveyEngine.setEmbeddedData("trialTypes", this.trialTypes.join(","))
         Qualtrics.SurveyEngine.setEmbeddedData("userAgent", navigator.userAgent)
+        Qualtrics.SurveyEngine.setEmbeddedData("inputDevice", this.inputDevice)
     }
 
     teardown() {
