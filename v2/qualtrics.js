@@ -132,8 +132,8 @@ class Renderer {
             "margin-left": "auto",
             "margin-right": "auto"
         }).hover(
-            () => this.nextButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.nextButton.css("background", "#A8A8A8")
+            () => this.touchscreenButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+            () => this.touchscreenButton.css("background", "#A8A8A8")
         )
         this.trackpadButton = jQuery('<img id="trackpadButton" src="https://jslawjslaw.github.io/js-crlab/static/trackpad.png"/>').css({
             "background": "#A8A8A8",
@@ -141,8 +141,8 @@ class Renderer {
             "margin-left": "auto",
             "margin-right": "auto"
         }).hover(
-            () => this.nextButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.nextButton.css("background", "#A8A8A8")
+            () => this.trackpadButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+            () => this.trackpadButton.css("background", "#A8A8A8")
         )
         this.mouseButton = jQuery('<img id="mouseButton" src="https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png"/>').css({
             "background": "#A8A8A8",
@@ -150,8 +150,8 @@ class Renderer {
             "margin-left": "auto",
             "margin-right": "auto"
         }).hover(
-            () => this.nextButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.nextButton.css("background", "#A8A8A8")
+            () => this.mouseButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+            () => this.mouseButton.css("background", "#A8A8A8")
         )
         this.otherButton = jQuery('<img id="otherButton" src="https://jslawjslaw.github.io/js-crlab/static/joystick.png"/>').css({
             "background": "#A8A8A8",
@@ -159,8 +159,8 @@ class Renderer {
             "margin-left": "auto",
             "margin-right": "auto"
         }).hover(
-            () => this.nextButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.nextButton.css("background", "#A8A8A8")
+            () => this.otherButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+            () => this.otherButton.css("background", "#A8A8A8")
         )
     }
 
@@ -231,6 +231,7 @@ class Renderer {
                     this.mouseButton,
                     this.touchscreenButton,
                     this.trackpadButton,
+                    this.otherButton,
                 ]),
                 this.buttonContainer.append([
                     this.greenButton, 
