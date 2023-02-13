@@ -1,5 +1,6 @@
 {
     "instructions": [
+        "Please choose your input device to start.",
         "You will see a string of letters on the screen.\nSome of these letter strings are real words.\nOthers are not real words.\n",
         "If the letter IS a real word, click \"Real Word.\"\nIf the letter is NOT a real word, click \"Not a word.\"",
         "Let's Practice."

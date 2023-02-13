@@ -23,6 +23,7 @@ class Renderer {
             "justify-content": "center"
         }})
         this.textContainer = jQuery("<div/>", {id: "textContainer", css: {
+            "color": "#000000",
             "text-align": "center",
             "font-size": "4vw",
             "min-width": "100vw",
@@ -33,7 +34,7 @@ class Renderer {
         }})
         this.greenButton = jQuery("<div/>", {id: "greenButton", css: {
             "margin-left": "auto",
-            "margin-right": "auto",
+            "margin-right": "2.5%",
             "justify-content": "center",
             "border-radius": "50%",
             "width": "150px",
@@ -44,7 +45,7 @@ class Renderer {
             () => this.greenButton.css("background-color", "#34eb43")
         )
         this.redButton = jQuery("<div/>", {id: "redButton", css: {
-            "margin-left": "auto",
+            "margin-left": "2.5%",
             "margin-right": "auto",
             "justify-content": "center",
             "border-radius": "50%",
@@ -63,15 +64,17 @@ class Renderer {
             "margin-bottom": "auto"
         }})
         this.greenLabel = jQuery("<div/>", {id: "greenLabel", css: {
+            "color": "#000000",
             "margin-left": "auto",
-            "margin-right": "auto",
+            "margin-right": "2.5%",
             "justify-content": "center",
             "display": "flex",
             "width": "150px",
             "height": "30px",
         }}).text("Real word")
         this.redLabel = jQuery("<div/>", {id: "redLabel", css: {
-            "margin-left": "auto",
+            "color": "#000000",
+            "margin-left": "2.5%",
             "margin-right": "auto",
             "justify-content": "center",
             "display": "flex",
@@ -94,7 +97,7 @@ class Renderer {
             "margin-bottom": "4vh"
         }})
         this.nextButton = jQuery('<div id="nextButton">Next &raquo;</div>').css({
-            "color": "#2e3138",
+            "color": "#000000",
             "background": "#A8A8A8",
             "font-size": "3vw",
             "padding": "0.5em",
@@ -106,7 +109,7 @@ class Renderer {
             () => this.nextButton.css("background-color", "#A8A8A8")
         )
         this.previousButton = jQuery('<div id="previousButton">&laquo; Previous</div>').css({
-            "color": "#2e3138",
+            "color": "#000000",
             "background": "#A8A8A8",
             "font-size": "3vw",
             "padding": "0.5em",
@@ -114,6 +117,42 @@ class Renderer {
         }).hover(
             () => this.previousButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
             () => this.previousButton.css("background-color", "#A8A8A8")
+        )
+        this.mouseButton = jQuery('<div id="mouseButton">Next &raquo;</div>').css({
+            "color": "#000000",
+            "background": "#A8A8A8",
+            "font-size": "3vw",
+            "padding": "0.5em",
+            "margin-left": "auto",
+            "margin-right": "5vw"
+
+        }).hover(
+            () => this.nextButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
+            () => this.nextButton.css("background-color", "#A8A8A8")
+        )
+        this.trackpadButton = jQuery('<div id="mouseButton">Next &raquo;</div>').css({
+            "color": "#000000",
+            "background": "#A8A8A8",
+            "font-size": "3vw",
+            "padding": "0.5em",
+            "margin-left": "auto",
+            "margin-right": "5vw"
+
+        }).hover(
+            () => this.nextButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
+            () => this.nextButton.css("background-color", "#A8A8A8")
+        )
+        this.touchscreenButton = jQuery('<div id="mouseButton">Next &raquo;</div>').css({
+            "color": "#000000",
+            "background": "#A8A8A8",
+            "font-size": "3vw",
+            "padding": "0.5em",
+            "margin-left": "auto",
+            "margin-right": "5vw"
+
+        }).hover(
+            () => this.nextButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
+            () => this.nextButton.css("background-color", "#A8A8A8")
         )
     }
 
@@ -168,6 +207,9 @@ class Renderer {
                 this.buttonContainer.append([
                     this.greenButton, 
                     this.redButton,
+                    this.mouseButton,
+                    this.touchscreenButton,
+                    this.trackpadButton
                 ]),
                 this.labelContainer.append([
                     this.greenLabel,
