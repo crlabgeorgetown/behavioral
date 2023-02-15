@@ -1,4 +1,16 @@
 const IS_QUALTRICS = window.location.host === "georgetown.az1.qualtrics.com"
+const DEVICE_LABEL_CSS = {
+    "color": "#000000",
+    "width": "15%",
+    "margin-left": "auto",
+    "margin-right": "auto",
+    "text-align": "center",
+}
+const DEVICE_BUTTON_CSS = {
+    "width": "15%",
+    "margin-left": "auto",
+    "margin-right": "auto"
+}
 
 class TrialType {
     static Practice = new TrialType("practice")
@@ -38,7 +50,7 @@ class Renderer {
             css: {
                 "margin-left": "auto",
                 "margin-right": "2.5%",
-                "justify-content": "center",
+                "padding": "1%",
                 "width": "150px",
                 "height": "150px",
         }}).hover(
@@ -51,7 +63,7 @@ class Renderer {
             css: {
                 "margin-left": "2.5%",
                 "margin-right": "auto",
-                "justify-content": "center",
+                "padding": "1%",
                 "width": "150px",
                 "height": "150px",
         }}).hover(
@@ -69,6 +81,7 @@ class Renderer {
             "color": "#000000",
             "margin-left": "auto",
             "margin-right": "2.5%",
+            "padding": "1%",
             "justify-content": "center",
             "display": "flex",
             "width": "150px",
@@ -78,6 +91,7 @@ class Renderer {
             "color": "#000000",
             "margin-left": "2.5%",
             "margin-right": "auto",
+            "padding": "1%",
             "justify-content": "center",
             "display": "flex",
             "width": "150px",
@@ -120,46 +134,69 @@ class Renderer {
             () => this.previousButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
             () => this.previousButton.css("background-color", "#A8A8A8")
         )
-        this.inputDeviceContainer = jQuery("<div/>", {id: "buttonContainer", css: {
+        this.inputDeviceContainer = jQuery("<div/>", {id: "inputDeviceContainer", css: {
             "display": "flex",
             "flex-direction": "row",
             "justify-content": "flex-end",
             "min-width": "100%",
             "margin-top": "5%",
-            "margin-bottom": "auto",
         }})
-        this.touchscreenButton = jQuery('<img id="touchscreenButton" src="https://jslawjslaw.github.io/js-crlab/static/touchscreen.png"/>').css({
-            "width": "15%",
-            "margin-left": "auto",
-            "margin-right": "auto"
+        this.touchscreenButton = jQuery('<img/>', {
+            id: "touchscreenButton", 
+            css: DEVICE_BUTTON_CSS,
+            src: "https://jslawjslaw.github.io/js-crlab/static/touchscreen.png",
         }).hover(
             () => this.touchscreenButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
             () => this.touchscreenButton.css("background", "transparent")
         )
-        this.trackpadButton = jQuery('<img id="trackpadButton" src="https://jslawjslaw.github.io/js-crlab/static/trackpad.png"/>').css({
-            "width": "15%",
-            "margin-left": "auto",
-            "margin-right": "auto"
+        this.trackpadButton = jQuery('<img/>', {
+            id: "trackpadButton",
+            css: DEVICE_BUTTON_CSS,
+            src: "https://jslawjslaw.github.io/js-crlab/static/trackpad.png",
         }).hover(
             () => this.trackpadButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
             () => this.trackpadButton.css("background", "transparent")
         )
-        this.mouseButton = jQuery('<img id="mouseButton" src="https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png"/>').css({
-            "width": "15%",
-            "margin-left": "auto",
-            "margin-right": "auto"
+        this.mouseButton = jQuery('<img/>', {
+            id: "mouseButton",
+            css: DEVICE_BUTTON_CSS,
+            src: "https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png",
         }).hover(
             () => this.mouseButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
             () => this.mouseButton.css("background", "transparent")
         )
-        this.otherButton = jQuery('<img id="otherButton" src="https://jslawjslaw.github.io/js-crlab/static/joystick.png"/>').css({
-            "width": "15%",
-            "margin-left": "auto",
-            "margin-right": "auto"
+        this.otherButton = jQuery('<img/>', {
+            id: "otherButton",
+            css: DEVICE_BUTTON_CSS,
+            src: "https://jslawjslaw.github.io/js-crlab/static/joystick.png",
         }).hover(
             () => this.otherButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
             () => this.otherButton.css("background", "transparent")
         )
+        this.inputDeviceLabelContainer = jQuery("<div/>", {id: "inputDeviceLabelContainer", css: {
+            "display": "flex",
+            "flex-direction": "row",
+            "justify-content": "flex-end",
+            "min-width": "100%",
+            "margin-top": "2.5%",
+            "margin-bottom": "auto",
+        }})
+        this.mouseButtonLabel = jQuery("<div/>", {
+            id: "mouseButtonLabel",
+            css: DEVICE_LABEL_CSS,
+        }).text("Mouse")
+        this.trackpadButtonLabel = jQuery("<div/>", {
+            id: "trackpadButtonLabel",
+            css: DEVICE_LABEL_CSS,
+        }).text("Trackpad")
+        this.touchscreenButtonLabel = jQuery("<div/>", {
+            id: "touchscreenButtonLabel",
+            css: DEVICE_LABEL_CSS,
+        }).text("Touchscreen")
+        this.otherButtonLabel = jQuery("<div/>", {
+            id: "otherButtonLabel",
+            css: DEVICE_LABEL_CSS,
+        }).text("other")
     }
 
     renderInstructions() {
@@ -169,24 +206,28 @@ class Renderer {
                 this.buttonContainer.hide()
                 this.labelContainer.hide()
                 this.inputDeviceContainer.show()
+                this.inputDeviceLabelContainer.show()
                 break
             case 1:
                 this.instructionButtonContainer.show()
                 this.buttonContainer.hide()
                 this.labelContainer.hide()
                 this.inputDeviceContainer.hide()
+                this.inputDeviceLabelContainer.hide()
                 break
             case 2:
                 this.instructionButtonContainer.show()
                 this.buttonContainer.show()
                 this.labelContainer.show()
                 this.inputDeviceContainer.hide()
+                this.inputDeviceLabelContainer.hide()
                 break
             default:
                 this.instructionButtonContainer.show()
                 this.buttonContainer.hide()
                 this.labelContainer.hide()
                 this.inputDeviceContainer.hide()
+                this.inputDeviceLabelContainer.hide()
                 break  
         }
         this.updateText(this.state.getInstructions())
@@ -230,6 +271,12 @@ class Renderer {
                     this.touchscreenButton,
                     this.trackpadButton,
                     this.otherButton,
+                ]),
+                this.inputDeviceLabelContainer.append([
+                    this.mouseButtonLabel,
+                    this.touchscreenButtonLabel,
+                    this.trackpadButtonLabel,
+                    this.otherButtonLabel,
                 ]),
                 this.buttonContainer.append([
                     this.greenButton, 
