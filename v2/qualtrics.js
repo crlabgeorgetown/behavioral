@@ -32,29 +32,31 @@ class Renderer {
             "margin-top": "auto",
             "margin-bottom": "auto"
         }})
-        this.greenButton = jQuery("<div/>", {id: "greenButton", css: {
-            "margin-left": "auto",
-            "margin-right": "2.5%",
-            "justify-content": "center",
-            "border-radius": "50%",
-            "width": "150px",
-            "height": "150px",
-            "background-color": "#34eb43"
+        this.greenButton = jQuery("<img/>", {
+            id: "greenButton",
+            src: "https://jslawjslaw.github.io/js-crlab/static/check.png",
+            css: {
+                "margin-left": "auto",
+                "margin-right": "2.5%",
+                "justify-content": "center",
+                "width": "150px",
+                "height": "150px",
         }}).hover(
-            () => this.greenButton.css("background-color", "#2dc93a"),
-            () => this.greenButton.css("background-color", "#34eb43")
+            () => this.greenButton.css({"background": "#e3e3e3"}),
+            () => this.greenButton.css({"background": "transparent"})
         )
-        this.redButton = jQuery("<div/>", {id: "redButton", css: {
-            "margin-left": "2.5%",
-            "margin-right": "auto",
-            "justify-content": "center",
-            "border-radius": "50%",
-            "width": "150px",
-            "height": "150px",
-            "background-color": "#eb3434"
+        this.redButton = jQuery("<img/>", {
+            id: "redButton",
+            src: "https://jslawjslaw.github.io/js-crlab/static/remove.png",
+            css: {
+                "margin-left": "2.5%",
+                "margin-right": "auto",
+                "justify-content": "center",
+                "width": "150px",
+                "height": "150px",
         }}).hover(
-            () => this.redButton.css("background-color", "#d52f2f"),
-            () => this.redButton.css("background-color", "#eb3434")
+            () => this.redButton.css({"background": "#e3e3e3"}),
+            () => this.redButton.css({"background": "transparent"})
         )
         this.labelContainer = jQuery("<div/>", {id: "labelContainer", css: {
             "display": "flex",
@@ -127,40 +129,36 @@ class Renderer {
             "margin-bottom": "auto",
         }})
         this.touchscreenButton = jQuery('<img id="touchscreenButton" src="https://jslawjslaw.github.io/js-crlab/static/touchscreen.png"/>').css({
-            "background": "#A8A8A8",
             "width": "15%",
             "margin-left": "auto",
             "margin-right": "auto"
         }).hover(
             () => this.touchscreenButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.touchscreenButton.css("background", "#A8A8A8")
+            () => this.touchscreenButton.css("background", "transparent")
         )
         this.trackpadButton = jQuery('<img id="trackpadButton" src="https://jslawjslaw.github.io/js-crlab/static/trackpad.png"/>').css({
-            "background": "#A8A8A8",
             "width": "15%",
             "margin-left": "auto",
             "margin-right": "auto"
         }).hover(
             () => this.trackpadButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.trackpadButton.css("background", "#A8A8A8")
+            () => this.trackpadButton.css("background", "transparent")
         )
         this.mouseButton = jQuery('<img id="mouseButton" src="https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png"/>').css({
-            "background": "#A8A8A8",
             "width": "15%",
             "margin-left": "auto",
             "margin-right": "auto"
         }).hover(
             () => this.mouseButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.mouseButton.css("background", "#A8A8A8")
+            () => this.mouseButton.css("background", "transparent")
         )
         this.otherButton = jQuery('<img id="otherButton" src="https://jslawjslaw.github.io/js-crlab/static/joystick.png"/>').css({
-            "background": "#A8A8A8",
             "width": "15%",
             "margin-left": "auto",
             "margin-right": "auto"
         }).hover(
             () => this.otherButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.otherButton.css("background", "#A8A8A8")
+            () => this.otherButton.css("background", "transparent")
         )
     }
 
@@ -329,7 +327,7 @@ class Game {
             "mouseButton": () => this.inputDeviceClickHandler("mouse"),
             "trackpadButton": () => this.inputDeviceClickHandler("trackpad"),
             "touchscreenButton": () => this.inputDeviceClickHandler("touchscreen"),
-            "other": () => this.inputDeviceClickHandler("other"),
+            "otherButton": () => this.inputDeviceClickHandler("other"),
         })
         this.renderer.renderInstructions()
 	}
