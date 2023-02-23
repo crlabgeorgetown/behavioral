@@ -1,4 +1,5 @@
 const IS_QUALTRICS = window.location.host === "georgetown.az1.qualtrics.com"
+const TIMEOUT = 5000
 const DEVICE_LABEL_CSS = {
     "color": "#000000",
     "width": "15%",
@@ -303,8 +304,9 @@ class Renderer {
         this.updateText("You've completed this exercise!")
     }
 
-    updateText(text) {
+    updateText(text, fontSize="4vw", fontColor="#000000") {
         this.textContainer.text(text)
+        this.textContainer.css({"font-size": fontSize, "color": fontColor})
     }
 }
 
@@ -315,9 +317,13 @@ class State {
         this.config = config
         this.hasPracticed = false
         this.trialType = TrialType.Practice
+        this.trialStartTime = null
         this.trial = 0
         this.clickIsDisabled = true
         this.instructionScreen = 0
+        this.inTrial = false
+
+        this.recordMousemove = this.recordMousemove.bind(this)
     }
 
     isDone() {
@@ -343,6 +349,50 @@ class State {
     advance() {
         this.trial++
     }
+
+    resetMousemoveState() {
+        this.mousemove = {
+            eventTimes: [],
+            xs: [],
+            ys: [],
+        }
+    }
+
+    recordMousemove(event) {
+        const now = Date.now()
+        if (this.inTrial) {
+            this.mousemove.eventTimes.push(now)
+            this.mousemove.xs.push(event.clientX)
+            this.mousemove.ys.push(event.clientY)
+        }
+    }
+
+    computeTrialMousemoveStats() {
+        const reactionTime = this.mousemove.eventTimes.length > 0 ? this.mousemove.eventTimes[0] - this.trialStartTime : null
+        let duration = 0
+        let distance = 0
+        let avgVelocity = null
+        let startTime = null
+        let startX = null
+        let startY = null
+        while (this.mousemove.eventTimes.length > 0) {
+            let currentTime = this.mousemove.eventTimes.shift() 
+            let currentX = this.mousemove.xs.shift()
+            let currentY = this.mousemove.ys.shift()
+            if (startTime !== null || currentTime - startTime < 500) {
+                const aSquared = Math.pow(startX - currentX, 2)        
+                const bSquared = Math.pow(startY - currentY, 2)
+                distance += Math.round(Math.sqrt(aSquared + bSquared))
+                duration += currentTime - startTime
+                avgVelocity = (distance / duration).toFixed(3)
+            }
+            startTime = currentTime
+            startX = currentX
+            startY = currentY
+        }
+
+        return [reactionTime, duration, distance, avgVelocity]
+    }
 }
 
 
@@ -356,6 +406,10 @@ class Game {
         this.answers = []
         this.trialTypes = []
 		this.responseTimes = []
+        this.reactionTimes = []
+        this.durations = []
+        this.distances = []
+        this.avgVelocities = []
         
         this.start = this.start.bind(this)
         this.recordResponse = this.recordResponse.bind(this)
@@ -365,6 +419,8 @@ class Game {
         this.againButtonClickHandler = this.againButtonClickHandler.bind(this)
         this.inputDeviceClickHandler = this.inputDeviceClickHandler.bind(this)
         this.teardown = this.teardown.bind(this)
+
+        jQuery(document).mousemove(this.state.recordMousemove)
 
         this.renderer.initialize({
             "nextButton": this.nextButtonClickHandler,
@@ -424,12 +480,14 @@ class Game {
     }
 
     incorrectEvent(timedOut) {
-        this.renderer.updateText("That was not correct. Try again.")
+        this.renderer.updateText("Incorrect, try again.", "7vw", "#FF0000")
         this.state.clickIsDisabled = true
+        this.state.inTrial = false
         setTimeout(() => this.start(false, timedOut), 2000)
     }
 
     start(advance, timedOut = false) {
+        this.state.inTrial = false
         if (timedOut) {
             this.recordResponse(null)
         }
@@ -447,11 +505,13 @@ class Game {
 			return
 		}
 
-        this.renderer.updateText("+")
+        this.renderer.updateText("+", "7vw")
         this.state.clickIsDisabled = true
         setTimeout(() => {
-			this.startTime = Date.now()
-			this.renderer.updateText(this.state.getStimuli())
+			this.renderer.updateText(this.state.getStimuli(), "7vw")
+            this.state.resetMousemoveState()
+            this.state.inTrial = true
+			this.state.trialStartTime = Date.now()
             this.state.clickIsDisabled = false
 			this.timeoutID = setTimeout(() => {
                 if (this.state.trialType === TrialType.Practice) {
@@ -459,26 +519,40 @@ class Game {
                 } else {
                     this.start(true, true)
                 }
-            }, 5000)
+            }, TIMEOUT)
 		}, 500)
     }
 
     recordResponse(response) {
         this.responses.push(response)
-        this.responseTimes.push(Date.now() - this.startTime)
+        if (response === null) {
+            this.responseTimes.push(TIMEOUT)
+        } else {
+            this.responseTimes.push(Date.now() - this.state.trialStartTime)
+        }
+        let reactionTime, duration, distance, avgVelocity
+        [reactionTime, duration, distance, avgVelocity] = this.state.computeTrialMousemoveStats()
+        this.reactionTimes.push(reactionTime)
+        this.durations.push(duration)
+        this.distances.push(distance)
+        this.avgVelocities.push(avgVelocity)
         this.trialTypes.push(this.state.trialType.name)
         this.stimuli.push(this.state.getStimuli())
         this.answers.push(this.state.getAnswer())
     }
 
     setEmbeddedData() {
-        Qualtrics.SurveyEngine.setEmbeddedData("responses", this.responses.join(','))
-        Qualtrics.SurveyEngine.setEmbeddedData("responseTimes", this.responseTimes.join(','))
-        Qualtrics.SurveyEngine.setEmbeddedData("stimuli", this.stimuli.join(","))
-        Qualtrics.SurveyEngine.setEmbeddedData("answers", this.answers.join(","))
-        Qualtrics.SurveyEngine.setEmbeddedData("trialTypes", this.trialTypes.join(","))
-        Qualtrics.SurveyEngine.setEmbeddedData("userAgent", navigator.userAgent)
-        Qualtrics.SurveyEngine.setEmbeddedData("inputDevice", this.inputDevice)
+        Qualtrics.SurveyEngine.setEmbeddedData('responses', this.responses.join(','))
+        Qualtrics.SurveyEngine.setEmbeddedData('responseTimes', this.responseTimes.join(','))
+        Qualtrics.SurveyEngine.setEmbeddedData('stimuli', this.stimuli.join(','))
+        Qualtrics.SurveyEngine.setEmbeddedData('answers', this.answers.join(','))
+        Qualtrics.SurveyEngine.setEmbeddedData('trialTypes', this.trialTypes.join(','))
+        Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent)
+        Qualtrics.SurveyEngine.setEmbeddedData('inputDevice', this.inputDevice)
+        Qualtrics.SurveyEngine.setEmbeddedData('reactionTimes', this.reactionTimes.join(','))
+        Qualtrics.SurveyEngine.setEmbeddedData('durations', this.durations.join(','))
+        Qualtrics.SurveyEngine.setEmbeddedData('distances', this.distances.join(','))
+        Qualtrics.SurveyEngine.setEmbeddedData('avgVelocities', this.avgVelocities.join(','))
     }
 
     teardown() {
