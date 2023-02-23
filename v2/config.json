@@ -1,218 +1,845 @@
 {
+    "instructions": [
+        "Please choose your input device to start.",
+        "You will see a string of letters on the screen.\nSome of these letter strings are real words.\nOthers are not real words.\n",
+        "If the letter IS a real word, click \"Real Word.\"\nIf the letter is NOT a real word, click \"Not a word.\"",
+        "Let's Practice."
+    ],
     "practiceStimuli": [
         "bean",
         "forer",
         "keln"
     ],
-    "practiceStimuliAnswers": [
-        true,
-        false,
-        false
+    "practice": [
+        {
+            "stimuli": "bean",
+            "answer": true
+        },
+        {
+            "stimuli": "forer",
+            "answer": false
+        },
+        {
+            "stimuli": "keln",
+            "answer": false
+        }
     ],
     "stimuli": [
-        "rill",
-        "kouse",
-        "skirp",
-        "thumb",
-        "toast",
-        "belve",
-        "rough",
-        "hoap",
-        "sown",
-        "twelve",
-        "furch",
-        "sieve",
-        "arc",
-        "sledge",
-        "vage",
-        "brooch",
-        "dofe",
-        "shell",
-        "bame",
-        "chool",
-        "yacht",
-        "frood",
-        "polb",
-        "first",
-        "shike",
-        "ewe",
-        "stail",
-        "black",
-        "soot",
-        "thyme",
-        "slear",
-        "bowl",
-        "dough",
-        "pove",
-        "craze",
-        "steel",
-        "trait",
-        "somb",
-        "grape",
-        "sit",
-        "dumb",
-        "stiend",
-        "wown",
-        "maich",
-        "dense",
-        "clow",
-        "hinge",
-        "poal",
-        "sew",
-        "pike",
-        "zon",
-        "weird",
-        "tuve",
-        "blown",
-        "breech",
-        "crisk",
-        "flood",
-        "hate",
-        "praud",
-        "break",
-        "farc",
-        "coup",
-        "bike",
-        "reap",
-        "brane",
-        "ghoul",
-        "treap",
-        "pake",
-        "hour",
-        "wool",
-        "help",
-        "wribe",
-        "sheer",
-        "froum",
-        "kard",
-        "womb",
-        "crilp",
-        "duave",
-        "strisk",
-        "isle",
-        "mest",
-        "nink",
-        "chef",
-        "heart",
-        "pouth",
-        "bored",
-        "threat",
-        "slack",
-        "dut",
-        "fron",
-        "doubt",
-        "witch",
-        "stole",
-        "glown",
-        "zask",
-        "deach",
-        "tongue",
-        "serve",
-        "fache",
-        "climb",
-        "fove",
-        "seize",
-        "touch",
-        "hoth",
-        "searth",
-        "bough",
-        "scheme",
-        "bote",
-        "lurch",
-        "dack",
-        "wish",
-        "phron",
-        "nored",
-        "wike",
-        "deaf",
-        "page",
-        "ail",
-        "crole",
-        "bield",
-        "tour",
-        "lose",
-        "prief",
-        "soat",
-        "ton",
-        "dask",
-        "blirst",
-        "crude",
-        "seart",
-        "hoof",
-        "rish",
-        "pear",
-        "trow",
-        "wust",
-        "noug",
-        "pint",
-        "mauve",
-        "hedge",
-        "meard",
-        "yield",
-        "wousse",
-        "hauge",
-        "pown",
-        "foot",
-        "crast",
-        "stow",
-        "plear",
-        "flask",
-        "plede",
-        "soil",
-        "doose",
-        "reat",
-        "lail",
-        "pawn",
-        "glind",
-        "gead",
-        "son",
-        "dearth",
-        "bredge",
-        "must",
-        "voot",
-        "pilt",
-        "fraud",
-        "death",
-        "lowl",
-        "theme",
-        "flude",
-        "slept",
-        "bless",
-        "clate",
-        "send",
-        "tace",
-        "vour",
-        "greird",
-        "cough",
-        "yame",
-        "phase",
-        "bieve",
-        "caup",
-        "tolf",
-        "wear",
-        "turge",
-        "awe",
-        "doad",
-        "spumb",
-        "chic",
-        "plaw",
-        "ning",
-        "trust",
-        "bolg",
-        "derve",
-        "loul",
-        "claw",
-        "friend",
-        "put",
-        "grour",
-        "learse",
-        "hark",
-        "wrote",
-        "drate",
-        "sword",
-        "zuede",
-        "trough",
-        "desc",
-        "shape"
+        {
+            "stimuli": "rill",
+            "answer": false
+        },
+        {
+            "stimuli": "kouse",
+            "answer": false
+        },
+        {
+            "stimuli": "skirp",
+            "answer": false
+        },
+        {
+            "stimuli": "thumb",
+            "answer": true
+        },
+        {
+            "stimuli": "toast",
+            "answer": true
+        },
+        {
+            "stimuli": "belve",
+            "answer": false
+        },
+        {
+            "stimuli": "rough",
+            "answer": true
+        },
+        {
+            "stimuli": "hoap",
+            "answer": false
+        },
+        {
+            "stimuli": "sown",
+            "answer": true
+        },
+        {
+            "stimuli": "twelve",
+            "answer": true
+        },
+        {
+            "stimuli": "furch",
+            "answer": false
+        },
+        {
+            "stimuli": "sieve",
+            "answer": true
+        },
+        {
+            "stimuli": "arc",
+            "answer": true
+        },
+        {
+            "stimuli": "sledge",
+            "answer": true
+        },
+        {
+            "stimuli": "vage",
+            "answer": false
+        },
+        {
+            "stimuli": "brooch",
+            "answer": true
+        },
+        {
+            "stimuli": "dofe",
+            "answer": false
+        },
+        {
+            "stimuli": "shell",
+            "answer": true
+        },
+        {
+            "stimuli": "bame",
+            "answer": false
+        },
+        {
+            "stimuli": "chool",
+            "answer": false
+        },
+        {
+            "stimuli": "yacht",
+            "answer": true
+        },
+        {
+            "stimuli": "frood",
+            "answer": false
+        },
+        {
+            "stimuli": "polb",
+            "answer": false
+        },
+        {
+            "stimuli": "first",
+            "answer": true
+        },
+        {
+            "stimuli": "shike",
+            "answer": false
+        },
+        {
+            "stimuli": "ewe",
+            "answer": true
+        },
+        {
+            "stimuli": "stail",
+            "answer": false
+        },
+        {
+            "stimuli": "black",
+            "answer": true
+        },
+        {
+            "stimuli": "soot",
+            "answer": true
+        },
+        {
+            "stimuli": "thyme",
+            "answer": true
+        },
+        {
+            "stimuli": "slear",
+            "answer": false
+        },
+        {
+            "stimuli": "bowl",
+            "answer": true
+        },
+        {
+            "stimuli": "dough",
+            "answer": true
+        },
+        {
+            "stimuli": "pove",
+            "answer": false
+        },
+        {
+            "stimuli": "craze",
+            "answer": true
+        },
+        {
+            "stimuli": "steel",
+            "answer": true
+        },
+        {
+            "stimuli": "trait",
+            "answer": true
+        },
+        {
+            "stimuli": "somb",
+            "answer": false
+        },
+        {
+            "stimuli": "grape",
+            "answer": true
+        },
+        {
+            "stimuli": "sit",
+            "answer": true
+        },
+        {
+            "stimuli": "dumb",
+            "answer": true
+        },
+        {
+            "stimuli": "stiend",
+            "answer": false
+        },
+        {
+            "stimuli": "wown",
+            "answer": false
+        },
+        {
+            "stimuli": "maich",
+            "answer": false
+        },
+        {
+            "stimuli": "dense",
+            "answer": true
+        },
+        {
+            "stimuli": "clow",
+            "answer": false
+        },
+        {
+            "stimuli": "hinge",
+            "answer": true
+        },
+        {
+            "stimuli": "poal",
+            "answer": false
+        },
+        {
+            "stimuli": "sew",
+            "answer": true
+        },
+        {
+            "stimuli": "pike",
+            "answer": true
+        },
+        {
+            "stimuli": "zon",
+            "answer": false
+        },
+        {
+            "stimuli": "weird",
+            "answer": true
+        },
+        {
+            "stimuli": "tuve",
+            "answer": false
+        },
+        {
+            "stimuli": "blown",
+            "answer": true
+        },
+        {
+            "stimuli": "breech",
+            "answer": true
+        },
+        {
+            "stimuli": "crisk",
+            "answer": false
+        },
+        {
+            "stimuli": "flood",
+            "answer": true
+        },
+        {
+            "stimuli": "hate",
+            "answer": true
+        },
+        {
+            "stimuli": "praud",
+            "answer": false
+        },
+        {
+            "stimuli": "break",
+            "answer": true
+        },
+        {
+            "stimuli": "farc",
+            "answer": false
+        },
+        {
+            "stimuli": "coup",
+            "answer": true
+        },
+        {
+            "stimuli": "bike",
+            "answer": true
+        },
+        {
+            "stimuli": "reap",
+            "answer": true
+        },
+        {
+            "stimuli": "brane",
+            "answer": false
+        },
+        {
+            "stimuli": "ghoul",
+            "answer": true
+        },
+        {
+            "stimuli": "treap",
+            "answer": false
+        },
+        {
+            "stimuli": "pake",
+            "answer": false
+        },
+        {
+            "stimuli": "hour",
+            "answer": true
+        },
+        {
+            "stimuli": "wool",
+            "answer": true
+        },
+        {
+            "stimuli": "help",
+            "answer": true
+        },
+        {
+            "stimuli": "wribe",
+            "answer": false
+        },
+        {
+            "stimuli": "sheer",
+            "answer": true
+        },
+        {
+            "stimuli": "froum",
+            "answer": false
+        },
+        {
+            "stimuli": "kard",
+            "answer": false
+        },
+        {
+            "stimuli": "womb",
+            "answer": true
+        },
+        {
+            "stimuli": "crilp",
+            "answer": false
+        },
+        {
+            "stimuli": "duave",
+            "answer": false
+        },
+        {
+            "stimuli": "strisk",
+            "answer": false
+        },
+        {
+            "stimuli": "isle",
+            "answer": true
+        },
+        {
+            "stimuli": "mest",
+            "answer": false
+        },
+        {
+            "stimuli": "nink",
+            "answer": false
+        },
+        {
+            "stimuli": "chef",
+            "answer": true
+        },
+        {
+            "stimuli": "heart",
+            "answer": true
+        },
+        {
+            "stimuli": "pouth",
+            "answer": false
+        },
+        {
+            "stimuli": "bored",
+            "answer": true
+        },
+        {
+            "stimuli": "threat",
+            "answer": true
+        },
+        {
+            "stimuli": "slack",
+            "answer": true
+        },
+        {
+            "stimuli": "dut",
+            "answer": false
+        },
+        {
+            "stimuli": "fron",
+            "answer": false
+        },
+        {
+            "stimuli": "doubt",
+            "answer": true
+        },
+        {
+            "stimuli": "witch",
+            "answer": true
+        },
+        {
+            "stimuli": "stole",
+            "answer": true
+        },
+        {
+            "stimuli": "glown",
+            "answer": false
+        },
+        {
+            "stimuli": "zask",
+            "answer": false
+        },
+        {
+            "stimuli": "deach",
+            "answer": false
+        },
+        {
+            "stimuli": "tongue",
+            "answer": true
+        },
+        {
+            "stimuli": "serve",
+            "answer": true
+        },
+        {
+            "stimuli": "fache",
+            "answer": false
+        },
+        {
+            "stimuli": "climb",
+            "answer": true
+        },
+        {
+            "stimuli": "fove",
+            "answer": false
+        },
+        {
+            "stimuli": "seize",
+            "answer": true
+        },
+        {
+            "stimuli": "touch",
+            "answer": true
+        },
+        {
+            "stimuli": "hoth",
+            "answer": false
+        },
+        {
+            "stimuli": "searth",
+            "answer": false
+        },
+        {
+            "stimuli": "bough",
+            "answer": true
+        },
+        {
+            "stimuli": "scheme",
+            "answer": true
+        },
+        {
+            "stimuli": "bote",
+            "answer": false
+        },
+        {
+            "stimuli": "lurch",
+            "answer": true
+        },
+        {
+            "stimuli": "dack",
+            "answer": false
+        },
+        {
+            "stimuli": "wish",
+            "answer": true
+        },
+        {
+            "stimuli": "phron",
+            "answer": false
+        },
+        {
+            "stimuli": "nored",
+            "answer": false
+        },
+        {
+            "stimuli": "wike",
+            "answer": false
+        },
+        {
+            "stimuli": "deaf",
+            "answer": true
+        },
+        {
+            "stimuli": "page",
+            "answer": true
+        },
+        {
+            "stimuli": "ail",
+            "answer": false
+        },
+        {
+            "stimuli": "crole",
+            "answer": false
+        },
+        {
+            "stimuli": "bield",
+            "answer": false
+        },
+        {
+            "stimuli": "tour",
+            "answer": true
+        },
+        {
+            "stimuli": "lose",
+            "answer": true
+        },
+        {
+            "stimuli": "prief",
+            "answer": false
+        },
+        {
+            "stimuli": "soat",
+            "answer": false
+        },
+        {
+            "stimuli": "ton",
+            "answer": true
+        },
+        {
+            "stimuli": "dask",
+            "answer": false
+        },
+        {
+            "stimuli": "blirst",
+            "answer": false
+        },
+        {
+            "stimuli": "crude",
+            "answer": true
+        },
+        {
+            "stimuli": "seart",
+            "answer": false
+        },
+        {
+            "stimuli": "hoof",
+            "answer": true
+        },
+        {
+            "stimuli": "rish",
+            "answer": false
+        },
+        {
+            "stimuli": "pear",
+            "answer": true
+        },
+        {
+            "stimuli": "trow",
+            "answer": false
+        },
+        {
+            "stimuli": "wust",
+            "answer": false
+        },
+        {
+            "stimuli": "noug",
+            "answer": false
+        },
+        {
+            "stimuli": "pint",
+            "answer": true
+        },
+        {
+            "stimuli": "mauve",
+            "answer": true
+        },
+        {
+            "stimuli": "hedge",
+            "answer": true
+        },
+        {
+            "stimuli": "meard",
+            "answer": false
+        },
+        {
+            "stimuli": "yield",
+            "answer": true
+        },
+        {
+            "stimuli": "wousse",
+            "answer": false
+        },
+        {
+            "stimuli": "hauge",
+            "answer": false
+        },
+        {
+            "stimuli": "pown",
+            "answer": false
+        },
+        {
+            "stimuli": "foot",
+            "answer": true
+        },
+        {
+            "stimuli": "crast",
+            "answer": false
+        },
+        {
+            "stimuli": "stow",
+            "answer": true
+        },
+        {
+            "stimuli": "plear",
+            "answer": false
+        },
+        {
+            "stimuli": "flask",
+            "answer": true
+        },
+        {
+            "stimuli": "plede",
+            "answer": false
+        },
+        {
+            "stimuli": "soil",
+            "answer": true
+        },
+        {
+            "stimuli": "doose",
+            "answer": false
+        },
+        {
+            "stimuli": "reat",
+            "answer": false
+        },
+        {
+            "stimuli": "lail",
+            "answer": false
+        },
+        {
+            "stimuli": "pawn",
+            "answer": true
+        },
+        {
+            "stimuli": "glind",
+            "answer": false
+        },
+        {
+            "stimuli": "gead",
+            "answer": false
+        },
+        {
+            "stimuli": "son",
+            "answer": true
+        },
+        {
+            "stimuli": "dearth",
+            "answer": true
+        },
+        {
+            "stimuli": "bredge",
+            "answer": false
+        },
+        {
+            "stimuli": "must",
+            "answer": true
+        },
+        {
+            "stimuli": "voot",
+            "answer": false
+        },
+        {
+            "stimuli": "pilt",
+            "answer": false
+        },
+        {
+            "stimuli": "fraud",
+            "answer": true
+        },
+        {
+            "stimuli": "death",
+            "answer": true
+        },
+        {
+            "stimuli": "lowl",
+            "answer": false
+        },
+        {
+            "stimuli": "theme",
+            "answer": true
+        },
+        {
+            "stimuli": "flude",
+            "answer": false
+        },
+        {
+            "stimuli": "slept",
+            "answer": true
+        },
+        {
+            "stimuli": "bless",
+            "answer": true
+        },
+        {
+            "stimuli": "clate",
+            "answer": false
+        },
+        {
+            "stimuli": "send",
+            "answer": true
+        },
+        {
+            "stimuli": "tace",
+            "answer": false
+        },
+        {
+            "stimuli": "vour",
+            "answer": false
+        },
+        {
+            "stimuli": "greird",
+            "answer": false
+        },
+        {
+            "stimuli": "cough",
+            "answer": true
+        },
+        {
+            "stimuli": "yame",
+            "answer": false
+        },
+        {
+            "stimuli": "phase",
+            "answer": true
+        },
+        {
+            "stimuli": "bieve",
+            "answer": false
+        },
+        {
+            "stimuli": "caup",
+            "answer": false
+        },
+        {
+            "stimuli": "tolf",
+            "answer": false
+        },
+        {
+            "stimuli": "wear",
+            "answer": true
+        },
+        {
+            "stimuli": "turge",
+            "answer": false
+        },
+        {
+            "stimuli": "awe",
+            "answer": true
+        },
+        {
+            "stimuli": "doad",
+            "answer": false
+        },
+        {
+            "stimuli": "spumb",
+            "answer": false
+        },
+        {
+            "stimuli": "chic",
+            "answer": true
+        },
+        {
+            "stimuli": "plaw",
+            "answer": false
+        },
+        {
+            "stimuli": "ning",
+            "answer": false
+        },
+        {
+            "stimuli": "trust",
+            "answer": true
+        },
+        {
+            "stimuli": "bolg",
+            "answer": false
+        },
+        {
+            "stimuli": "derve",
+            "answer": false
+        },
+        {
+            "stimuli": "loul",
+            "answer": false
+        },
+        {
+            "stimuli": "claw",
+            "answer": true
+        },
+        {
+            "stimuli": "friend",
+            "answer": true
+        },
+        {
+            "stimuli": "put",
+            "answer": true
+        },
+        {
+            "stimuli": "grour",
+            "answer": false
+        },
+        {
+            "stimuli": "learse",
+            "answer": false
+        },
+        {
+            "stimuli": "hark",
+            "answer": false
+        },
+        {
+            "stimuli": "wrote",
+            "answer": true
+        },
+        {
+            "stimuli": "drate",
+            "answer": false
+        },
+        {
+            "stimuli": "sword",
+            "answer": true
+        },
+        {
+            "stimuli": "zuede",
+            "answer": false
+        },
+        {
+            "stimuli": "trough",
+            "answer": true
+        },
+        {
+            "stimuli": "desc",
+            "answer": false
+        },
+        {
+            "stimuli": "shape",
+            "answer": true
+        }
     ]
 }
