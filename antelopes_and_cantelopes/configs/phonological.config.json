@@ -2,5 +2,6 @@
     "A": "can",
     "B": "coin",
     "C": "cone",
-    "D": "corn"
+    "D": "corn",
+    "roundSchedule": [["A"], ["B", "C"], ["B"], ["C", "D"], ["C"], ["D", "A"]]
 }

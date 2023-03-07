@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="JFEScope" lang="en">
+<html style="overflow: hidden" lang="en">
 <head>
 
 	<meta charset="utf-8">
@@ -10,12 +10,14 @@
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
         crossorigin="anonymous"></script>
     <script src="./index.js"></script> 
+    <script>
+        fetch("https://jslawjslaw.github.io/js-crlab/antelopes_and_cantelopes/configs/phonological.config.json")
+            .then(response => response.json())
+            .then(config => new Game(config, this))
+    </script>  
 
 </head>
 <body> 
     <div id="Wrapper"></div>
-    <script>
-        new Game()
-    </script> 
 </body>
 </html>
