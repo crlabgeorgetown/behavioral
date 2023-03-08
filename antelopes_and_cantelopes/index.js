@@ -166,10 +166,10 @@ class Renderer {
                 'align-items': 'center'
             }
         })
-        this.appendAllStimuli(this.allAstimuliContainer, this.config.A)
-        this.appendAllStimuli(this.allBstimuliContainer, this.config.B)
-        this.appendAllStimuli(this.allCstimuliContainer, this.config.C)
-        this.appendAllStimuli(this.allDstimuliContainer, this.config.D)
+        this.appendAllStimuli(this.allAstimuliContainer, this.config.stimuli[0])
+        this.appendAllStimuli(this.allBstimuliContainer, this.config.stimuli[1])
+        this.appendAllStimuli(this.allCstimuliContainer, this.config.stimuli[2])
+        this.appendAllStimuli(this.allDstimuliContainer, this.config.stimuli[3])
         this.textContainer = jQuery("<div/>", {id: "textContainer", css: {
             "color": "#000000",
             "text-align": "center",
@@ -466,18 +466,18 @@ class InstructionScreenOne extends Screen {
         this.renderer.reminderContainer.hide()
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliRow1Container.show()
-        this.renderer.stimuli1.attr({'src': `${BASE_URL}/${this.config.A}1.jpg`})
-        this.renderer.stimuli2.attr({'src': `${BASE_URL}/${this.config.B}1.jpg`})
+        this.renderer.stimuli1.attr({'src': `${BASE_URL}/${this.config.stimuli[0]}1.jpg`})
+        this.renderer.stimuli2.attr({'src': `${BASE_URL}/${this.config.stimuli[1]}1.jpg`})
         this.renderer.stimuliRow2Container.show()
-        this.renderer.stimuli3.attr({'src': `${BASE_URL}/${this.config.C}1.jpg`})
-        this.renderer.stimuli4.attr({'src': `${BASE_URL}/${this.config.D}1.jpg`})
+        this.renderer.stimuli3.attr({'src': `${BASE_URL}/${this.config.stimuli[2]}1.jpg`})
+        this.renderer.stimuli4.attr({'src': `${BASE_URL}/${this.config.stimuli[3]}1.jpg`})
         this.renderer.textContainer.text(this.getInstructions())
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.show()
     }
 
     getInstructions() {
-        return `Every screen will show pictures of a ${this.config.A}, a ${this.config.B}, a ${this.config.C}, and ${this.config.D}, but the exact pictures will change.`
+        return `Every screen will show pictures of a ${this.config.stimuli[0]}, a ${this.config.stimuli[1]}, a ${this.config.stimuli[2]}, and ${this.config.stimuli[3]}, but the exact pictures will change.`
     }
 }
 
@@ -513,7 +513,7 @@ class InstructionScreenThree extends Screen {
         this.renderer.inputDeviceLabelContainer.hide()
         this.renderer.stimuliToSelectAndLabelContainer.hide()
         this.renderer.reminderContainer.show()
-        this.renderer.reminder.attr({src: `${BASE_URL}/${this.config.A}1.jpg`})
+        this.renderer.reminder.attr({src: `${BASE_URL}/${this.config.stimuli[0]}1.jpg`})
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliRow1Container.show()
         this.renderer.stimuliRow2Container.show()
@@ -535,8 +535,8 @@ class InstructionScreenFour extends Screen {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
         this.renderer.stimuliToSelectAndLabelContainer.show()
-        this.renderer.stimuliToSelect1.attr({src: `${BASE_URL}/${this.config.A}1.jpg`})
-        this.renderer.stimuliToSelect1Label.text(this.config.A)
+        this.renderer.stimuliToSelect1.attr({src: `${BASE_URL}/${this.config.stimuli[0]}1.jpg`})
+        this.renderer.stimuliToSelect1Label.text(this.config.stimuli[0])
         this.renderer.stimuliToSelect2.hide()
         this.renderer.stimuliToSelect2Label.hide()
         this.renderer.reminderContainer.hide()
@@ -549,7 +549,7 @@ class InstructionScreenFour extends Screen {
     }
 
     getInstructions() {
-        return `Please touch the ${this.config.A} every time. Let's practice a few.`
+        return `Please touch the ${this.config.stimuli[0]} every time. Let's practice a few.`
     }
 }
 
@@ -577,7 +577,7 @@ class ReadyScreen extends Screen {
             setTimeout(() => {
                 this.renderer.textContainer.text("Go!")
                 setTimeout(() => {
-                    this.game.state.newRound()
+                    this.game.newRound()
                 }, READY_TIMEOUT)
             }, READY_TIMEOUT)
         }, READY_TIMEOUT)
@@ -593,21 +593,20 @@ class TrialScreen extends Screen {
     }
 
     render() {
-        const images = this.game.state.currentTrial.stimuli.map((stimuli, index) => {
-            return `${BASE_URL}/${stimuli}${this.game.state.currentTrial.imageNumbers[index]}.jpg`
-        })
+        const images = this.game.currentRound.currentTrial.getImages()
+
         this.renderer.updateClickHandlers({
-            stimuli1: () => this.game.stimuliButtonClickHandler(this.game.state.currentTrial.stimuli[0]),
-            stimuli2: () => this.game.stimuliButtonClickHandler(this.game.state.currentTrial.stimuli[1]),
-            stimuli3: () => this.game.stimuliButtonClickHandler(this.game.state.currentTrial.stimuli[2]),
-            stimuli4: () => this.game.stimuliButtonClickHandler(this.game.state.currentTrial.stimuli[3])
+            stimuli1: () => this.game.stimuliButtonClickHandler(this.game.currentRound.currentTrial.stimuli[0]),
+            stimuli2: () => this.game.stimuliButtonClickHandler(this.game.currentRound.currentTrial.stimuli[1]),
+            stimuli3: () => this.game.stimuliButtonClickHandler(this.game.currentRound.currentTrial.stimuli[2]),
+            stimuli4: () => this.game.stimuliButtonClickHandler(this.game.currentRound.currentTrial.stimuli[3])
         })
 
         this.renderer.stimuliToSelectAndLabelContainer.hide()
         this.renderer.reminderContainer.show()
         this.renderer.pointer.hide()
         this.renderer.reminder.css({marginLeft: 'auto'})
-        this.renderer.reminder.attr({src: `${BASE_URL}/${this.config.A}1.jpg`})
+        this.renderer.reminder.attr({src: `${BASE_URL}/${this.config.stimuli[0]}1.jpg`})
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliRow1Container.show()
         this.renderer.stimuli1.attr({src: images[0]})
@@ -623,7 +622,8 @@ class TrialScreen extends Screen {
 
 
 class Round {
-    constructor(roundSchedule) {
+    constructor(orderedStimuli, roundSchedule) {
+        this.orderedStimuli = orderedStimuli
         this.roundSchedule = roundSchedule
         this.scheduleIndex = 0
         this.trials = []
@@ -638,7 +638,7 @@ class Round {
     }
 
     getSearchStimuli() {
-        return this.roundSchedule[this.scheduleIndex]
+        return this.orderedStimuli[this.roundSchedule[this.scheduleIndex]]
     }
 
     getRandomImageNumbers() {
@@ -650,7 +650,7 @@ class Round {
     }
 
     shuffle() {
-        let array = [this.config.A, this.config.B, this.config.C, this.config.D]
+        let array = this.orderedStimuli.map((x) => x)
         let currentIndex = array.length
       
         while (currentIndex != 0) {
@@ -719,6 +719,12 @@ class Trial {
     getSearchStimuliImageNumber() {
         return this.imageNumbers[this.getSearchStimuliIndex()]
     }
+
+    getImages() {
+        return this.stimuli.map((stimulus, index) => {
+            return `${BASE_URL}/${stimulus}${this.imageNumbers[index]}.jpg`
+        })
+    }
 }
 
 
@@ -769,18 +775,22 @@ class Game {
     }
 
     stimuliButtonClickHandler(stimuli) {
-        const currentRound = this.rounds[this.rounds.length - 1]
-        if (currentRound.currentTrial.searchStimuli === stimuli) {
-            currentRound.newTrial()
+        debugger
+        if (this.currentRound.currentTrial.searchStimuli === stimuli) {
+            this.currentRound.newTrial()
         } else {
-            this.state.currentTrial.mistakes++
+            this.currentRound.currentTrial.mistakes++
         }
         this.nextScreen(TrialScreen)
     }
 
+    get currentRound() {
+        return this.rounds[this.rounds.length - 1]
+    }
+
     newRound() {
         this.rounds.push(
-            new Round(this.config.roundSchedule[this.rounds.length])
+            new Round(this.config.stimuli, this.config.roundSchedule[this.rounds.length])
         )
     }
 
