@@ -7,6 +7,7 @@ const PHONOLOGICAL = 'phonological'
 const STANDARD = 'standard'
 const READY_TIMEOUT = 1000
 const TRIAL_TIMEOUT = 20000
+const MAX_PRACTICE_TRIALS = 3
 const DEVICE_LABEL_CSS = {
     "color": "#000000",
     "width": "15%",
@@ -434,6 +435,8 @@ class Screen {
 
 
 class InputDeviceInstructionScreen extends Screen {
+    nextScreen = InstructionScreenOne
+    
     render() {
         this.renderer.inputDeviceContainer.show()
         this.renderer.inputDeviceLabelContainer.show()
@@ -450,14 +453,12 @@ class InputDeviceInstructionScreen extends Screen {
     getInstructions() {
         return 'Please choose your input device to start.'
     }
-
-    nextScreen() {
-        return InstructionScreenOne
-    }
 }
 
 
 class InstructionScreenOne extends Screen {
+    previousScreen = InputDeviceInstructionScreen
+    nextScreen = InstructionScreenTwo
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
@@ -478,18 +479,13 @@ class InstructionScreenOne extends Screen {
     getInstructions() {
         return `Every screen will show pictures of a ${this.config.A}, a ${this.config.B}, a ${this.config.C}, and ${this.config.D}, but the exact pictures will change.`
     }
-
-    previousScreen() {
-        return InputDeviceInstructionScreen
-    }
-
-    nextScreen() {
-        return InstructionScreenTwo
-    }
 }
 
 
 class InstructionScreenTwo extends Screen {
+    previousScreen = InstructionScreenOne
+    nextScreen = InstructionScreenThree
+
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
@@ -503,20 +499,15 @@ class InstructionScreenTwo extends Screen {
         this.renderer.instructionButtonContainer.show()
     }
 
-    previousScreen() {
-        return InstructionScreenOne
-    }
-
-    nextScreen() {
-        return InstructionScreenThree
-    }
-
     getInstructions() {
         return `Here are all the pictures you may see. Notice that some of them may look similar to each other.`
     }
 }
 
 class InstructionScreenThree extends Screen {
+    previousScreen = InstructionScreenTwo
+    nextScreen = InstructionScreenFour
+
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
@@ -531,20 +522,15 @@ class InstructionScreenThree extends Screen {
         this.renderer.instructionButtonContainer.show()
     }
 
-    previousScreen() {
-        return InstructionScreenTwo
-    }
-
-    nextScreen() {
-        return InstructionScreenFour
-    }
-
     getInstructions() {
         return `You will be asked to touch one picture as fast as you can. When you touch the picture, the location will change. If you forget what picture to touch, look for the reminder.`
     }
 }
 
 class InstructionScreenFour extends Screen {
+    previousScreen = InstructionScreenThree
+    nextScreen = TrialScreen
+
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
@@ -562,14 +548,6 @@ class InstructionScreenFour extends Screen {
         this.renderer.instructionButtonContainer.show()
     }
 
-    previousScreen() {
-        return InstructionScreenThree
-    }
-
-    nextScreen() {
-        return ReadyScreen
-    }
-
     getInstructions() {
         return `Please touch the ${this.config.A} every time. Let's practice a few.`
     }
@@ -577,6 +555,8 @@ class InstructionScreenFour extends Screen {
 
 
 class ReadyScreen extends Screen {
+    nextScreen = TrialScreen
+
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
@@ -597,19 +577,17 @@ class ReadyScreen extends Screen {
             setTimeout(() => {
                 this.renderer.textContainer.text("Go!")
                 setTimeout(() => {
-                    this.game.handleNewTrial(TrialType.Practice)
+                    this.game.state.newRound()
                 }, READY_TIMEOUT)
             }, READY_TIMEOUT)
         }, READY_TIMEOUT)
-    }
-
-    nextScreen() {
-        return TrialScreen
     }
 }
 
 
 class TrialScreen extends Screen {
+    nextScreen = TrialScreen
+
     constructor(renderer, config, game) {
         super(renderer, config, game)
     }
@@ -641,26 +619,26 @@ class TrialScreen extends Screen {
         this.renderer.textContainer.hide()
         this.renderer.instructionButtonContainer.hide()
     }
-
-    nextScreen() {
-        return TrialScreen
-    }
 }
 
 
-class State {
-    constructor(config) {
-        this.config = config
-        this.hasPracticed = false
-        this.currentTrial = null
-        this.round = 0
-        this.roundIndex = 0
-        this.searchStimuli = [this.config.A]
-        
+class Round {
+    constructor(roundSchedule) {
+        this.roundSchedule = roundSchedule
+        this.scheduleIndex = 0
+        this.trials = []
+        this.newTrial()
+    }
+
+    incrementScheduleIndex() {
+        this.scheduleIndex++
+        if (this.scheduleIndex === this.roundSchedule.length) {
+            this.scheduleIndex = 0
+        }
     }
 
     getSearchStimuli() {
-        return this.config.roundSchedule[this.round][this.roundIndex]
+        return this.roundSchedule[this.scheduleIndex]
     }
 
     getRandomImageNumbers() {
@@ -684,10 +662,17 @@ class State {
         return array
     }
 
-    newCurrentTrial(trialType) {
+    newTrial() {
+        let trialType = TrialType.Experiment
+        if (this.practiceTrials < MAX_PRACTICE_TRIALS) {
+            trialType = TrialType.Practice
+            this.practiceTrials++
+        }
+
         const searchStimuli = this.getSearchStimuli()
         let shuffled = this.shuffle()
         let imageNumbers = this.getRandomImageNumbers()
+        
         if (this.currentTrial) {
             while (this.currentTrial.getSearchStimuliIndex() === shuffled.indexOf(searchStimuli)) {
                 shuffled = this.shuffle()
@@ -696,12 +681,21 @@ class State {
                 imageNumbers = this.getRandomImageNumbers()
             }
         }
-        this.currentTrial = new Trial(
+        
+        this.trials.push(new Trial(
             trialType, 
             shuffled,
             imageNumbers,
             searchStimuli,
-        )
+        ))
+    }
+
+    get currentTrial() {
+        return this.trials[this.trials.length - 1]
+    }
+
+    shouldBeginExperiment() {
+        return this.trials.length === MAX_PRACTICE_TRIALS
     }
 }
 
@@ -723,7 +717,7 @@ class Trial {
     }
 
     getSearchStimuliImageNumber() {
-        return this.imageNumbers[this.stimuli.indexOf(this.searchStimuli)]
+        return this.imageNumbers[this.getSearchStimuliIndex()]
     }
 }
 
@@ -731,17 +725,15 @@ class Trial {
 class Game {
     constructor(config, engine) {
         this.renderer = new Renderer(config)
-        this.state = new State(config)
         this.engine = engine
         this.config = config
         
-        this.trials = []
+        this.rounds = []
 
         this.nextScreen = this.nextScreen.bind(this)
         this.inputDeviceClickHandler = this.inputDeviceClickHandler.bind(this)
         this.instructionButtonClickHandler = this.instructionButtonClickHandler.bind(this)
         this.stimuliButtonClickHandler = this.stimuliButtonClickHandler.bind(this)
-        this.handleNewTrial = this.handleNewTrial.bind(this)
 
         this.renderer.initialize({
             nextButton: () => this.instructionButtonClickHandler('next'),
@@ -757,7 +749,7 @@ class Game {
 
     inputDeviceClickHandler(inputDevice) {
         this.inputDevice = inputDevice
-        this.nextScreen(this.currentScreen.nextScreen())
+        this.nextScreen(this.currentScreen.nextScreen)
     }
 
     nextScreen(screenClass) {
@@ -766,28 +758,33 @@ class Game {
     }
 
     instructionButtonClickHandler(functionName) {
-        let ScreenClass
-        switch (functionName) {
-            case "next":
-                ScreenClass = this.currentScreen.nextScreen()
-                break
-            case "previous":
-                ScreenClass = this.currentScreen.previousScreen()
-                break
+        let ScreenClass = this.currentScreen.nextScreen
+        if (functionName === "previous") {
+            ScreenClass = this.currentScreen.previousScreen
+        }
+        if (ScreenClass === TrialScreen) {
+            this.newRound()
         }
         this.nextScreen(ScreenClass)
     }
 
     stimuliButtonClickHandler(stimuli) {
-        if (this.state.getSearchStimuli() === stimuli) {
-            this.handleNewTrial(TrialType.Practice)
+        const currentRound = this.rounds[this.rounds.length - 1]
+        if (currentRound.currentTrial.searchStimuli === stimuli) {
+            currentRound.newTrial()
         } else {
             this.state.currentTrial.mistakes++
         }
+        this.nextScreen(TrialScreen)
     }
 
-    handleNewTrial(trialType) {
-        this.state.newCurrentTrial(trialType)
-        this.nextScreen(this.currentScreen.nextScreen())
+    newRound() {
+        this.rounds.push(
+            new Round(this.config.roundSchedule[this.rounds.length])
+        )
+    }
+
+    isDone() {
+        return this.rounds.length === this.config.roundSchedule.length
     }
 }

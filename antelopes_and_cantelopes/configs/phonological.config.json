@@ -1,7 +1,9 @@
 {
-    "A": "can",
-    "B": "coin",
-    "C": "cone",
-    "D": "corn",
+    "stimuli": [
+        "can",
+        "coin",
+        "cone",
+        "corn"
+    ],
     "roundSchedule": [["A"], ["B", "C"], ["B"], ["C", "D"], ["C"], ["D", "A"]]
 }
