@@ -6,7 +6,7 @@ const SEMANTIC = 'semantic'
 const PHONOLOGICAL = 'phonological'
 const STANDARD = 'standard'
 const READY_TIMEOUT = 1000
-const TRIAL_TIMEOUT = 20000
+const ROUND_DURATION = 3000
 const MAX_PRACTICE_TRIALS = 3
 const DEVICE_LABEL_CSS = {
     "color": "#000000",
@@ -19,6 +19,38 @@ const DEVICE_BUTTON_CSS = {
     "width": "15%",
     "margin-left": "auto",
     "margin-right": "auto"
+}
+const DEFAULT_TEXT_CSS = {
+    "color": "#000000",
+    "text-align": "center",
+    "font-size": "3vh",
+    "min-width": "100vw",
+    "white-space": "pre-line",
+    "line-height": "1.7em",
+    "margin-top": "auto",
+    "margin-bottom": "auto"
+}
+const REMINDER_CSS = {
+    width: '80px',
+    height: '80px',
+    margin: 'auto'
+}
+const SEARCH_STIMULI_CSS = {
+    width: '200px', 
+    height: '200px', 
+    padding: '50px',
+    background: '#BEBEBE',
+    border: '1px solid #000000'
+}
+const SEARCH_STIMULI_LABEL_CSS = {
+    width: '200px', 
+    height: '100%', 
+    fontSize: '2em',
+    textAlign: 'center'
+}
+const STIMULI_CSS = {
+    width: '200px',
+    height: '200px',
 }
 
 
@@ -56,71 +88,40 @@ class Renderer {
         this.reminderContainer = jQuery('<div/>', {
             id: 'reminderContainer', 
             css: {
-                width: '100%', 
+                width: '200px', 
                 display: 'flex',
                 marginTop: '10px',
-                alignItems: 'center'
-            }
-        })
-        this.pointer = jQuery('<div/>', {
-            id: 'pointer', 
-            css: {
-                color: '#FF0000',
-                fontSize: '3em',
+                marginBottom: '10px',
                 marginLeft: 'auto',
-                marginRight: '3px',
-                fontWeight: '900'
-            }
-        }).text('\u2192')
-        this.reminder = jQuery('<img/>', {
-            id: 'reminder', 
-            css: {
-                width: '80px',
-                height: '80px',
-                marginRight: '10px'
+                padding: '5px',
+                alignItems: 'center',
+                background: '#BEBEBE',
+                border: 'solid 1px'
             }
         })
+        this.reminders = [
+            jQuery('<img/>', {id: 'reminder1', css: REMINDER_CSS}),
+            jQuery('<img/>', {id: 'reminder2', css: REMINDER_CSS})
+        ]
         this.stimuliToSelectContainer = jQuery('<div/>', {
             id: 'stimuliToSelectContainer', 
             css: {
-                width: '100%', 
-                display: 'flex', 
+                width: '600px',
+                maxHeight: '400px', 
+                display: 'flex',
+                flexWrap: 'wrap',
+                flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: 'auto'
+                margin: 'auto',
             }
         })
-        this.stimuliToSelectAndLabelContainer = jQuery('<div/>', {id: 'stimuliToSelectAndLabelContainer', css: {width: '100%', marginTop: 'auto'}})
-        this.stimuliToSelect1 = jQuery('<img/>', {id: 'stimuliToSelect1', css: {width: '200px', height: '200px'}})
-        this.stimuliToSelect2 = jQuery('<img/>', {id: 'stimuliToSelect2', css: {width: '200px', height: '200px'}})
-        this.stimuliToSelectLabelContainer = jQuery('<div/>', {
-            id: 'stimuliToSelectLabelContainer', 
-            css: {
-                width: '100%', 
-                display: 'flex', 
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: 'auto'
-            }
-        })
-        this.stimuliToSelect1Label = jQuery('<div/>', {
-            id: 'stimuliToSelect1Label', 
-            css: {
-                width: '200px', 
-                height: '100%', 
-                fontSize: '2em',
-                textAlign: 'center'
-            }
-        })
-        this.stimuliToSelect2Label = jQuery('<div/>', {
-            id: 'stimuliToSelect2Label', 
-            css: {
-                width: '200px', 
-                height: '100%', 
-                fontSize: '2em',
-                textAlign: 'center'
-            }
-        })
+        this.stimuliToSelect = [
+            jQuery('<img/>', {id: 'stimuliToSelect1', css: SEARCH_STIMULI_CSS}),
+            jQuery('<div/>', {id: 'stimuliToSelect1Label', css: SEARCH_STIMULI_LABEL_CSS}),
+            jQuery('<img/>', {id: 'stimuliToSelect2', css: SEARCH_STIMULI_CSS}),
+            jQuery('<div/>', {id: 'stimuliToSelect2Label', css: SEARCH_STIMULI_LABEL_CSS})
+        ]
         this.allStimuliContainer = jQuery('<div/>', {id: 'allStimuliContainer', css: {width: '100%'}})
         this.allAstimuliContainer = jQuery('<div/>', {
             id: 'AllAstimuliContainer',
@@ -170,71 +171,26 @@ class Renderer {
         this.appendAllStimuli(this.allBstimuliContainer, this.config.stimuli[1])
         this.appendAllStimuli(this.allCstimuliContainer, this.config.stimuli[2])
         this.appendAllStimuli(this.allDstimuliContainer, this.config.stimuli[3])
-        this.textContainer = jQuery("<div/>", {id: "textContainer", css: {
-            "color": "#000000",
-            "text-align": "center",
-            "font-size": "3vh",
-            "min-width": "100vw",
-            "white-space": "pre-line",
-            "line-height": "1.7em",
-            "margin-top": "auto",
-            "margin-bottom": "auto"
-        }})
-        this.stimuliRow1Container = jQuery('<div/>', {
-            id: 'stimuliRow1Container',
+        this.textContainer = jQuery("<div/>", {id: "textContainer", css: DEFAULT_TEXT_CSS})
+
+        this.stimuliGrid = jQuery('<div/>', {
+            id: 'stimuliGrid',
             css: {
-                'display': 'flex',
-                'height': '200px',
-                'width': '100%',
-                'margin-bottom': '1vh',
-                'margin-top': 'auto',
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                gap: '10px',
+                width: '430px',
+                margin: 'auto',
+                justifyContent: 'center'
             }
         })
-        this.stimuliRow2Container = jQuery('<div/>', {
-            id: 'stimuliRow2Container',
-            css: {
-                'display': 'flex',
-                'height': '200px',
-                'width': '100%',
-                'margin-top': '1vh'
-            }
-        })
-        this.stimuli1 = jQuery('<img/>', {
-            id: 'stimuli1',
-            css: {
-                'width': '200px',
-                'height': '200px',
-                'margin-left': 'auto',
-                'margin-right': '1vh',
-            }
-        })
-        this.stimuli2 = jQuery('<img/>', {
-            id: 'stimuli2',
-            css: {
-                'width': '200px',
-                'height': '200px',
-                'margin-left': '1vh',
-                'margin-right': 'auto',
-            }
-        })
-        this.stimuli3 = jQuery('<img/>', {
-            id: 'stimuli3',
-            css: {
-                'width': '200px',
-                'height': '200px',
-                'margin-left': 'auto',
-                'margin-right': '1vh',
-            }
-        })
-        this.stimuli4 = jQuery('<img/>', {
-            id: 'stimuli4',
-            css: {
-                'width': '200px',
-                'height': '200px',
-                'margin-left': '1vh',
-                'margin-right': 'auto',
-            }
-        })
+        this.stimuli = [
+            jQuery('<img/>', {id: 'stimuli1', css: STIMULI_CSS}),
+            jQuery('<img/>', {id: 'stimuli2', css: STIMULI_CSS}),
+            jQuery('<img/>', {id: 'stimuli3', css: STIMULI_CSS}),
+            jQuery('<img/>', {id: 'stimuli4', css: STIMULI_CSS})
+        ]
         this.instructionButtonContainer = jQuery("<div/>", {id: "instructionButtonContainer", css: {
             "display": "flex",
             "flex-direction": "row",
@@ -265,6 +221,15 @@ class Renderer {
             () => this.previousButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
             () => this.previousButton.css("background-color", "#A8A8A8")
         )
+        this.stopImage = jQuery('<img/>', {
+            id: 'stopImage', 
+            css: {
+                width: '300px',
+                height: '300px',
+                margin: 'auto'
+            },
+            src: 'https://jslawjslaw.github.io/js-crlab/static/stop.png' 
+        })
         this.inputDeviceContainer = jQuery("<div/>", {id: "inputDeviceContainer", css: {
             "display": "flex",
             "flex-direction": "row",
@@ -364,34 +329,16 @@ class Renderer {
 
         jQuery("#Wrapper").append(
             this.container.append(
-                this.reminderContainer.append(
-                    this.pointer,
-                    this.reminder
-                ),
-                this.stimuliToSelectAndLabelContainer.append(
-                    this.stimuliToSelectContainer.append(
-                        this.stimuliToSelect1,
-                        this.stimuliToSelect2
-                    ),
-                    this.stimuliToSelectLabelContainer.append(
-                        this.stimuliToSelect1Label,
-                        this.stimuliToSelect2Label
-                    )
-                ),
+                this.reminderContainer.append(...this.reminders),
+                this.stimuliToSelectContainer.append(...this.stimuliToSelect),
                 this.allStimuliContainer.append(
                     this.allAstimuliContainer,
                     this.allBstimuliContainer,
                     this.allCstimuliContainer,
                     this.allDstimuliContainer
                 ),
-                this.stimuliRow1Container.append(
-                    this.stimuli1,
-                    this.stimuli2
-                ),
-                this.stimuliRow2Container.append(
-                    this.stimuli3,
-                    this.stimuli4
-                ),
+                this.stimuliGrid.append(...this.stimuli),
+                this.stopImage,
                 this.textContainer,
                 this.inputDeviceContainer.append([
                     this.mouseButton,
@@ -422,6 +369,10 @@ class Renderer {
             element.click(callback)
         }
     }
+
+    setOneTimeClick(func) {
+        jQuery('#Wrapper').one('click', func)
+    }
 }
 
 
@@ -430,6 +381,24 @@ class Screen {
         this.renderer = renderer
         this.config = config
         this.game = game
+    }
+
+    setStimuliImages(images) {
+        this.renderer.stimuli.map((stimulus, index) => stimulus.attr({src: images[index]}))
+    }
+
+    updateReminders() {
+        this.renderer.reminders.map((reminder) => reminder.hide())
+        this.game.currentRound.getStimuliSchedule().map((stimulus, index) => {
+            const reminder = this.renderer.reminders[index]
+            reminder.show()
+            reminder.attr({src: `${BASE_URL}/${stimulus}1.jpg`})
+            if (this.game.currentRound.getSearchStimuli() === stimulus) {
+                reminder.css({border: '1px solid #FF0000'})
+            } else {
+                reminder.css({border: '1px solid #000000'})
+            }
+        })
     }
 }
 
@@ -440,11 +409,11 @@ class InputDeviceInstructionScreen extends Screen {
     render() {
         this.renderer.inputDeviceContainer.show()
         this.renderer.inputDeviceLabelContainer.show()
-        this.renderer.stimuliToSelectAndLabelContainer.hide()
+        this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderContainer.hide()
         this.renderer.allStimuliContainer.hide()
-        this.renderer.stimuliRow1Container.hide()
-        this.renderer.stimuliRow2Container.hide()
+        this.renderer.stimuliGrid.hide()
+        this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions())
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.hide()
@@ -462,15 +431,12 @@ class InstructionScreenOne extends Screen {
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
-        this.renderer.stimuliToSelectAndLabelContainer.hide()
+        this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderContainer.hide()
         this.renderer.allStimuliContainer.hide()
-        this.renderer.stimuliRow1Container.show()
-        this.renderer.stimuli1.attr({'src': `${BASE_URL}/${this.config.stimuli[0]}1.jpg`})
-        this.renderer.stimuli2.attr({'src': `${BASE_URL}/${this.config.stimuli[1]}1.jpg`})
-        this.renderer.stimuliRow2Container.show()
-        this.renderer.stimuli3.attr({'src': `${BASE_URL}/${this.config.stimuli[2]}1.jpg`})
-        this.renderer.stimuli4.attr({'src': `${BASE_URL}/${this.config.stimuli[3]}1.jpg`})
+        this.renderer.stimuliGrid.show()
+        this.setStimuliImages(this.config.stimuli.map((stimuli) => `${BASE_URL}/${stimuli}1.jpg`))
+        this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions())
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.show()
@@ -489,11 +455,11 @@ class InstructionScreenTwo extends Screen {
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
-        this.renderer.stimuliToSelectAndLabelContainer.hide()
+        this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderContainer.hide()
         this.renderer.allStimuliContainer.show()
-        this.renderer.stimuliRow1Container.hide()
-        this.renderer.stimuliRow2Container.hide()
+        this.renderer.stimuliGrid.hide()
+        this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions())
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.show()
@@ -511,12 +477,12 @@ class InstructionScreenThree extends Screen {
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
-        this.renderer.stimuliToSelectAndLabelContainer.hide()
+        this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderContainer.show()
-        this.renderer.reminder.attr({src: `${BASE_URL}/${this.config.stimuli[0]}1.jpg`})
+        this.updateReminders()
         this.renderer.allStimuliContainer.hide()
-        this.renderer.stimuliRow1Container.show()
-        this.renderer.stimuliRow2Container.show()
+        this.renderer.stimuliGrid.show()
+        this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions())
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.show()
@@ -534,50 +500,97 @@ class InstructionScreenFour extends Screen {
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
-        this.renderer.stimuliToSelectAndLabelContainer.show()
-        this.renderer.stimuliToSelect1.attr({src: `${BASE_URL}/${this.config.stimuli[0]}1.jpg`})
-        this.renderer.stimuliToSelect1Label.text(this.config.stimuli[0])
-        this.renderer.stimuliToSelect2.hide()
-        this.renderer.stimuliToSelect2Label.hide()
+        this.renderer.stimuliToSelectContainer.show()
+        this.updateSearchStimuli()
         this.renderer.reminderContainer.hide()
         this.renderer.allStimuliContainer.hide()
-        this.renderer.stimuliRow1Container.hide()
-        this.renderer.stimuliRow2Container.hide()
-        this.renderer.textContainer.text(this.getInstructions())
+        this.renderer.stimuliGrid.hide()
+        this.renderer.stopImage.hide()
+        this.renderer.textContainer.text(this.getInstructions()).css(DEFAULT_TEXT_CSS)
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.show()
     }
 
+    updateSearchStimuli() {
+        this.renderer.stimuliToSelect.map((stimulusToSelect) => stimulusToSelect.hide())
+        this.game.currentRound.getStimuliSchedule().map((stimulus, index) => {
+            this.renderer.stimuliToSelect[2 * index].show()
+            this.renderer.stimuliToSelect[2 * index].attr({src: `${BASE_URL}/${stimulus}1.jpg`})
+            this.renderer.stimuliToSelect[2 * index + 1].show()
+            this.renderer.stimuliToSelect[2 * index + 1].text(stimulus)
+        })
+    }
+
     getInstructions() {
-        return `Please touch the ${this.config.stimuli[0]} every time. Let's practice a few.`
+        if (this.game.currentRound.roundSchedule.length === 1) {
+            return `Please touch the ${this.game.currentRound.getSearchStimuli()} every time. Let's practice a few.`
+        } else {
+            return `Please alternate between these.`
+        }
     }
 }
+
+
+class StopScreen extends Screen {
+    nextScreen = ReadyScreen
+
+    render() {
+        this.renderer.inputDeviceContainer.hide()
+        this.renderer.inputDeviceLabelContainer.hide()
+        this.renderer.stimuliToSelectContainer.hide()
+        this.renderer.reminderContainer.hide()
+        this.renderer.allStimuliContainer.hide()
+        this.renderer.stimuliGrid.hide()
+        this.renderer.stopImage.show()
+        this.renderer.textContainer.text(this.getInstructions())
+        this.renderer.textContainer.show()
+        this.renderer.instructionButtonContainer.hide()
+        this.renderer.setOneTimeClick(this.clickHandler)
+    }
+
+    getInstructions() {
+        return 'Click anywhere when you are ready to begin the real thing. Go as fast as you can.'
+    }
+}
+
 
 
 class ReadyScreen extends Screen {
     nextScreen = TrialScreen
 
+    constructor(renderer, config, game) {
+        super(renderer, config, game)
+        this.clickHandler = this.clickHandler.bind(this)
+    }
+
     render() {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
-        this.renderer.stimuliToSelectAndLabelContainer.hide()
+        this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderContainer.hide()
         this.renderer.allStimuliContainer.hide()
-        this.renderer.stimuliRow1Container.hide()
-        this.renderer.stimuliRow2Container.hide()
-        this.renderer.textContainer.text("Ready")
+        this.renderer.stimuliGrid.hide()
         this.renderer.textContainer.css({
             fontSize: '10vh',
             color: '#0000FF'
         })
+        this.renderer.stopImage.hide()
+        this.renderer.textContainer.text('Ready')
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.hide()
+        
         setTimeout(() => {
-            this.renderer.textContainer.text("Set")
+            this.renderer.textContainer.text('Set')
             setTimeout(() => {
-                this.renderer.textContainer.text("Go!")
+                this.renderer.textContainer.text('Go!')
                 setTimeout(() => {
-                    this.game.newRound()
+                    this.game.currentRound.experimentStartTime = Date.now()
+                    this.game.currentRound.newTrial()
+                    this.game.nextScreen(this.nextScreen)
+                    setTimeout(() => {
+                        this.game.newRound()
+                        this.game.nextScreen(InstructionScreenFour)
+                    }, ROUND_DURATION)
                 }, READY_TIMEOUT)
             }, READY_TIMEOUT)
         }, READY_TIMEOUT)
@@ -593,8 +606,6 @@ class TrialScreen extends Screen {
     }
 
     render() {
-        const images = this.game.currentRound.currentTrial.getImages()
-
         this.renderer.updateClickHandlers({
             stimuli1: () => this.game.stimuliButtonClickHandler(this.game.currentRound.currentTrial.stimuli[0]),
             stimuli2: () => this.game.stimuliButtonClickHandler(this.game.currentRound.currentTrial.stimuli[1]),
@@ -602,21 +613,17 @@ class TrialScreen extends Screen {
             stimuli4: () => this.game.stimuliButtonClickHandler(this.game.currentRound.currentTrial.stimuli[3])
         })
 
-        this.renderer.stimuliToSelectAndLabelContainer.hide()
+        this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderContainer.show()
-        this.renderer.pointer.hide()
-        this.renderer.reminder.css({marginLeft: 'auto'})
-        this.renderer.reminder.attr({src: `${BASE_URL}/${this.config.stimuli[0]}1.jpg`})
+        this.updateReminders()
         this.renderer.allStimuliContainer.hide()
-        this.renderer.stimuliRow1Container.show()
-        this.renderer.stimuli1.attr({src: images[0]})
-        this.renderer.stimuli2.attr({src: images[1]})
-        this.renderer.stimuliRow2Container.show()
-        this.renderer.stimuli3.attr({src: images[2]})
-        this.renderer.stimuli4.attr({src: images[3]})
-        this.renderer.stimuliRow2Container.css({marginBottom: 'auto'})
+        this.renderer.stimuliGrid.show()
+        this.setStimuliImages(this.game.currentRound.currentTrial.getImages())
+        this.renderer.stopImage.hide()
         this.renderer.textContainer.hide()
         this.renderer.instructionButtonContainer.hide()
+
+        this.game.currentRound.currentTrial.startTime = Date.now()
     }
 }
 
@@ -626,6 +633,7 @@ class Round {
         this.orderedStimuli = orderedStimuli
         this.roundSchedule = roundSchedule
         this.scheduleIndex = 0
+        this.experimentStartTime = null
         this.trials = []
         this.newTrial()
     }
@@ -636,9 +644,13 @@ class Round {
             this.scheduleIndex = 0
         }
     }
-
+ 
     getSearchStimuli() {
         return this.orderedStimuli[this.roundSchedule[this.scheduleIndex]]
+    }
+
+    getStimuliSchedule() {
+        return this.roundSchedule.map((index) => this.orderedStimuli[index])
     }
 
     getRandomImageNumbers() {
@@ -703,7 +715,7 @@ class Round {
 class Trial {
     constructor(trialType, stimuli, imageNumbers, searchStimuli) {
         this.trialType = trialType
-        this.startTime = Date.now()
+        this.startTime = null
         this.endTime = null
         this.selected = null
         this.stimuli = stimuli
@@ -721,9 +733,7 @@ class Trial {
     }
 
     getImages() {
-        return this.stimuli.map((stimulus, index) => {
-            return `${BASE_URL}/${stimulus}${this.imageNumbers[index]}.jpg`
-        })
+        return this.stimuli.map((stimulus, index) => `${BASE_URL}/${stimulus}${this.imageNumbers[index]}.jpg`)
     }
 }
 
@@ -735,6 +745,7 @@ class Game {
         this.config = config
         
         this.rounds = []
+        this.newRound()
 
         this.nextScreen = this.nextScreen.bind(this)
         this.inputDeviceClickHandler = this.inputDeviceClickHandler.bind(this)
@@ -768,20 +779,21 @@ class Game {
         if (functionName === "previous") {
             ScreenClass = this.currentScreen.previousScreen
         }
-        if (ScreenClass === TrialScreen) {
-            this.newRound()
-        }
         this.nextScreen(ScreenClass)
     }
 
     stimuliButtonClickHandler(stimuli) {
-        debugger
         if (this.currentRound.currentTrial.searchStimuli === stimuli) {
-            this.currentRound.newTrial()
+            let nextScreen = StopScreen
+            if (!this.currentRound.shouldBeginExperiment()) {
+                nextScreen = TrialScreen
+                this.currentRound.incrementScheduleIndex()
+                this.currentRound.newTrial()
+            }
+            this.nextScreen(nextScreen)
         } else {
             this.currentRound.currentTrial.mistakes++
         }
-        this.nextScreen(TrialScreen)
     }
 
     get currentRound() {
@@ -792,9 +804,5 @@ class Game {
         this.rounds.push(
             new Round(this.config.stimuli, this.config.roundSchedule[this.rounds.length])
         )
-    }
-
-    isDone() {
-        return this.rounds.length === this.config.roundSchedule.length
     }
 }
