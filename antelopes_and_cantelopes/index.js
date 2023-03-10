@@ -9,26 +9,26 @@ const READY_TIMEOUT = 1000
 const ROUND_DURATION = 3000
 const MAX_PRACTICE_TRIALS = 3
 const DEVICE_LABEL_CSS = {
-    "color": "#000000",
-    "width": "15%",
-    "margin-left": "auto",
-    "margin-right": "auto",
-    "text-align": "center",
+    color: "#000000",
+    width: "15%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    textAlign: "center",
 }
 const DEVICE_BUTTON_CSS = {
-    "width": "15%",
-    "margin-left": "auto",
-    "margin-right": "auto"
+    width: "15%",
+    marginLeft: "auto",
+    marginRight: "auto"
 }
 const DEFAULT_TEXT_CSS = {
-    "color": "#000000",
-    "text-align": "center",
-    "font-size": "3vh",
-    "min-width": "100vw",
-    "white-space": "pre-line",
-    "line-height": "1.7em",
-    "margin-top": "auto",
-    "margin-bottom": "auto"
+    color: "#000000",
+    textAlign: "center",
+    fontSize: "3vh",
+    minWidth: "100vw",
+    whiteSpace: "pre-line",
+    lineHeight: "1.7em",
+    marginTop: "auto",
+    marginBottom: "auto"
 }
 const REMINDER_CSS = {
     width: '80px',
@@ -369,10 +369,6 @@ class Renderer {
             element.click(callback)
         }
     }
-
-    setOneTimeClick(func) {
-        jQuery('#Wrapper').one('click', func)
-    }
 }
 
 
@@ -525,7 +521,7 @@ class InstructionScreenFour extends Screen {
         if (this.game.currentRound.roundSchedule.length === 1) {
             return `Please touch the ${this.game.currentRound.getSearchStimuli()} every time. Let's practice a few.`
         } else {
-            return `Please alternate between these.`
+            return `Please alternate between these. Let's practice again.`
         }
     }
 }
@@ -545,7 +541,8 @@ class StopScreen extends Screen {
         this.renderer.textContainer.text(this.getInstructions())
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.hide()
-        this.renderer.setOneTimeClick(this.clickHandler)
+        const startTime = Date.now()
+        this.renderer.updateClickHandlers({Wrapper: () => this.game.stopClickHandler(startTime)})
     }
 
     getInstructions() {
@@ -557,11 +554,6 @@ class StopScreen extends Screen {
 
 class ReadyScreen extends Screen {
     nextScreen = TrialScreen
-
-    constructor(renderer, config, game) {
-        super(renderer, config, game)
-        this.clickHandler = this.clickHandler.bind(this)
-    }
 
     render() {
         this.renderer.inputDeviceContainer.hide()
@@ -751,6 +743,7 @@ class Game {
         this.inputDeviceClickHandler = this.inputDeviceClickHandler.bind(this)
         this.instructionButtonClickHandler = this.instructionButtonClickHandler.bind(this)
         this.stimuliButtonClickHandler = this.stimuliButtonClickHandler.bind(this)
+        this.stopClickHandler = this.stopClickHandler.bind(this)
 
         this.renderer.initialize({
             nextButton: () => this.instructionButtonClickHandler('next'),
@@ -762,6 +755,13 @@ class Game {
         })
         this.currentScreen = new InputDeviceInstructionScreen(this.renderer, this.config, this)
         this.currentScreen.render()
+    }
+
+    stopClickHandler(startTime) {
+        if (Date.now() - startTime > 500) {
+            jQuery('#Wrapper').off('click')
+            this.nextScreen(this.currentScreen.nextScreen)
+        }
     }
 
     inputDeviceClickHandler(inputDevice) {
@@ -776,7 +776,7 @@ class Game {
 
     instructionButtonClickHandler(functionName) {
         let ScreenClass = this.currentScreen.nextScreen
-        if (functionName === "previous") {
+        if (functionName === 'previous') {
             ScreenClass = this.currentScreen.previousScreen
         }
         this.nextScreen(ScreenClass)
