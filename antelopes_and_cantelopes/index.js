@@ -1,3 +1,4 @@
+const IS_QUALTRICS = window.location.host === "georgetown.az1.qualtrics.com"
 const BASE_URL = './toshare/stimuli_for_adaptation'
 
 const PRACTICE = 'practice'
@@ -27,8 +28,8 @@ const DEFAULT_TEXT_CSS = {
     minWidth: "100vw",
     whiteSpace: "pre-line",
     lineHeight: "1.7em",
-    marginTop: "auto",
-    marginBottom: "auto"
+    marginBottom: '',
+    marginTop: ''
 }
 const REMINDER_CSS = {
     width: '80px',
@@ -85,11 +86,23 @@ class Renderer {
             "align-items": "center",
             "justify-content": "center"
         }})
+        this.reminderRow = jQuery('<div/>', {
+            id: 'reminderRow',
+            css: {
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'right',
+            }
+        })
         this.redArrow = jQuery('<img/>', {
             id: 'redArrow',
             css: {
                 width: '200px',
-                height: '80px'
+                height: '80px',
+                marginTop: '10px',
+                marginBottom: '10px',
+                padding: '5px'
             },
             src: 'https://jslawjslaw.github.io/js-crlab/static/red-arrow.png'
         })
@@ -100,7 +113,6 @@ class Renderer {
                 display: 'flex',
                 marginTop: '10px',
                 marginBottom: '10px',
-                marginLeft: 'auto',
                 padding: '5px',
                 alignItems: 'center',
                 background: '#BEBEBE',
@@ -121,7 +133,8 @@ class Renderer {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                margin: 'auto',
+                marginTop: 'auto',
+                marginBottom: 'auto'
             }
         })
         this.stimuliToSelect = [
@@ -130,7 +143,7 @@ class Renderer {
             jQuery('<img/>', {id: 'stimuliToSelect2', css: SEARCH_STIMULI_CSS}),
             jQuery('<div/>', {id: 'stimuliToSelect2Label', css: SEARCH_STIMULI_LABEL_CSS})
         ]
-        this.allStimuliContainer = jQuery('<div/>', {id: 'allStimuliContainer', css: {width: '100%'}})
+        this.allStimuliContainer = jQuery('<div/>', {id: 'allStimuliContainer', css: {width: '100%', margin: 'auto'}})
         this.allAstimuliContainer = jQuery('<div/>', {
             id: 'AllAstimuliContainer',
             css: {
@@ -180,7 +193,6 @@ class Renderer {
         this.appendAllStimuli(this.allCstimuliContainer, this.config.stimuli[2])
         this.appendAllStimuli(this.allDstimuliContainer, this.config.stimuli[3])
         this.textContainer = jQuery("<div/>", {id: "textContainer", css: DEFAULT_TEXT_CSS})
-
         this.stimuliGrid = jQuery('<div/>', {
             id: 'stimuliGrid',
             css: {
@@ -189,7 +201,8 @@ class Renderer {
                 flexWrap: 'wrap',
                 gap: '10px',
                 width: '430px',
-                margin: 'auto',
+                marginTop: 'auto',
+                marginBottom: 'auto',
                 justifyContent: 'center'
             }
         })
@@ -234,17 +247,21 @@ class Renderer {
             css: {
                 width: '300px',
                 height: '300px',
-                margin: 'auto'
+                margin: 'auto',
+                marginBottom: '20px'
             },
             src: 'https://jslawjslaw.github.io/js-crlab/static/stop.png' 
         })
-        this.inputDeviceContainer = jQuery("<div/>", {id: "inputDeviceContainer", css: {
-            "display": "flex",
-            "flex-direction": "row",
-            "justify-content": "flex-end",
-            "min-width": "100%",
-            "margin-top": "5%",
-        }})
+        this.inputDeviceContainer = jQuery("<div/>", {
+            id: "inputDeviceContainer", 
+            css: {
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                minWidth: "100%",
+                marginTop: "auto",
+            }
+        })
         this.touchscreenButton = jQuery('<img/>', {
             id: "touchscreenButton", 
             css: DEVICE_BUTTON_CSS,
@@ -337,7 +354,10 @@ class Renderer {
 
         jQuery("#Wrapper").append(
             this.container.append(
-                this.reminderContainer.append(...this.reminders),
+                this.reminderRow.append(
+                    this.redArrow, 
+                    this.reminderContainer.append(...this.reminders)
+                ),               
                 this.stimuliToSelectContainer.append(...this.stimuliToSelect),
                 this.allStimuliContainer.append(
                     this.allAstimuliContainer,
@@ -347,7 +367,6 @@ class Renderer {
                 ),
                 this.stimuliGrid.append(...this.stimuli),
                 this.stopImage,
-                this.textContainer,
                 this.inputDeviceContainer.append([
                     this.mouseButton,
                     this.touchscreenButton,
@@ -360,6 +379,7 @@ class Renderer {
                     this.trackpadButtonLabel,
                     this.otherButtonLabel,
                 ]),
+                this.textContainer,
                 this.instructionButtonContainer.append(
                     this.previousButton,
                     this.nextButton
@@ -411,14 +431,15 @@ class InputDeviceInstructionScreen extends Screen {
     nextScreen = InstructionScreenOne
     
     render() {
+        this.renderer.redArrow.hide()
         this.renderer.inputDeviceContainer.show()
         this.renderer.inputDeviceLabelContainer.show()
         this.renderer.stimuliToSelectContainer.hide()
-        this.renderer.reminderContainer.hide()
+        this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliGrid.hide()
         this.renderer.stopImage.hide()
-        this.renderer.textContainer.text(this.getInstructions())
+        this.renderer.textContainer.text(this.getInstructions()).css({marginBottom: 'auto'})
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.hide()
     }
@@ -433,15 +454,16 @@ class InstructionScreenOne extends Screen {
     previousScreen = InputDeviceInstructionScreen
     nextScreen = InstructionScreenTwo
     render() {
+        this.renderer.redArrow.hide()
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
         this.renderer.stimuliToSelectContainer.hide()
-        this.renderer.reminderContainer.hide()
+        this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliGrid.show()
         this.setStimuliImages(this.config.stimuli.map((stimuli) => `${BASE_URL}/${stimuli}1.jpg`))
         this.renderer.stopImage.hide()
-        this.renderer.textContainer.text(this.getInstructions())
+        this.renderer.textContainer.text(this.getInstructions()).css(DEFAULT_TEXT_CSS)
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.show()
     }
@@ -457,10 +479,11 @@ class InstructionScreenTwo extends Screen {
     nextScreen = InstructionScreenThree
 
     render() {
+        this.renderer.redArrow.hide()
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
         this.renderer.stimuliToSelectContainer.hide()
-        this.renderer.reminderContainer.hide()
+        this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.show()
         this.renderer.stimuliGrid.hide()
         this.renderer.stopImage.hide()
@@ -479,10 +502,11 @@ class InstructionScreenThree extends Screen {
     nextScreen = InstructionScreenFour
 
     render() {
+        this.renderer.redArrow.show()
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
         this.renderer.stimuliToSelectContainer.hide()
-        this.renderer.reminderContainer.show()
+        this.renderer.reminderRow.show()
         this.updateReminders()
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliGrid.show()
@@ -506,12 +530,13 @@ class InstructionScreenFour extends Screen {
         this.renderer.inputDeviceLabelContainer.hide()
         this.renderer.stimuliToSelectContainer.show()
         this.updateSearchStimuli()
-        this.renderer.reminderContainer.hide()
+        this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliGrid.hide()
         this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions()).css(DEFAULT_TEXT_CSS)
         this.renderer.textContainer.show()
+        this.renderer.previousButton.hide()
         this.renderer.instructionButtonContainer.show()
     }
 
@@ -529,7 +554,8 @@ class InstructionScreenFour extends Screen {
         if (this.game.currentRound.roundSchedule.length === 1) {
             return `Please touch the ${this.game.currentRound.getSearchStimuli()} every time. Let's practice a few.`
         } else {
-            return `Please alternate between these. Let's practice again.`
+            const stimuli = this.game.currentRound.getStimuliSchedule()
+            return `Please alternate between the ${stimuli[0]} and the ${stimuli[1]}. Let's practice a few.`
         }
     }
 }
@@ -542,11 +568,11 @@ class StopScreen extends Screen {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
         this.renderer.stimuliToSelectContainer.hide()
-        this.renderer.reminderContainer.hide()
+        this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliGrid.hide()
         this.renderer.stopImage.show()
-        this.renderer.textContainer.text(this.getInstructions())
+        this.renderer.textContainer.text(this.getInstructions()).css({marginBottom: 'auto'})
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.hide()
         const startTime = Date.now()
@@ -567,7 +593,7 @@ class ReadyScreen extends Screen {
         this.renderer.inputDeviceContainer.hide()
         this.renderer.inputDeviceLabelContainer.hide()
         this.renderer.stimuliToSelectContainer.hide()
-        this.renderer.reminderContainer.hide()
+        this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
         this.renderer.stimuliGrid.hide()
         this.renderer.textContainer.css({
@@ -575,6 +601,7 @@ class ReadyScreen extends Screen {
             color: '#0000FF'
         })
         this.renderer.stopImage.hide()
+        this.renderer.textContainer.css({marginTop: 'auto'})
         this.renderer.textContainer.text('Ready')
         this.renderer.textContainer.show()
         this.renderer.instructionButtonContainer.hide()
@@ -589,7 +616,8 @@ class ReadyScreen extends Screen {
                     this.game.nextScreen(this.nextScreen)
                     setTimeout(() => {
                         if (this.game.isDone()) {
-                            debugger
+                            this.game.submit()
+                            this.game.nextScreen(FinalScreen)
                         } else {
                             this.game.newRound()
                             this.game.nextScreen(InstructionScreenFour)
@@ -618,9 +646,11 @@ class TrialScreen extends Screen {
         })
 
         this.renderer.stimuliToSelectContainer.hide()
-        this.renderer.reminderContainer.show()
+        this.renderer.reminderRow.show()
+        this.renderer.redArrow.hide()
         this.updateReminders()
         this.renderer.allStimuliContainer.hide()
+        this.renderer.stimuliGrid.css({marginTop: ''})
         this.renderer.stimuliGrid.show()
         this.setStimuliImages(this.game.currentRound.currentTrial.getImages())
         this.renderer.stopImage.hide()
@@ -628,6 +658,20 @@ class TrialScreen extends Screen {
         this.renderer.instructionButtonContainer.hide()
 
         this.game.currentRound.currentTrial.startTime = Date.now()
+    }
+}
+
+
+class FinalScreen extends Screen {
+    render() {
+        this.renderer.stimuliToSelectContainer.hide()
+        this.renderer.reminderRow.hide()
+        this.renderer.allStimuliContainer.hide()
+        this.renderer.stimuliGrid.hide()
+        this.renderer.stopImage.hide()
+        this.renderer.textContainer.show()
+        this.renderer.textContainer.text(`You've completed this exercise!`)
+        this.renderer.instructionButtonContainer.hide()
     }
 }
 
@@ -679,12 +723,7 @@ class Round {
     }
 
     newTrial() {
-        let trialType = TrialType.Experiment
-        if (this.practiceTrials < MAX_PRACTICE_TRIALS) {
-            trialType = TrialType.Practice
-            this.practiceTrials++
-        }
-
+        const trialType = this.trials.length < MAX_PRACTICE_TRIALS ? TrialType.Practice: TrialType.Experiment
         const searchStimuli = this.getSearchStimuli()
         let shuffled = this.shuffle()
         let imageNumbers = this.getRandomImageNumbers()
@@ -720,12 +759,11 @@ class Trial {
     constructor(trialType, stimuli, imageNumbers, searchStimuli) {
         this.trialType = trialType
         this.startTime = null
-        this.endTime = null
-        this.selected = null
         this.stimuli = stimuli
         this.imageNumbers = imageNumbers
         this.searchStimuli = searchStimuli
-        this.mistakes = 0
+        this.selections = []
+        this.selectionTimes = []
     }
 
     getSearchStimuliIndex() {
@@ -795,6 +833,8 @@ class Game {
     }
 
     stimuliButtonClickHandler(stimuli) {
+        this.currentRound.currentTrial.selections.push(stimuli)
+        this.currentRound.currentTrial.selectionTimes.push(Date.now())
         if (this.currentRound.currentTrial.searchStimuli === stimuli) {
             let nextScreen = StopScreen
             if (!this.currentRound.shouldBeginExperiment()) {
@@ -803,8 +843,6 @@ class Game {
                 this.currentRound.newTrial()
             }
             this.nextScreen(nextScreen)
-        } else {
-            this.currentRound.currentTrial.mistakes++
         }
     }
 
@@ -820,5 +858,29 @@ class Game {
 
     isDone() {
         return this.rounds.length === this.config.roundSchedule.length
+    }
+
+    submit() {
+        const searchStimuli = []
+        const imageNumbers = []
+        const stimuliOrdering = []
+        const selections = []
+        const selectionTimes = []
+        const trialTypes = []
+        const timedOut = []
+        this.rounds.map((round) => {
+            round.trials.map((trial) => {
+                searchStimuli.push(trial.searchStimuli)
+                imageNumbers.push(trial.imageNumbers.join(';'))
+                stimuliOrdering.push(trial.stimuli.join(';'))
+                selections.push(trial.selections.join(';'))
+                selectionTimes.push(trial.selectionTimes.map((selectionTime) => selectionTime - trial.startTime).join(';'))
+                trialTypes.push(trial.trialType.name)
+                timedOut.push(!trial.selections.includes(trial.searchStimuli))
+            })
+        })
+        if (IS_QUALTRICS) {
+            setTimeout(() => this.engine.clickNextButton(), 500)
+        }
     }
 }
