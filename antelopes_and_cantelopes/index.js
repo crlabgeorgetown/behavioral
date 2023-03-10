@@ -85,6 +85,14 @@ class Renderer {
             "align-items": "center",
             "justify-content": "center"
         }})
+        this.redArrow = jQuery('<img/>', {
+            id: 'redArrow',
+            css: {
+                width: '200px',
+                height: '80px'
+            },
+            src: 'https://jslawjslaw.github.io/js-crlab/static/red-arrow.png'
+        })
         this.reminderContainer = jQuery('<div/>', {
             id: 'reminderContainer', 
             css: {
@@ -580,8 +588,12 @@ class ReadyScreen extends Screen {
                     this.game.currentRound.newTrial()
                     this.game.nextScreen(this.nextScreen)
                     setTimeout(() => {
-                        this.game.newRound()
-                        this.game.nextScreen(InstructionScreenFour)
+                        if (this.game.isDone()) {
+                            debugger
+                        } else {
+                            this.game.newRound()
+                            this.game.nextScreen(InstructionScreenFour)
+                        }
                     }, ROUND_DURATION)
                 }, READY_TIMEOUT)
             }, READY_TIMEOUT)
@@ -804,5 +816,9 @@ class Game {
         this.rounds.push(
             new Round(this.config.stimuli, this.config.roundSchedule[this.rounds.length])
         )
+    }
+
+    isDone() {
+        return this.rounds.length === this.config.roundSchedule.length
     }
 }
