@@ -1,3 +1,5 @@
+import { INPUT_DEVICE_CONTAINER, INPUT_DEVICE_LABEL_CONTAINER } from "../shared/components/inputDevice"
+
 const IS_QUALTRICS = window.location.host === "georgetown.az1.qualtrics.com"
 const BASE_URL = './toshare/stimuli_for_adaptation'
 
@@ -252,72 +254,72 @@ class Renderer {
             },
             src: 'https://jslawjslaw.github.io/js-crlab/static/stop.png' 
         })
-        this.inputDeviceContainer = jQuery("<div/>", {
-            id: "inputDeviceContainer", 
-            css: {
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-end",
-                minWidth: "100%",
-                marginTop: "auto",
-            }
-        })
-        this.touchscreenButton = jQuery('<img/>', {
-            id: "touchscreenButton", 
-            css: DEVICE_BUTTON_CSS,
-            src: "https://jslawjslaw.github.io/js-crlab/static/touchscreen.png",
-        }).hover(
-            () => this.touchscreenButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.touchscreenButton.css("background", "transparent")
-        )
-        this.trackpadButton = jQuery('<img/>', {
-            id: "trackpadButton",
-            css: DEVICE_BUTTON_CSS,
-            src: "https://jslawjslaw.github.io/js-crlab/static/trackpad.png",
-        }).hover(
-            () => this.trackpadButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.trackpadButton.css("background", "transparent")
-        )
-        this.mouseButton = jQuery('<img/>', {
-            id: "mouseButton",
-            css: DEVICE_BUTTON_CSS,
-            src: "https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png",
-        }).hover(
-            () => this.mouseButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.mouseButton.css("background", "transparent")
-        )
-        this.otherButton = jQuery('<img/>', {
-            id: "otherButton",
-            css: DEVICE_BUTTON_CSS,
-            src: "https://jslawjslaw.github.io/js-crlab/static/joystick.png",
-        }).hover(
-            () => this.otherButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
-            () => this.otherButton.css("background", "transparent")
-        )
-        this.inputDeviceLabelContainer = jQuery("<div/>", {id: "inputDeviceLabelContainer", css: {
-            "display": "flex",
-            "flex-direction": "row",
-            "justify-content": "flex-end",
-            "min-width": "100%",
-            "margin-top": "2.5%",
-            "margin-bottom": "auto",
-        }})
-        this.mouseButtonLabel = jQuery("<div/>", {
-            id: "mouseButtonLabel",
-            css: DEVICE_LABEL_CSS,
-        }).text("Mouse")
-        this.trackpadButtonLabel = jQuery("<div/>", {
-            id: "trackpadButtonLabel",
-            css: DEVICE_LABEL_CSS,
-        }).text("Trackpad")
-        this.touchscreenButtonLabel = jQuery("<div/>", {
-            id: "touchscreenButtonLabel",
-            css: DEVICE_LABEL_CSS,
-        }).text("Touchscreen")
-        this.otherButtonLabel = jQuery("<div/>", {
-            id: "otherButtonLabel",
-            css: DEVICE_LABEL_CSS,
-        }).text("other")
+        // this.inputDeviceContainer = jQuery("<div/>", {
+        //     id: "inputDeviceContainer", 
+        //     css: {
+        //         display: "flex",
+        //         flexDirection: "row",
+        //         justifyContent: "flex-end",
+        //         minWidth: "100%",
+        //         marginTop: "auto",
+        //     }
+        // })
+        // this.touchscreenButton = jQuery('<img/>', {
+        //     id: "touchscreenButton", 
+        //     css: DEVICE_BUTTON_CSS,
+        //     src: "https://jslawjslaw.github.io/js-crlab/static/touchscreen.png",
+        // }).hover(
+        //     () => this.touchscreenButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+        //     () => this.touchscreenButton.css("background", "transparent")
+        // )
+        // this.trackpadButton = jQuery('<img/>', {
+        //     id: "trackpadButton",
+        //     css: DEVICE_BUTTON_CSS,
+        //     src: "https://jslawjslaw.github.io/js-crlab/static/trackpad.png",
+        // }).hover(
+        //     () => this.trackpadButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+        //     () => this.trackpadButton.css("background", "transparent")
+        // )
+        // this.mouseButton = jQuery('<img/>', {
+        //     id: "mouseButton",
+        //     css: DEVICE_BUTTON_CSS,
+        //     src: "https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png",
+        // }).hover(
+        //     () => this.mouseButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+        //     () => this.mouseButton.css("background", "transparent")
+        // )
+        // this.otherButton = jQuery('<img/>', {
+        //     id: "otherButton",
+        //     css: DEVICE_BUTTON_CSS,
+        //     src: "https://jslawjslaw.github.io/js-crlab/static/joystick.png",
+        // }).hover(
+        //     () => this.otherButton.css({"background": "#B0B0B0", "cursor": "pointer"}),
+        //     () => this.otherButton.css("background", "transparent")
+        // )
+        // this.inputDeviceLabelContainer = jQuery("<div/>", {id: "inputDeviceLabelContainer", css: {
+        //     "display": "flex",
+        //     "flex-direction": "row",
+        //     "justify-content": "flex-end",
+        //     "min-width": "100%",
+        //     "margin-top": "2.5%",
+        //     "margin-bottom": "auto",
+        // }})
+        // this.mouseButtonLabel = jQuery("<div/>", {
+        //     id: "mouseButtonLabel",
+        //     css: DEVICE_LABEL_CSS,
+        // }).text("Mouse")
+        // this.trackpadButtonLabel = jQuery("<div/>", {
+        //     id: "trackpadButtonLabel",
+        //     css: DEVICE_LABEL_CSS,
+        // }).text("Trackpad")
+        // this.touchscreenButtonLabel = jQuery("<div/>", {
+        //     id: "touchscreenButtonLabel",
+        //     css: DEVICE_LABEL_CSS,
+        // }).text("Touchscreen")
+        // this.otherButtonLabel = jQuery("<div/>", {
+        //     id: "otherButtonLabel",
+        //     css: DEVICE_LABEL_CSS,
+        // }).text("other")
     }
 
     appendAllStimuli(container, pattern) {
@@ -367,18 +369,20 @@ class Renderer {
                 ),
                 this.stimuliGrid.append(...this.stimuli),
                 this.stopImage,
-                this.inputDeviceContainer.append([
-                    this.mouseButton,
-                    this.touchscreenButton,
-                    this.trackpadButton,
-                    this.otherButton,
-                ]),
-                this.inputDeviceLabelContainer.append([
-                    this.mouseButtonLabel,
-                    this.touchscreenButtonLabel,
-                    this.trackpadButtonLabel,
-                    this.otherButtonLabel,
-                ]),
+                INPUT_DEVICE_CONTAINER,
+                INPUT_DEVICE_LABEL_CONTAINER,
+                // this.inputDeviceContainer.append([
+                //     this.mouseButton,
+                //     this.touchscreenButton,
+                //     this.trackpadButton,
+                //     this.otherButton,
+                // ]),
+                // this.inputDeviceLabelContainer.append([
+                //     this.mouseButtonLabel,
+                //     this.touchscreenButtonLabel,
+                //     this.trackpadButtonLabel,
+                //     this.otherButtonLabel,
+                // ]),
                 this.textContainer,
                 this.instructionButtonContainer.append(
                     this.previousButton,
@@ -884,3 +888,5 @@ class Game {
         }
     }
 }
+
+export {Game}
