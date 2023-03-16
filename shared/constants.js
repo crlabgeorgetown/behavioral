@@ -1,0 +1,1 @@
+const BASE_URL = 'https://jslawjslaw.github.io/js-crlab/'
