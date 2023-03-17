@@ -6,12 +6,16 @@ import Trial from "./trial"
 
 
 export class Task {
-	constructor(config, engine) {
-        this.config = config
+	constructor(engine) {
+        
         this.engine = engine
         this.trials = []
         
-        this.initializeScreens()       
+        d3.csv('https://jslawjslaw.github.io/js-crlab/static/data/written_lexical_decision_1.csv', (data) => {
+            this.config = data
+            debugger
+            this.initializeScreens()
+        })       
 	}
 
     initializeScreens() {
