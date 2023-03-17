@@ -1,5 +1,3 @@
-import { INPUT_DEVICE_CONTAINER, INPUT_DEVICE_LABEL_CONTAINER } from "../shared/components/inputDevice"
-
 const IS_QUALTRICS = window.location.host === "georgetown.az1.qualtrics.com"
 const BASE_URL = './toshare/stimuli_for_adaptation'
 
@@ -11,18 +9,18 @@ const STANDARD = 'standard'
 const READY_TIMEOUT = 1000
 const ROUND_DURATION = 3000
 const MAX_PRACTICE_TRIALS = 3
-const DEVICE_LABEL_CSS = {
-    color: "#000000",
-    width: "15%",
-    marginLeft: "auto",
-    marginRight: "auto",
-    textAlign: "center",
-}
-const DEVICE_BUTTON_CSS = {
-    width: "15%",
-    marginLeft: "auto",
-    marginRight: "auto"
-}
+// const DEVICE_LABEL_CSS = {
+//     color: "#000000",
+//     width: "15%",
+//     marginLeft: "auto",
+//     marginRight: "auto",
+//     textAlign: "center",
+// }
+// const DEVICE_BUTTON_CSS = {
+//     width: "15%",
+//     marginLeft: "auto",
+//     marginRight: "auto"
+// }
 const DEFAULT_TEXT_CSS = {
     color: "#000000",
     textAlign: "center",
@@ -214,36 +212,36 @@ class Renderer {
             jQuery('<img/>', {id: 'stimuli3', css: STIMULI_CSS}),
             jQuery('<img/>', {id: 'stimuli4', css: STIMULI_CSS})
         ]
-        this.instructionButtonContainer = jQuery("<div/>", {id: "instructionButtonContainer", css: {
-            "display": "flex",
-            "flex-direction": "row",
-            "justify-content": "flex-end",
-            "min-width": "100%",
-            "margin-top": "auto",
-            "margin-bottom": "4vh"
-        }})
-        this.nextButton = jQuery('<div id="nextButton">Next &raquo;</div>').css({
-            "color": "#000000",
-            "background": "#A8A8A8",
-            "font-size": "2vw",
-            "padding": "0.5em",
-            "margin-left": "auto",
-            "margin-right": "5vw"
+        // this.instructionButtonContainer = jQuery("<div/>", {id: "instructionButtonContainer", css: {
+        //     "display": "flex",
+        //     "flex-direction": "row",
+        //     "justify-content": "flex-end",
+        //     "min-width": "100%",
+        //     "margin-top": "auto",
+        //     "margin-bottom": "4vh"
+        // }})
+        // this.nextButton = jQuery('<div id="nextButton">Next &raquo;</div>').css({
+        //     "color": "#000000",
+        //     "background": "#A8A8A8",
+        //     "font-size": "2vw",
+        //     "padding": "0.5em",
+        //     "margin-left": "auto",
+        //     "margin-right": "5vw"
 
-        }).hover(
-            () => this.nextButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
-            () => this.nextButton.css("background-color", "#A8A8A8")
-        )
-        this.previousButton = jQuery('<div id="previousButton">&laquo; Previous</div>').css({
-            "color": "#000000",
-            "background": "#A8A8A8",
-            "font-size": "2vw",
-            "padding": "0.5em",
-            "margin-left": "5vw"
-        }).hover(
-            () => this.previousButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
-            () => this.previousButton.css("background-color", "#A8A8A8")
-        )
+        // }).hover(
+        //     () => this.nextButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
+        //     () => this.nextButton.css("background-color", "#A8A8A8")
+        // )
+        // this.previousButton = jQuery('<div id="previousButton">&laquo; Previous</div>').css({
+        //     "color": "#000000",
+        //     "background": "#A8A8A8",
+        //     "font-size": "2vw",
+        //     "padding": "0.5em",
+        //     "margin-left": "5vw"
+        // }).hover(
+        //     () => this.previousButton.css({"background-color": "#B0B0B0", "cursor": "pointer"}),
+        //     () => this.previousButton.css("background-color", "#A8A8A8")
+        // )
         this.stopImage = jQuery('<img/>', {
             id: 'stopImage', 
             css: {
@@ -384,10 +382,7 @@ class Renderer {
                 //     this.otherButtonLabel,
                 // ]),
                 this.textContainer,
-                this.instructionButtonContainer.append(
-                    this.previousButton,
-                    this.nextButton
-                )
+                INSTRUCTION_BUTTON_CONTAINER
             )
         )
 
@@ -436,8 +431,8 @@ class InputDeviceInstructionScreen extends Screen {
     
     render() {
         this.renderer.redArrow.hide()
-        this.renderer.inputDeviceContainer.show()
-        this.renderer.inputDeviceLabelContainer.show()
+        INPUT_DEVICE_CONTAINER.show()
+        INPUT_DEVICE_LABEL_CONTAINER.show()
         this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
@@ -445,7 +440,7 @@ class InputDeviceInstructionScreen extends Screen {
         this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions()).css({marginBottom: 'auto'})
         this.renderer.textContainer.show()
-        this.renderer.instructionButtonContainer.hide()
+        INSTRUCTION_BUTTON_CONTAINER.hide()
     }
 
     getInstructions() {
@@ -459,8 +454,8 @@ class InstructionScreenOne extends Screen {
     nextScreen = InstructionScreenTwo
     render() {
         this.renderer.redArrow.hide()
-        this.renderer.inputDeviceContainer.hide()
-        this.renderer.inputDeviceLabelContainer.hide()
+        INPUT_DEVICE_CONTAINER.hide()
+        INPUT_DEVICE_LABEL_CONTAINER.hide()
         this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
@@ -469,7 +464,7 @@ class InstructionScreenOne extends Screen {
         this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions()).css(DEFAULT_TEXT_CSS)
         this.renderer.textContainer.show()
-        this.renderer.instructionButtonContainer.show()
+        INSTRUCTION_BUTTON_CONTAINER.show()
     }
 
     getInstructions() {
@@ -484,8 +479,8 @@ class InstructionScreenTwo extends Screen {
 
     render() {
         this.renderer.redArrow.hide()
-        this.renderer.inputDeviceContainer.hide()
-        this.renderer.inputDeviceLabelContainer.hide()
+        INPUT_DEVICE_CONTAINER.hide()
+        INPUT_DEVICE_LABEL_CONTAINER.hide()
         this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.show()
@@ -493,7 +488,7 @@ class InstructionScreenTwo extends Screen {
         this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions())
         this.renderer.textContainer.show()
-        this.renderer.instructionButtonContainer.show()
+        INSTRUCTION_BUTTON_CONTAINER.show()
     }
 
     getInstructions() {
@@ -507,8 +502,8 @@ class InstructionScreenThree extends Screen {
 
     render() {
         this.renderer.redArrow.show()
-        this.renderer.inputDeviceContainer.hide()
-        this.renderer.inputDeviceLabelContainer.hide()
+        INPUT_DEVICE_CONTAINER.hide()
+        INPUT_DEVICE_LABEL_CONTAINER.hide()
         this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderRow.show()
         this.updateReminders()
@@ -517,7 +512,7 @@ class InstructionScreenThree extends Screen {
         this.renderer.stopImage.hide()
         this.renderer.textContainer.text(this.getInstructions())
         this.renderer.textContainer.show()
-        this.renderer.instructionButtonContainer.show()
+        INSTRUCTION_BUTTON_CONTAINER.show()
     }
 
     getInstructions() {
@@ -530,8 +525,8 @@ class InstructionScreenFour extends Screen {
     nextScreen = TrialScreen
 
     render() {
-        this.renderer.inputDeviceContainer.hide()
-        this.renderer.inputDeviceLabelContainer.hide()
+        INPUT_DEVICE_CONTAINER.hide()
+        INPUT_DEVICE_LABEL_CONTAINER.hide()
         this.renderer.stimuliToSelectContainer.show()
         this.updateSearchStimuli()
         this.renderer.reminderRow.hide()
@@ -541,7 +536,7 @@ class InstructionScreenFour extends Screen {
         this.renderer.textContainer.text(this.getInstructions()).css(DEFAULT_TEXT_CSS)
         this.renderer.textContainer.show()
         this.renderer.previousButton.hide()
-        this.renderer.instructionButtonContainer.show()
+        INSTRUCTION_BUTTON_CONTAINER.show()
     }
 
     updateSearchStimuli() {
@@ -569,8 +564,8 @@ class StopScreen extends Screen {
     nextScreen = ReadyScreen
 
     render() {
-        this.renderer.inputDeviceContainer.hide()
-        this.renderer.inputDeviceLabelContainer.hide()
+        INPUT_DEVICE_CONTAINER.hide()
+        INPUT_DEVICE_LABEL_CONTAINER.hide()
         this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
@@ -578,7 +573,7 @@ class StopScreen extends Screen {
         this.renderer.stopImage.show()
         this.renderer.textContainer.text(this.getInstructions()).css({marginBottom: 'auto'})
         this.renderer.textContainer.show()
-        this.renderer.instructionButtonContainer.hide()
+        INSTRUCTION_BUTTON_CONTAINER.hide()
         const startTime = Date.now()
         this.renderer.updateClickHandlers({Wrapper: () => this.game.stopClickHandler(startTime)})
     }
@@ -594,8 +589,8 @@ class ReadyScreen extends Screen {
     nextScreen = TrialScreen
 
     render() {
-        this.renderer.inputDeviceContainer.hide()
-        this.renderer.inputDeviceLabelContainer.hide()
+        INPUT_DEVICE_CONTAINER.hide()
+        INPUT_DEVICE_LABEL_CONTAINER.hide()
         this.renderer.stimuliToSelectContainer.hide()
         this.renderer.reminderRow.hide()
         this.renderer.allStimuliContainer.hide()
@@ -608,7 +603,7 @@ class ReadyScreen extends Screen {
         this.renderer.textContainer.css({marginTop: 'auto'})
         this.renderer.textContainer.text('Ready')
         this.renderer.textContainer.show()
-        this.renderer.instructionButtonContainer.hide()
+        INSTRUCTION_BUTTON_CONTAINER.hide()
         
         setTimeout(() => {
             this.renderer.textContainer.text('Set')
@@ -659,7 +654,7 @@ class TrialScreen extends Screen {
         this.setStimuliImages(this.game.currentRound.currentTrial.getImages())
         this.renderer.stopImage.hide()
         this.renderer.textContainer.hide()
-        this.renderer.instructionButtonContainer.hide()
+        INSTRUCTION_BUTTON_CONTAINER.hide()
 
         this.game.currentRound.currentTrial.startTime = Date.now()
     }
@@ -675,7 +670,7 @@ class FinalScreen extends Screen {
         this.renderer.stopImage.hide()
         this.renderer.textContainer.show()
         this.renderer.textContainer.text(`You've completed this exercise!`)
-        this.renderer.instructionButtonContainer.hide()
+        INSTRUCTION_BUTTON_CONTAINER.hide()
     }
 }
 
@@ -888,5 +883,3 @@ class Game {
         }
     }
 }
-
-export {Game}

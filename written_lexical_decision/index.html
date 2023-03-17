@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html class="JFEScope" lang="en">
 <head>
-
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Cognitive Recovery Lab</title>
@@ -9,13 +8,16 @@
         src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
         crossorigin="anonymous"></script>
-    <script src="./qualtrics.js"></script>
+    <script src="../dist/writtenLexicalDecision.bundle.js"></script>
     <script>
-        fetch("https://jslawjslaw.github.io/js-crlab/v2/test.config.json")
+        new writtenLexicalDecision.Task(this)
+    </script>
+    <!-- <script src="./index.js"></script> -->
+    <!-- <script>
+        fetch("https://jslawjslaw.github.io/js-crlab/written_lexical_decision/test.config.json")
             .then(response => response.json())
             .then(config => new Game(config, this))
-    </script>  
-
+    </script>   -->
 </head>
 <body> 
     <div id="Wrapper"></div>
