@@ -5,11 +5,12 @@ import Screen from "../../shared/screens/base"
 
 
 class InstructionsOne extends Screen {
-    components = [
-        TEXT_CONTAINER,
-        INSTRUCTION_BUTTON_CONTAINER
-    ]
-    text = 'You will see a string of letters on the screen.\nSome of these letter strings are real words.\nOthers are not real words.\n'
+    components = new Map([
+        [TEXT_CONTAINER, {
+            text: 'You will see a sequence of letters on the screen.\nSome of these are real words.\nOthers are not real words.\n'
+        }],
+        [INSTRUCTION_BUTTON_CONTAINER, {}]
+    ])
 
     get clickHandlers() {
         return {
@@ -21,13 +22,14 @@ class InstructionsOne extends Screen {
 
 
 class InstructionsTwo extends Screen {
-    components = [
-        TEXT_CONTAINER,
-        BUTTON_CONTAINER,
-        BUTTON_LABEL_CONTAINER,
-        INSTRUCTION_BUTTON_CONTAINER
-    ]
-    text = 'If the letter IS a real word, click \"Real Word.\"\nIf the letter is NOT a real word, click \"Not a word.\"'
+    components = new Map([
+        [TEXT_CONTAINER, {
+            text: 'If the sequence IS a real word, click \"Real Word.\"\nIf the sequence is NOT a real word, click \"Not a word.\"'
+        }],
+        [BUTTON_CONTAINER, {}],
+        [BUTTON_LABEL_CONTAINER, {}],
+        [INSTRUCTION_BUTTON_CONTAINER, {}]
+    ])
 
     get clickHandlers() {
         return {
@@ -39,11 +41,12 @@ class InstructionsTwo extends Screen {
 
 
 class InstructionsThree extends Screen {
-    components = [
-        TEXT_CONTAINER,
-        INSTRUCTION_BUTTON_CONTAINER
-    ]
-    text = `Let's Practice.`
+    components = new Map([
+        [TEXT_CONTAINER, {
+            text: `Let's Practice.`
+        }],
+        [INSTRUCTION_BUTTON_CONTAINER, {}]
+    ])
 
     get clickHandlers() {
         return {

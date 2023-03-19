@@ -61,6 +61,7 @@ const GREEN_LABEL = jQuery('<div/>', {
         display: 'flex',
         width: '150px',
         height: '30px',
+        fontSize: '30px'
     }
 }).text('Real word')
 
@@ -76,6 +77,7 @@ const RED_LABEL = jQuery('<div/>', {
         display: 'flex',
         width: '150px',
         height: '30px',
+        fontSize: '30px'
     }
 }).text('Not a word')
 

@@ -5,6 +5,7 @@ export default class Screen {
         this.task = task
         this.previousScreen = null
         this.nextScreen = null
+        this.renderTime = null
     }
 
     get clickHandlers() {
@@ -13,17 +14,30 @@ export default class Screen {
 
     render() {
         CONTAINER.children().detach()
-        CONTAINER.append(this.components)
+        for (const [component, settings] of this.components.entries()) {
+            for (const [setting, value] of Object.entries(settings)) {
+                component[setting](value)
+            }
+            CONTAINER.append(component)
+        }
         this.updateClickHandlers()
-        jQuery('#textContainer').text(this.text)
+        this.renderTime = Date.now()
+    }
+
+    removeContainerClickHandler() {
+        CONTAINER.off('click')
     }
 
     updateClickHandlers() {
         for (const [id, callback] of Object.entries(this.clickHandlers)) {
             const element = jQuery(`#${id}`)
-            element.off("click")
+            element.off('click')
             element.click(callback)
         }
+    }
+
+    updateText(text, css={fontSize: '4vw', fontColor: '#000000'}) {
+        jQuery('#textContainer').text(text).css(css)
     }
 
     inputDeviceClickHandler(inputDevice) {
@@ -42,5 +56,13 @@ export default class Screen {
                 break
         }
         this.task.currentScreen.render()
+    }
+
+    containerClickHandler() {
+        if (Date.now() - this.renderTime > 500) {
+            this.removeContainerClickHandler()
+            this.task.currentScreen = this.task.trialScreen
+            this.task.currentScreen.render()
+        }
     }
 }
