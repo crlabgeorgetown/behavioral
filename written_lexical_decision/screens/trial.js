@@ -37,6 +37,8 @@ class TrialScreen extends Screen {
             this.task.currentScreen = this.task.beginOrPracticeAgainScreen
         } else if (this.task.isDone) {
             this.task.currentScreen = this.task.finishedScreen
+        } else if (response === null) {
+            this.task.currentScreen = this.task.timeoutScreen
         } else {
             this.task.dataIndex++
             this.task.newTrial()

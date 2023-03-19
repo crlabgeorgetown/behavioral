@@ -75,7 +75,18 @@ class Finished extends Screen {
         setTimeout(() => this.task.submit())
         super.render()
     }
-} 
+}
 
 
-export { BeginOrPracticeAgain, Break, Finished, Incorrect }
+class Timeout extends Screen {
+    components = new Map([
+        [TEXT_CONTAINER, {text: 'Click or touch to continue.'}]
+    ])
+
+    get clickHandlers() {
+        return {container: () => this.containerClickHandler()}
+    }
+}
+
+
+export { BeginOrPracticeAgain, Break, Finished, Incorrect, Timeout }
