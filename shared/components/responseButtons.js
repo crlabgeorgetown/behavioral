@@ -15,8 +15,8 @@ const GREEN_BUTTON = jQuery('<img/>', {
         marginLeft: 'auto',
         marginRight: '2.5%',
         padding: '1%',
-        width: '150px',
-        height: '150px',
+        width: '175px',
+        height: '175px',
 }}).hover(
     () => GREEN_BUTTON.css({background: '#E3E3E3'}),
     () => GREEN_BUTTON.css({background: 'transparent'})
@@ -30,8 +30,8 @@ const RED_BUTTON = jQuery('<img/>', {
         marginLeft: '2.5%',
         marginRight: 'auto',
         padding: '1%',
-        width: '150px',
-        height: '150px',
+        width: '175px',
+        height: '175px',
 }}).hover(
     () => RED_BUTTON.css({background: '#E3E3E3'}),
     () => RED_BUTTON.css({background: 'transparent'})
@@ -59,8 +59,8 @@ const GREEN_LABEL = jQuery('<div/>', {
         padding: '1%',
         justifyContent: 'center',
         display: 'flex',
-        width: '150px',
-        height: '30px',
+        width: '175px',
+        height: '35px',
         fontSize: '30px'
     }
 }).text('Real word')
@@ -75,8 +75,8 @@ const RED_LABEL = jQuery('<div/>', {
         padding: '1%',
         justifyContent: 'center',
         display: 'flex',
-        width: '150px',
-        height: '30px',
+        width: '175px',
+        height: '35px',
         fontSize: '30px'
     }
 }).text('Not a word')

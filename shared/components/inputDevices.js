@@ -23,7 +23,7 @@ const INPUT_DEVICE_CONTAINER = jQuery('<div/>', {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         minWidth: '100%',
-        marginTop: 'auto',
+        marginTop: 'auto'
     }
 })
 

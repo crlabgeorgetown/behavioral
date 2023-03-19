@@ -6,7 +6,8 @@ const CONTAINER = jQuery('<div/>', {
         minHeight: '100vh',
         background: '#f0f0f0',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        fontFamiliy: 'Poppins,Verdana,sans-serif'
     }
 })
 

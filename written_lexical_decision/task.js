@@ -131,7 +131,7 @@ export class Task {
             Qualtrics.SurveyEngine.setEmbeddedData('reactionTimes', reactionTimes.join(','))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(','))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', avgVelocities.join(','))
+            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(','))
 
             this.engine.clickNextButton()
         }
