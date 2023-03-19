@@ -83,7 +83,7 @@ export class Task {
                     config.Frequency,
                     config.Regularity,
                     config.Imageability,
-                    config.PartOfSpeech
+                    config.PartofSpeech
                 )
             )
         }
@@ -111,6 +111,7 @@ export class Task {
         const regularities = []
         const imageabilities = []
         const partsOfSpeech = []
+
         this.trials.map((trial) => {
             let reactionTime, duration, distance, avgVelocity 
             [reactionTime, duration, distance, avgVelocity] = trial.computeMousemoveStats()
@@ -118,7 +119,7 @@ export class Task {
             responseTimes.push(trial.responseTime - trial.startTime)
             stimuli.push(trial.stimulus)
             correctResponses.push(trial.correctResponse)
-            trialTypes.push(trial.trailType)
+            trialTypes.push(trial.trialType)
             reactionTimes.push(reactionTime)
             mouseMoveDurations.push(duration)
             mouseMoveDistances.push(distance)
@@ -126,7 +127,7 @@ export class Task {
             wordTypes.push(trial.wordType)
             frequencies.push(trial.frequency)
             regularities.push(trial.regularity)
-            imageabilities.push(trial.imageabilities)
+            imageabilities.push(trial.imageability)
             partsOfSpeech.push(trial.partOfSpeech)
         })
 
