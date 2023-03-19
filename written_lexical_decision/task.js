@@ -106,6 +106,11 @@ export class Task {
         const mouseMoveDurations = []
         const mouseMoveDistances = []
         const mouseMoveAverageVelocities = []
+        const wordTypes = []
+        const frequencies = []
+        const regularities = []
+        const imageabilities = []
+        const partsOfSpeech = []
         this.trials.map((trial) => {
             let reactionTime, duration, distance, avgVelocity 
             [reactionTime, duration, distance, avgVelocity] = trial.computeMousemoveStats()
@@ -118,6 +123,11 @@ export class Task {
             mouseMoveDurations.push(duration)
             mouseMoveDistances.push(distance)
             mouseMoveAverageVelocities.push(avgVelocity)
+            wordTypes.push(trial.wordType)
+            frequencies.push(trial.frequency)
+            regularities.push(trial.regularity)
+            imageabilities.push(trial.imageabilities)
+            partsOfSpeech.push(trial.partOfSpeech)
         })
 
         if (window.location.host === "georgetown.az1.qualtrics.com") {
@@ -132,6 +142,11 @@ export class Task {
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(','))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(','))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(','))
+            Qualtrics.SurveyEngine.setEmbeddedData('wordTypes', wordTypes.join(','))
+            Qualtrics.SurveyEngine.setEmbeddedData('frequencies', frequencies.join(','))
+            Qualtrics.SurveyEngine.setEmbeddedData('regularities', regularities.join(','))
+            Qualtrics.SurveyEngine.setEmbeddedData('imageabilities', imageabilities.join(','))
+            Qualtrics.SurveyEngine.setEmbeddedData('partsOfSpeech', partsOfSpeech.join(','))
 
             this.engine.clickNextButton()
         }
