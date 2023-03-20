@@ -2,7 +2,7 @@ import { CONTAINER } from "../shared/components/container"
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
 import { InstructionsOne, InstructionsThree, InstructionsTwo } from "../shared/screens/lexicalDecisionInstructions"
 import { TrialScreen } from "./screens/trial"
-import { BeginOrPracticeAgain, Break, Finished, Incorrect, Timeout } from "../shared/screens/transitions"
+import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
 import { Trial } from "../shared/lexicalDecisionTrial"
 
 
@@ -33,7 +33,7 @@ export class Task {
         this.breakScreen = new Break(this)
         this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
         this.finishedScreen = new Finished(this)
-        this.timeoutScreen = new Timeout(this)
+        this.timeoutScreen = new TimeOut(this)
         
         const instructionScreens = [
             new InputDevicesScreen(this), 

@@ -1,11 +1,13 @@
 import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons"
 import { TEXT_CONTAINER } from "../../shared/components/textContainer"
 import Screen from "../../shared/screens/base"
+import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../components/audioContainer"
 
 
 class TrialScreen extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {text: '+', css: {color: '#000000', fontSize: '7vw'}}],
+        [TEXT_CONTAINER, {text: '+', css: {color: '#000000'}}],
+        [AUDIO_CONTAINER, {}],
         [BUTTON_CONTAINER, {}],
         [BUTTON_LABEL_CONTAINER, {}]
     ])
@@ -48,12 +50,14 @@ class TrialScreen extends Screen {
 
     render() {
         super.render()
-        setTimeout(() => {
-            this.updateText(this.task.currentTrial.stimulus, {fontSize: '7vw'})
-            this.task.currentTrial.startTime = Date.now()
+        AUDIO_SOURCE.attr('src', this.task.currentTrial.audioSource)
+        AUDIO_CONTAINER.on('ended', () => {
             this.task.inTrial = true
+            this.task.currentTrial.startTime = Date.now()
+            this.updateText('')
             this.timeoutID = setTimeout(() => this.responseClickHandler(null), 5000)
-        }, 500)
+        })
+        AUDIO_CONTAINER[0].play()
     }
 }
 

@@ -78,15 +78,24 @@ class Finished extends Screen {
 }
 
 
-class Timeout extends Screen {
+class TimeOut extends Screen {
     components = new Map([
         [TEXT_CONTAINER, {text: 'Click or touch to continue.'}]
     ])
 
     get clickHandlers() {
-        return {container: () => this.containerClickHandler()}
+        return {container: () => this.handle()}
+    }
+
+    handle() {
+        if (this.task.currentTrial.trialType === 'Real') {
+            this.task.dataIndex++
+        }
+        this.task.newTrial()
+        this.task.currentScreen = this.task.trialScreen
+        this.task.currentScreen.render()
     }
 }
 
 
-export { BeginOrPracticeAgain, Break, Finished, Incorrect, Timeout }
+export { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut }

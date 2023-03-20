@@ -88,7 +88,6 @@ export class Task {
                 )
             )
         }
-        
     }
 
     recordMouseMove(event) {

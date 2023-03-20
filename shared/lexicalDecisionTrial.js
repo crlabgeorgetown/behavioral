@@ -50,6 +50,10 @@ class Trial {
 
         return [reactionTime, duration, distance, avgVelocity]
     }
+
+    get audioSource() {
+        return `https://jslawjslaw.github.io/js-crlab/static/auditory_lexical_decision_normalized_wav_files/${this.stimulus}.wav`
+    }
 }
 
 
