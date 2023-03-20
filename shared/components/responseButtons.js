@@ -44,7 +44,8 @@ const BUTTON_LABEL_CONTAINER = jQuery('<div/>', {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         minWidth: '100%',
-        marginBottom: 'auto'
+        marginBottom: 'auto',
+        fontFamily: 'Arial'
     }
 })
 

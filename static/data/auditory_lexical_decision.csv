@@ -1,0 +1,5 @@
+Weight,Procedure,word,yes,no,CRESP,TrialWasAdministered,TrialType,Repetitions,WordType,BlockNumber,Frequency,Regularity,Imageability,PartofSpeech,Lexicality
+1,showtrial,belt,yes,no,yes,0,Practice,0,practice,1,N/A,N/A,N/A,N/A,Real
+1,showtrial,bame,yes,no,no,0,Practice,0,practice,1,N/A,N/A,N/A,N/A,Pseudo
+1,showtrial,freme,yes,no,no,0,Practice,0,practice,1,N/A,N/A,N/A,N/A,Pseudo
+1,showlastpractice,black,yes,no,yes,0,Practice,0,practice,1,N/A,N/A,N/A,N/A,Real

@@ -75,6 +75,7 @@ const INPUT_DEVICE_LABEL_CONTAINER = jQuery('<div/>', {id: 'inputDeviceLabelCont
     minWidth: '100%',
     marginTop: '2.5%',
     marginBottom: 'auto',
+    fontFamily: 'Arial'
 }})
 
 

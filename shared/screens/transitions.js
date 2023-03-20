@@ -1,12 +1,12 @@
-import { TEXT_CONTAINER } from "../../shared/components/textContainer"
+import { TEXT_CONTAINER } from "../components/textContainer"
 import { BEGIN_OR_PRACTICE_CONTAINER } from "../components/beginOrPractice"
-import Screen from "../../shared/screens/base"
+import Screen from "./base"
 
 
 class BeginOrPracticeAgain extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {text: 'Begin or practice again?'}],
-        [BEGIN_OR_PRACTICE_CONTAINER, {css: {fontSize: '4vw'}}]
+        [TEXT_CONTAINER, {text: `Any questions?\nLet's begin`}],
+        [BEGIN_OR_PRACTICE_CONTAINER, {}]
     ])
 
     get clickHandlers() {
@@ -38,7 +38,7 @@ class Break extends Screen {
             TEXT_CONTAINER, 
             {
                 text: 'Take a break. Click or touch anywhere to continue.',
-                css: {color: '#0000FF', fontSize: '4vw'}
+                css: {color: '#0000FF'}
             }
         ]
     ])
@@ -55,7 +55,7 @@ class Incorrect extends Screen {
             TEXT_CONTAINER, 
             {
                 text: 'Incorrect, click or touch anywhere to try again.',
-                css: {color: '#FF0000', fontSize: '4vw'}
+                css: {color: '#FF0000'}
             }
         ]
     ])

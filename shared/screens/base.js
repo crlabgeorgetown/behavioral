@@ -36,7 +36,7 @@ export default class Screen {
         }
     }
 
-    updateText(text, css={fontSize: '4vw', fontColor: '#000000'}) {
+    updateText(text, css={fontSize: '60pt', fontColor: '#000000'}) {
         jQuery('#textContainer').text(text).css(css)
     }
 

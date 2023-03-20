@@ -5,7 +5,7 @@ import Screen from "../../shared/screens/base"
 
 class TrialScreen extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {text: '+', css: {color: '#000000', fontSize: '60pt'}}],
+        [TEXT_CONTAINER, {text: '+', css: {color: '#000000', fontSize: '7vw'}}],
         [BUTTON_CONTAINER, {}],
         [BUTTON_LABEL_CONTAINER, {}]
     ])
@@ -49,7 +49,7 @@ class TrialScreen extends Screen {
     render() {
         super.render()
         setTimeout(() => {
-            this.updateText(this.task.currentTrial.stimulus)
+            this.updateText(this.task.currentTrial.stimulus, {fontSize: '7vw'})
             this.task.currentTrial.startTime = Date.now()
             this.task.inTrial = true
             this.timeoutID = setTimeout(() => this.responseClickHandler(null), 5000)

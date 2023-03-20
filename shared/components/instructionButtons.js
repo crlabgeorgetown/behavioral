@@ -6,7 +6,9 @@ const INSTRUCTION_BUTTON_CONTAINER = jQuery('<div/>', {
         justifyContent: 'flex-end',
         minWidth: '100%',
         marginTop: 'auto',
-        marginBottom: '4vh'
+        marginBottom: '4vh',
+        fontFamily: 'Arial',
+        textAlign: 'center'
     }
 })
 
@@ -16,11 +18,10 @@ const NEXT_BUTTON = jQuery('<div/>', {
     css: {
         color: '#000000',
         background: '#A8A8A8',
-        fontSize: '2vw',
+        fontSize: '25pt',
         padding: '0.5em',
         marginLeft: 'auto',
-        marginRight: '5vw'
-    
+        marginRight: '5vw',
     },
     text: 'Next >>'
 }).hover(
@@ -34,9 +35,9 @@ const PREVIOUS_BUTTON = jQuery('<div/>', {
     css: {
         color: '#000000',
         background: '#A8A8A8',
-        fontSize: '2vw',
+        fontSize: '25pt',
         padding: '0.5em',
-        marginLeft: '5vw'
+        marginLeft: '5vw',
     },
     text: '<< Previous'
 }).hover(

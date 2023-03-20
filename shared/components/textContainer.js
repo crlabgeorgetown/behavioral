@@ -3,12 +3,13 @@ const TEXT_CONTAINER = jQuery("<div/>", {
     css: {
         color: '#000000',
         textAlign: 'center',
-        fontSize: '4vw',
+        fontSize: '60pt',
         minWidth: '100vw',
         whiteSpace: 'pre-line',
         lineHeight: '1.7em',
         marginTop: 'auto',
-        marginBottom: 'auto'
+        marginBottom: 'auto',
+        fontFamily: 'Arial'
     }
 })
 
