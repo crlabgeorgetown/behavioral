@@ -6,7 +6,9 @@ const BEGIN_OR_PRACTICE_CONTAINER = jQuery('<div/>', {
         justifyContent: 'flex-end',
         minWidth: '100%',
         marginTop: 'auto',
-        marginBottom: '4vh'
+        marginBottom: '4vh',
+        fontFamily: 'Arial',
+        textAlign: 'center'
     }
 })
 
@@ -16,13 +18,13 @@ const PRACTICE_BUTTON = jQuery('<div/>', {
     css: {
         color: '#000000',
         background: '#A8A8A8',
-        fontSize: '2vw',
+        fontSize: '25pt',
         padding: '0.5em',
         marginRight: 'auto',
         marginLeft: '5vw'
     
     },
-    text: '<< PRACTICE'
+    text: '<< Practice'
 }).hover(
     () => PRACTICE_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
     () => PRACTICE_BUTTON.css({background: '#A8A8A8'})
@@ -34,11 +36,11 @@ const BEGIN_BUTTON = jQuery('<div/>', {
     css: {
         color: '#000000',
         background: '#A8A8A8',
-        fontSize: '2vw',
+        fontSize: '25pt',
         padding: '0.5em',
         marginRight: '5vw'
     },
-    text: 'BEGIN >>'
+    text: 'Begin >>'
 }).hover(
     () => BEGIN_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
     () => BEGIN_BUTTON.css({background: '#A8A8A8'})
