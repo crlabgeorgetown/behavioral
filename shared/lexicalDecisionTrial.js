@@ -1,23 +1,4 @@
 class Trial {
-    columns = [
-        'ItemNum',
-        'Date',
-        'Time',
-        'Item',
-        'CRESP',
-        'TimedOut',
-        'RT',
-        'Accuracy',
-        'WordType',
-        'Frequency',
-        'Regularity',
-        'Imageability',
-        'PartofSpeech',
-        'Lexicality',
-        'Response',
-        'TrialType'
-    ]
-
     constructor(config) {
         this.ItemNum = config.ItemNum
         this.TrialType = config.TrialType
@@ -35,7 +16,6 @@ class Trial {
         this.mouseMoveTimes = []
         this.mouseMoveXPositions = []
         this.mouseMoveYPositions = []
-
     }
 
     recordMouseMove(time, xPosition, yPosition) {
@@ -73,10 +53,6 @@ class Trial {
 
     get RT() {
         return this.responseTime - this.startTime
-    }
-
-    get Date() {
-        return `${this.startTime.getMonth() + 1}/${this.startTime.getDate()}/${this.startTime.getFullYear()}`
     }
 
     get TimedOut() {

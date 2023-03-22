@@ -44,7 +44,7 @@ class Break extends Screen {
     ])
 
     get clickHandlers() {
-        return {container: () => this.containerClickHandler()}
+        return {container: () => this.containerClickHandler(true)}
     }
 }
 
@@ -61,7 +61,7 @@ class Incorrect extends Screen {
     ])
 
     get clickHandlers() {
-        return {container: () => this.containerClickHandler()}
+        return {container: () => this.containerClickHandler(false)}
     }
 }
 

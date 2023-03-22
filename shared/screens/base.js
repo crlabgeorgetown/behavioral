@@ -13,7 +13,7 @@ export default class Screen {
     }
 
     render() {
-        CONTAINER.children().detach()
+        CONTAINER.children().remove()
         for (const [component, settings] of this.components.entries()) {
             for (const [setting, value] of Object.entries(settings)) {
                 component[setting](value)
@@ -58,9 +58,13 @@ export default class Screen {
         this.task.currentScreen.render()
     }
 
-    containerClickHandler() {
+    containerClickHandler(nextItem) {
         if (Date.now() - this.renderTime > 500) {
             this.removeContainerClickHandler()
+            if (nextItem) {
+                this.task.dataIndex++
+            }
+            this.task.newTrial()
             this.task.currentScreen = this.task.trialScreen
             this.task.currentScreen.render()
         }

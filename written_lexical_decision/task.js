@@ -86,57 +86,51 @@ export class Task {
     }
 
     submit() {
-        const responses = []
-        const responseTimes = []
-        const stimuli = []
-        const correctResponses = []
-        const trialTypes = []
-        const reactionTimes = []
-        const mouseMoveDurations = []
+        const columns = {
+            'ItemNum': [],
+            'Item': [],
+            'CRESP': [],
+            'TimedOut': [],
+            'RT': [],
+            'Accuracy': [],
+            'WordType': [],
+            'Frequency': [],
+            'Regularity': [],
+            'Imageability': [],
+            'PartofSpeech': [],
+            'Lexicality': [],
+            'Response': [],
+            'TrialType': []
+        }
         const mouseMoveDistances = []
+        const mouseMoveDurations = []
         const mouseMoveAverageVelocities = []
-        const wordTypes = []
-        const frequencies = []
-        const regularities = []
-        const imageabilities = []
-        const partsOfSpeech = []
+        const reactionTimes = []
 
         this.trials.map((trial) => {
             let reactionTime, duration, distance, avgVelocity 
             [reactionTime, duration, distance, avgVelocity] = trial.computeMousemoveStats()
-            responses.push(trial.response)
-            responseTimes.push(trial.responseTime - trial.startTime)
-            stimuli.push(trial.stimulus)
-            correctResponses.push(trial.correctResponse)
-            trialTypes.push(trial.trialType)
             reactionTimes.push(reactionTime)
             mouseMoveDurations.push(duration)
             mouseMoveDistances.push(distance)
             mouseMoveAverageVelocities.push(avgVelocity)
-            wordTypes.push(trial.wordType)
-            frequencies.push(trial.frequency)
-            regularities.push(trial.regularity)
-            imageabilities.push(trial.imageability)
-            partsOfSpeech.push(trial.partOfSpeech)
+            
+            for (const [key, values] of Object.entries(columns)) {
+                values.push(trial[key])
+            }
         })
 
         if (window.location.host === "georgetown.az1.qualtrics.com") {
-            Qualtrics.SurveyEngine.setEmbeddedData('responses', responses.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('responseTimes', responseTimes.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('stimuli', stimuli.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('correctResponses', correctResponses.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('trialTypes', trialTypes.join(';'))
+            for (const [key, values] of Object.entries(columns)) {
+                Qualtrics.SurveyEngine.setEmbeddedData(key, values.join(';'))
+            }
             Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent)
             Qualtrics.SurveyEngine.setEmbeddedData('inputDevice', this.inputDevice)
+            Qualtrics.SurveyEngine.setEmbeddedData('SubjectID', this.participantID)
             Qualtrics.SurveyEngine.setEmbeddedData('reactionTimes', reactionTimes.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('wordTypes', wordTypes.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('frequencies', frequencies.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('regularities', regularities.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('Imageability', imageabilities.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('partsOfSpeech', partsOfSpeech.join(';'))
 
             this.engine.clickNextButton()
         }
