@@ -7,7 +7,7 @@ import Screen from "./base"
 class InstructionsOne extends Screen {
     components = new Map([
         [TEXT_CONTAINER, {
-            text: 'You will see a sequence of letters on the screen.\nSome of these are real words.\nOthers are not real words.\n',
+            text: 'You will see a string of letters on the screen.\nSome of these letter strings are real words.\nOthers are not real words.\n',
             css: {fontSize: '45pt'}
         }],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
@@ -25,7 +25,7 @@ class InstructionsOne extends Screen {
 class InstructionsTwo extends Screen {
     components = new Map([
         [TEXT_CONTAINER, {
-            text: 'If the sequence IS a real word, click \"Real Word.\"\nIf the sequence is NOT a real word, click \"Not a word.\"',
+            text: 'If the letter string IS a real word, touch \"Real Word.\"\nIf the letter string is NOT a real word, touch \"Not a word.\"',
             css: {fontSize: '40pt'}
         }],
         [BUTTON_CONTAINER, {}],
