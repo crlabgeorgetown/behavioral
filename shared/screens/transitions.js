@@ -84,16 +84,7 @@ class TimeOut extends Screen {
     ])
 
     get clickHandlers() {
-        return {container: () => this.handle()}
-    }
-
-    handle() {
-        if (this.task.currentTrial.TrialType === 'Real') {
-            this.task.dataIndex++
-        }
-        this.task.newTrial()
-        this.task.currentScreen = this.task.trialScreen
-        this.task.currentScreen.render()
+        return {container: () => this.containerClickHandler(true)}
     }
 }
 
