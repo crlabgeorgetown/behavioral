@@ -16,6 +16,8 @@ const PARTICIPANT_ID_LABEL = jQuery('<div/>', {
     css: {
         fontSize: '35pt',
         color: '#000000',
+        marginLeft: 'auto',
+        marginRight: '20px'
     }
 })
 
@@ -35,8 +37,8 @@ const SUBMIT_BUTTON = jQuery('<div/>', {
         background: '#A8A8A8',
         fontSize: '25pt',
         padding: '0.5em',
-        marginLeft: 'auto',
-        marginRight: '5vw'
+        marginLeft: '20px',
+        marginRight: 'auto'
     },
     text: 'Submit'
 

@@ -4,6 +4,7 @@ import { InstructionsOne, InstructionsThree, InstructionsTwo } from "../shared/s
 import { TrialScreen } from "./screens/trial"
 import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
 import { Trial } from "../shared/lexicalDecisionTrial"
+import { ParticipantIdScreen } from "../shared/screens/participantID"
 
 
 export class Task {
@@ -36,6 +37,7 @@ export class Task {
         this.timeoutScreen = new TimeOut(this)
         
         const instructionScreens = [
+            new ParticipantIdScreen(this),
             new InputDevicesScreen(this), 
             new InstructionsOne(this), 
             new InstructionsTwo(this), 
@@ -69,24 +71,10 @@ export class Task {
     }
 
     newTrial() {
-        const config = this.data[this.dataIndex]
-
         if (this.currentProcedure === 'showasbreak') {
             this.currentScreen = this.breakScreen
         } else {
-            this.trials.push(
-                new Trial(
-                    config.TrialType, 
-                    config.word,
-                    config.Lexicality,
-                    config.CRESP,
-                    config.WordType,
-                    config.Frequency,
-                    config.Regularity,
-                    config.Imageability,
-                    config.PartofSpeech
-                )
-            )
+            this.trials.push(new Trial(this.data[this.dataIndex]))
         }
         
     }
@@ -133,22 +121,22 @@ export class Task {
         })
 
         if (window.location.host === "georgetown.az1.qualtrics.com") {
-            Qualtrics.SurveyEngine.setEmbeddedData('responses', responses.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('responseTimes', responseTimes.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('stimuli', stimuli.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('correctResponses', correctResponses.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('trialTypes', trialTypes.join(','))
+            Qualtrics.SurveyEngine.setEmbeddedData('responses', responses.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('responseTimes', responseTimes.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('stimuli', stimuli.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('correctResponses', correctResponses.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('trialTypes', trialTypes.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent)
             Qualtrics.SurveyEngine.setEmbeddedData('inputDevice', this.inputDevice)
-            Qualtrics.SurveyEngine.setEmbeddedData('reactionTimes', reactionTimes.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('wordTypes', wordTypes.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('frequencies', frequencies.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('regularities', regularities.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('imageabilities', imageabilities.join(','))
-            Qualtrics.SurveyEngine.setEmbeddedData('partsOfSpeech', partsOfSpeech.join(','))
+            Qualtrics.SurveyEngine.setEmbeddedData('reactionTimes', reactionTimes.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('wordTypes', wordTypes.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('frequencies', frequencies.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('regularities', regularities.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('Imageability', imageabilities.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('partsOfSpeech', partsOfSpeech.join(';'))
 
             this.engine.clickNextButton()
         }

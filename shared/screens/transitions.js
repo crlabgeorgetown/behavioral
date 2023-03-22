@@ -88,7 +88,7 @@ class TimeOut extends Screen {
     }
 
     handle() {
-        if (this.task.currentTrial.trialType === 'Real') {
+        if (this.task.currentTrial.TrialType === 'Real') {
             this.task.dataIndex++
         }
         this.task.newTrial()

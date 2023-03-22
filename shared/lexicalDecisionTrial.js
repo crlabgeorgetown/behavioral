@@ -1,15 +1,35 @@
 class Trial {
-    constructor(trialType, stimulus, lexicality, correctResponse, wordType, frequency, regularity, imageability, partOfSpeech) {
-        this.trialType = trialType
-        this.stimulus = stimulus
-        this.lexicality = lexicality
-        this.correctResponse = correctResponse
-        this.wordType = wordType
-        this.frequency = frequency
-        this.regularity = regularity
-        this.imageability = imageability
-        this.partOfSpeech = partOfSpeech
-        this.response = null
+    columns = [
+        'ItemNum',
+        'Date',
+        'Time',
+        'Item',
+        'CRESP',
+        'TimedOut',
+        'RT',
+        'Accuracy',
+        'WordType',
+        'Frequency',
+        'Regularity',
+        'Imageability',
+        'PartofSpeech',
+        'Lexicality',
+        'Response',
+        'TrialType'
+    ]
+
+    constructor(config) {
+        this.ItemNum = config.ItemNum
+        this.TrialType = config.TrialType
+        this.Item = config.Item
+        this.Lexicality = config.Lexicality
+        this.CRESP = config.CRESP
+        this.WordType = config.WordType
+        this.Frequency = config.Frequency
+        this.Regularity = config.Regularity
+        this.Imageability = config.Imageability
+        this.PartofSpeech = config.PartofSpeech
+        this.Response = null
         this.startTime = null
         this.responseTime = null
         this.mouseMoveTimes = []
@@ -49,6 +69,22 @@ class Trial {
         }
 
         return [reactionTime, duration, distance, avgVelocity]
+    }
+
+    get RT() {
+        return this.responseTime - this.startTime
+    }
+
+    get Date() {
+        return `${this.startTime.getMonth() + 1}/${this.startTime.getDate()}/${this.startTime.getFullYear()}`
+    }
+
+    get TimedOut() {
+        return this.Response === null
+    }
+
+    get Accuracy() {
+        return this.Response === this.CRESP ? 1 : 0
     }
 
     get audioSource() {

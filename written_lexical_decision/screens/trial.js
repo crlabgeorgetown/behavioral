@@ -23,11 +23,11 @@ class TrialScreen extends Screen {
         }
         clearTimeout(this.timeoutID)
         this.task.inTrial = false
-        this.task.currentTrial.responseTime = Date.now()
-        this.task.currentTrial.response = response
+        this.task.currentTrial.responseTime = new Date()
+        this.task.currentTrial.Response = response
         
-        const isCorrectResponse = this.task.currentTrial.correctResponse === response
-        const isPracticeRound = this.task.currentTrial.trialType === 'Practice'
+        const isCorrectResponse = this.task.currentTrial.CRESP === response
+        const isPracticeRound = this.task.currentTrial.TrialType === 'Practice'
         const isLastPracticeRound = this.task.currentProcedure === 'showlastpractice'
 
         if (isPracticeRound && !isCorrectResponse) {
@@ -49,8 +49,8 @@ class TrialScreen extends Screen {
     render() {
         super.render()
         setTimeout(() => {
-            this.updateText(this.task.currentTrial.stimulus)
-            this.task.currentTrial.startTime = Date.now()
+            this.updateText(this.task.currentTrial.Item)
+            this.task.currentTrial.startTime = new Date()
             this.task.inTrial = true
             this.timeoutID = setTimeout(() => this.responseClickHandler(null), 5000)
         }, 500)

@@ -8,10 +8,10 @@ class ParticipantIdScreen extends Screen {
     ])
 
     get clickHandlers() {
-        return {submitButton: () => this.handleInput()}
+        return {submitButton: () => this.handleSubmit()}
     }
 
-    handleInput() {
+    handleSubmit() {
         this.task.participantID = jQuery('#participantIdInput')[0].value
         this.task.currentScreen = this.nextScreen
         this.task.currentScreen.render()
