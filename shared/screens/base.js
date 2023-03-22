@@ -13,7 +13,7 @@ export default class Screen {
     }
 
     render() {
-        CONTAINER.children().remove()
+        CONTAINER.children().detach()
         for (const [component, settings] of this.components.entries()) {
             for (const [setting, value] of Object.entries(settings)) {
                 component[setting](value)
