@@ -100,7 +100,8 @@ export class Task {
             'PartofSpeech': [],
             'Lexicality': [],
             'Response': [],
-            'TrialType': []
+            'TrialType': [],
+            'TrialOnset': []
         }
         const mouseMoveDistances = []
         const mouseMoveDurations = []

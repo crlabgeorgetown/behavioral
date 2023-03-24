@@ -63,6 +63,10 @@ class Trial {
         return this.Response === this.CRESP ? 1 : 0
     }
 
+    get TrialOnset() {
+        return this.startTime.toISOString().split('T')[1].replace('Z', '')
+    }
+
     get audioSource() {
         return `https://jslawjslaw.github.io/js-crlab/static/auditory_lexical_decision_normalized_wav_files/${this.stimulus}.wav`
     }
