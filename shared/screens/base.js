@@ -64,7 +64,6 @@ export default class Screen {
             if (nextItem) {
                 this.task.dataIndex++
             }
-            this.task.newTrial()
             this.task.currentScreen = this.task.trialScreen
             this.task.currentScreen.render()
         }

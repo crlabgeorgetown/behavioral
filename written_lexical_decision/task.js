@@ -18,7 +18,6 @@ export class Task {
         this.recordMouseMove = this.recordMouseMove.bind(this)
 
         this.initializeScreens()
-        this.newTrial()
 	}
 
     initializeScreens() {

@@ -32,7 +32,6 @@ class TrialScreen extends Screen {
 
         if (isPracticeRound && !isCorrectResponse) {
             this.task.currentScreen = this.task.incorrectScreen
-            this.task.newTrial()
         } else if (isLastPracticeRound) {
             this.task.currentScreen = this.task.beginOrPracticeAgainScreen
         } else if (this.task.isDone) {
@@ -41,12 +40,12 @@ class TrialScreen extends Screen {
             this.task.currentScreen = this.task.timeoutScreen
         } else {
             this.task.dataIndex++
-            this.task.newTrial()
         }
         this.task.currentScreen.render()
     }
 
     render() {
+        this.task.newTrial()
         super.render()
         setTimeout(() => {
             this.updateText(this.task.currentTrial.Item)

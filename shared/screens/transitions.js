@@ -25,7 +25,6 @@ class BeginOrPracticeAgain extends Screen {
                 this.task.dataIndex++
                 break
         }
-        this.task.newTrial()
         this.task.currentScreen = this.task.trialScreen
         this.task.currentScreen.render()
     }
