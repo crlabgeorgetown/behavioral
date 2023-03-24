@@ -25,10 +25,10 @@ class Trial {
     }
 
     computeMousemoveStats() {
-        const reactionTime = this.mouseMoveTimes.length > 0 ? this.mouseMoveTimes[0] - this.startTime : null
+        const firstMouseMoveTime = this.mouseMoveTimes.length > 0 ? this.mouseMoveTimes[0] - this.startTime : 'N/A'
         let duration = 0
         let distance = 0
-        let avgVelocity = null
+        let avgVelocity = 'N/A'
         let startTime = null
         let startX = null
         let startY = null
@@ -48,7 +48,7 @@ class Trial {
             startY = currentY
         }
 
-        return [reactionTime, duration, distance, avgVelocity]
+        return [firstMouseMoveTime, duration, distance, avgVelocity]
     }
 
     get RT() {

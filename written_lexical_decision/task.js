@@ -105,12 +105,12 @@ export class Task {
         const mouseMoveDistances = []
         const mouseMoveDurations = []
         const mouseMoveAverageVelocities = []
-        const reactionTimes = []
+        const firstMouseMoves = []
 
         this.trials.map((trial) => {
-            let reactionTime, duration, distance, avgVelocity 
-            [reactionTime, duration, distance, avgVelocity] = trial.computeMousemoveStats()
-            reactionTimes.push(reactionTime)
+            let firstMouseMove, duration, distance, avgVelocity 
+            [firstMouseMove, duration, distance, avgVelocity] = trial.computeMousemoveStats()
+            firstMouseMoves.push(firstMouseMove)
             mouseMoveDurations.push(duration)
             mouseMoveDistances.push(distance)
             mouseMoveAverageVelocities.push(avgVelocity)
@@ -124,13 +124,17 @@ export class Task {
             for (const [key, values] of Object.entries(columns)) {
                 Qualtrics.SurveyEngine.setEmbeddedData(key, values.join(';'))
             }
-            Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent)
+            Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent.replace(',', '|').replace(';','|'))
             Qualtrics.SurveyEngine.setEmbeddedData('inputDevice', this.inputDevice)
             Qualtrics.SurveyEngine.setEmbeddedData('SubjectID', this.participantID)
-            Qualtrics.SurveyEngine.setEmbeddedData('reactionTimes', reactionTimes.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('firstMouseMoves', firstMouseMoves.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('RecipientFirstName', 'N/A')
+            Qualtrics.SurveyEngine.setEmbeddedData('RecipientLastName', 'N/A')
+            Qualtrics.SurveyEngine.setEmbeddedData('RecipientEmail', 'N/A')
+            Qualtrics.SurveyEngine.setEmbeddedData('ExternalReference', 'N/A')
 
             this.engine.clickNextButton()
         }

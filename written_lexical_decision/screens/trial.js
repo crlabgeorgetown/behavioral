@@ -37,7 +37,7 @@ class TrialScreen extends Screen {
             this.task.currentScreen = this.task.beginOrPracticeAgainScreen
         } else if (this.task.isDone) {
             this.task.currentScreen = this.task.finishedScreen
-        } else if (response === null) {
+        } else if (response === 'NR') {
             this.task.currentScreen = this.task.timeoutScreen
         } else {
             this.task.dataIndex++
@@ -52,7 +52,7 @@ class TrialScreen extends Screen {
             this.updateText(this.task.currentTrial.Item)
             this.task.currentTrial.startTime = new Date()
             this.task.inTrial = true
-            this.timeoutID = setTimeout(() => this.responseClickHandler(null), 5000)
+            this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
         }, 500)
     }
 }

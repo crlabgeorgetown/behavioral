@@ -25,7 +25,7 @@ class TrialScreen extends Screen {
         }
         clearTimeout(this.timeoutID)
         this.task.inTrial = false
-        this.task.currentTrial.responseTime = Date.now()
+        this.task.currentTrial.responseTime = new Date()
         this.task.currentTrial.response = response
         
         const isCorrectResponse = this.task.currentTrial.correctResponse === response
@@ -53,7 +53,7 @@ class TrialScreen extends Screen {
         AUDIO_SOURCE.attr('src', this.task.currentTrial.audioSource)
         AUDIO_CONTAINER.on('ended', () => {
             this.task.inTrial = true
-            this.task.currentTrial.startTime = Date.now()
+            this.task.currentTrial.startTime = new Date()
             this.updateText('')
             this.timeoutID = setTimeout(() => this.responseClickHandler(null), 5000)
         })
