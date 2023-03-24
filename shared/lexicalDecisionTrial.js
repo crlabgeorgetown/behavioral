@@ -56,7 +56,7 @@ class Trial {
     }
 
     get TimedOut() {
-        return this.Response === null
+        return this.Response === 'NR'
     }
 
     get Accuracy() {
