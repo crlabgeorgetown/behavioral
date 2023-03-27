@@ -1,3 +1,8 @@
+import Joystick from '../../static/images/joystick.png'
+import Mouse from '../../static/images/mouse.png'
+import Touchscreen from '../../static/images/touchscreen.png'
+import Trackpad from '../../static/images/trackpad.png'
+
 
 const DEVICE_LABEL_CSS = {
     color: '#000000',
@@ -31,7 +36,7 @@ const INPUT_DEVICE_CONTAINER = jQuery('<div/>', {
 const TOUCHSCREEN_BUTTON = jQuery('<img/>', {
     id: 'touchscreenButton', 
     css: DEVICE_BUTTON_CSS,
-    src: 'https://jslawjslaw.github.io/js-crlab/static/touchscreen.png',
+    src: Touchscreen,
 }).hover(
     () => TOUCHSCREEN_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
     () => TOUCHSCREEN_BUTTON.css({background: 'transparent'})
@@ -41,7 +46,7 @@ const TOUCHSCREEN_BUTTON = jQuery('<img/>', {
 const TRACKPAD_BUTTON = jQuery('<img/>', {
     id: 'trackpadButton',
     css: DEVICE_BUTTON_CSS,
-    src: 'https://jslawjslaw.github.io/js-crlab/static/trackpad.png',
+    src: Trackpad,
 }).hover(
     () => TRACKPAD_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
     () => TRACKPAD_BUTTON.css({background: 'transparent'})
@@ -51,7 +56,7 @@ const TRACKPAD_BUTTON = jQuery('<img/>', {
 const MOUSE_BUTTON = jQuery('<img/>', {
     id: 'mouseButton',
     css: DEVICE_BUTTON_CSS,
-    src: 'https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png',
+    src: Mouse,
 }).hover(
     () => MOUSE_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
     () => MOUSE_BUTTON.css({background: 'transparent'})
@@ -61,7 +66,7 @@ const MOUSE_BUTTON = jQuery('<img/>', {
 const OTHER_BUTTON = jQuery('<img/>', {
     id: 'otherButton',
     css: DEVICE_BUTTON_CSS,
-    src: 'https://jslawjslaw.github.io/js-crlab/static/joystick.png',
+    src: Joystick,
 }).hover(
     () => OTHER_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
     () => OTHER_BUTTON.css({background: 'transparent'})

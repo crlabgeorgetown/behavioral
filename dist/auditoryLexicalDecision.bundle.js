@@ -67,7 +67,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"INPUT_DEVICE_CONTAINER\": () => (/* binding */ INPUT_DEVICE_CONTAINER),\n/* harmony export */   \"INPUT_DEVICE_LABEL_CONTAINER\": () => (/* binding */ INPUT_DEVICE_LABEL_CONTAINER)\n/* harmony export */ });\n\nconst DEVICE_LABEL_CSS = {\n    color: '#000000',\n    width: '15%',\n    marginLeft: 'auto',\n    marginRight: 'auto',\n    textAlign: 'center',\n    fontSize: '30px'\n}\n\n\nconst DEVICE_BUTTON_CSS = {\n    width: '15%',\n    marginLeft: 'auto',\n    marginRight: 'auto'\n}\n\n\nconst INPUT_DEVICE_CONTAINER = jQuery('<div/>', {\n    id: 'inputDeviceContainer', \n    css: {\n        display: 'flex',\n        flexDirection: 'row',\n        justifyContent: 'flex-end',\n        minWidth: '100%',\n        marginTop: 'auto'\n    }\n})\n\n\nconst TOUCHSCREEN_BUTTON = jQuery('<img/>', {\n    id: 'touchscreenButton', \n    css: DEVICE_BUTTON_CSS,\n    src: 'https://jslawjslaw.github.io/js-crlab/static/touchscreen.png',\n}).hover(\n    () => TOUCHSCREEN_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),\n    () => TOUCHSCREEN_BUTTON.css({background: 'transparent'})\n)\n\n\nconst TRACKPAD_BUTTON = jQuery('<img/>', {\n    id: 'trackpadButton',\n    css: DEVICE_BUTTON_CSS,\n    src: 'https://jslawjslaw.github.io/js-crlab/static/trackpad.png',\n}).hover(\n    () => TRACKPAD_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),\n    () => TRACKPAD_BUTTON.css({background: 'transparent'})\n)\n\n\nconst MOUSE_BUTTON = jQuery('<img/>', {\n    id: 'mouseButton',\n    css: DEVICE_BUTTON_CSS,\n    src: 'https://jslawjslaw.github.io/js-crlab/static/computer-mouse.png',\n}).hover(\n    () => MOUSE_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),\n    () => MOUSE_BUTTON.css({background: 'transparent'})\n)\n\n\nconst OTHER_BUTTON = jQuery('<img/>', {\n    id: 'otherButton',\n    css: DEVICE_BUTTON_CSS,\n    src: 'https://jslawjslaw.github.io/js-crlab/static/joystick.png',\n}).hover(\n    () => OTHER_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),\n    () => OTHER_BUTTON.css({background: 'transparent'})\n)\n\n\nconst INPUT_DEVICE_LABEL_CONTAINER = jQuery('<div/>', {id: 'inputDeviceLabelContainer', css: {\n    display: 'flex',\n    flexDirection: 'row',\n    justifyContent: 'flex-end',\n    minWidth: '100%',\n    marginTop: '2.5%',\n    marginBottom: 'auto',\n    fontFamily: 'Arial'\n}})\n\n\nconst MOUSE_LABEL = jQuery('<div/>', {id: 'mouseLabel', css: DEVICE_LABEL_CSS}).text('Mouse')\nconst TRACKPAD_LABEL = jQuery('<div/>', {id: 'trackpadLabel', css: DEVICE_LABEL_CSS,}).text('Trackpad')\nconst TOUCHSCREEN_LABEL = jQuery('<div/>', {id: 'touchscreenLabel', css: DEVICE_LABEL_CSS}).text('Touchscreen')\nconst OTHER_LABEL = jQuery('<div/>', {id: 'otherLabel', css: DEVICE_LABEL_CSS}).text('Other')\n\n\nINPUT_DEVICE_CONTAINER.append(MOUSE_BUTTON, TRACKPAD_BUTTON, TOUCHSCREEN_BUTTON, OTHER_BUTTON)\nINPUT_DEVICE_LABEL_CONTAINER.append(MOUSE_LABEL, TRACKPAD_LABEL,TOUCHSCREEN_LABEL, OTHER_LABEL)\n\n\n\n//# sourceURL=webpack://js-crlab/./shared/components/inputDevices.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"INPUT_DEVICE_CONTAINER\": () => (/* binding */ INPUT_DEVICE_CONTAINER),\n/* harmony export */   \"INPUT_DEVICE_LABEL_CONTAINER\": () => (/* binding */ INPUT_DEVICE_LABEL_CONTAINER)\n/* harmony export */ });\n/* harmony import */ var _static_images_joystick_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../static/images/joystick.png */ \"./static/images/joystick.png\");\n/* harmony import */ var _static_images_mouse_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../static/images/mouse.png */ \"./static/images/mouse.png\");\n/* harmony import */ var _static_images_touchscreen_png__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../static/images/touchscreen.png */ \"./static/images/touchscreen.png\");\n/* harmony import */ var _static_images_trackpad_png__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../static/images/trackpad.png */ \"./static/images/trackpad.png\");\n\n\n\n\n\n\nconst DEVICE_LABEL_CSS = {\n    color: '#000000',\n    width: '15%',\n    marginLeft: 'auto',\n    marginRight: 'auto',\n    textAlign: 'center',\n    fontSize: '30px'\n}\n\n\nconst DEVICE_BUTTON_CSS = {\n    width: '15%',\n    marginLeft: 'auto',\n    marginRight: 'auto'\n}\n\n\nconst INPUT_DEVICE_CONTAINER = jQuery('<div/>', {\n    id: 'inputDeviceContainer', \n    css: {\n        display: 'flex',\n        flexDirection: 'row',\n        justifyContent: 'flex-end',\n        minWidth: '100%',\n        marginTop: 'auto'\n    }\n})\n\n\nconst TOUCHSCREEN_BUTTON = jQuery('<img/>', {\n    id: 'touchscreenButton', \n    css: DEVICE_BUTTON_CSS,\n    src: _static_images_touchscreen_png__WEBPACK_IMPORTED_MODULE_2__,\n}).hover(\n    () => TOUCHSCREEN_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),\n    () => TOUCHSCREEN_BUTTON.css({background: 'transparent'})\n)\n\n\nconst TRACKPAD_BUTTON = jQuery('<img/>', {\n    id: 'trackpadButton',\n    css: DEVICE_BUTTON_CSS,\n    src: _static_images_trackpad_png__WEBPACK_IMPORTED_MODULE_3__,\n}).hover(\n    () => TRACKPAD_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),\n    () => TRACKPAD_BUTTON.css({background: 'transparent'})\n)\n\n\nconst MOUSE_BUTTON = jQuery('<img/>', {\n    id: 'mouseButton',\n    css: DEVICE_BUTTON_CSS,\n    src: _static_images_mouse_png__WEBPACK_IMPORTED_MODULE_1__,\n}).hover(\n    () => MOUSE_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),\n    () => MOUSE_BUTTON.css({background: 'transparent'})\n)\n\n\nconst OTHER_BUTTON = jQuery('<img/>', {\n    id: 'otherButton',\n    css: DEVICE_BUTTON_CSS,\n    src: _static_images_joystick_png__WEBPACK_IMPORTED_MODULE_0__,\n}).hover(\n    () => OTHER_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),\n    () => OTHER_BUTTON.css({background: 'transparent'})\n)\n\n\nconst INPUT_DEVICE_LABEL_CONTAINER = jQuery('<div/>', {id: 'inputDeviceLabelContainer', css: {\n    display: 'flex',\n    flexDirection: 'row',\n    justifyContent: 'flex-end',\n    minWidth: '100%',\n    marginTop: '2.5%',\n    marginBottom: 'auto',\n    fontFamily: 'Arial'\n}})\n\n\nconst MOUSE_LABEL = jQuery('<div/>', {id: 'mouseLabel', css: DEVICE_LABEL_CSS}).text('Mouse')\nconst TRACKPAD_LABEL = jQuery('<div/>', {id: 'trackpadLabel', css: DEVICE_LABEL_CSS,}).text('Trackpad')\nconst TOUCHSCREEN_LABEL = jQuery('<div/>', {id: 'touchscreenLabel', css: DEVICE_LABEL_CSS}).text('Touchscreen')\nconst OTHER_LABEL = jQuery('<div/>', {id: 'otherLabel', css: DEVICE_LABEL_CSS}).text('Other')\n\n\nINPUT_DEVICE_CONTAINER.append(MOUSE_BUTTON, TRACKPAD_BUTTON, TOUCHSCREEN_BUTTON, OTHER_BUTTON)\nINPUT_DEVICE_LABEL_CONTAINER.append(MOUSE_LABEL, TRACKPAD_LABEL,TOUCHSCREEN_LABEL, OTHER_LABEL)\n\n\n\n//# sourceURL=webpack://js-crlab/./shared/components/inputDevices.js?");
 
 /***/ }),
 
@@ -87,7 +87,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"BUTTON_CONTAINER\": () => (/* binding */ BUTTON_CONTAINER),\n/* harmony export */   \"BUTTON_LABEL_CONTAINER\": () => (/* binding */ BUTTON_LABEL_CONTAINER)\n/* harmony export */ });\n\nconst BUTTON_CONTAINER = jQuery('<div/>', {id: 'buttonContainer', css: {\n    display: 'flex',\n    flexDirection: 'row',\n    justifyContent: 'flex-end',\n    minWidth: '100%'\n}})\n\n\nconst GREEN_BUTTON = jQuery('<img/>', {\n    id: 'greenButton',\n    src: 'https://jslawjslaw.github.io/js-crlab/static/check.png',\n    css: {\n        marginLeft: 'auto',\n        marginRight: '2.5%',\n        padding: '1%',\n        width: '200px',\n        height: '200px',\n}}).hover(\n    () => GREEN_BUTTON.css({background: '#E3E3E3'}),\n    () => GREEN_BUTTON.css({background: 'transparent'})\n)\n\n\nconst RED_BUTTON = jQuery('<img/>', {\n    id: 'redButton',\n    src: 'https://jslawjslaw.github.io/js-crlab/static/remove.png',\n    css: {\n        marginLeft: '2.5%',\n        marginRight: 'auto',\n        padding: '1%',\n        width: '200px',\n        height: '200px',\n}}).hover(\n    () => RED_BUTTON.css({background: '#E3E3E3'}),\n    () => RED_BUTTON.css({background: 'transparent'})\n)\n\n\nconst BUTTON_LABEL_CONTAINER = jQuery('<div/>', {\n    id: 'labelContainer', \n    css: {\n        display: 'flex',\n        flexDirection: 'row',\n        justifyContent: 'flex-end',\n        minWidth: '100%',\n        marginBottom: 'auto',\n        fontFamily: 'Arial'\n    }\n})\n\n\nconst GREEN_LABEL = jQuery('<div/>', {\n    id: 'greenLabel', \n    css: {\n        color: '#000000',\n        marginLeft: 'auto',\n        marginRight: '2.5%',\n        padding: '1%',\n        justifyContent: 'center',\n        display: 'flex',\n        width: '200px',\n        height: '35px',\n        fontSize: '30px'\n    }\n}).text('Real word')\n\n\nconst RED_LABEL = jQuery('<div/>', {\n    id: 'redLabel', \n    css: {\n        color: '#000000',\n        marginLeft: '2.5%',\n        marginRight: 'auto',\n        padding: '1%',\n        justifyContent: 'center',\n        display: 'flex',\n        width: '200px',\n        height: '35px',\n        fontSize: '30px'\n    }\n}).text('Not a word')\n\n\nBUTTON_CONTAINER.append(GREEN_BUTTON, RED_BUTTON)\nBUTTON_LABEL_CONTAINER.append(GREEN_LABEL, RED_LABEL)\n\n\n\n//# sourceURL=webpack://js-crlab/./shared/components/responseButtons.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"BUTTON_CONTAINER\": () => (/* binding */ BUTTON_CONTAINER),\n/* harmony export */   \"BUTTON_LABEL_CONTAINER\": () => (/* binding */ BUTTON_LABEL_CONTAINER)\n/* harmony export */ });\n/* harmony import */ var _static_images_check_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../static/images/check.png */ \"./static/images/check.png\");\n/* harmony import */ var _static_images_remove_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../static/images/remove.png */ \"./static/images/remove.png\");\n\n\n\n\nconst BUTTON_CONTAINER = jQuery('<div/>', {id: 'buttonContainer', css: {\n    display: 'flex',\n    flexDirection: 'row',\n    justifyContent: 'flex-end',\n    minWidth: '100%'\n}})\n\n\nconst GREEN_BUTTON = jQuery('<img/>', {\n    id: 'greenButton',\n    src: _static_images_check_png__WEBPACK_IMPORTED_MODULE_0__,\n    css: {\n        marginLeft: 'auto',\n        marginRight: '2.5%',\n        padding: '1%',\n        width: '200px',\n        height: '200px',\n}}).hover(\n    () => GREEN_BUTTON.css({background: '#E3E3E3'}),\n    () => GREEN_BUTTON.css({background: 'transparent'})\n)\n\n\nconst RED_BUTTON = jQuery('<img/>', {\n    id: 'redButton',\n    src: _static_images_remove_png__WEBPACK_IMPORTED_MODULE_1__,\n    css: {\n        marginLeft: '2.5%',\n        marginRight: 'auto',\n        padding: '1%',\n        width: '200px',\n        height: '200px',\n}}).hover(\n    () => RED_BUTTON.css({background: '#E3E3E3'}),\n    () => RED_BUTTON.css({background: 'transparent'})\n)\n\n\nconst BUTTON_LABEL_CONTAINER = jQuery('<div/>', {\n    id: 'labelContainer', \n    css: {\n        display: 'flex',\n        flexDirection: 'row',\n        justifyContent: 'flex-end',\n        minWidth: '100%',\n        marginBottom: 'auto',\n        fontFamily: 'Arial'\n    }\n})\n\n\nconst GREEN_LABEL = jQuery('<div/>', {\n    id: 'greenLabel', \n    css: {\n        color: '#000000',\n        marginLeft: 'auto',\n        marginRight: '2.5%',\n        padding: '1%',\n        justifyContent: 'center',\n        display: 'flex',\n        width: '200px',\n        height: '35px',\n        fontSize: '30px'\n    }\n}).text('Real word')\n\n\nconst RED_LABEL = jQuery('<div/>', {\n    id: 'redLabel', \n    css: {\n        color: '#000000',\n        marginLeft: '2.5%',\n        marginRight: 'auto',\n        padding: '1%',\n        justifyContent: 'center',\n        display: 'flex',\n        width: '200px',\n        height: '35px',\n        fontSize: '30px'\n    }\n}).text('Not a word')\n\n\nBUTTON_CONTAINER.append(GREEN_BUTTON, RED_BUTTON)\nBUTTON_LABEL_CONTAINER.append(GREEN_LABEL, RED_LABEL)\n\n\n\n//# sourceURL=webpack://js-crlab/./shared/components/responseButtons.js?");
 
 /***/ }),
 
@@ -149,6 +149,66 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"BeginOrPracticeAgain\": () => (/* binding */ BeginOrPracticeAgain),\n/* harmony export */   \"Break\": () => (/* binding */ Break),\n/* harmony export */   \"Finished\": () => (/* binding */ Finished),\n/* harmony export */   \"Incorrect\": () => (/* binding */ Incorrect),\n/* harmony export */   \"TimeOut\": () => (/* binding */ TimeOut)\n/* harmony export */ });\n/* harmony import */ var _components_textContainer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/textContainer */ \"./shared/components/textContainer.js\");\n/* harmony import */ var _components_beginOrPractice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/beginOrPractice */ \"./shared/components/beginOrPractice.js\");\n/* harmony import */ var _base__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base */ \"./shared/screens/base.js\");\n\n\n\n\n\nclass BeginOrPracticeAgain extends _base__WEBPACK_IMPORTED_MODULE_2__[\"default\"] {\n    components = new Map([\n        [_components_textContainer__WEBPACK_IMPORTED_MODULE_0__.TEXT_CONTAINER, {text: `Any questions?\\nLet's begin`}],\n        [_components_beginOrPractice__WEBPACK_IMPORTED_MODULE_1__.BEGIN_OR_PRACTICE_CONTAINER, {}]\n    ])\n\n    get clickHandlers() {\n        return {\n            practiceButton: () => this.handle('practice'),\n            beginButton: () => this.handle('begin')\n        }\n    }\n\n    handle(action) {\n        switch (action) {\n            case 'practice':\n                this.task.dataIndex = 0\n                break\n            case 'begin':\n                this.task.dataIndex++\n                break\n        }\n        this.task.currentScreen = this.task.trialScreen\n        this.task.currentScreen.render()\n    }\n}\n\n\nclass Break extends _base__WEBPACK_IMPORTED_MODULE_2__[\"default\"] {\n    components = new Map([\n        [\n            _components_textContainer__WEBPACK_IMPORTED_MODULE_0__.TEXT_CONTAINER, \n            {\n                text: 'Take a break. Click or touch anywhere to continue.',\n                css: {color: '#0000FF'}\n            }\n        ]\n    ])\n\n    get clickHandlers() {\n        return {container: () => this.containerClickHandler(true)}\n    }\n}\n\n\nclass Incorrect extends _base__WEBPACK_IMPORTED_MODULE_2__[\"default\"] {\n    components = new Map([\n        [\n            _components_textContainer__WEBPACK_IMPORTED_MODULE_0__.TEXT_CONTAINER, \n            {\n                text: 'Incorrect, click or touch anywhere to try again.',\n                css: {color: '#FF0000'}\n            }\n        ]\n    ])\n\n    get clickHandlers() {\n        return {container: () => this.containerClickHandler(false)}\n    }\n}\n\n\nclass Finished extends _base__WEBPACK_IMPORTED_MODULE_2__[\"default\"] {\n    components = new Map([\n        [_components_textContainer__WEBPACK_IMPORTED_MODULE_0__.TEXT_CONTAINER, {text: `You've completed this exercise!`}]\n    ])\n\n    render() {\n        setTimeout(() => this.task.submit())\n        super.render()\n    }\n}\n\n\nclass TimeOut extends _base__WEBPACK_IMPORTED_MODULE_2__[\"default\"] {\n    components = new Map([\n        [_components_textContainer__WEBPACK_IMPORTED_MODULE_0__.TEXT_CONTAINER, {text: 'Click or touch to continue.'}]\n    ])\n\n    get clickHandlers() {\n        return {container: () => this.containerClickHandler(true)}\n    }\n}\n\n\n\n\n//# sourceURL=webpack://js-crlab/./shared/screens/transitions.js?");
 
+/***/ }),
+
+/***/ "./static/images/check.png":
+/*!*********************************!*\
+  !*** ./static/images/check.png ***!
+  \*********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"a2b4bba181f6ccf84f84.png\";\n\n//# sourceURL=webpack://js-crlab/./static/images/check.png?");
+
+/***/ }),
+
+/***/ "./static/images/joystick.png":
+/*!************************************!*\
+  !*** ./static/images/joystick.png ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"09266e10475fea030f5d.png\";\n\n//# sourceURL=webpack://js-crlab/./static/images/joystick.png?");
+
+/***/ }),
+
+/***/ "./static/images/mouse.png":
+/*!*********************************!*\
+  !*** ./static/images/mouse.png ***!
+  \*********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"61b7cb57c03ffecee052.png\";\n\n//# sourceURL=webpack://js-crlab/./static/images/mouse.png?");
+
+/***/ }),
+
+/***/ "./static/images/remove.png":
+/*!**********************************!*\
+  !*** ./static/images/remove.png ***!
+  \**********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"3032c2aacc989cb25071.png\";\n\n//# sourceURL=webpack://js-crlab/./static/images/remove.png?");
+
+/***/ }),
+
+/***/ "./static/images/touchscreen.png":
+/*!***************************************!*\
+  !*** ./static/images/touchscreen.png ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"0fb8531231b5724cb5de.png\";\n\n//# sourceURL=webpack://js-crlab/./static/images/touchscreen.png?");
+
+/***/ }),
+
+/***/ "./static/images/trackpad.png":
+/*!************************************!*\
+  !*** ./static/images/trackpad.png ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"20da724564a7fae46e8b.png\";\n\n//# sourceURL=webpack://js-crlab/./static/images/trackpad.png?");
+
 /***/ })
 
 /******/ 	});
@@ -190,6 +250,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -204,6 +276,26 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /************************************************************************/

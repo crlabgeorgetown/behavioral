@@ -1,3 +1,6 @@
+import Check from '../../static/images/check.png'
+import Remove from '../../static/images/remove.png'
+
 
 const BUTTON_CONTAINER = jQuery('<div/>', {id: 'buttonContainer', css: {
     display: 'flex',
@@ -9,7 +12,7 @@ const BUTTON_CONTAINER = jQuery('<div/>', {id: 'buttonContainer', css: {
 
 const GREEN_BUTTON = jQuery('<img/>', {
     id: 'greenButton',
-    src: 'https://jslawjslaw.github.io/js-crlab/static/check.png',
+    src: Check,
     css: {
         marginLeft: 'auto',
         marginRight: '2.5%',
@@ -24,7 +27,7 @@ const GREEN_BUTTON = jQuery('<img/>', {
 
 const RED_BUTTON = jQuery('<img/>', {
     id: 'redButton',
-    src: 'https://jslawjslaw.github.io/js-crlab/static/remove.png',
+    src: Remove,
     css: {
         marginLeft: '2.5%',
         marginRight: 'auto',

@@ -13,4 +13,12 @@ module.exports = {
     filename: '[name].bundle.js',
     library: '[name]'
   },
+  module: {
+    rules: [
+     {
+       test: /\.(png|svg|jpg|jpeg|gif)$/i,
+       type: 'asset/resource',
+     },
+    ],
+  },
 }
