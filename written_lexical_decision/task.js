@@ -70,12 +70,7 @@ export class Task {
     }
 
     newTrial() {
-        if (this.currentProcedure === 'showasbreak') {
-            this.currentScreen = this.breakScreen
-        } else {
-            this.trials.push(new Trial(this.data[this.dataIndex]))
-        }
-        
+        this.trials.push(new Trial(this.data[this.dataIndex]))        
     }
 
     recordMouseMove(event) {
