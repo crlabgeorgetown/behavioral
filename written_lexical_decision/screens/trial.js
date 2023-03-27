@@ -41,14 +41,16 @@ class TrialScreen extends Screen {
         } else {
             this.task.dataIndex++
         }
-
-        if (this.task.currentProcedure === 'showasbreak') {
-            this.task.currentScreen = this.task.breakScreen
-        } 
         this.task.currentScreen.render()
     }
 
     render() {
+        if (this.task.currentProcedure === 'showasbreak') {
+            this.task.currentScreen = this.task.breakScreen
+            this.task.currentScreen.render()
+            return
+        }
+        
         this.task.newTrial()
         super.render()
         setTimeout(() => {

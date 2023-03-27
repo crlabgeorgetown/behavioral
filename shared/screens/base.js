@@ -24,10 +24,6 @@ export default class Screen {
         this.renderTime = Date.now()
     }
 
-    removeContainerClickHandler() {
-        CONTAINER.off('click')
-    }
-
     updateClickHandlers() {
         for (const [id, callback] of Object.entries(this.clickHandlers)) {
             const element = jQuery(`#${id}`)
@@ -60,7 +56,7 @@ export default class Screen {
 
     containerClickHandler(nextItem) {
         if (Date.now() - this.renderTime > 500) {
-            this.removeContainerClickHandler()
+            CONTAINER.off('click')
             if (nextItem) {
                 this.task.dataIndex++
             }
