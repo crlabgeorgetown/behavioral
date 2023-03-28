@@ -1,4 +1,5 @@
-import { CONTAINER } from "../components/container"
+import { CONTAINER } from '../../shared/components/container'
+
 
 export default class Screen {
     constructor(task) {

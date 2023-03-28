@@ -4,9 +4,8 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
-    writtenLexicalDecision: './written_lexical_decision/task.js',
-    auditoryLexicalDecision: './auditory_lexical_decision/task.js',
-    antelopesAndCantelopes: './antelopes_and_cantelopes/index.js'
+    lexicalDecision: './lexicalDecision/task.js',
+    antelopesAndCantelopes: './antelopesAndCantelopes/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
