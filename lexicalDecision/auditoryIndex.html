@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html class="JFEScope" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Cognitive Recovery Lab</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
+    <script src="../dist/lexicalDecision.bundle.js"></script>
+    <script>
+        d3.csv('https://jslawjslaw.github.io/js-crlab/static/data/written_lexical_decision_1.csv').then((data) => {
+            new lexicalDecision.Task(data, this, 'auditory')
+        })
+    </script>
+</head>
+<body> 
+    <div id="Wrapper"></div>
+</body>
+</html>
