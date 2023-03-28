@@ -6,7 +6,7 @@ import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../components/audioContainer"
 
 class AuditoryTrialScreen extends LexicalDecisionTrialScreen {
     components = new Map([
-        [TEXT_CONTAINER, {text: '+', css: {color: '#000000', height: '90px'}}],
+        [TEXT_CONTAINER, {text: '+', css: {fontSize: '60pt', color: '#000000', height: '90px'}}],
         [AUDIO_CONTAINER, {}],
         [BUTTON_CONTAINER, {}],
         [BUTTON_LABEL_CONTAINER, {}]
