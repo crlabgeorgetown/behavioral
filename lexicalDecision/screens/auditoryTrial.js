@@ -19,6 +19,7 @@ class AuditoryTrialScreen extends LexicalDecisionTrialScreen {
             return
         }
 
+        this.task.newTrial()
         super.render()
         AUDIO_SOURCE.attr('src', this.task.currentTrial.audioSource)
         AUDIO_CONTAINER.on('ended', () => {

@@ -68,7 +68,7 @@ class Trial {
     }
 
     get audioSource() {
-        return `https://jslawjslaw.github.io/js-crlab/static/auditory_lexical_decision_normalized_wav_files/${this.stimulus}.wav`
+        return `https://jslawjslaw.github.io/js-crlab/static/auditory_lexical_decision_normalized_wav_files/${this.Item}.wav`
     }
 }
 

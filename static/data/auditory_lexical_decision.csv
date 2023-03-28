@@ -1,5 +1,11 @@
-Weight,Procedure,word,yes,no,CRESP,TrialWasAdministered,TrialType,Repetitions,WordType,BlockNumber,Frequency,Regularity,Imageability,PartofSpeech,Lexicality
-1,showtrial,belt,yes,no,yes,0,Practice,0,practice,1,N/A,N/A,N/A,N/A,Real
-1,showtrial,bame,yes,no,no,0,Practice,0,practice,1,N/A,N/A,N/A,N/A,Pseudo
-1,showtrial,freme,yes,no,no,0,Practice,0,practice,1,N/A,N/A,N/A,N/A,Pseudo
-1,showlastpractice,black,yes,no,yes,0,Practice,0,practice,1,N/A,N/A,N/A,N/A,Real
+ItemNum,Procedure,Item,CRESP,TrialType,WordType,Frequency,Regularity,Imageability,PartofSpeech,Lexicality
+1,showtrial,bame,yes,Practice,practice,N/A,N/A,N/A,N/A,Real
+2,showtrial,belt,no,Practice,practice,N/A,N/A,N/A,N/A,Pseudo
+3,showtrial,bieve,no,Practice,practice,N/A,N/A,N/A,N/A,Pseudo
+4,showlastpractice,craze,yes,Practice,practice,N/A,N/A,N/A,N/A,Real
+5,showtrial,dack,no,Real,PW_No_Analogy,N/A,N/A,N/A,N/A,Pseudo
+6,showtrial,gress,yes,Real,LF_LI_Exception,low,Exception,low,Noun,Real
+7,showtrial,fiend,no,Real,PW_No_Analogy,N/A,N/A,N/A,N/A,Pseudo
+8,showtrial,jic,no,Real,PW_Exception,N/A,N/A,N/A,N/A,Pseudo
+9,showtrial,loul,yes,Real,LF_HI_Exception,low,Exception,high,Verb,Real
+10,showtrial,pawn,no,Real,PW_No_Analogy,N/A,N/A,N/A,N/A,Pseudo
