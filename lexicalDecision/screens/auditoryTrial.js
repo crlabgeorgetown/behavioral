@@ -27,7 +27,7 @@ class AuditoryTrialScreen extends LexicalDecisionTrialScreen {
             this.task.currentTrial.startTime = new Date()
             this.task.inTrial = true
             this.updateText('')
-            this.timeoutID = setTimeout(() => this.responseClickHandler(null), 5000)
+            this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
         })
         AUDIO_CONTAINER[0].load()
         AUDIO_CONTAINER[0].play()
