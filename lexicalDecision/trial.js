@@ -63,7 +63,7 @@ class Trial {
         return this.Response === this.CRESP ? 1 : 0
     }
 
-    get TrialOnset() {
+    get Time() {
         return this.startTime.toTimeString().split(' ')[0]
     }
 
