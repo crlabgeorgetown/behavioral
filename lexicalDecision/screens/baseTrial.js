@@ -1,4 +1,6 @@
 import Screen from "../../shared/screens/base"
+import { GREEN_BUTTON, RED_BUTTON } from "../../shared/components/responseButtons"
+
 
 
 class LexicalDecisionTrialScreen extends Screen {
@@ -13,6 +15,8 @@ class LexicalDecisionTrialScreen extends Screen {
         if (!this.task.inTrial) {
             return
         }
+        GREEN_BUTTON.mouseout()
+        RED_BUTTON.mouseout()
         clearTimeout(this.timeoutID)
         this.task.inTrial = false
         this.task.currentTrial.responseTime = new Date()
