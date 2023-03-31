@@ -5,7 +5,7 @@ module.exports = {
   mode: 'development',
   entry: {
     lexicalDecision: './lexicalDecision/task.js',
-    antelopesAndCantelopes: './antelopesAndCantelopes/index.js'
+    antelopesAndCanteloupes: './antelopesAndCanteloupes/task.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

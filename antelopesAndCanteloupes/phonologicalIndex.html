@@ -9,17 +9,13 @@
         src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
         crossorigin="anonymous"></script>
-    <script src="../shared/components/instructionButtons.js"></script>
-    <script src="../shared/components/inputDevices.js"></script>
-    <script src="./index.js"></script>
-    <script>
-        fetch("https://jslawjslaw.github.io/js-crlab/antelopes_and_cantelopes/configs/phonological.config.json")
-            .then(response => response.json())
-            .then(config => new Game(config, this))
-    </script>  
 
 </head>
 <body> 
     <div id="Wrapper"></div>
+    <script src="../dist/antelopesAndCanteloupes.bundle.js"></script>
+    <script>
+        new antelopesAndCanteloupes.Task(this, 'phonological')
+    </script>  
 </body>
 </html>
