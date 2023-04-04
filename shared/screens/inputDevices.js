@@ -8,7 +8,7 @@ class InputDevicesScreen extends Screen {
         [INPUT_DEVICE_LABEL_CONTAINER, {}],
         [TEXT_CONTAINER, {
             text: 'Please choose your input device to start.',
-            css: {fontSize: '45pt'}
+            css: {fontSize: '45pt', marginBottom: 'auto'}
         }],
     ])
 

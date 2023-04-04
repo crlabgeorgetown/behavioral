@@ -24,8 +24,6 @@ const RED_ARROW = jQuery('<img/>', {
     css: {
         width: '200px',
         height: '80px',
-        marginTop: '10px',
-        marginBottom: '10px',
         padding: '5px'
     },
     src: RedArrow
@@ -37,8 +35,6 @@ const REMINDER_CONTAINER = jQuery('<div/>', {
     css: {
         width: '200px', 
         display: 'flex',
-        marginTop: '10px',
-        marginBottom: '10px',
         padding: '5px',
         alignItems: 'center',
         background: '#BEBEBE',
@@ -56,4 +52,4 @@ const REMINDERS = [
 REMINDER_BLOCK.append(RED_ARROW, REMINDER_CONTAINER.append(...REMINDERS))  
 
 
-export { REMINDER_BLOCK }
+export { REMINDER_BLOCK, REMINDERS, RED_ARROW }

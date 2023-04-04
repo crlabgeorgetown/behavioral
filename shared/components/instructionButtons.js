@@ -18,7 +18,7 @@ const NEXT_BUTTON = jQuery('<div/>', {
     css: {
         color: '#000000',
         background: '#A8A8A8',
-        fontSize: '25pt',
+        fontSize: '2vw',
         padding: '0.5em',
         marginLeft: 'auto',
         marginRight: '5vw',
@@ -35,7 +35,7 @@ const PREVIOUS_BUTTON = jQuery('<div/>', {
     css: {
         color: '#000000',
         background: '#A8A8A8',
-        fontSize: '25pt',
+        fontSize: '2vw',
         padding: '0.5em',
         marginLeft: '5vw',
     },

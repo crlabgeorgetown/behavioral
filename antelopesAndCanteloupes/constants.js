@@ -1,8 +1,11 @@
-const BASE_IMAGE_URL = '../../static/images/readmap'
+const BASE_IMAGE_URL = 'https://jslawjslaw.github.io/js-crlab/static/images/readmap'
 
 const SEMANTIC = 'semantic'
 const PHONOLOGICAL = 'phonological'
 const STANDARD = 'standard'
+const MAX_PRACTICE_TRIALS = 3
+const READY_TIMEOUT = 1000
+const ROUND_DURATION = 10000
 
 
 class TaskType {
@@ -16,14 +19,18 @@ class TaskType {
 
     get roundSchedule() {
         return {
-            [TaskType.PhonologicalReadMap]: [[0], [1, 2], [1], [2, 3], [2], [3, 1]]
-        }[this]
+            [PHONOLOGICAL]: [[0], [1, 2], [1], [2, 3], [2], [3, 1]],
+            [SEMANTIC]: [[0], [1], [2], [3]],
+            [STANDARD]: [[0], [1], [2], [3]]
+        }[this.name]
     }
 
     get stimuli() {
         return {
-            [TaskType.PhonologicalReadMap]: ['can', 'coin', 'cone', 'corn']
-        }[this]
+            [PHONOLOGICAL]: ['can', 'coin', 'cone', 'corn'],
+            [SEMANTIC]: ['cow', 'pig', 'sheep', 'goat'],
+            [STANDARD]: ['triangle', 'square', 'circle', 'star']
+        }[this.name]
     }
 
     static fromString(string) {
@@ -41,4 +48,4 @@ class TaskType {
 }
 
 
-export { BASE_IMAGE_URL, TaskType }
+export { BASE_IMAGE_URL, MAX_PRACTICE_TRIALS, READY_TIMEOUT, ROUND_DURATION, TaskType }

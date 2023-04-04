@@ -14,4 +14,4 @@ const TEXT_CONTAINER = jQuery("<div/>", {
 })
 
 
-export {TEXT_CONTAINER}
+export { TEXT_CONTAINER }

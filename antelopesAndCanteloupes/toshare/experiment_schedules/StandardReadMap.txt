@@ -1,7 +1,0 @@
-Weight	Nested	Procedure	patternString	patternOptions
-1		showsequence	1	ABCD
-1		showsequence	23	ABCD
-1		showsequence	2	ABCD
-1		showsequence	34	ABCD
-1		showsequence	3	ABCD
-1		showsequence	41	ABCD
