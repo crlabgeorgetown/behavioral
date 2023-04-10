@@ -33,6 +33,18 @@ class TaskType {
         }[this.name]
     }
 
+    get imageExtension() {
+        return {
+            [PHONOLOGICAL]: 'jpg',
+            [SEMANTIC]: 'jpg',
+            [STANDARD]: 'bmp'
+        }[this.name]
+    }
+
+    get shouldShowInstructionScreenTwo() {
+        return this.name !== STANDARD
+    }
+
     static fromString(string) {
         switch(string) {
             case SEMANTIC:
@@ -45,7 +57,15 @@ class TaskType {
                 throw new Error(`Undefined task type: ${string}`)
         }
     }
+
+    imageUrlFromStimulus(stimulus, imageNumber) {
+        if (this.name === STANDARD) {
+            return `${BASE_IMAGE_URL}/${stimulus}.${this.imageExtension}`
+        } else {
+            return `${BASE_IMAGE_URL}/${stimulus}${imageNumber}.${this.imageExtension}`
+        }
+    }
 }
 
 
-export { BASE_IMAGE_URL, MAX_PRACTICE_TRIALS, READY_TIMEOUT, ROUND_DURATION, TaskType }
+export { MAX_PRACTICE_TRIALS, READY_TIMEOUT, ROUND_DURATION, TaskType }

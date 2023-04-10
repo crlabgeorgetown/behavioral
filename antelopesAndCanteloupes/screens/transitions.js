@@ -45,7 +45,6 @@ class ReadyScreen extends BaseScreen {
             setTimeout(() => {
                 this.updateText('Go!')
                 setTimeout(() => {
-                    this.task.currentRound.experimentStartTime = Date.now()
                     this.task.currentRound.newTrial()
                     this.task.currentScreen = this.task.trialScreen
                     this.task.currentScreen.render()

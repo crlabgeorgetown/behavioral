@@ -2,14 +2,16 @@ import { TaskType } from "./constants"
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour } from "./screens/instructions"
-import { CONTAINER } from "../shared/components/container"
 import { Round } from "./round"
 import { FinalScreen, ReadyScreen, StopScreen } from "./screens/transitions"
 import { TrialScreen } from "./screens/trial"
+import { BaseTask } from "../shared/task"
 
 
-class Task {
+class Task extends BaseTask {
     constructor(engine, taskType) {
+        super()
+
         this.engine = engine
         this.taskType = TaskType.fromString(taskType)
         this.rounds = []
@@ -19,11 +21,7 @@ class Task {
     }
 
     initializeScreens() {
-        jQuery("#Questions").remove()
-        jQuery("#PushStickyFooter").remove()
-        jQuery("#Plug").hide()
-        jQuery(".SkinInner").hide()
-        jQuery("#Wrapper").append(CONTAINER)
+        this.setupDOM()
 
         this.readyScreen = new ReadyScreen(this)
         this.finalScreen = new FinalScreen(this)
@@ -34,23 +32,19 @@ class Task {
             new ParticipantIdScreen(this),
             new InputDevicesScreen(this),
             new InstructionsOne(this),
-            new InstructionsTwo(this),
+        ]
+        
+        if (this.taskType.shouldShowInstructionScreenTwo) {
+            this.instructionScreens.push(new InstructionsTwo(this))
+        }
+            
+        this.instructionScreens.push(
             new InstructionsThree(this),
             new InstructionsFour(this),
             this.trialScreen
-        ]
+        )
 
-        for (let i=0; i<this.instructionScreens.length; i++) {
-            if (i < this.instructionScreens.length - 1) {
-                this.instructionScreens[i].nextScreen = this.instructionScreens[i + 1]
-            }
-            if (i > 0) {
-                this.instructionScreens[i].previousScreen = this.instructionScreens[i - 1]
-            }
-        }
-
-        this.currentScreen = this.instructionScreens[0]
-        this.currentScreen.render()
+        this.setupInstructionScreens()
     }
 
     get currentRound() {
@@ -58,9 +52,7 @@ class Task {
     }
 
     newRound() {
-        this.rounds.push(
-            new Round(this.taskType.stimuli, this.taskType.roundSchedule[this.rounds.length])
-        )
+        this.rounds.push(new Round(this.taskType, this.taskType.roundSchedule[this.rounds.length]))
     }
 
     isDone() {
@@ -68,26 +60,68 @@ class Task {
     }
 
     submit() {
-        const searchStimuli = []
-        const imageNumbers = []
-        const stimuliOrdering = []
-        const selections = []
-        const selectionTimes = []
-        const trialTypes = []
-        const timedOut = []
-        this.rounds.map((round) => {
+        const columns = {
+            'OptionA': [],
+            'OptionB': [],
+            'OptionC': [],
+            'OptionD': [],
+            'Item': [],
+            'CRESP': [],
+            'RT': [],
+            'IncorrRT': [],
+            'IncorrResp': [],
+            'PresOrder': [],
+            'TrialType': [],
+            'Time': [],
+            'TimedOut': [],
+        }
+        const mouseMoveDistances = []
+        const mouseMoveDurations = []
+        const mouseMoveAverageVelocities = []
+        const firstMouseMoves = []
+
+        const thePattern = []
+        const patternLength = []
+        const patternNumber = []
+
+        this.rounds.map((round, roundIndex) => {
             round.trials.map((trial) => {
-                searchStimuli.push(trial.searchStimuli)
-                imageNumbers.push(trial.imageNumbers.join(';'))
-                stimuliOrdering.push(trial.stimuli.join(';'))
-                selections.push(trial.selections.join(';'))
-                selectionTimes.push(trial.selectionTimes.map((selectionTime) => selectionTime - trial.startTime).join(';'))
-                trialTypes.push(trial.trialType.name)
-                timedOut.push(!trial.selections.includes(trial.searchStimuli))
+                let firstMouseMove, duration, distance, avgVelocity 
+                [firstMouseMove, duration, distance, avgVelocity] = trial.computeMousemoveStats()
+                firstMouseMoves.push(firstMouseMove)
+                mouseMoveDurations.push(duration)
+                mouseMoveDistances.push(distance)
+                mouseMoveAverageVelocities.push(avgVelocity)
+
+                for (const [key, values] of Object.entries(columns)) {
+                    values.push(trial[key])
+                }
+
+                patternNumber.push(roundIndex)
+                thePattern.push(round.roundSchedule.join(''))
+                patternLength.push(round.roundSchedule.length)
             })
         })
         if (window.location.host === "georgetown.az1.qualtrics.com") {
-            setTimeout(() => this.engine.clickNextButton(), 500)
+            for (const [key, values] of Object.entries(columns)) {
+                Qualtrics.SurveyEngine.setEmbeddedData(key, values.join(';'))
+            }
+            Qualtrics.SurveyEngine.setEmbeddedData('ThePattern', thePattern.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('PatternLength', patternLength.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('PatternNumber', patternNumber.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent.replace(',', '|').replace(';','|'))
+            Qualtrics.SurveyEngine.setEmbeddedData('inputDevice', this.inputDevice)
+            Qualtrics.SurveyEngine.setEmbeddedData('SubjectID', this.participantID)
+            Qualtrics.SurveyEngine.setEmbeddedData('firstMouseMoves', firstMouseMoves.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('RecipientFirstName', 'N/A')
+            Qualtrics.SurveyEngine.setEmbeddedData('RecipientLastName', 'N/A')
+            Qualtrics.SurveyEngine.setEmbeddedData('RecipientEmail', 'N/A')
+            Qualtrics.SurveyEngine.setEmbeddedData('ExternalReference', 'N/A')
+
+            this.engine.clickNextButton()
         }
     }
 }

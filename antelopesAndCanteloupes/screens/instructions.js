@@ -4,7 +4,6 @@ import { ALL_STIMULI_CONTAINER, ALL_STIMULI_FOUR, ALL_STIMULI_ONE, ALL_STIMULI_T
 import { REMINDER_BLOCK } from "../components/reminder"
 import { SEARCH_STIMULI, SEARCH_STIMULI_CONTAINER } from "../components/searchStimuli"
 import { STIMULI_GRID } from "../components/stimuliGrid"
-import { BASE_IMAGE_URL } from "../constants"
 import { BaseScreen } from "./base"
 
 
@@ -35,8 +34,7 @@ class InstructionsOne extends BaseScreen {
     }
 
     render() {
-        this.setStimuliImages(this.task.taskType.stimuli.map((stimuli) => `${BASE_IMAGE_URL}/${stimuli}1.jpg`))
-        debugger
+        this.setStimuliImages(this.task.taskType.stimuli.map((stimulus) => this.task.taskType.imageUrlFromStimulus(stimulus, 1)))
         this.updateText(`Every screen will show pictures of a ${this.task.taskType.stimuli[0]}, a ${this.task.taskType.stimuli[1]}, a ${this.task.taskType.stimuli[2]}, and ${this.task.taskType.stimuli[3]}, but the exact pictures will change.`)
         super.render()
     }
@@ -79,7 +77,7 @@ class InstructionsTwo extends BaseScreen {
             container.append(
                 jQuery('<img/>', {
                     id: `${pattern}${i}`,
-                    src: `${BASE_IMAGE_URL}/${pattern}${i}.jpg`,
+                    src: this.task.taskType.imageUrlFromStimulus(pattern, i),
                     css: {
                         width: '90px',
                         height: '90px',
@@ -133,7 +131,7 @@ class InstructionsFour extends BaseScreen {
         SEARCH_STIMULI.map((stimulusToSelect) => stimulusToSelect.hide())
         this.task.currentRound.getStimuliSchedule().map((stimulus, index) => {
             SEARCH_STIMULI[2 * index].show()
-            SEARCH_STIMULI[2 * index].attr({src: `${BASE_IMAGE_URL}/${stimulus}1.jpg`})
+            SEARCH_STIMULI[2 * index].attr({src: this.task.taskType.imageUrlFromStimulus(stimulus, 1)})
             SEARCH_STIMULI[2 * index + 1].show()
             SEARCH_STIMULI[2 * index + 1].text(stimulus)
         })

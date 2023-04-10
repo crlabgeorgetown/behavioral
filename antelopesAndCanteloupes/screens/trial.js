@@ -19,10 +19,10 @@ class TrialScreen extends BaseScreen {
         }
     }
 
-    stimuliButtonClickHandler(stimuli) {
-        this.task.currentRound.currentTrial.selections.push(stimuli)
-        this.task.currentRound.currentTrial.selectionTimes.push(Date.now())
-        if (this.task.currentRound.currentTrial.searchStimuli === stimuli) {
+    stimuliButtonClickHandler(stimulus) {
+        this.task.currentRound.currentTrial.responses.push(stimulus)
+        this.task.currentRound.currentTrial.responseTimes.push(new Date())
+        if (this.task.currentRound.currentTrial.isCorrectResponse(stimulus)) {
             this.task.currentScreen = this.task.stopScreen
             if (!this.task.currentRound.shouldBeginExperiment()) {
                 this.task.currentScreen = this.task.trialScreen
@@ -37,7 +37,7 @@ class TrialScreen extends BaseScreen {
         RED_ARROW.hide()
         this.updateReminders()
         this.setStimuliImages(this.task.currentRound.currentTrial.getImages())
-        this.task.currentRound.currentTrial.startTime = Date.now()
+        this.task.currentRound.currentTrial.startTime = new Date()
         super.render()
     }
 }
