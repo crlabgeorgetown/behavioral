@@ -55,7 +55,7 @@ class Round {
         let imageNumbers = this.getRandomImageNumbers()
         
         if (this.currentTrial) {
-            while (this.currentTrial.getSearchStimuliIndex() === shuffled.indexOf(searchStimuli)) {
+            while (this.currentTrial.getSearchStimulusIndex() === shuffled.indexOf(searchStimuli)) {
                 shuffled = this.shuffle()
             }
             while (this.currentTrial.getSearchStimuliImageNumber() === imageNumbers[shuffled.indexOf(searchStimuli)]) {

@@ -23,6 +23,7 @@ class TrialScreen extends BaseScreen {
         this.task.currentRound.currentTrial.responses.push(stimulus)
         this.task.currentRound.currentTrial.responseTimes.push(new Date())
         if (this.task.currentRound.currentTrial.isCorrectResponse(stimulus)) {
+            this.inTask = false
             this.task.currentScreen = this.task.stopScreen
             if (!this.task.currentRound.shouldBeginExperiment()) {
                 this.task.currentScreen = this.task.trialScreen
@@ -38,6 +39,7 @@ class TrialScreen extends BaseScreen {
         this.updateReminders()
         this.setStimuliImages(this.task.currentRound.currentTrial.getImages())
         this.task.currentRound.currentTrial.startTime = new Date()
+        this.task.inTrial = true
         super.render()
     }
 }

@@ -49,6 +49,7 @@ class ReadyScreen extends BaseScreen {
                     this.task.currentScreen = this.task.trialScreen
                     this.task.currentScreen.render()
                     setTimeout(() => {
+                        this.task.inTrial = false
                         if (this.task.isDone()) {
                             this.task.submit()
                             this.task.currentScreen = this.task.finalScreen

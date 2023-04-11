@@ -1,6 +1,11 @@
 import { CONTAINER } from "./components/container"
 
 class BaseTask {
+
+    constructor() {
+        this.recordMouseMove = this.recordMouseMove.bind(this)
+        jQuery(document).mousemove(this.recordMouseMove)
+    }
     
     setupDOM() {
         jQuery("#Questions").remove()
@@ -22,6 +27,12 @@ class BaseTask {
 
         this.currentScreen = this.instructionScreens[0]
         this.currentScreen.render()
+    }
+
+    recordMouseMove(event) {
+        if (this.inTrial) {
+            this.currentTrial.recordMouseMove(Date.now(), event.clientX, event.clientY)
+        }
     }
 }
 

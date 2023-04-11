@@ -14,12 +14,12 @@ class Trial extends BaseTrial {
         this.responseTimes = []
     }
 
-    getSearchStimuliIndex() {
-        return this.stimuli.indexOf(this.searchStimuli)
+    getSearchStimulusIndex() {
+        return this.stimuli.indexOf(this.searchStimulus)
     }
 
     getSearchStimuliImageNumber() {
-        return this.imageNumbers[this.getSearchStimuliIndex()]
+        return this.imageNumbers[this.getSearchStimulusIndex()]
     }
 
     getImages() {
@@ -31,19 +31,19 @@ class Trial extends BaseTrial {
     }
 
     get OptionA() {
-        return this.taskType.imageUrlFromStimulus(this.stimuli[0], this.imageNumbers[0])
+        return this.taskType.getOption(this.stimuli[0], this.imageNumbers[0])
     }
     
     get OptionB() {
-        return this.taskType.imageUrlFromStimulus(this.stimuli[1], this.imageNumbers[1])
+        return this.taskType.getOption(this.stimuli[1], this.imageNumbers[1])
     }
     
     get OptionC() {
-        return this.taskType.imageUrlFromStimulus(this.stimuli[2], this.imageNumbers[2])
+        return this.taskType.getOption(this.stimuli[2], this.imageNumbers[2])
     }
     
     get OptionD() {
-        return this.taskType.imageUrlFromStimulus(this.stimuli[3], this.imageNumbers[3])
+        return this.taskType.getOption(this.stimuli[3], this.imageNumbers[3])
     }
 
     get CRESP() {
@@ -63,7 +63,7 @@ class Trial extends BaseTrial {
     }
 
     get PresOrder() {
-        return this.stimuli.map((stimulus) => this.taskType.stimuli.indexOf(stimulus)).join('')
+        return this.stimuli.map((stimulus) => this.taskType.stimuli.indexOf(stimulus) + 1).join('')
     }
 
     get IncorrRT() {

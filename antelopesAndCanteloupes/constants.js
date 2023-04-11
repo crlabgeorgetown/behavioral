@@ -59,11 +59,15 @@ class TaskType {
     }
 
     imageUrlFromStimulus(stimulus, imageNumber) {
-        if (this.name === STANDARD) {
-            return `${BASE_IMAGE_URL}/${stimulus}.${this.imageExtension}`
-        } else {
-            return `${BASE_IMAGE_URL}/${stimulus}${imageNumber}.${this.imageExtension}`
+        return `${BASE_IMAGE_URL}/${this.getOption(stimulus, imageNumber)}.${this.imageExtension}`
+    }
+
+    getOption(stimulus, imageNumber) {
+        let option = `${stimulus}`
+        if (this.name !== STANDARD) {
+            option += imageNumber
         }
+        return option
     }
 }
 

@@ -1,4 +1,3 @@
-import { CONTAINER } from "../shared/components/container"
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
 import { InstructionsOne, InstructionsThree, InstructionsTwo } from "./screens/instructions"
 import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
@@ -6,10 +5,13 @@ import { AuditoryTrialScreen } from "./screens/auditoryTrial"
 import { WrittenTrialScreen } from "./screens/writtenTrial"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { Trial } from "./trial"
+import { BaseTask } from "../shared/task"
 
 
-export class Task {
+class Task extends BaseTask {
 	constructor(data, engine, type) {
+        super()
+        
         this.engine = engine
         this.trials = []
         this.data = data
@@ -17,18 +19,11 @@ export class Task {
         this.inTrial = false
         this.type = type
 
-        this.recordMouseMove = this.recordMouseMove.bind(this)
-
         this.initializeScreens()
 	}
 
     initializeScreens() {
-        jQuery("#Questions").remove()
-        jQuery("#PushStickyFooter").remove()
-        jQuery("#Plug").hide()
-        jQuery(".SkinInner").hide()
-        jQuery("#Wrapper").append(CONTAINER)
-        jQuery(document).mousemove(this.recordMouseMove)
+        this.setupDOM()
 
         this.trialScreen = this.type === 'auditory' ? new AuditoryTrialScreen(this) : new WrittenTrialScreen(this)
         this.incorrectScreen = new Incorrect(this)
@@ -37,7 +32,7 @@ export class Task {
         this.finishedScreen = new Finished(this)
         this.timeoutScreen = new TimeOut(this)
         
-        const instructionScreens = [
+        this.instructionScreens = [
             new ParticipantIdScreen(this),
             new InputDevicesScreen(this), 
             new InstructionsOne(this), 
@@ -46,17 +41,7 @@ export class Task {
             this.trialScreen
         ]
 
-        for (let i=0; i<instructionScreens.length; i++) {
-            if (i < instructionScreens.length - 1) {
-                instructionScreens[i].nextScreen = instructionScreens[i + 1]
-            }
-            if (i > 0) {
-                instructionScreens[i].previousScreen = instructionScreens[i - 1]
-            }
-             
-        }
-        this.currentScreen = instructionScreens[0]
-        this.currentScreen.render()
+        this.setupInstructionScreens()
     }
 
     get currentTrial() {
@@ -73,12 +58,6 @@ export class Task {
 
     newTrial() {
         this.trials.push(new Trial(this.data[this.dataIndex]))        
-    }
-
-    recordMouseMove(event) {
-        if (this.inTrial) {
-            this.currentTrial.recordMouseMove(Date.now(), event.clientX, event.clientY)
-        }
     }
 
     submit() {
@@ -137,3 +116,6 @@ export class Task {
         }
     }
 }
+
+
+export { Task }
