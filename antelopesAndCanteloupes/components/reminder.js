@@ -3,7 +3,7 @@ import RedArrow from '../../static/images/redArrow.png'
 
 const REMINDER_CSS = {
     width: '80px',
-    height: '80px',
+    height: '80px!important',
     margin: 'auto'
 }
 
@@ -23,7 +23,7 @@ const RED_ARROW = jQuery('<img/>', {
     id: 'redArrow',
     css: {
         width: '200px',
-        height: '80px !important',
+        height: '80px!important',
         padding: '5px'
     },
     src: RedArrow
