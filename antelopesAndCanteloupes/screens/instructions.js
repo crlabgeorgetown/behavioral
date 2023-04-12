@@ -70,7 +70,8 @@ class InstructionsTwo extends BaseScreen {
                 fontSize: '5vh',
                 width: '40px',
                 marginRight: '1em',
-                marginLeft: '1em'
+                marginLeft: '1em',
+                fontFamily: 'Arial'
             }
         }).text(pattern))
         for (let i=1; i<11; i++){
