@@ -71,7 +71,8 @@ class InstructionsTwo extends BaseScreen {
                 width: '40px',
                 marginRight: '1em',
                 marginLeft: '1em',
-                fontFamily: 'Arial'
+                fontFamily: 'Arial',
+                color: '#000000'
             }
         }).text(pattern))
         for (let i=1; i<11; i++){

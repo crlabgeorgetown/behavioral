@@ -6,7 +6,8 @@ const SEARCH_STIMULI_LABEL_CSS = {
     height: '100%', 
     fontSize: '2em',
     textAlign: 'center',
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    color: '#000000'
 }
 
 
