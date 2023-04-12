@@ -47,6 +47,10 @@ class Task extends BaseTask {
         this.setupInstructionScreens()
     }
 
+    get currentTrial() {
+        return this.currentRound.currentTrial
+    }
+
     get currentRound() {
         return this.rounds[this.rounds.length - 1]
     }
