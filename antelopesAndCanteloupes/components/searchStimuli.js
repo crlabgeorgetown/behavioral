@@ -1,4 +1,4 @@
-const SEARCH_STIMULI_CSS = 'width: 200px !important; height: 200px !important; padding: 50px; background: #BEBEBE; border: 1px solid #000000'
+const SEARCH_STIMULI_CSS = 'width: 300px !important; height: 300px !important; padding: 50px; background: #BEBEBE; border: 1px solid #000000'
 
 
 const SEARCH_STIMULI_LABEL_CSS = {
