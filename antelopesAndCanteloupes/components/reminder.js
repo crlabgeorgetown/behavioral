@@ -21,13 +21,8 @@ const REMINDER_BLOCK = jQuery('<div/>', {
 
 const RED_ARROW = jQuery('<img/>', {
     id: 'redArrow',
-    css: {
-        width: '200px',
-        height: '80px!important',
-        padding: '5px'
-    },
     src: RedArrow
-})
+}).attr('style', 'width: 200px; height: 80px !important; padding: 5px')
 
 
 const REMINDER_CONTAINER = jQuery('<div/>', {
