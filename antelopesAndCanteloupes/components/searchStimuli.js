@@ -1,10 +1,4 @@
-const SEARCH_STIMULI_CSS = {
-    width: '200px', 
-    height: '200px', 
-    padding: '50px',
-    background: '#BEBEBE',
-    border: '1px solid #000000'
-}
+const SEARCH_STIMULI_CSS = 'width: 200px !important; height: 200px !important; padding: 50px; background: #BEBEBE; border: 1px solid #000000'
 
 
 const SEARCH_STIMULI_LABEL_CSS = {
@@ -32,9 +26,9 @@ const SEARCH_STIMULI_CONTAINER = jQuery('<div/>', {
 
 
 const SEARCH_STIMULI = [
-    jQuery('<img/>', {id: 'stimuliToSelect1', css: SEARCH_STIMULI_CSS}),
+    jQuery('<img/>', {id: 'stimuliToSelect1'}).attr('style', SEARCH_STIMULI_CSS),
     jQuery('<div/>', {id: 'stimuliToSelect1Label', css: SEARCH_STIMULI_LABEL_CSS}),
-    jQuery('<img/>', {id: 'stimuliToSelect2', css: SEARCH_STIMULI_CSS}),
+    jQuery('<img/>', {id: 'stimuliToSelect2'}).attr('style', SEARCH_STIMULI_CSS),
     jQuery('<div/>', {id: 'stimuliToSelect2Label', css: SEARCH_STIMULI_LABEL_CSS})
 ]
 
