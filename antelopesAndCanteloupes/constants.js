@@ -5,7 +5,7 @@ const PHONOLOGICAL = 'phonological'
 const STANDARD = 'standard'
 const MAX_PRACTICE_TRIALS = 3
 const READY_TIMEOUT = 1000
-const ROUND_DURATION = 10000
+const ROUND_DURATION = 30000
 
 
 class TaskType {
