@@ -9,6 +9,13 @@ class BaseScreen extends Screen {
         STIMULI.map((stimulus, index) => stimulus.attr({src: images[index]}))
     }
 
+    pluralize(stimulus) {
+        if (stimulus === 'coin') {
+            return 'coin(s)'
+        }
+        return stimulus
+    }
+
     updateReminders() {
         REMINDERS.map((reminder) => reminder.hide())
         this.task.currentRound.getStimuliSchedule().map((stimulus, index) => {

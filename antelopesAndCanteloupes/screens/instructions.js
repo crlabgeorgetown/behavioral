@@ -35,7 +35,8 @@ class InstructionsOne extends BaseScreen {
 
     render() {
         this.setStimuliImages(this.task.taskType.stimuli.map((stimulus) => this.task.taskType.imageUrlFromStimulus(stimulus, 1)))
-        this.updateText(`Every screen will show pictures of a ${this.task.taskType.stimuli[0]}, a ${this.task.taskType.stimuli[1]}, a ${this.task.taskType.stimuli[2]}, and ${this.task.taskType.stimuli[3]}, but the exact pictures will change.`)
+        const pluralized = this.task.taskType.stimuli.map(this.pluralize)
+        this.updateText(`Every screen will show pictures of a ${pluralized[0]}, a ${pluralized[1]}, a ${pluralized[2]}, and ${pluralized[3]}, but the exact pictures will change.`)
         super.render()
     }
 }
@@ -68,13 +69,12 @@ class InstructionsTwo extends BaseScreen {
             id: `${pattern}`, 
             css: {
                 fontSize: '5vh',
-                width: '40px',
-                marginRight: '1em',
-                marginLeft: '1em',
+                width: '100px',
+                marginLeft: 'auto',
                 fontFamily: 'Arial',
                 color: '#000000'
             }
-        }).text(pattern))
+        }).text(this.pluralize(pattern)))
         for (let i=1; i<11; i++){
             container.append(
                 jQuery('<img/>', {
@@ -135,7 +135,7 @@ class InstructionsFour extends BaseScreen {
             SEARCH_STIMULI[2 * index].show()
             SEARCH_STIMULI[2 * index].attr({src: this.task.taskType.imageUrlFromStimulus(stimulus, 1)})
             SEARCH_STIMULI[2 * index + 1].show()
-            SEARCH_STIMULI[2 * index + 1].text(stimulus)
+            SEARCH_STIMULI[2 * index + 1].text(this.pluralize(stimulus))
         })
     }
 
@@ -143,9 +143,9 @@ class InstructionsFour extends BaseScreen {
         super.render()
         let text
         if (this.task.currentRound.roundSchedule.length === 1) {
-            text = `Please touch the ${this.task.currentRound.getSearchStimuli()} every time. Let's practice a few.`
+            text = `Please touch the ${this.pluralize(this.task.currentRound.getSearchStimuli())} every time. Let's practice a few.`
         } else {
-            const stimuli = this.task.currentRound.getStimuliSchedule()
+            const stimuli = this.task.currentRound.getStimuliSchedule().map(this.pluralize)
             text = `Please alternate between the ${stimuli[0]} and the ${stimuli[1]}. Let's practice a few.`
         }
         this.updateText(text, DEFAULT_TEXT_CSS)

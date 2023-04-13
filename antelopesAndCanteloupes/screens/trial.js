@@ -25,9 +25,9 @@ class TrialScreen extends BaseScreen {
         if (this.task.currentRound.currentTrial.isCorrectResponse(stimulus)) {
             this.inTask = false
             this.task.currentScreen = this.task.stopScreen
+            this.task.currentRound.incrementScheduleIndex()
             if (!this.task.currentRound.shouldBeginExperiment()) {
                 this.task.currentScreen = this.task.trialScreen
-                this.task.currentRound.incrementScheduleIndex()
                 this.task.currentRound.newTrial()
             }
             this.task.currentScreen.render()

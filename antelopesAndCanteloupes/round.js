@@ -49,7 +49,7 @@ class Round {
     }
 
     newTrial() {
-        const trialType = this.trials.length < MAX_PRACTICE_TRIALS ? 'practice': 'experiment'
+        const trialType = this.trials.length < MAX_PRACTICE_TRIALS * this.roundSchedule.length ? 'practice': 'experiment'
         const searchStimuli = this.getSearchStimuli()
         let shuffled = this.shuffle()
         let imageNumbers = this.getRandomImageNumbers()
@@ -77,7 +77,7 @@ class Round {
     }
 
     shouldBeginExperiment() {
-        return this.trials.length === MAX_PRACTICE_TRIALS
+        return this.trials.length === MAX_PRACTICE_TRIALS * this.roundSchedule.length
     }
 }
 

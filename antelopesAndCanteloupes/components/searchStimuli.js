@@ -14,8 +14,8 @@ const SEARCH_STIMULI_LABEL_CSS = {
 const SEARCH_STIMULI_CONTAINER = jQuery('<div/>', {
     id: 'searchStimuliContainer', 
     css: {
-        width: '600px',
-        maxHeight: '400px', 
+        width: '800px',
+        maxHeight: '500px', 
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
