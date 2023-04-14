@@ -5,7 +5,7 @@ const PHONOLOGICAL = 'phonological'
 const STANDARD = 'standard'
 const MAX_PRACTICE_TRIALS = 3
 const READY_TIMEOUT = 1000
-const ROUND_DURATION = 30000
+const ROUND_DURATION = 20000
 
 
 class TaskType {
@@ -17,11 +17,15 @@ class TaskType {
         this.name = name
     }
 
+    get version() {
+        return `${this.name.charAt(0).toUpperCase()}${this.name.slice(1)}ReadMap`
+    }
+
     get roundSchedule() {
         return {
-            [PHONOLOGICAL]: [[0], [1, 2], [1], [2, 3], [2], [3, 1]],
+            [PHONOLOGICAL]: [[0], [1], [2], [3]],
             [SEMANTIC]: [[0], [1], [2], [3]],
-            [STANDARD]: [[0], [1], [2], [3]]
+            [STANDARD]: [[0], [1, 2], [1], [2, 3], [2], [3, 1]]
         }[this.name]
     }
 

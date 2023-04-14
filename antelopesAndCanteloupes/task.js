@@ -75,7 +75,7 @@ class Task extends BaseTask {
             'IncorrRT': [],
             'IncorrResp': [],
             'PresOrder': [],
-            'TrialType': [],
+            'RunInPeriod': [],
             'Time': [],
             'TimedOut': [],
         }
@@ -87,9 +87,11 @@ class Task extends BaseTask {
         const thePattern = []
         const patternLength = []
         const patternNumber = []
+        const curPatternElementNum = []
+        const timeOnSequence = []
 
         this.rounds.map((round, roundIndex) => {
-            round.trials.map((trial) => {
+            round.trials.map((trial, trialIndex) => {
                 let firstMouseMove, duration, distance, avgVelocity 
                 [firstMouseMove, duration, distance, avgVelocity] = trial.computeMousemoveStats()
                 firstMouseMoves.push(firstMouseMove)
@@ -101,9 +103,13 @@ class Task extends BaseTask {
                     values.push(trial[key])
                 }
 
-                patternNumber.push(roundIndex)
+                patternNumber.push(roundIndex + 1)
                 thePattern.push(round.roundSchedule.join(''))
                 patternLength.push(round.roundSchedule.length)
+                curPatternElementNum.push(trialIndex % round.roundSchedule.length + 1)
+
+                const blockStartIndex = trial.trialType === 'practice' ? 0 : MAX_PRACTICE_TRIALS * round.roundSchedule.length
+                timeOnSequence.push(trial.startTime - round.trials[blockStartIndex].startTime)
             })
         })
         if (window.location.host === "georgetown.az1.qualtrics.com") {
@@ -113,6 +119,8 @@ class Task extends BaseTask {
             Qualtrics.SurveyEngine.setEmbeddedData('ThePattern', thePattern.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('PatternLength', patternLength.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('PatternNumber', patternNumber.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('CurPatternElementNum', curPatternElementNum.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('TimeOnSequence', timeOnSequence.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent.replace(',', '|').replace(';','|'))
             Qualtrics.SurveyEngine.setEmbeddedData('inputDevice', this.inputDevice)
             Qualtrics.SurveyEngine.setEmbeddedData('SubjectID', this.participantID)
@@ -120,6 +128,7 @@ class Task extends BaseTask {
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(';'))
+            Qualtrics.SurveyEngine.setEmbeddedData('StimVersion', this.taskType.version)
             Qualtrics.SurveyEngine.setEmbeddedData('RecipientFirstName', 'N/A')
             Qualtrics.SurveyEngine.setEmbeddedData('RecipientLastName', 'N/A')
             Qualtrics.SurveyEngine.setEmbeddedData('RecipientEmail', 'N/A')

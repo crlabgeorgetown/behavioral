@@ -73,6 +73,9 @@ class Trial extends BaseTrial {
                 incorrectResponseTimes.push(this.responseTimes[index] - this.startTime)
             }
         })
+        if (incorrectResponseTimes.length === 0) {
+            return 0
+        }
         return incorrectResponseTimes.join('|')
     }
 
@@ -86,12 +89,12 @@ class Trial extends BaseTrial {
         return incorrectResponses.join('|')
     }
 
-    get TrialType() {
-        return this.trialType
-    }
-
     get TimedOut() {
         return !this.responses.includes(this.searchStimulus)
+    }
+
+    get RunInPeriod() {
+        return this.trialType === 'practice' ? 1 : 0
     }
 }
 
