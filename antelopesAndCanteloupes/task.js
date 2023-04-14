@@ -1,4 +1,4 @@
-import { TaskType } from "./constants"
+import { MAX_PRACTICE_TRIALS, TaskType } from "./constants"
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour } from "./screens/instructions"
