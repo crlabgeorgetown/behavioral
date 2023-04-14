@@ -47,7 +47,7 @@ class Trial extends BaseTrial {
     }
 
     get CRESP() {
-        return this.taskType.imageUrlFromStimulus(this.searchStimulus, this.getSearchStimuliImageNumber())
+        return this.taskType.getOption(this.searchStimulus, this.getSearchStimuliImageNumber())
     }
 
     get Time() {
