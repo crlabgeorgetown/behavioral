@@ -55,7 +55,7 @@ class ReadyScreen extends BaseScreen {
                             this.task.currentScreen = this.task.finalScreen
                         } else {
                             this.task.newRound()
-                            this.task.currentScreen = this.task.instructionScreens[5]
+                            this.task.currentScreen = this.task.instructionScreens[this.task.instructionScreens.length - 2]
                         }
                         this.task.currentScreen.render()
                     }, ROUND_DURATION)
