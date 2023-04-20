@@ -7,7 +7,8 @@ const CONTAINER = jQuery('<div/>', {
         background: '#f0f0f0',
         alignItems: 'center',
         justifyContent: 'center',
-        fontFamiliy: 'Poppins,Verdana,sans-serif'
+        fontFamiliy: 'Poppins,Verdana,sans-serif',
+        touchAction: null
     }
 })
 
