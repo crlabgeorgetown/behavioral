@@ -1,45 +1,24 @@
 const PARTICIPANT_ID_CONTAINER = jQuery("<div/>", {
     id: 'participantIdContainer', 
-    css: {
-        display: 'flex',
-        flexDirection: 'row',
-        fontFamily: 'Arial',
-        alignItems: 'center',
-        minWidth: '100%'
-    }
+    class: "participant-id-container"
 })
 
 
 const PARTICIPANT_ID_LABEL = jQuery('<div/>', {
     id: 'participantIdLabel',
-    text: 'Participant ID',
-    css: {
-        fontSize: '35pt',
-        color: '#000000',
-        marginLeft: 'auto',
-        marginRight: '20px'
-    }
+    class: 'participant-id-label',
+    text: 'Participant ID'
 })
 
 const PARTICIPANT_ID_INPUT = jQuery('<input/>', {
     id: 'participantIdInput',
-    css: {
-        fontSize: '25pt',
-        height: '65px'
-    }
+    class: 'participant-id-input'
 })
 
 
 const SUBMIT_BUTTON = jQuery('<div/>', {
     id: 'submitButton',
-    css: {
-        color: '#000000',
-        background: '#A8A8A8',
-        fontSize: '25pt',
-        padding: '0.5em',
-        marginLeft: '20px',
-        marginRight: 'auto'
-    },
+    class: 'submit-button',
     text: 'Submit'
 
 }).hover(

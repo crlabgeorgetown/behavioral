@@ -1,5 +1,56 @@
 html, body {
     overflow: hidden;
-    /* position: fixed; */
-    /* touch-action: none; */
+    touch-action: none;
+}
+
+.participant-id-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    font-family: Arial;
+    align-items: center;
+    min-width: 100%;
+}
+
+.participant-id-label {
+    font-size: 35pt;
+    color: #000000;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.participant-id-input {
+    font-size: 25pt;
+    padding: 12px;
+}
+
+.submit-button {
+    color: #000000;
+    background: #A8A8A8;
+    font-size: 25pt;
+    padding: 15px;
+    margin-left: 20px;
+    margin-right: auto;
+}
+
+/* TODO: Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    
+}
+    
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .participant-id-label {
+        width: 100%
+    }
+}
+    
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {
+    
+}
+    
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) {
+    
 }
