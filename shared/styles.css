@@ -1,5 +1,5 @@
 html, body {
     overflow: hidden;
-    position: fixed;
-    touch-action: none;
+    /* position: fixed; */
+    /* touch-action: none; */
 }
