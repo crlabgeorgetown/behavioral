@@ -1,0 +1,45 @@
+
+.device-label {
+    color: #000000;
+    width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 30px;
+}
+
+.device-button {
+    width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.device-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    min-width: 100%;
+    margin-top: auto;
+}
+
+.device-label-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    min-width: 100%;
+    margin-top: 2.5%;
+    margin-bottom: auto;
+    font-family: Arial;
+}
+
+.device-hover {
+    background: #B0B0B0;
+    cursor: pointer;
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .device-label {
+        font-size: 20px;
+    }
+}

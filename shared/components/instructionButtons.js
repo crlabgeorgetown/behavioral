@@ -1,48 +1,26 @@
 const INSTRUCTION_BUTTON_CONTAINER = jQuery('<div/>', {
     id: 'instructionButtonContainer', 
-    css: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        minWidth: '100%',
-        marginTop: 'auto',
-        marginBottom: '4vh',
-        fontFamily: 'Arial',
-        textAlign: 'center'
-    }
+    class: 'instruction-button-container'
 })
 
 
 const NEXT_BUTTON = jQuery('<div/>', {
     id: 'nextButton',
-    css: {
-        color: '#000000',
-        background: '#A8A8A8',
-        fontSize: '2vw',
-        padding: '0.5em',
-        marginLeft: 'auto',
-        marginRight: '5vw',
-    },
+    class: 'next-button',
     text: 'Next >>'
 }).hover(
-    () => NEXT_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
-    () => NEXT_BUTTON.css({background: '#A8A8A8'})
+    () => NEXT_BUTTON.addClass('instruction-button-hover'),
+    () => NEXT_BUTTON.removeClass('instruction-button-hover')
 )
 
 
 const PREVIOUS_BUTTON = jQuery('<div/>', {
     id: 'previousButton',
-    css: {
-        color: '#000000',
-        background: '#A8A8A8',
-        fontSize: '2vw',
-        padding: '0.5em',
-        marginLeft: '5vw',
-    },
+    class: 'previous-button',
     text: '<< Previous'
 }).hover(
-    () => PREVIOUS_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
-    () => PREVIOUS_BUTTON.css({background: '#A8A8A8'})
+    () => PREVIOUS_BUTTON.addClass('instruction-button-hover'),
+    () => PREVIOUS_BUTTON.removeClass('instruction-button-hover')
 )
 
 

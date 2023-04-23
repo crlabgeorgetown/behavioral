@@ -1,0 +1,10 @@
+@import url('inputDevices.css');
+@import url('instructionButtons.css');
+@import url('participantID.css');
+@import url('text.css');
+
+
+html, body {
+    overflow: hidden;
+    touch-action: none;
+}

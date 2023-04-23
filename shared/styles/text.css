@@ -1,0 +1,63 @@
+.base-text {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    white-space: pre-line;
+    line-height: 1.7em;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: Arial;
+}
+
+
+.extra-large-text {
+    font-size: 60pt;
+}
+
+
+.large-text {
+    font-size: 45pt;
+}
+
+
+.medium-text {
+    font-size: 33pt;
+}
+
+.fixed-height {
+    height: 90px;
+}
+
+.blue {
+    color: #0000FF;
+}
+
+.red {
+    color: #FF0000
+}
+
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    
+}
+    
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .large-text {
+        font-size: 35pt;
+    }
+
+    .medium-text {
+        font-size: 22pt;
+    }
+}
+    
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+    
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) {
+    
+}

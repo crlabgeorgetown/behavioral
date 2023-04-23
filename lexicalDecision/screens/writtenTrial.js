@@ -5,7 +5,7 @@ import { LexicalDecisionTrialScreen } from "./baseTrial"
 
 class WrittenTrialScreen extends LexicalDecisionTrialScreen {
     components = new Map([
-        [TEXT_CONTAINER, {text: '+', css: {color: '#000000', fontSize: '60pt'}}],
+        [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text'}],
         [BUTTON_CONTAINER, {}],
         [BUTTON_LABEL_CONTAINER, {}]
     ])

@@ -37,7 +37,7 @@ class Break extends Screen {
             TEXT_CONTAINER, 
             {
                 text: 'Take a break. Click or touch anywhere to continue.',
-                css: {color: '#0000FF'}
+                addClass: 'base-text extra-large-text blue'
             }
         ]
     ])
@@ -54,7 +54,7 @@ class Incorrect extends Screen {
             TEXT_CONTAINER, 
             {
                 text: 'Incorrect, click or touch anywhere to try again.',
-                css: {color: '#FF0000'}
+                addClass: 'base-text extra-large-text red'
             }
         ]
     ])

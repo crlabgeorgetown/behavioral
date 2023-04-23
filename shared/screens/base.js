@@ -17,6 +17,9 @@ export default class Screen {
         CONTAINER.children().detach()
         for (const [component, settings] of this.components.entries()) {
             for (const [setting, value] of Object.entries(settings)) {
+                if (setting === 'addClass') {
+                    component.removeClass()
+                }
                 component[setting](value)
             }
             CONTAINER.append(component)

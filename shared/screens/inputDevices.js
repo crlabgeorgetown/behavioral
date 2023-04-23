@@ -2,14 +2,12 @@ import Screen from "./base"
 import { INPUT_DEVICE_CONTAINER, INPUT_DEVICE_LABEL_CONTAINER } from "../components/inputDevices"
 import { TEXT_CONTAINER } from "../components/textContainer"
 
+
 class InputDevicesScreen extends Screen {
     components = new Map([
         [INPUT_DEVICE_CONTAINER, {}],
         [INPUT_DEVICE_LABEL_CONTAINER, {}],
-        [TEXT_CONTAINER, {
-            text: 'Please choose your input device to start.',
-            css: {fontSize: '45pt', marginBottom: 'auto'}
-        }],
+        [TEXT_CONTAINER, {text: 'Please choose your input device to start.', addClass: 'base-text large-text'}],
     ])
 
     get clickHandlers() {

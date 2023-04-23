@@ -17,7 +17,7 @@ class InstructionsOne extends Screen {
         }
         
         return new Map([
-            [TEXT_CONTAINER, {text: instructionText, css: {fontSize: '45pt'}}],
+            [TEXT_CONTAINER, {text: instructionText, addClass: 'base-text large-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }
@@ -44,10 +44,7 @@ class InstructionsTwo extends Screen {
         }
         
         return new Map([
-            [TEXT_CONTAINER, {
-                text: instructionText,
-                css: {fontSize: '40pt'}
-            }],
+            [TEXT_CONTAINER, {text: instructionText, addClass: 'base-text medium-text'}],
             [BUTTON_CONTAINER, {}],
             [BUTTON_LABEL_CONTAINER, {}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
@@ -65,9 +62,7 @@ class InstructionsTwo extends Screen {
 
 class InstructionsThree extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {
-            text: `Let's Practice.`
-        }],
+        [TEXT_CONTAINER, {text: `Let's Practice.`, addClass: 'base-text extra-large-text'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
