@@ -7,22 +7,10 @@ import { STIMULI_GRID } from "../components/stimuliGrid"
 import { BaseScreen } from "./base"
 
 
-const DEFAULT_TEXT_CSS = {
-    color: "#000000",
-    textAlign: "center",
-    fontSize: "3vh",
-    minWidth: "100vw",
-    whiteSpace: "pre-line",
-    lineHeight: "1.7em",
-    marginBottom: '',
-    marginTop: ''
-}
-
-
 class InstructionsOne extends BaseScreen {
     components = new Map([
         [STIMULI_GRID, {}],
-        [TEXT_CONTAINER, {css: DEFAULT_TEXT_CSS}],
+        [TEXT_CONTAINER, {addClass: 'base-text extra-small-text'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
@@ -36,7 +24,7 @@ class InstructionsOne extends BaseScreen {
     render() {
         this.setStimuliImages(this.task.taskType.stimuli.map((stimulus) => this.task.taskType.imageUrlFromStimulus(stimulus, 1)))
         const pluralized = this.task.taskType.stimuli.map(this.pluralize)
-        this.updateText(`Every screen will show pictures of a ${pluralized[0]}, a ${pluralized[1]}, a ${pluralized[2]}, and ${pluralized[3]}, but the exact pictures will change.`)
+        TEXT_CONTAINER.text(`Every screen will show pictures of a ${pluralized[0]}, a ${pluralized[1]}, a ${pluralized[2]}, and ${pluralized[3]}, but the exact pictures will change.`)
         super.render()
     }
 }
@@ -45,7 +33,7 @@ class InstructionsOne extends BaseScreen {
 class InstructionsTwo extends BaseScreen {
     components = new Map([
         [ALL_STIMULI_CONTAINER, {}],
-        [TEXT_CONTAINER, {css: DEFAULT_TEXT_CSS, text: 'Here are all the pictures you may see. Notice that some of them may look similar to each other.'}],
+        [TEXT_CONTAINER, {addClass: 'base-text extra-small-text', text: 'Here are all the pictures you may see. Notice that some of them may look similar to each other.'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
@@ -65,28 +53,10 @@ class InstructionsTwo extends BaseScreen {
     }
 
     appendAllStimuli(container, pattern) {
-        container.append(jQuery('<div/>', {
-            id: `${pattern}`, 
-            css: {
-                fontSize: '5vh',
-                width: '100px',
-                marginLeft: 'auto',
-                fontFamily: 'Arial',
-                color: '#000000'
-            }
-        }).text(this.pluralize(pattern)))
+        container.append(jQuery('<div/>', {id: pattern, class: 'stimuli-label'}).text(this.pluralize(pattern)))
         for (let i=1; i<11; i++){
             container.append(
-                jQuery('<img/>', {
-                    id: `${pattern}${i}`,
-                    src: this.task.taskType.imageUrlFromStimulus(pattern, i),
-                    css: {
-                        width: '90px',
-                        height: '90px',
-                        marginLeft: 'auto',
-                        marginRight: 'auto'
-                    }
-                })
+                jQuery('<img/>', {id: `${pattern}${i}`, src: this.task.taskType.imageUrlFromStimulus(pattern, i), class: 'stimulus'})
             )
         }
     }
@@ -97,7 +67,10 @@ class InstructionsThree extends BaseScreen {
     components = new Map([
         [REMINDER_BLOCK, {}],
         [STIMULI_GRID, {}],
-        [TEXT_CONTAINER, {text: 'You will be asked to touch one picture as fast as you can. When you touch the picture, the location will change. If you forget what picture to touch, look for the reminder.'}],
+        [TEXT_CONTAINER, {
+            text: 'You will be asked to touch one picture as fast as you can. When you touch the picture, the location will change. If you forget what picture to touch, look for the reminder.',
+            addClass: 'base-text extra-small-text'
+        }],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
@@ -118,7 +91,7 @@ class InstructionsThree extends BaseScreen {
 class InstructionsFour extends BaseScreen {
     components = new Map([
         [SEARCH_STIMULI_CONTAINER, {}],
-        [TEXT_CONTAINER, {}],
+        [TEXT_CONTAINER, {addClass: 'base-text extra-small-text'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
@@ -148,7 +121,7 @@ class InstructionsFour extends BaseScreen {
             const stimuli = this.task.currentRound.getStimuliSchedule().map(this.pluralize)
             text = `Please alternate between the ${stimuli[0]} and the ${stimuli[1]}. Let's practice a few.`
         }
-        this.updateText(text, DEFAULT_TEXT_CSS)
+        TEXT_CONTAINER.text(text)
         this.updateSearchStimuli()
     }
 }

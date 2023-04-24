@@ -1,5 +1,5 @@
 .base-text {
-    color: rgb(0, 0, 0);
+    color: #000000;
     text-align: center;
     white-space: pre-line;
     line-height: 1.7em;
@@ -8,19 +8,24 @@
     font-family: Arial;
 }
 
-
 .extra-large-text {
     font-size: 60pt;
 }
-
 
 .large-text {
     font-size: 45pt;
 }
 
-
 .medium-text {
     font-size: 33pt;
+}
+
+.small-text {
+    font-size: 20pt;
+}
+
+.extra-small-text {
+    font-size: 14pt;
 }
 
 .fixed-height {
@@ -34,7 +39,6 @@
 .red {
     color: #FF0000
 }
-
 
 /* Media Query for Mobile Devices */
 @media (max-width: 480px) {

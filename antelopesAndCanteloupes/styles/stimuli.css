@@ -1,0 +1,102 @@
+.stimuli-row-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1vh;
+    margin-top: auto;
+    align-items: center;
+}
+
+.all-stimuli-container {
+    width: 100%;
+    margin: auto;
+}
+
+.stimuli-label {
+    font-size: 5vh;
+    width: 100px;
+    margin-left: auto;
+    font-family: Arial;
+    color: #000000;
+}
+
+.stimulus {
+    width: 90px;
+    height: 90px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.red-border {
+    border: 1px solid #FF0000
+}
+
+.black-border {
+    border: 1px solid #000000
+}
+
+.search-stimuli-container {
+    width: 800px;
+    max-height: 500px; 
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.search-stimuli {
+    width: 300px !important; 
+    height: 300px !important; 
+    padding: 50px; 
+    background: #BEBEBE; 
+    border: 1px solid #000000;
+}
+
+.search-stimuli-label {
+    width: 200px; 
+    height: 100%; 
+    font-size: 2em;
+    text-align: center;
+    font-family: Arial;
+    color: #000000;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    
+}
+    
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+    .stimuli-row-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .stimulus {
+        width: 70px;
+        height: 70px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .stimuli-label {
+        flex: 0 1 100%;
+        font-size: 15pt;
+        text-align: center;
+    }
+}
+    
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {
+    
+}
+    
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) {
+    
+}

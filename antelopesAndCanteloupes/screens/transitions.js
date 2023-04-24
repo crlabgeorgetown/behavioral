@@ -7,7 +7,7 @@ import { BaseScreen } from "./base";
 
 class FinalScreen extends BaseScreen {
     components = new Map([
-        [TEXT_CONTAINER, {text: `You've completed this exercise!`}]
+        [TEXT_CONTAINER, {addClass: 'base-text large-text', text: `You've completed this exercise!`}]
     ])
 }
 
@@ -15,7 +15,7 @@ class FinalScreen extends BaseScreen {
 class StopScreen extends BaseScreen {
     components = new Map([
         [STOP, {}],
-        [TEXT_CONTAINER, {css: {marginBottom: 'auto'}, text: 'Click anywhere when you are ready to begin the real thing. Go as fast as you can.'}]
+        [TEXT_CONTAINER, {addClass: 'base-text medium-text', text: 'Click anywhere when you are ready to begin the real thing. Go as fast as you can.'}]
     ])
 
     get clickHandlers() {
@@ -34,16 +34,16 @@ class StopScreen extends BaseScreen {
 
 class ReadyScreen extends BaseScreen {
     components = new Map([
-        [TEXT_CONTAINER, {css: {fontSize: '10vh', color: '#0000FF', marginTop: 'auto'}}]
+        [TEXT_CONTAINER, {addClass: 'base-text extra-large-text blue'}]
     ])
 
     render() {
         super.render()
-        this.updateText('Ready')
+        TEXT_CONTAINER.text('Ready')
         setTimeout(() => {
-            this.updateText('Set')
+            TEXT_CONTAINER.text('Set')
             setTimeout(() => {
-                this.updateText('Go!')
+                TEXT_CONTAINER.text('Go!')
                 setTimeout(() => {
                     this.task.currentRound.newTrial()
                     this.task.currentScreen = this.task.trialScreen

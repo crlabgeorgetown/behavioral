@@ -23,9 +23,11 @@ class BaseScreen extends Screen {
             reminder.show()
             reminder.attr({src: this.task.taskType.imageUrlFromStimulus(stimulus, 1)})
             if (this.task.currentRound.getSearchStimuli() === stimulus) {
-                reminder.css({border: '1px solid #FF0000'})
+                reminder.addClass('red-border')
+                reminder.removeClass('black-border')
             } else {
-                reminder.css({border: '1px solid #000000'})
+                reminder.removeClass('red-border')
+                reminder.addClass('black-border')
             }
         })
     }

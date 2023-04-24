@@ -1,21 +1,11 @@
 
-const ALL_STIMULI_CSS = {
-    'display': 'flex',
-    'height': '100px',
-    'width': '100%',
-    'margin-bottom': '1vh',
-    'margin-top': 'auto',
-    'align-items': 'center'
-}
+const ALL_STIMULI_CONTAINER = jQuery('<div/>', {id: 'allStimuliContainer', class: 'all-stimuli-container'})
 
 
-const ALL_STIMULI_CONTAINER = jQuery('<div/>', {id: 'allStimuliContainer', css: {width: '100%', margin: 'auto'}})
-
-
-const ALL_STIMULI_ONE = jQuery('<div/>', {id: 'allStimuliOne', css: ALL_STIMULI_CSS})
-const ALL_STIMULI_TWO = jQuery('<div/>', {id: 'allStimuliTwo', css: ALL_STIMULI_CSS})
-const ALL_STIMULI_THREE = jQuery('<div/>', {id: 'allStimuliThree', css: ALL_STIMULI_CSS})
-const ALL_STIMULI_FOUR = jQuery('<div/>', {id: 'allStimuliFour', css: ALL_STIMULI_CSS})
+const ALL_STIMULI_ONE = jQuery('<div/>', {id: 'allStimuliOne', class: 'stimuli-row-container'})
+const ALL_STIMULI_TWO = jQuery('<div/>', {id: 'allStimuliTwo', class: 'stimuli-row-container'})
+const ALL_STIMULI_THREE = jQuery('<div/>', {id: 'allStimuliThree', class: 'stimuli-row-container'})
+const ALL_STIMULI_FOUR = jQuery('<div/>', {id: 'allStimuliFour', class: 'stimuli-row-container'})
 
 
 ALL_STIMULI_CONTAINER.append(
