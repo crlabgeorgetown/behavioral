@@ -1,0 +1,28 @@
+
+.reminder {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+}
+
+.reminder-block {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.reminder-container {
+    width: 200px;
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    background: #BEBEBE;
+    border: solid 1px;
+}
+
+.red-arrow {
+    width: 200px; 
+    height: 80px !important; 
+    padding: 5px;
+}

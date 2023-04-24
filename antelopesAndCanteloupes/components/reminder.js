@@ -1,46 +1,12 @@
 import RedArrow from '../../static/images/redArrow.png'
 
 
-const REMINDER_CSS = {
-    width: '80px',
-    height: '80px',
-    margin: 'auto'
-}
-
-
-const REMINDER_BLOCK = jQuery('<div/>', {
-    id: 'reminderBlock',
-    css: {
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'right',
-    }
-})
-
-
-const RED_ARROW = jQuery('<img/>', {
-    id: 'redArrow',
-    src: RedArrow
-}).attr('style', 'width: 200px; height: 80px !important; padding: 5px')
-
-
-const REMINDER_CONTAINER = jQuery('<div/>', {
-    id: 'reminderContainer', 
-    css: {
-        width: '200px', 
-        display: 'flex',
-        padding: '5px',
-        alignItems: 'center',
-        background: '#BEBEBE',
-        border: 'solid 1px'
-    }
-})
-
-
+const REMINDER_BLOCK = jQuery('<div/>', {id: 'reminderBlock', class: 'reminder-block'})
+const RED_ARROW = jQuery('<img/>', {id: 'redArrow', src: RedArrow, class: 'red-arrow'})
+const REMINDER_CONTAINER = jQuery('<div/>', {id: 'reminderContainer', class: 'reminder-container'})
 const REMINDERS = [
-    jQuery('<img/>', {id: 'reminder1', css: REMINDER_CSS}),
-    jQuery('<img/>', {id: 'reminder2', css: REMINDER_CSS})
+    jQuery('<img/>', {id: 'reminder1', class: 'reminder'}),
+    jQuery('<img/>', {id: 'reminder2', class: 'reminder'})
 ]
 
 

@@ -6,6 +6,22 @@
     align-items: center;
 }
 
+.stimuli-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 430px;
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: center;
+}
+
+.random-stimulus {
+    width: 200px;
+    height: 200px;
+}
+
 .all-stimuli-container {
     width: 100%;
     margin: auto;
