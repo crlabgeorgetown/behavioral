@@ -4,8 +4,9 @@ const path = require('path');
 module.exports = {
   mode: 'development',
   entry: {
+    antelopesAndCanteloupes: './antelopesAndCanteloupes/task.js',
     lexicalDecision: './lexicalDecision/task.js',
-    antelopesAndCanteloupes: './antelopesAndCanteloupes/task.js'
+    rhymeDecision: './rhymeDecision/task.js',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

@@ -2,42 +2,21 @@ import Check from '../../static/images/check.png'
 import Remove from '../../static/images/remove.png'
 
 
-const BUTTON_CONTAINER = jQuery('<div/>', {id: 'buttonContainer', css: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    minWidth: '100%'
-}})
+const BUTTON_CONTAINER = jQuery('<div/>', {id: 'buttonContainer', class: 'response-button-container'})
 
 
 const GREEN_BUTTON = jQuery('<img/>', {
     id: 'greenButton',
     src: Check,
-    css: {
-        marginLeft: 'auto',
-        marginRight: '2.5%',
-        padding: '1%',
-        width: '200px',
-        height: '200px',
-}}).hover(
-    () => GREEN_BUTTON.css({background: '#E3E3E3'}),
-    () => GREEN_BUTTON.css({background: 'transparent'})
-)
+    class: 'button right-aligned'
+})
 
 
 const RED_BUTTON = jQuery('<img/>', {
     id: 'redButton',
     src: Remove,
-    css: {
-        marginLeft: '2.5%',
-        marginRight: 'auto',
-        padding: '1%',
-        width: '200px',
-        height: '200px',
-}}).hover(
-    () => RED_BUTTON.css({background: '#E3E3E3'}),
-    () => RED_BUTTON.css({background: 'transparent'})
-)
+    class: 'button left-aligned'
+})
 
 
 const BUTTON_LABEL_CONTAINER = jQuery('<div/>', {
@@ -53,39 +32,11 @@ const BUTTON_LABEL_CONTAINER = jQuery('<div/>', {
 })
 
 
-const GREEN_LABEL = jQuery('<div/>', {
-    id: 'greenLabel', 
-    css: {
-        color: '#000000',
-        marginLeft: 'auto',
-        marginRight: '2.5%',
-        padding: '1%',
-        justifyContent: 'center',
-        display: 'flex',
-        width: '200px',
-        height: '35px',
-        fontSize: '30px'
-    }
-}).text('Real word')
-
-
-const RED_LABEL = jQuery('<div/>', {
-    id: 'redLabel', 
-    css: {
-        color: '#000000',
-        marginLeft: '2.5%',
-        marginRight: 'auto',
-        padding: '1%',
-        justifyContent: 'center',
-        display: 'flex',
-        width: '200px',
-        height: '35px',
-        fontSize: '30px'
-    }
-}).text('Not a word')
+const GREEN_LABEL = jQuery('<div/>', {id: 'greenLabel', class: 'button-label right-aligned'})
+const RED_LABEL = jQuery('<div/>', {id: 'redLabel', class: 'button-label left-aligned'})
 
 
 BUTTON_CONTAINER.append(GREEN_BUTTON, RED_BUTTON)
 BUTTON_LABEL_CONTAINER.append(GREEN_LABEL, RED_LABEL)
 
-export {BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER, GREEN_BUTTON, RED_BUTTON}
+export {BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER, GREEN_BUTTON, RED_BUTTON, GREEN_LABEL, RED_LABEL}

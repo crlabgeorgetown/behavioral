@@ -6,22 +6,16 @@ const INSTRUCTION_BUTTON_CONTAINER = jQuery('<div/>', {
 
 const NEXT_BUTTON = jQuery('<div/>', {
     id: 'nextButton',
-    class: 'next-button',
+    class: 'instruction-button right-margined',
     text: 'Next >>'
-}).hover(
-    () => NEXT_BUTTON.addClass('instruction-button-hover'),
-    () => NEXT_BUTTON.removeClass('instruction-button-hover')
-)
+})
 
 
 const PREVIOUS_BUTTON = jQuery('<div/>', {
     id: 'previousButton',
-    class: 'previous-button',
+    class: 'instruction-button left-margined',
     text: '<< Previous'
-}).hover(
-    () => PREVIOUS_BUTTON.addClass('instruction-button-hover'),
-    () => PREVIOUS_BUTTON.removeClass('instruction-button-hover')
-)
+})
 
 
 INSTRUCTION_BUTTON_CONTAINER.append(PREVIOUS_BUTTON, NEXT_BUTTON)

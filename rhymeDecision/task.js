@@ -1,21 +1,21 @@
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
-import { InstructionsOne, InstructionsThree, InstructionsTwo } from "./screens/instructions"
-import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
-import { AuditoryTrialScreen } from "./screens/auditoryTrial"
-import { WrittenTrialScreen } from "./screens/writtenTrial"
+// import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
+// import { AuditoryTrialScreen } from "./screens/auditoryTrial"
+// import { WrittenTrialScreen } from "./screens/writtenTrial"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
-import { Trial } from "./trial"
+// import { Trial } from "./trial"
 import { BaseTask } from "../shared/task"
 import { GREEN_LABEL, RED_LABEL } from "../shared/components/responseButtons"
+import { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour } from "./screens/instructions"
 
 
 class Task extends BaseTask {
-	constructor(data, engine, type) {
+	constructor(engine, type) {
         super()
         
         this.engine = engine
         this.trials = []
-        this.data = data
+        // this.data = data
         this.dataIndex = 0
         this.inTrial = false
         this.type = type
@@ -25,23 +25,24 @@ class Task extends BaseTask {
 
     initializeScreens() {
         this.setupDOM()
-        RED_LABEL.text('Not a word')
-        GREEN_LABEL.text('Real word')
+        RED_LABEL.text('No Rhyme')
+        GREEN_LABEL.text('Rhyme')
 
-        this.trialScreen = this.type === 'auditory' ? new AuditoryTrialScreen(this) : new WrittenTrialScreen(this)
-        this.incorrectScreen = new Incorrect(this)
-        this.breakScreen = new Break(this)
-        this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
-        this.finishedScreen = new Finished(this)
-        this.timeoutScreen = new TimeOut(this)
+        // this.trialScreen = this.type === 'auditory' ? new AuditoryTrialScreen(this) : new WrittenTrialScreen(this)
+        // this.incorrectScreen = new Incorrect(this)
+        // this.breakScreen = new Break(this)
+        // this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
+        // this.finishedScreen = new Finished(this)
+        // this.timeoutScreen = new TimeOut(this)
         
         this.instructionScreens = [
             new ParticipantIdScreen(this),
             new InputDevicesScreen(this), 
-            new InstructionsOne(this), 
-            new InstructionsTwo(this), 
+            new InstructionsOne(this),
+            new InstructionsTwo(this),
             new InstructionsThree(this),
-            this.trialScreen
+            new InstructionsFour(this),
+            // this.trialScreen
         ]
 
         this.setupInstructionScreens()
