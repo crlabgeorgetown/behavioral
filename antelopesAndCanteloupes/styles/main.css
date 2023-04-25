@@ -1,2 +1,4 @@
 @import url('../../shared/styles/main.css');
+@import url('reminder.css');
 @import url('stimuli.css');
+@import url('transitions.css');
