@@ -36,10 +36,6 @@ export default class Screen {
         }
     }
 
-    updateText(text, css={fontSize: '60pt', fontColor: '#000000'}) {
-        jQuery('#textContainer').text(text).css(css)
-    }
-
     inputDeviceClickHandler(inputDevice) {
         this.task.inputDevice = inputDevice
         this.task.currentScreen = this.nextScreen

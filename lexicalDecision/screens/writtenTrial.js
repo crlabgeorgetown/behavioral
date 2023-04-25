@@ -20,7 +20,7 @@ class WrittenTrialScreen extends LexicalDecisionTrialScreen {
         this.task.newTrial()
         super.render()
         setTimeout(() => {
-            this.updateText(this.task.currentTrial.Item)
+            TEXT_CONTAINER.text(this.task.currentTrial.Item)
             this.task.currentTrial.startTime = new Date()
             this.task.inTrial = true
             this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
