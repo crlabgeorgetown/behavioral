@@ -10,7 +10,7 @@ import { BaseScreen } from "./base"
 class InstructionsOne extends BaseScreen {
     components = new Map([
         [STIMULI_GRID, {}],
-        [TEXT_CONTAINER, {addClass: 'base-text extra-small-text'}],
+        [TEXT_CONTAINER, {addClass: 'base-text small-text'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
@@ -33,7 +33,7 @@ class InstructionsOne extends BaseScreen {
 class InstructionsTwo extends BaseScreen {
     components = new Map([
         [ALL_STIMULI_CONTAINER, {}],
-        [TEXT_CONTAINER, {addClass: 'base-text extra-small-text', text: 'Here are all the pictures you may see. Notice that some of them may look similar to each other.'}],
+        [TEXT_CONTAINER, {addClass: 'base-text small-text', text: 'Here are all the pictures you may see. Notice that some of them may look similar to each other.'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
@@ -91,7 +91,7 @@ class InstructionsThree extends BaseScreen {
 class InstructionsFour extends BaseScreen {
     components = new Map([
         [SEARCH_STIMULI_CONTAINER, {}],
-        [TEXT_CONTAINER, {addClass: 'base-text extra-small-text'}],
+        [TEXT_CONTAINER, {addClass: 'base-text small-text'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
