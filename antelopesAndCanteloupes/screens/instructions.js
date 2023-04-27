@@ -9,7 +9,7 @@ import { BaseScreen } from "./base"
 
 class InstructionsOne extends BaseScreen {
     components = new Map([
-        [STIMULI_GRID, {}],
+        [STIMULI_GRID, {addClass: 'stimuli-grid top-margin'}],
         [TEXT_CONTAINER, {addClass: 'base-text small-text'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
@@ -66,7 +66,7 @@ class InstructionsTwo extends BaseScreen {
 class InstructionsThree extends BaseScreen {
     components = new Map([
         [REMINDER_BLOCK, {}],
-        [STIMULI_GRID, {}],
+        [STIMULI_GRID, {addClass: 'stimuli-grid'}],
         [TEXT_CONTAINER, {
             text: 'You will be asked to touch one picture as fast as you can. When you touch the picture, the location will change. If you forget what picture to touch, look for the reminder.',
             addClass: 'base-text extra-small-text'

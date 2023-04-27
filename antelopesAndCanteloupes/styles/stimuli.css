@@ -4,9 +4,12 @@
     flex-wrap: wrap;
     gap: 10px;
     width: 430px;
-    margin-top: auto;
     margin-bottom: auto;
     justify-content: center;
+}
+
+.top-margin {
+    margin-top: 5vh;
 }
 
 .random-stimulus {
@@ -61,6 +64,7 @@
     flex-wrap: wrap;
     width: 100%;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .stimulus {
@@ -72,7 +76,7 @@
 
 .stimuli-label {
     width: 100%;
-    font-size: 15pt;
+    font-size: 22pt;
     text-align: center;
     font-family: Arial;
     color: #000000;
@@ -106,7 +110,6 @@
     }
     
     .stimuli-label {
-        font-size: 5vh;
         width: 100px;
         margin-left: auto;
     }
