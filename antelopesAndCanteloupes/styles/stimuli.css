@@ -4,12 +4,9 @@
     flex-wrap: wrap;
     gap: 10px;
     width: 430px;
+    margin-top: 5vh;
     margin-bottom: auto;
     justify-content: center;
-}
-
-.top-margin {
-    margin-top: 5vh;
 }
 
 .random-stimulus {

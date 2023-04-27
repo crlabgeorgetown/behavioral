@@ -9,7 +9,7 @@ import { BaseScreen } from "./base"
 
 class InstructionsOne extends BaseScreen {
     components = new Map([
-        [STIMULI_GRID, {addClass: 'stimuli-grid top-margin'}],
+        [STIMULI_GRID, {}],
         [TEXT_CONTAINER, {addClass: 'base-text small-text'}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
@@ -77,9 +77,6 @@ class InstructionsThree extends BaseScreen {
     constructor(task) {
         super(task)
         this.updateReminders()
-        if (window.innerHeight > 667) {
-            STIMULI_GRID.addClass('margin-top')
-        }
     }
 
     get clickHandlers() {
