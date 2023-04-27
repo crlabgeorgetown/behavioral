@@ -77,6 +77,9 @@ class InstructionsThree extends BaseScreen {
     constructor(task) {
         super(task)
         this.updateReminders()
+        if (window.innerHeight > 667) {
+            STIMULI_GRID.addClass('margin-top')
+        }
     }
 
     get clickHandlers() {

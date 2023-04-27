@@ -13,8 +13,8 @@
 .instruction-button {
     color: #000000;
     background: #A8A8A8;
-    font-size: 25pt;
-    padding: 0.5em;
+    font-size: 22pt;
+    padding: 8px;
 }
 
 .instruction-button:hover {

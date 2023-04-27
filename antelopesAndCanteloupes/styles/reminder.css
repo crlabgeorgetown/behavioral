@@ -19,6 +19,8 @@
     align-items: center;
     background: #BEBEBE;
     border: solid 1px;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 .red-arrow {
