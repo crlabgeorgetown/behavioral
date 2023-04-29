@@ -1,7 +1,7 @@
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
-// import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
-// import { AuditoryTrialScreen } from "./screens/auditoryTrial"
-// import { WrittenTrialScreen } from "./screens/writtenTrial"
+import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
+import { AuditoryTrialScreen } from "./screens/auditoryTrial"
+import { WrittenTrialScreen } from "./screens/writtenTrial"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 // import { Trial } from "./trial"
 import { BaseTask } from "../shared/task"
@@ -10,12 +10,12 @@ import { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour }
 
 
 class Task extends BaseTask {
-	constructor(engine, type) {
+	constructor(data, engine, type) {
         super()
         
         this.engine = engine
         this.trials = []
-        // this.data = data
+        this.data = data
         this.dataIndex = 0
         this.inTrial = false
         this.type = type
@@ -28,12 +28,12 @@ class Task extends BaseTask {
         RED_LABEL.text('No Rhyme')
         GREEN_LABEL.text('Rhyme')
 
-        // this.trialScreen = this.type === 'auditory' ? new AuditoryTrialScreen(this) : new WrittenTrialScreen(this)
-        // this.incorrectScreen = new Incorrect(this)
-        // this.breakScreen = new Break(this)
-        // this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
-        // this.finishedScreen = new Finished(this)
-        // this.timeoutScreen = new TimeOut(this)
+        this.trialScreen = this.type === 'auditory' ? new AuditoryTrialScreen(this) : new WrittenTrialScreen(this)
+        this.incorrectScreen = new Incorrect(this)
+        this.breakScreen = new Break(this)
+        this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
+        this.finishedScreen = new Finished(this)
+        this.timeoutScreen = new TimeOut(this)
         
         this.instructionScreens = [
             new ParticipantIdScreen(this),
