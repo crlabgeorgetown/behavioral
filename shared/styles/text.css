@@ -1,6 +1,10 @@
 .base-text {
-    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     text-align: center;
+    flex-direction: column;
+    color: #000000;
     white-space: pre-line;
     line-height: 1.7em;
     margin-top: auto;
@@ -30,6 +34,10 @@
 
 .fixed-height {
     height: 90px;
+}
+
+.large-fixed-height {
+    height: 275px;
 }
 
 .blue {

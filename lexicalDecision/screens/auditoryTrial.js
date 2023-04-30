@@ -1,10 +1,10 @@
 import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons"
-import { LexicalDecisionTrialScreen } from "./baseTrial"
 import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../components/audioContainer"
 import { TEXT_CONTAINER } from "../../shared/components/textContainer"
+import { DecisionTrialScreen } from "../../shared/screens/decisionTrial"
 
 
-class AuditoryTrialScreen extends LexicalDecisionTrialScreen {
+class AuditoryTrialScreen extends DecisionTrialScreen {
     components = new Map([
         [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text fixed-height'}],
         [AUDIO_CONTAINER, {}],

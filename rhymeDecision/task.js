@@ -3,7 +3,7 @@ import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../sh
 import { AuditoryTrialScreen } from "./screens/auditoryTrial"
 import { WrittenTrialScreen } from "./screens/writtenTrial"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
-// import { Trial } from "./trial"
+import { Trial } from "./trial"
 import { BaseTask } from "../shared/task"
 import { GREEN_LABEL, RED_LABEL } from "../shared/components/responseButtons"
 import { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour } from "./screens/instructions"
@@ -42,7 +42,7 @@ class Task extends BaseTask {
             new InstructionsTwo(this),
             new InstructionsThree(this),
             new InstructionsFour(this),
-            // this.trialScreen
+            this.trialScreen
         ]
 
         this.setupInstructionScreens()
@@ -72,12 +72,6 @@ class Task extends BaseTask {
             'TimedOut': [],
             'RT': [],
             'Accuracy': [],
-            'WordType': [],
-            'Frequency': [],
-            'Regularity': [],
-            'Imageability': [],
-            'PartofSpeech': [],
-            'Lexicality': [],
             'Response': [],
             'TrialType': [],
             'Time': []

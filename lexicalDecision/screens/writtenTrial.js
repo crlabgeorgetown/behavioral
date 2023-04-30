@@ -1,9 +1,9 @@
 import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons"
 import { TEXT_CONTAINER } from "../../shared/components/textContainer"
-import { LexicalDecisionTrialScreen } from "./baseTrial"
+import { DecisionTrialScreen } from "../../shared/screens/decisionTrial"
 
 
-class WrittenTrialScreen extends LexicalDecisionTrialScreen {
+class WrittenTrialScreen extends DecisionTrialScreen {
     components = new Map([
         [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text'}],
         [BUTTON_CONTAINER, {}],
