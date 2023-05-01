@@ -67,12 +67,15 @@ class Task extends BaseTask {
     submit() {
         const columns = {
             'ItemNum': [],
-            'Item': [],
             'CRESP': [],
             'TimedOut': [],
             'RT': [],
             'Accuracy': [],
             'Response': [],
+            'Sound1': [],
+            'Sound2': [],
+            'RhymeMatch': [],
+            'OrthoMatch': [],
             'TrialType': [],
             'Time': []
         }
