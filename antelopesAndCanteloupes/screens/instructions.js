@@ -23,8 +23,7 @@ class InstructionsOne extends BaseScreen {
 
     render() {
         this.setStimuliImages(this.task.taskType.stimuli.map((stimulus) => this.task.taskType.imageUrlFromStimulus(stimulus, 1)))
-        const pluralized = this.task.taskType.stimuli.map(this.pluralize)
-        TEXT_CONTAINER.text(`Every screen will show pictures of a ${pluralized[0]}, a ${pluralized[1]}, a ${pluralized[2]}, and ${pluralized[3]}, but the exact pictures will change.`)
+        TEXT_CONTAINER.text(this.task.taskType.instructionsOne)
         super.render()
     }
 }

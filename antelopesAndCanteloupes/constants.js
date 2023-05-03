@@ -25,7 +25,7 @@ class TaskType {
         return {
             [PHONOLOGICAL]: [[0], [1], [2], [3]],
             [SEMANTIC]: [[0], [1], [2], [3]],
-            [STANDARD]: [[0], [1, 2], [1], [2, 3], [2], [3, 1]]
+            [STANDARD]: [[0], [1, 2], [1], [2, 0], [2], [1, 0]]
         }[this.name]
     }
 
@@ -47,6 +47,14 @@ class TaskType {
 
     get shouldShowInstructionScreenTwo() {
         return this.name !== STANDARD
+    }
+
+    get instructionsOne() {
+        return {
+            [PHONOLOGICAL]: 'Every screen will show pictures of a can, coin(s), a cone, and corn, but the exact pictures will change.',
+            [SEMANTIC]: 'Every screen will show pictures of a cow, a pig, a sheep, and a goat, but the exact pictures will change.',
+            [STANDARD]: 'Every screen will show pictures of a triangle, a square, a circle, and a star.'
+        }[this.name]
     }
 
     static fromString(string) {
