@@ -1,25 +1,25 @@
 const COLOR_BUTTON_CONTAINER = jQuery('<div/>', {
-    id: 'instructionButtonContainer', 
-    class: 'instruction-button-container'
+    id: 'colorButtonContainer', 
+    class: 'color-button-container'
 })
 
 
 const RED_BUTTON = jQuery('<div/>', {
     id: 'redButton',
-    class: 'instruction-button right-margined',
+    class: 'color-button',
     text: 'Red'
 })
 
 
 const BLUE_BUTTON = jQuery('<div/>', {
     id: 'blueButton',
-    class: 'instruction-button left-margined',
+    class: 'color-button',
     text: 'Blue'
 })
 
 const GREEN_BUTTON = jQuery('<div/>', {
     id: 'greenButton',
-    class: 'instruction-button left-margined',
+    class: 'color-button',
     text: 'Green'
 })
 

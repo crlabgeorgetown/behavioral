@@ -21,8 +21,6 @@ class Task extends BaseTask {
     }
 
     initializeScreens() {
-        this.setupDOM()
-
         this.readyScreen = new ReadyScreen(this)
         this.finalScreen = new FinalScreen(this)
         this.trialScreen = new TrialScreen(this)

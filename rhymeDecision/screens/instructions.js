@@ -65,19 +65,4 @@ class InstructionsThree extends Screen {
 }
 
 
-class InstructionsFour extends Screen {
-    components = new Map([
-        [TEXT_CONTAINER, {text: `Let's practice`}],
-        [INSTRUCTION_BUTTON_CONTAINER, {}]
-    ])
-
-    get clickHandlers() {
-        return {
-            nextButton: () => this.instructionButtonClickHandler('next'),
-            previousButton: () => this.instructionButtonClickHandler('previous')
-        }
-    }
-}
-
-
-export { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour }
+export { InstructionsOne, InstructionsTwo, InstructionsThree }

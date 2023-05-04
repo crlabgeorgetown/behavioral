@@ -1,5 +1,6 @@
 import { TEXT_CONTAINER } from "../components/textContainer"
 import { BEGIN_OR_PRACTICE_CONTAINER } from "../components/beginOrPractice"
+import { INSTRUCTION_BUTTON_CONTAINER } from "../components/instructionButtons"
 import Screen from "./base"
 
 
@@ -27,6 +28,21 @@ class BeginOrPracticeAgain extends Screen {
         }
         this.task.currentScreen = this.task.trialScreen
         this.task.currentScreen.render()
+    }
+}
+
+
+class LetsPractice extends Screen {
+    components = new Map([
+        [TEXT_CONTAINER, {text: `Let's Practice.`, addClass: 'base-text extra-large-text'}],
+        [INSTRUCTION_BUTTON_CONTAINER, {}]
+    ])
+
+    get clickHandlers() {
+        return {
+            nextButton: () => this.instructionButtonClickHandler('next'),
+            previousButton: () => this.instructionButtonClickHandler('previous')
+        }
     }
 }
 
@@ -88,4 +104,4 @@ class TimeOut extends Screen {
 }
 
 
-export { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut }
+export { BeginOrPracticeAgain, Break, Finished, Incorrect, LetsPractice, TimeOut }

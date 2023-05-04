@@ -1,5 +1,5 @@
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
-import { InstructionsOne } from "./screens/instructions"
+import { InstructionsOne, InstructionsTwo, InstructionsThree } from "./screens/instructions"
 import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { BaseTask } from "../shared/task"
@@ -19,19 +19,14 @@ class Task extends BaseTask {
         this.initializeScreens()
 	}
 
-    initializeScreens() {
-        this.setupDOM()
-
-        this.incorrectScreen = new Incorrect(this)
-        this.breakScreen = new Break(this)
-        this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
-        this.finishedScreen = new Finished(this)
-        this.timeoutScreen = new TimeOut(this)
-        
+    initializeScreens() {    
         this.instructionScreens = [
             new ParticipantIdScreen(this),
             new InputDevicesScreen(this), 
-            new InstructionsOne(this), 
+            new InstructionsOne(this),
+            new InstructionsTwo(this),
+            new InstructionsThree(this),
+            this.letsPracticeScreen
         ]
 
         this.setupInstructionScreens()

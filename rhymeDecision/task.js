@@ -1,12 +1,12 @@
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
-import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
+import { BeginOrPracticeAgain, Break, Finished, Incorrect, LetsPractice, TimeOut } from "../shared/screens/transitions"
 import { AuditoryTrialScreen } from "./screens/auditoryTrial"
 import { WrittenTrialScreen } from "./screens/writtenTrial"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { Trial } from "./trial"
 import { BaseTask } from "../shared/task"
 import { GREEN_LABEL, RED_LABEL } from "../shared/components/responseButtons"
-import { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour } from "./screens/instructions"
+import { InstructionsOne, InstructionsTwo, InstructionsThree } from "./screens/instructions"
 
 
 class Task extends BaseTask {
@@ -24,16 +24,10 @@ class Task extends BaseTask {
 	}
 
     initializeScreens() {
-        this.setupDOM()
         RED_LABEL.text('No Rhyme')
         GREEN_LABEL.text('Rhyme')
 
         this.trialScreen = this.type === 'auditory' ? new AuditoryTrialScreen(this) : new WrittenTrialScreen(this)
-        this.incorrectScreen = new Incorrect(this)
-        this.breakScreen = new Break(this)
-        this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
-        this.finishedScreen = new Finished(this)
-        this.timeoutScreen = new TimeOut(this)
         
         this.instructionScreens = [
             new ParticipantIdScreen(this),
@@ -41,7 +35,7 @@ class Task extends BaseTask {
             new InstructionsOne(this),
             new InstructionsTwo(this),
             new InstructionsThree(this),
-            new InstructionsFour(this),
+            this.letsPracticeScreen,
             this.trialScreen
         ]
 

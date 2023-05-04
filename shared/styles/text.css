@@ -36,6 +36,10 @@
     height: 90px;
 }
 
+.medium-fixed-height {
+    height: 225px;
+}
+
 .large-fixed-height {
     height: 275px;
 }
@@ -46,6 +50,11 @@
 
 .red {
     color: #FF0000
+}
+
+.vertically-marginless {
+    margin-bottom: unset;
+    margin-top: unset;
 }
 
 /* Media Query for Mobile Devices */

@@ -24,16 +24,10 @@ class Task extends BaseTask {
 	}
 
     initializeScreens() {
-        this.setupDOM()
         RED_LABEL.text('Not a word')
         GREEN_LABEL.text('Real word')
 
         this.trialScreen = this.type === 'auditory' ? new AuditoryTrialScreen(this) : new WrittenTrialScreen(this)
-        this.incorrectScreen = new Incorrect(this)
-        this.breakScreen = new Break(this)
-        this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
-        this.finishedScreen = new Finished(this)
-        this.timeoutScreen = new TimeOut(this)
         
         this.instructionScreens = [
             new ParticipantIdScreen(this),
