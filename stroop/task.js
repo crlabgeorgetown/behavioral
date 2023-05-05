@@ -1,8 +1,10 @@
 import { InputDevicesScreen } from "../shared/screens/inputDevices"
 import { InstructionsOne, InstructionsTwo, InstructionsThree } from "./screens/instructions"
-import { BeginOrPracticeAgain, Break, Finished, Incorrect, TimeOut } from "../shared/screens/transitions"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
+import { TrialScreen } from "./screens/trial"
 import { BaseTask } from "../shared/task"
+import { ReadyScreen, StartCountdownScreen } from "./screens/transitions"
+import { Round } from "./round"
 
 
 class Task extends BaseTask {
@@ -10,7 +12,7 @@ class Task extends BaseTask {
         super()
         
         this.engine = engine
-        this.trials = []
+        this.rounds = []
         this.data = data
         this.dataIndex = 0
         this.inTrial = false
@@ -19,21 +21,29 @@ class Task extends BaseTask {
         this.initializeScreens()
 	}
 
-    initializeScreens() {    
+    initializeScreens() {
+        this.trialScreen = new TrialScreen(this)
+        this.readyScreen = new ReadyScreen(this)
+
         this.instructionScreens = [
             new ParticipantIdScreen(this),
             new InputDevicesScreen(this), 
             new InstructionsOne(this),
             new InstructionsTwo(this),
             new InstructionsThree(this),
-            this.letsPracticeScreen
+            this.letsPracticeScreen,
+            new StartCountdownScreen(this),
         ]
 
         this.setupInstructionScreens()
     }
 
     get currentTrial() {
-        return this.trials[this.trials.length - 1]
+        return this.currentRound.currentTrial
+    }
+
+    get currentRound() {
+        return this.rounds[this.rounds.length - 1]
     }
 
     get currentProcedure() {
@@ -44,8 +54,8 @@ class Task extends BaseTask {
         return this.dataIndex === this.data.length - 1
     }
 
-    newTrial() {
-        this.trials.push(new Trial(this.data[this.dataIndex]))        
+    newRound() {
+        this.rounds.push(new Round(this.data[this.dataIndex]))
     }
 
     submit() {
