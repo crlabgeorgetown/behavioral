@@ -52,6 +52,10 @@
     color: #FF0000
 }
 
+.green {
+    color: green
+}
+
 .vertically-marginless {
     margin-bottom: unset;
     margin-top: unset;

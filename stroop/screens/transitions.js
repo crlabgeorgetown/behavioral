@@ -2,9 +2,30 @@ import { TEXT_CONTAINER } from "../../shared/components/textContainer"
 import { READY_TIMEOUT } from "../constants"
 import Screen from "../../shared/screens/base"
 import { CONTAINER } from "../../shared/components/container"
+import { STOP } from "../../shared/components/stop"
 
 
-class StartCountdownScreen extends Screen {
+class StopScreen extends Screen {
+    components = new Map([
+        [STOP, {}],
+        [TEXT_CONTAINER, {addClass: 'base-text medium-text', text: `Any questions? Let's begin.`}]
+    ])
+
+    get clickHandlers() {
+        return {container: () => this.handler()}
+    }
+
+    handler() {
+        if (Date.now() - this.renderTime > 500) {
+            CONTAINER.off('click')
+            this.task.currentScreen = this.task.startCountDownScreen
+            this.task.currentScreen.render()
+        }
+    }
+}
+
+
+class StartCountDownScreen extends Screen {
     components = new Map([
         [TEXT_CONTAINER, {addClass: 'base-text medium-text', text: 'Press to begin the countdown.'}]
     ])
@@ -51,4 +72,4 @@ class ReadyScreen extends Screen {
 }
 
 
-export { ReadyScreen, StartCountdownScreen }
+export { ReadyScreen, StartCountDownScreen, StopScreen }

@@ -19,7 +19,6 @@ class Round {
     }
 
     newTrial() {
-        debugger
         this.trials.push(new Trial(
             this.blockType, 
             this.InkColorSchedule[this.trials.length], 

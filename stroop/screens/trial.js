@@ -26,7 +26,7 @@ class TrialScreen extends Screen {
         this.task.currentTrial.responseTime = new Date()
         this.task.currentScreen = this.task.trialScreen
         if (this.task.currentRound.isDone) {
-            
+            this.task.currentScreen = this.task.stopScreen
         }
         this.task.currentScreen.render()
     }

@@ -3,7 +3,7 @@ import { InstructionsOne, InstructionsTwo, InstructionsThree } from "./screens/i
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { TrialScreen } from "./screens/trial"
 import { BaseTask } from "../shared/task"
-import { ReadyScreen, StartCountdownScreen } from "./screens/transitions"
+import { ReadyScreen, StartCountDownScreen, StopScreen } from "./screens/transitions"
 import { Round } from "./round"
 
 
@@ -14,7 +14,6 @@ class Task extends BaseTask {
         this.engine = engine
         this.rounds = []
         this.data = data
-        this.dataIndex = 0
         this.inTrial = false
         this.type = type
 
@@ -24,6 +23,8 @@ class Task extends BaseTask {
     initializeScreens() {
         this.trialScreen = new TrialScreen(this)
         this.readyScreen = new ReadyScreen(this)
+        this.startCountDownScreen = new StartCountDownScreen(this)
+        this.stopScreen = new StopScreen(this)
 
         this.instructionScreens = [
             new ParticipantIdScreen(this),
@@ -32,7 +33,7 @@ class Task extends BaseTask {
             new InstructionsTwo(this),
             new InstructionsThree(this),
             this.letsPracticeScreen,
-            new StartCountdownScreen(this),
+            this.startCountDownScreen,
         ]
 
         this.setupInstructionScreens()
@@ -55,7 +56,7 @@ class Task extends BaseTask {
     }
 
     newRound() {
-        this.rounds.push(new Round(this.data[this.dataIndex]))
+        this.rounds.push(new Round(this.data[this.rounds.length]))
     }
 
     submit() {
