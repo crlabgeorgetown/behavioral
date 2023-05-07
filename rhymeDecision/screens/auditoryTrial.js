@@ -1,5 +1,7 @@
+import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../shared/components/audioContainer";
+import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons"
+import { TEXT_CONTAINER } from "../../shared/components/textContainer";
 import { DecisionTrialScreen } from "../../shared/screens/decisionTrial";
-
 
 
 class AuditoryTrialScreen extends DecisionTrialScreen {
@@ -14,13 +16,24 @@ class AuditoryTrialScreen extends DecisionTrialScreen {
         setTimeout(() => {
             this.task.newTrial()
             super.render()
-            AUDIO_SOURCE.attr('src', this.task.currentTrial.audioSource)
+            let sourceIndex = 1
+            AUDIO_SOURCE.attr('src', this.task.currentTrial.audioSource(1))
             AUDIO_CONTAINER.off('ended')
             AUDIO_CONTAINER.on('ended', () => {
-                this.task.currentTrial.startTime = new Date()
-                this.task.inTrial = true
-                TEXT_CONTAINER.text('')
-                this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
+                switch (sourceIndex) {
+                    case 1:
+                        sourceIndex++
+                        AUDIO_SOURCE.attr('src', this.task.currentTrial.audioSource(2))
+                        AUDIO_CONTAINER[0].load()
+                        AUDIO_CONTAINER[0].play()
+                        break
+                    case 2:
+                        this.task.currentTrial.startTime = new Date()
+                        this.task.inTrial = true
+                        TEXT_CONTAINER.text('')
+                        this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
+                        break
+                }
             })
             AUDIO_CONTAINER[0].load()
             AUDIO_CONTAINER[0].play()

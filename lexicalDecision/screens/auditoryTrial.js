@@ -1,5 +1,5 @@
 import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons"
-import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../components/audioContainer"
+import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../shared/components/audioContainer"
 import { TEXT_CONTAINER } from "../../shared/components/textContainer"
 import { DecisionTrialScreen } from "../../shared/screens/decisionTrial"
 

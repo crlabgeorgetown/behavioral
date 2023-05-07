@@ -30,6 +30,11 @@ class Trial extends BaseTrial {
     get Time() {
         return this.startTime.toTimeString().split(' ')[0]
     }
+
+    audioSource(sourceIndex) {
+        const sound = sourceIndex === 1 ? this.Sound1 : this.Sound2
+        return `../static/auditory_rhyme_decision_wav_files/${sound}.wav`
+    }
 }
 
 
