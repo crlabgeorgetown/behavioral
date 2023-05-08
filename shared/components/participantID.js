@@ -18,7 +18,7 @@ const PARTICIPANT_ID_INPUT = jQuery('<input/>', {
 
 const SUBMIT_BUTTON = jQuery('<div/>', {
     id: 'submitButton',
-    class: 'submit-button',
+    class: 'grey-button large-button-text left-margined',
     text: 'Submit'
 
 }).hover(

@@ -21,15 +21,6 @@
     width: 275px;
 }
 
-.submit-button {
-    color: #000000;
-    background: #A8A8A8;
-    font-size: 25pt;
-    padding: 15px;
-    margin-left: 20px;
-    margin-right: auto;
-}
-
 /* Media Query for Mobile Devices */
 @media (max-width: 480px) {
     

@@ -6,20 +6,20 @@ const COLOR_BUTTON_CONTAINER = jQuery('<div/>', {
 
 const RED_BUTTON = jQuery('<div/>', {
     id: 'redButton',
-    class: 'color-button',
+    class: 'grey-button large-button-text fixed-width',
     text: 'Red'
 })
 
 
 const BLUE_BUTTON = jQuery('<div/>', {
     id: 'blueButton',
-    class: 'color-button',
+    class: 'grey-button large-button-text fixed-width',
     text: 'Blue'
 })
 
 const GREEN_BUTTON = jQuery('<div/>', {
     id: 'greenButton',
-    class: 'color-button',
+    class: 'grey-button large-button-text fixed-width',
     text: 'Green'
 })
 

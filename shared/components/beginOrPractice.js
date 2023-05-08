@@ -6,7 +6,7 @@ const BEGIN_OR_PRACTICE_CONTAINER = jQuery('<div/>', {
 
 const PRACTICE_BUTTON = jQuery('<div/>', {
     id: 'practiceButton',
-    class: 'instruction-button left-margined',
+    class: 'grey-button medium-button-text left-margined',
     text: '<< Practice'
 }).hover(
     () => PRACTICE_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
@@ -16,7 +16,7 @@ const PRACTICE_BUTTON = jQuery('<div/>', {
 
 const BEGIN_BUTTON = jQuery('<div/>', {
     id: 'beginButton',
-    class: 'instruction-button right-margined',
+    class: 'grey-button medium-button-text right-margined',
     text: 'Begin >>'
 }).hover(
     () => BEGIN_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
