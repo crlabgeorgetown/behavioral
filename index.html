@@ -3,50 +3,103 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no" />
+    <link rel="stylesheet" href="./shared/styles/main.css">
 	<title>Cognitive Recovery Lab</title>
     <style>
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: futura-pt, sans-serif;
+            font-style: normal;
+            text-transform: none;
+            text-rendering: optimizeLegibility;
+            text-align: center;
+        }
+
+        section {
+            padding-bottom: 30px;
+        }
+
+        #grid {
+            display: grid;
         }
 
         #container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10%;
+        }
+
+        .sized {
+            width: 175px;
+            height: 25px;
+        }
+
+        .small-button-text {
+            font-size: 15pt;
         }
 
         a {
-            flex-grow: 1;
-            width: 33%;
+            text-decoration: none;
         }
+
+        h1 {
+            font-size: 51px;
+            letter-spacing: 4.19px;
+            line-height: 1.2em;
+            font-weight: 300;
+        }
+
+        h2, h3 {
+            font-weight: 300;
+        }
+
+
     </style>
 </head>
 <body> 
     <div>
-        <h1>Cognitive Recovery Lab Behavioral Tests</h1>
-        <div id="container">
+        <h1>COGNITIVE RECOVERY LAB</h1>
+        <h2>Behavioral Tasks</h2>
+        <div id="grid">
             <section>
-                <h2>Antelopes and Canteloupes</h2>
+                <h3>Antelopes and Canteloupes</h3>
                 <div id="container">
-                    <a href="./antelopesAndCanteloupes/phonologicalIndex.html">Phonological ReadMap</a>
-                    <a href="./antelopesAndCanteloupes/semanticIndex.html">Semantic ReadMap</a>
-                    <a href="./antelopesAndCanteloupes/standardIndex.html">Standard ReadMap</a>
-                    <a href="./antelopesAndCanteloupes/unrelatedIndex.html">Unrelated ReadMap</a>
+                    <a href="./antelopesAndCanteloupes/phonologicalIndex.html">
+                        <div class="grey-button small-button-text sized">Phonological</div>
+                    </a>
+                    <a href="./antelopesAndCanteloupes/semanticIndex.html">
+                        <div class="grey-button small-button-text sized">Semantic</div>
+                    </a>
+                    <a href="./antelopesAndCanteloupes/standardIndex.html">
+                        <div class="grey-button small-button-text sized">Standard</div>
+                    </a>
+                    <a href="./antelopesAndCanteloupes/unrelatedIndex.html">
+                        <div class="grey-button small-button-text sized">Unrelated</div>
+                    </a>
                 </div>
             </section>
 
             <section>
-                <h2>Lexical Decision</h2>
+                <h3>Lexical Decision</h3>
                 <div id="container">
-                    <a href="./lexicalDecision/auditoryIndex.html">Auditory Lexical Decision</a>
-                    <a href="./lexicalDecision/writtenIndex.html">Written Lexical Decision</a>
+                    <a href="./lexicalDecision/auditoryIndex.html">
+                        <div class="grey-button small-button-text sized">Auditory</div>
+                    </a>
+                    <a href="./lexicalDecision/writtenIndex.html">
+                        <div class="grey-button small-button-text sized">Written</div>
+                    </a>
                 </div>
             </section>
             
             <section>
-                <h2>Rhyme Judgement</h2>
+                <h3>Rhyme Judgement</h3>
                 <div id="container">
-                    <a href="./rhymeDecision/writtenIndex.html">Written Rhyme Judgement</a>
-                    <a href="./rhymeDecision/auditoryIndex.html">Auditory Rhyme Judgement</a>
+                    <a href="./rhymeDecision/writtenIndex.html">
+                        <div class="grey-button small-button-text sized">Written</div>
+                    </a>
+                    <a href="./rhymeDecision/auditoryIndex.html">
+                        <div class="grey-button small-button-text sized">Auditory</div>
+                    </a>
                 </div>
             </section>
         </div>
