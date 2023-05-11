@@ -5,7 +5,7 @@ import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { Trial } from "./trial"
 import { BaseTask } from "../shared/task"
 import { GREEN_LABEL, RED_LABEL } from "../shared/components/responseButtons"
-import { InstructionsOne, InstructionsTwo, InstructionsThree } from "./screens/instructions"
+import { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour, InstructionFive } from "./screens/instructions"
 
 
 class Task extends BaseTask {
@@ -25,8 +25,6 @@ class Task extends BaseTask {
     initializeScreens() {
         RED_LABEL.text('No Rhyme')
         GREEN_LABEL.text('Rhyme')
-
-        this.trialScreen = this.type === 'auditory' ? new AuditoryTrialScreen(this) : new WrittenTrialScreen(this)
         
         this.instructionScreens = [
             new ParticipantIdScreen(this),
@@ -34,9 +32,23 @@ class Task extends BaseTask {
             new InstructionsOne(this),
             new InstructionsTwo(this),
             new InstructionsThree(this),
+        ]
+
+        this.trialScreen = new AuditoryTrialScreen(this)
+
+        if (this.type === 'written') {
+            this.instructionScreens.push(
+                new InstructionsFour(this),
+                new InstructionFive(this),
+            )
+
+            this.trialScreen = new WrittenTrialScreen(this)
+        }
+
+        this.instructionScreens.push(
             this.letsPracticeScreen,
             this.trialScreen
-        ]
+        )
 
         this.setupInstructionScreens()
     }

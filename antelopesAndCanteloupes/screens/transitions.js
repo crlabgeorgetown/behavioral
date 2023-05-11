@@ -1,7 +1,7 @@
 import { CONTAINER } from "../../shared/components/container";
 import { TEXT_CONTAINER } from "../../shared/components/textContainer";
 import { STOP } from "../../shared/components/stop";
-import { READY_TIMEOUT, ROUND_DURATION } from "../constants";
+import { READY_TIMEOUT, ROUND_DURATION } from "../../shared/constants";
 import { BaseScreen } from "./base";
 
 

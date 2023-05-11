@@ -10,6 +10,7 @@ class Trial extends BaseTrial {
         this.Response = null
         this.startTime = null
         this.responseTime = null
+        this.responses = []
     }
 
     get Word() {
@@ -18,6 +19,10 @@ class Trial extends BaseTrial {
 
     get InkColor() {
         return this.blockType.inkColor(this.inkColorIndex)
+    }
+
+    isCorrectResponse(color) {
+        
     }
 }
 

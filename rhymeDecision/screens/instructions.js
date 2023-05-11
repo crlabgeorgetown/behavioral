@@ -50,7 +50,10 @@ class InstructionsTwo extends Screen {
 
 class InstructionsThree extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {text: 'If the words do not rhyme, press No Rhyme.\nFor example, hat and sit.'}],
+        [TEXT_CONTAINER, {
+            text: 'If the words do not rhyme, press No Rhyme.\nFor example, hat and sit.',
+            addClass: 'base-text large-text'
+        }],
         [BUTTON_CONTAINER, {}],
         [BUTTON_LABEL_CONTAINER, {}],
         [INSTRUCTION_BUTTON_CONTAINER, {}]
@@ -65,4 +68,40 @@ class InstructionsThree extends Screen {
 }
 
 
-export { InstructionsOne, InstructionsTwo, InstructionsThree }
+class InstructionsFour extends Screen {
+    components = new Map([
+        [TEXT_CONTAINER, {
+            text: 'Sometimes the words may look similar, but do NOT rhyme.\nLike wood and food.\n\nOther times the words may look different, but DO rhyme.\nLike mite and night.',
+            addClass: 'base-text medium-text'
+        }],
+        [INSTRUCTION_BUTTON_CONTAINER, {}]
+    ])
+
+    get clickHandlers() {
+        return {
+            nextButton: () => this.instructionButtonClickHandler('next'),
+            previousButton: () => this.instructionButtonClickHandler('previous')
+        }
+    }
+}
+
+
+class InstructionFive extends Screen {
+    components = new Map([
+        [TEXT_CONTAINER, {
+            text: 'Decide if the words rhyme based on how they sound in your head, not how they are written.',
+            addClass: 'base-text large-text'
+        }],
+        [INSTRUCTION_BUTTON_CONTAINER, {}]
+    ])
+
+    get clickHandlers() {
+        return {
+            nextButton: () => this.instructionButtonClickHandler('next'),
+            previousButton: () => this.instructionButtonClickHandler('previous')
+        }
+    }
+}
+
+
+export { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour, InstructionFive }

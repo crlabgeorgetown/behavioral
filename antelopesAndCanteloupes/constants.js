@@ -5,8 +5,6 @@ const PHONOLOGICAL = 'phonological'
 const STANDARD = 'standard'
 const UNRELATED = 'unrelated'
 const MAX_PRACTICE_TRIALS = 3
-const READY_TIMEOUT = 1000
-const ROUND_DURATION = 20000
 
 
 class TaskType {
@@ -91,4 +89,4 @@ class TaskType {
 }
 
 
-export { MAX_PRACTICE_TRIALS, READY_TIMEOUT, ROUND_DURATION, TaskType }
+export { MAX_PRACTICE_TRIALS, TaskType }

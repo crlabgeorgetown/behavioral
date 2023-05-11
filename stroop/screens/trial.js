@@ -22,19 +22,23 @@ class TrialScreen extends Screen {
     }
 
     colorButtonClickHandler(color) {
-        this.task.currentTrial.response = color
-        this.task.currentTrial.responseTime = new Date()
-        this.task.currentScreen = this.task.trialScreen
-        if (this.task.currentRound.isDone) {
-            this.task.currentScreen = this.task.stopScreen
+        this.task.currentTrial.responses.push(color)
+        this.task.currentTrial.responseTimes.push(new Date())
+        if (this.task.currentTrial.isCorrectResponse(color)) {
+            this.task.inTask = false
+            this.task.currentScreen = this.task.trialScreen
+            if (this.task.currentRound.isDone) {
+                this.task.currentScreen = this.task.stopScreen
+            }
+            this.task.currentScreen.render()
         }
-        this.task.currentScreen.render()
     }
 
     render() {
         this.task.currentRound.newTrial()
         super.render()
         this.task.currentTrial.startTime = this.renderTime
+        this.task.inTrial = true
     }
 
 }

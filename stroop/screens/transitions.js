@@ -1,5 +1,5 @@
 import { TEXT_CONTAINER } from "../../shared/components/textContainer"
-import { READY_TIMEOUT } from "../constants"
+import { READY_TIMEOUT, ROUND_DURATION } from "../../shared/constants"
 import Screen from "../../shared/screens/base"
 import { CONTAINER } from "../../shared/components/container"
 import { STOP } from "../../shared/components/stop"
@@ -57,13 +57,18 @@ class ReadyScreen extends Screen {
             setTimeout(() => {
                 TEXT_CONTAINER.text('Go!')
                 setTimeout(() => {
-                    if (this.task.isDone) {
-                        this.task.submit()
-                        this.task.currentScreen = this.task.finalScreen
-                    } else {
-                        this.task.newRound()
-                        this.task.currentScreen = this.task.trialScreen
-                    }
+                    setTimeout(() => {
+                        if (this.task.isDone) {
+                            this.task.submit()
+                            this.task.currentScreen = this.task.finalScreen
+                        } else {
+                            this.task.newRound()
+                            this.task.currentScreen = this.task.trialScreen
+                        }
+                    }, ROUND_DURATION)
+                    
+                    this.task.currentScreen = this.task.trialScreen
+                    this.task.currentScreen.render()
                     this.task.currentScreen.render()
                 }, READY_TIMEOUT)
             }, READY_TIMEOUT)
