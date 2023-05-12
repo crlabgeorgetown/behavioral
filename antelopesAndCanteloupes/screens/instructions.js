@@ -85,7 +85,6 @@ class InstructionsThree extends BaseScreen {
 
     render() {
         this.updateReminders()
-        STIMULI.map((stimulus) => stimulus.attr('class', 'random-stimulus'))
         super.render()
     }
 }

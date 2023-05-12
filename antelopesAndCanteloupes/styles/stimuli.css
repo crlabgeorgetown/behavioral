@@ -13,13 +13,7 @@
 }
 
 .random-stimulus {
-    width: 200px;
-    height: 200px;
-}
-
-.trial-stimulus {
-    width: 225px;
-    height: 225px;
+    width: calc(50% - 10px);
 }
 
 .trial-stimuli-grid {
@@ -27,7 +21,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    width: 550px;
+    width: 500px;
     margin-top: 3%;
     margin-bottom: auto;
     justify-content: center;
