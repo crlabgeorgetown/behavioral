@@ -1,5 +1,5 @@
 
-const STIMULI_GRID = jQuery('<div/>', {id: 'stimuliGrid', class: 'stimuli-grid'})
+const STIMULI_GRID = jQuery('<div/>', {id: 'stimuliGrid'})
 
 const STIMULI = [
     jQuery('<img/>', {id: 'stimuli1', class: 'random-stimulus'}),

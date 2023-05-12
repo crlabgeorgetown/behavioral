@@ -15,7 +15,10 @@ class FinalScreen extends BaseScreen {
 class StopScreen extends BaseScreen {
     components = new Map([
         [STOP, {}],
-        [TEXT_CONTAINER, {addClass: 'base-text medium-text', text: 'Click anywhere when you are ready to begin the real thing. Go as fast as you can.'}]
+        [TEXT_CONTAINER, {
+            addClass: 'base-text medium-text', 
+            text: 'Click anywhere when you are ready to begin the real thing. Go as fast as you can.'
+        }]
     ])
 
     get clickHandlers() {
