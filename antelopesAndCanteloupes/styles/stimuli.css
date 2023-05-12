@@ -123,4 +123,8 @@
         width: 300px;
         height: 300px;
     }
+
+    .stimuli-grid {
+        width: 630px;
+    }
 }
