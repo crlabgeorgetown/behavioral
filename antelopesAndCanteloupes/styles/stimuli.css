@@ -3,17 +3,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
-    width: 550px;
+    width: 430px;
     margin-bottom: auto;
     justify-content: center;
 }
 
 .top-margined {
     margin-top: 5%;
-}
-
-.short-top-margined {
-    margin-top: 3%
 }
 
 .random-stimulus {
@@ -24,6 +20,17 @@
 .trial-stimulus {
     width: 225px;
     height: 225px;
+}
+
+.trial-stimuli-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 550px;
+    margin-top: 3%;
+    margin-bottom: auto;
+    justify-content: center;
 }
 
 .all-stimuli-container {

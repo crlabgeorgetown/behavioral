@@ -6,7 +6,7 @@ import { BaseScreen } from "./base";
 class TrialScreen extends BaseScreen {
     components = new Map([
         [REMINDER_BLOCK, {}],
-        [STIMULI_GRID, {addClass: 'stimuli-grid short-top-margined'}],
+        [STIMULI_GRID, {addClass: 'trial-stimuli-grid'}],
 
     ])
 

@@ -3,7 +3,7 @@ import { TEXT_CONTAINER } from "../../shared/components/textContainer"
 import { ALL_STIMULI_CONTAINER, ALL_STIMULI_FOUR, ALL_STIMULI_ONE, ALL_STIMULI_THREE, ALL_STIMULI_TWO } from "../components/allStimuli"
 import { REMINDER_BLOCK } from "../components/reminder"
 import { SEARCH_STIMULI, SEARCH_STIMULI_CONTAINER } from "../components/searchStimuli"
-import { STIMULI_GRID } from "../components/stimuliGrid"
+import { STIMULI, STIMULI_GRID } from "../components/stimuliGrid"
 import { BaseScreen } from "./base"
 
 
@@ -76,16 +76,17 @@ class InstructionsThree extends BaseScreen {
         [INSTRUCTION_BUTTON_CONTAINER, {}]
     ])
 
-    constructor(task) {
-        super(task)
-        this.updateReminders()
-    }
-
     get clickHandlers() {
         return {
             nextButton: () => this.instructionButtonClickHandler('next'),
             previousButton: () => this.instructionButtonClickHandler('previous')
         }
+    }
+
+    render() {
+        this.updateReminders()
+        STIMULI.map((stimulus) => stimulus.attr('class', 'random-stimulus'))
+        super.render()
     }
 }
 
