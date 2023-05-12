@@ -19,7 +19,7 @@
 
 .all-stimuli-container {
     width: 100%;
-    margin: auto;
+    margin-bottom: auto;
 }
 
 .red-border {
@@ -105,8 +105,8 @@
     }
 
     .stimulus {
-        width: 90px;
-        height: 90px;
+        width: 95px;
+        height: 95px;
     }
     
     .stimuli-label {

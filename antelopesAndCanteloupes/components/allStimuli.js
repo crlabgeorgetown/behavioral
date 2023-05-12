@@ -1,5 +1,5 @@
 
-const ALL_STIMULI_CONTAINER = jQuery('<div/>', {id: 'allStimuliContainer', class: 'all-stimuli-container'})
+const ALL_STIMULI_CONTAINER = jQuery('<div/>', {id: 'allStimuliContainer', class: 'all-stimuli-container top-margined'})
 
 
 const ALL_STIMULI_ONE = jQuery('<div/>', {id: 'allStimuliOne', class: 'stimuli-row-container'})
