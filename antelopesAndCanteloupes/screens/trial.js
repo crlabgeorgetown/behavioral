@@ -1,12 +1,12 @@
 import { RED_ARROW, REMINDER_BLOCK } from "../components/reminder";
-import { STIMULI_GRID } from "../components/stimuliGrid";
+import { STIMULI, STIMULI_GRID } from "../components/stimuliGrid";
 import { BaseScreen } from "./base";
 
 
 class TrialScreen extends BaseScreen {
     components = new Map([
         [REMINDER_BLOCK, {}],
-        [STIMULI_GRID, {addClass: 'stimuli-grid top-auto-margined'}],
+        [STIMULI_GRID, {addClass: 'stimuli-grid short-top-margined'}],
 
     ])
 
@@ -36,6 +36,7 @@ class TrialScreen extends BaseScreen {
 
     render() {
         RED_ARROW.hide()
+        STIMULI.map((stimulus) => stimulus.attr('class', 'trial-stimulus'))
         this.updateReminders()
         this.setStimuliImages(this.task.currentRound.currentTrial.getImages())
         this.task.currentRound.currentTrial.startTime = new Date()
