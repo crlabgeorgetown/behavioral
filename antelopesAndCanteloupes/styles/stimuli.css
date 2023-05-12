@@ -9,7 +9,7 @@
 }
 
 .top-margined {
-    margin-top: 8vh;
+    margin-top: 5%;
 }
 
 .random-stimulus {
@@ -82,21 +82,7 @@
     color: #000000;
 }
 
-/* Media Query for Mobile Devices */
-@media (max-width: 480px) {
-    
-}
-    
-/* Media Query for low resolution  Tablets, Ipads */
-@media (min-width: 481px) and (max-width: 767px) {
-    
-}
-    
-/* Media Query for Tablets Ipads portrait mode */
-@media (min-width: 768px) and (max-width: 1024px) {
-    
-}
-    
+
 /* Media Query for Laptops and Desktops */
 @media (min-width: 1025px) {
     .stimuli-row-container {
@@ -112,5 +98,16 @@
     .stimuli-label {
         width: 100px;
         margin-left: auto;
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .top-margined {
+        margin-top: 8%;
     }
 }
