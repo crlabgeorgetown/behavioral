@@ -8,14 +8,14 @@ const BUTTON_CONTAINER = jQuery('<div/>', {id: 'buttonContainer', class: 'respon
 const GREEN_BUTTON = jQuery('<img/>', {
     id: 'greenButton',
     src: Check,
-    class: 'button right-aligned',
+    class: 'image-button right-margined',
 })
 
 
 const RED_BUTTON = jQuery('<img/>', {
     id: 'redButton',
     src: Remove,
-    class: 'button left-aligned'
+    class: 'image-button left-margined'
 })
 
 
@@ -32,8 +32,8 @@ const BUTTON_LABEL_CONTAINER = jQuery('<div/>', {
 })
 
 
-const GREEN_LABEL = jQuery('<div/>', {id: 'greenLabel', class: 'button-label right-aligned'})
-const RED_LABEL = jQuery('<div/>', {id: 'redLabel', class: 'button-label left-aligned'})
+const GREEN_LABEL = jQuery('<div/>', {id: 'greenLabel', class: 'button-label right-margined'})
+const RED_LABEL = jQuery('<div/>', {id: 'redLabel', class: 'button-label left-margined'})
 
 
 BUTTON_CONTAINER.append(GREEN_BUTTON, RED_BUTTON)

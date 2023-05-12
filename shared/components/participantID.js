@@ -19,7 +19,8 @@ const PARTICIPANT_ID_INPUT = jQuery('<input/>', {
 const SUBMIT_BUTTON = jQuery('<div/>', {
     id: 'submitButton',
     class: 'grey-button large-button-text left-margined',
-    text: 'Submit'
+    text: 'Submit',
+    ontouchstart: ''
 
 }).hover(
     () => SUBMIT_BUTTON.css({background: '#B0B0B0', cursor: 'pointer'}),
