@@ -22,11 +22,6 @@
     height: 200px;
 }
 
-.image-button:hover {
-    background: #d8d8d8;
-    cursor: pointer;
-}
-
 .image-button:active {
     border-color: #e9d700;
     border-style: solid;
@@ -44,14 +39,21 @@
     padding: 12px;
 }
 
-.grey-button:hover {
-    background: #B0B0B0; 
-    cursor: pointer;
-}
-
 .grey-button:active {
     border-color: #e9d700;
     border-width: 2px;
+}
+
+@media (hover: hover) {
+    .image-button:hover {
+        background: #d8d8d8;
+        cursor: pointer;
+    }
+
+    .grey-button:hover {
+        background: #B0B0B0;
+        cursor: pointer;
+    }
 }
 
 .fixed-width {
