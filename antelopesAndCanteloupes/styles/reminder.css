@@ -45,8 +45,7 @@
   and (max-device-width: 1024px) 
   and (orientation: landscape) 
   and (-webkit-min-device-pixel-ratio: 2) {
-
-    .reminder-container {
-        margin-top: 8%;
+    .reminder-block {
+        margin-top: 6%;
     }
 }
