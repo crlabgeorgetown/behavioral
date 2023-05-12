@@ -9,13 +9,15 @@ const GREEN_BUTTON = jQuery('<img/>', {
     id: 'greenButton',
     src: Check,
     class: 'image-button right-margined',
+    ontouchstart: ''
 })
 
 
 const RED_BUTTON = jQuery('<img/>', {
     id: 'redButton',
     src: Remove,
-    class: 'image-button left-margined'
+    class: 'image-button left-margined',
+    ontouchstart: ''
 })
 
 
