@@ -8,7 +8,7 @@ const BUTTON_CONTAINER = jQuery('<div/>', {id: 'buttonContainer', class: 'respon
 const GREEN_BUTTON = jQuery('<img/>', {
     id: 'greenButton',
     src: Check,
-    class: 'button right-aligned'
+    class: 'button right-aligned',
 })
 
 

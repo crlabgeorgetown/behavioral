@@ -7,14 +7,16 @@ const INSTRUCTION_BUTTON_CONTAINER = jQuery('<div/>', {
 const NEXT_BUTTON = jQuery('<div/>', {
     id: 'nextButton',
     class: 'grey-button medium-button-text right-margined',
-    text: 'Next >>'
+    text: 'Next >>',
+    ontouchstart: ''
 })
 
 
 const PREVIOUS_BUTTON = jQuery('<div/>', {
     id: 'previousButton',
     class: 'grey-button medium-button-text left-margined',
-    text: '<< Previous'
+    text: '<< Previous',
+    ontouchstart: ''
 })
 
 
