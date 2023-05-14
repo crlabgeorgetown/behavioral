@@ -15,16 +15,15 @@ class TrialScreen extends Screen {
 
     get clickHandlers() {
         return {
-            redButton: () => this.colorButtonClickHandler('red'),
-            blueButton: () => this.colorButtonClickHandler('blue'),
-            greenButton: () => this.colorButtonClickHandler('green')
+            redButton: () => this.colorButtonClickHandler(1),
+            greenButton: () => this.colorButtonClickHandler(2),
+            blueButton: () => this.colorButtonClickHandler(3),
         }
     }
 
-    colorButtonClickHandler(color) {
-        this.task.currentTrial.responses.push(color)
-        this.task.currentTrial.responseTimes.push(new Date())
-        if (this.task.currentTrial.isCorrectResponse(color)) {
+    colorButtonClickHandler(colorIndex) {
+        this.task.currentTrial.newResponse(colorIndex)
+        if (this.task.currentTrial.isCorrectResponse(colorIndex)) {
             this.task.inTask = false
             this.task.currentScreen = this.task.trialScreen
             if (this.task.currentRound.isDone) {
@@ -40,7 +39,6 @@ class TrialScreen extends Screen {
         this.task.currentTrial.startTime = this.renderTime
         this.task.inTrial = true
     }
-
 }
 
 

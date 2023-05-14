@@ -5,11 +5,11 @@ class Trial extends BaseTrial {
     constructor(blockType, inkColorIndex, wordIndex) {
         super()
         this.blockType = blockType
-        this.inkColorIndex = inkColorIndex
-        this.wordIndex = wordIndex
+        this.inkColorIndex = parseInt(inkColorIndex)
+        this.wordIndex = parseInt(wordIndex)
         this.Response = null
         this.startTime = null
-        this.responseTime = null
+        this.responseTimes = []
         this.responses = []
     }
 
@@ -21,8 +21,13 @@ class Trial extends BaseTrial {
         return this.blockType.inkColor(this.inkColorIndex)
     }
 
-    isCorrectResponse(color) {
-        
+    isCorrectResponse(colorIndex) {
+        return this.inkColorIndex === colorIndex
+    }
+
+    newResponse(colorIndex) {
+        this.responseTimes.push(new Date())
+        this.responses.push(this.blockType.inkColor(colorIndex))
     }
 }
 

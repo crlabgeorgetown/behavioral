@@ -45,11 +45,11 @@ class BlockType {
     }
 
     stimulus(index) {
-        return this.stimuliMap[this.name][parseInt(index)]
+        return this.stimuliMap[this.name][index]
     }
 
     inkColor(index) {
-        return this.inkColorMap[parseInt(index)]
+        return this.inkColorMap[index]
     }
 
     static fromString(string) {
@@ -69,4 +69,4 @@ class BlockType {
 }
 
 
-export { BlockType, READY_TIMEOUT }
+export { BlockType, PRACTICE, READY_TIMEOUT }
