@@ -52,7 +52,7 @@ class Task extends BaseTask {
     }
 
     get isDone() {
-        return this.dataIndex === this.data.length - 1
+        return this.rounds.length === this.data.length
     }
 
     newRound() {

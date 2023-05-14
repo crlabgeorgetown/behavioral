@@ -7,8 +7,8 @@ class TrialScreen extends Screen {
     get components() {
         return new Map([
             [STIMULUS_CONTAINER, {
-                text: this.task.currentTrial.Word, 
-                addClass: `base-text large-text ${this.task.currentTrial.InkColor}`}],
+                text: '+', 
+                addClass: `base-text large-text`}],
             [COLOR_BUTTON_CONTAINER, {}]
         ])
     }
@@ -36,8 +36,12 @@ class TrialScreen extends Screen {
     render() {
         this.task.currentRound.newTrial()
         super.render()
-        this.task.currentTrial.startTime = this.renderTime
-        this.task.inTrial = true
+        setTimeout(() => {
+            STIMULUS_CONTAINER.text(this.task.currentTrial.Word)
+            STIMULUS_CONTAINER.attr('class', `base-text large-text ${this.task.currentTrial.InkColor}`)
+            this.task.currentTrial.startTime = new Date()
+            this.task.inTrial = true
+        }, 500)
     }
 }
 
