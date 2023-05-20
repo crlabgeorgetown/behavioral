@@ -61,39 +61,38 @@ class Task extends BaseTask {
 
     submit() {
         const columns = {
-            'ItemNum': [],
-            'Item': [],
+            'BlockType': [],
+            'TrialType': [],
+            'WordString': [],
+            'WordStringIndex': [],
+            'InkColor': [],
             'CRESP': [],
+            'Time': [],
             'TimedOut': [],
             'RT': [],
-            'Accuracy': [],
-            'WordType': [],
-            'Frequency': [],
-            'Regularity': [],
-            'Imageability': [],
-            'PartofSpeech': [],
-            'Lexicality': [],
-            'Response': [],
-            'TrialType': [],
-            'Time': []
+            'IncorrRT': [],
+            'IncorrResp': [],
         }
         const mouseMoveDistances = []
         const mouseMoveDurations = []
         const mouseMoveAverageVelocities = []
         const firstMouseMoves = []
 
-        this.trials.map((trial) => {
-            let firstMouseMove, duration, distance, avgVelocity 
-            [firstMouseMove, duration, distance, avgVelocity] = trial.computeMousemoveStats()
-            firstMouseMoves.push(firstMouseMove)
-            mouseMoveDurations.push(duration)
-            mouseMoveDistances.push(distance)
-            mouseMoveAverageVelocities.push(avgVelocity)
-            
-            for (const [key, values] of Object.entries(columns)) {
-                values.push(trial[key])
-            }
+        this.rounds.map((round) => {
+            round.trials.map((trial) => {
+                let firstMouseMove, duration, distance, avgVelocity 
+                [firstMouseMove, duration, distance, avgVelocity] = trial.computeMousemoveStats()
+                firstMouseMoves.push(firstMouseMove)
+                mouseMoveDurations.push(duration)
+                mouseMoveDistances.push(distance)
+                mouseMoveAverageVelocities.push(avgVelocity)
+                
+                for (const [key, values] of Object.entries(columns)) {
+                    values.push(trial[key])
+                }
+            })
         })
+
 
         if (window.location.host === "georgetown.az1.qualtrics.com") {
             for (const [key, values] of Object.entries(columns)) {

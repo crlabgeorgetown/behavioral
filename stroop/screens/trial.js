@@ -36,8 +36,9 @@ class TrialScreen extends Screen {
     render() {
         this.task.currentRound.newTrial()
         super.render()
+        this.task.currentTrial.renderTime = this.renderTime
         setTimeout(() => {
-            STIMULUS_CONTAINER.text(this.task.currentTrial.Word)
+            STIMULUS_CONTAINER.text(this.task.currentTrial.WordString)
             STIMULUS_CONTAINER.attr('class', `base-text large-text ${this.task.currentTrial.InkColor}`)
             this.task.currentTrial.startTime = new Date()
             this.task.inTrial = true
