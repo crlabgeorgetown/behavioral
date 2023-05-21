@@ -56,16 +56,6 @@
     color: green
 }
 
-.vertically-marginless {
-    margin-bottom: unset;
-    margin-top: unset;
-}
-
-/* Media Query for Mobile Devices */
-@media (max-width: 480px) {
-    
-}
-    
 /* Media Query for low resolution  Tablets, Ipads */
 @media (min-width: 481px) and (max-width: 767px) {
     .large-text {
@@ -75,14 +65,4 @@
     .medium-text {
         font-size: 22pt;
     }
-}
-    
-/* Media Query for Tablets Ipads portrait mode */
-@media (min-width: 768px) and (max-width: 1024px) {
-
-}
-    
-/* Media Query for Laptops and Desktops */
-@media (min-width: 1025px) {
-    
 }

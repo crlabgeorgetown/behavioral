@@ -9,7 +9,7 @@ class InstructionsOne extends Screen {
     components = new Map([
         [TEXT_CONTAINER, {
             text: 'You will see a word in red, green, or blue ink.', 
-            addClass: 'base-text medium-text vertically-marginless medium-fixed-height'
+            addClass: 'base-text medium-text medium-fixed-height'
         }],
         [STIMULUS_CONTAINER, {text: 'plan', addClass: 'base-text large-text red'}],
         [COLOR_BUTTON_CONTAINER, {}],
@@ -29,7 +29,7 @@ class InstructionsTwo extends Screen {
     components = new Map([
         [TEXT_CONTAINER, {
             text: 'Press the color of the ink.',
-            addClass: 'base-text medium-text vertically-marginless medium-fixed-height'
+            addClass: 'base-text medium-text medium-fixed-height'
         }],
         [STIMULUS_CONTAINER, {text: 'red', addClass: 'base-text large-text red'}],
         [COLOR_BUTTON_CONTAINER, {}],
@@ -49,7 +49,7 @@ class InstructionsThree extends Screen {
     components = new Map([
         [TEXT_CONTAINER, {
             text: 'Sometimes the word and the ink color will not match.\nAlways press the color of the ink!', 
-            addClass: 'base-text medium-text vertically-marginless medium-fixed-height'
+            addClass: 'base-text medium-text medium-fixed-height'
         }],
         [STIMULUS_CONTAINER, {text: 'red', addClass: 'base-text large-text blue'}],
         [COLOR_BUTTON_CONTAINER, {}],
