@@ -59,7 +59,7 @@
 /* Media Query for low resolution  Tablets, Ipads */
 @media (min-width: 481px) and (max-width: 767px) {
     .large-text {
-        font-size: 35pt;
+        font-size: 34pt;
     }
 
     .medium-text {
