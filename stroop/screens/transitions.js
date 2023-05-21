@@ -11,7 +11,7 @@ class StopScreen extends Screen {
         const text = this.task.currentRound.blockType.name === PRACTICE ? `Any questions? Let's begin.` : 'Click or touch anywhere to continue.'
         return new Map([
             [STOP, {}],
-            [TEXT_CONTAINER, {addClass: 'base-text medium-text', text: text}]
+            [TEXT_CONTAINER, {addClass: 'base-text large-text', text: text}]
         ])
     }
 
@@ -31,7 +31,7 @@ class StopScreen extends Screen {
 
 class StartCountDownScreen extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {addClass: 'base-text medium-text', text: 'Press to begin the countdown.'}]
+        [TEXT_CONTAINER, {addClass: 'base-text large-text', text: 'Press to begin the countdown.'}]
     ])
 
     get clickHandlers() {
