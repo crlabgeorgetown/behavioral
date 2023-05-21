@@ -69,7 +69,7 @@ class ReadyScreen extends Screen {
                             this.task.inTrial = false
                             if (this.task.isDone) {
                                 this.task.submit()
-                                this.task.currentScreen = this.task.finalScreen
+                                this.task.currentScreen = this.task.finishedScreen
                             } else {
                                 this.task.currentScreen = this.task.stopScreen
                             }

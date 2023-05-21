@@ -25,7 +25,7 @@ export default class Screen {
             CONTAINER.append(component)
         }
         this.updateClickHandlers()
-        this.renderTime = Date.now()
+        this.renderTime = new Date()
     }
 
     updateClickHandlers() {

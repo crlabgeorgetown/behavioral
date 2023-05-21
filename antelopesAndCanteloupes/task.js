@@ -3,7 +3,7 @@ import { InputDevicesScreen } from "../shared/screens/inputDevices"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { InstructionsOne, InstructionsTwo, InstructionsThree, InstructionsFour } from "./screens/instructions"
 import { Round } from "./round"
-import { FinalScreen, ReadyScreen, StopScreen } from "./screens/transitions"
+import { ReadyScreen, StopScreen } from "./screens/transitions"
 import { TrialScreen } from "./screens/trial"
 import { BaseTask } from "../shared/task"
 
@@ -22,7 +22,6 @@ class Task extends BaseTask {
 
     initializeScreens() {
         this.readyScreen = new ReadyScreen(this)
-        this.finalScreen = new FinalScreen(this)
         this.trialScreen = new TrialScreen(this)
         this.stopScreen = new StopScreen(this)
 

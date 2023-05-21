@@ -5,13 +5,6 @@ import { READY_TIMEOUT, ROUND_DURATION } from "../../shared/constants";
 import { BaseScreen } from "./base";
 
 
-class FinalScreen extends BaseScreen {
-    components = new Map([
-        [TEXT_CONTAINER, {addClass: 'base-text large-text', text: `You've completed this exercise!`}]
-    ])
-}
-
-
 class StopScreen extends BaseScreen {
     components = new Map([
         [STOP, {}],
@@ -55,7 +48,7 @@ class ReadyScreen extends BaseScreen {
                         this.task.inTrial = false
                         if (this.task.isDone()) {
                             this.task.submit()
-                            this.task.currentScreen = this.task.finalScreen
+                            this.task.currentScreen = this.task.finishedScreen
                         } else {
                             this.task.newRound()
                             this.task.currentScreen = this.task.instructionScreens[this.task.instructionScreens.length - 2]
@@ -69,4 +62,4 @@ class ReadyScreen extends BaseScreen {
 }
 
 
-export { FinalScreen, ReadyScreen, StopScreen }
+export { ReadyScreen, StopScreen }

@@ -83,7 +83,7 @@ class Incorrect extends Screen {
 
 class Finished extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {text: `You've completed this exercise!`}]
+        [TEXT_CONTAINER, {addClass: 'base-text large-text', text: `You've completed this exercise!`}]
     ])
 
     render() {
