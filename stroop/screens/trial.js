@@ -8,7 +8,7 @@ class TrialScreen extends Screen {
         return new Map([
             [STIMULUS_CONTAINER, {
                 text: '+', 
-                addClass: `base-text large-text`}],
+                addClass: `base-text extra-large-text`}],
             [COLOR_BUTTON_CONTAINER, {}]
         ])
     }
