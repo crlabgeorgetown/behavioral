@@ -4,7 +4,7 @@
     justify-content: flex-end;
     min-width: 100%;
     margin-top: auto;
-    margin-bottom: 4%;
+    margin-bottom: 4vh;
     font-family: Arial;
     text-align: center;
     padding: 12px;
@@ -86,6 +86,6 @@
   and (orientation: portrait) 
   and (-webkit-min-device-pixel-ratio: 2) {
     .instruction-button-container {
-        margin-bottom: 6%;
+        margin-bottom: 8vh;
     }
 }
