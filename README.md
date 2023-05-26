@@ -14,6 +14,7 @@ Or, download the zip archive from github and unzip it.
 ```sh
 open lexicalDecision/writtenIndex.html
 ```
+1. You can open and file ending in index.html (i.e. `antelopesAndCanteloupes/unrelatedIndex.html`).
 
 # Development
 
