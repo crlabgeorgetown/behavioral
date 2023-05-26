@@ -1,4 +1,4 @@
-const BASE_IMAGE_URL = 'https://jslawjslaw.github.io/js-crlab/static/images/readmap'
+const BASE_IMAGE_URL = 'https://jslawjslaw.github.io/behavioral/static/images/readmap'
 
 const SEMANTIC = 'semantic'
 const PHONOLOGICAL = 'phonological'

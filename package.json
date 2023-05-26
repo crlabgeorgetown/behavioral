@@ -1,5 +1,5 @@
 {
-  "name": "js-crlab",
+  "name": "behavioral",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -7,15 +7,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jslawjslaw/js-crlab.git"
+    "url": "git+https://github.com/jslawjslaw/behavioral.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jslawjslaw/js-crlab/issues"
+    "url": "https://github.com/jslawjslaw/behavioral/issues"
   },
-  "homepage": "https://github.com/jslawjslaw/js-crlab#readme",
+  "homepage": "https://github.com/jslawjslaw/behavioral#readme",
   "dependencies": {
     "d3": "^7.8.2",
     "fs": "^0.0.1-security",
