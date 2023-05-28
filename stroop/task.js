@@ -5,6 +5,7 @@ import { TrialScreen } from "./screens/trial"
 import { BaseTask } from "../shared/task"
 import { ReadyScreen, StartCountDownScreen, StopScreen } from "./screens/transitions"
 import { Round } from "./round"
+import { QualtricsClient } from "../shared/qualtricsClient"
 
 
 class Task extends BaseTask {
@@ -60,56 +61,23 @@ class Task extends BaseTask {
     }
 
     submit() {
-        const columns = {
-            'BlockType': [],
-            'TrialType': [],
-            'WordString': [],
-            'WordStringIndex': [],
-            'InkColor': [],
-            'CRESP': [],
-            'Time': [],
-            'TimedOut': [],
-            'RT': [],
-            'IncorrRT': [],
-            'IncorrResp': [],
-        }
-        const mouseMoveDistances = []
-        const mouseMoveDurations = []
-        const mouseMoveAverageVelocities = []
-        const firstMouseMoves = []
-
-        this.rounds.map((round) => {
-            round.trials.map((trial) => {
-                let firstMouseMove, duration, distance, avgVelocity 
-                [firstMouseMove, duration, distance, avgVelocity] = trial.computeMousemoveStats()
-                firstMouseMoves.push(firstMouseMove)
-                mouseMoveDurations.push(duration)
-                mouseMoveDistances.push(distance)
-                mouseMoveAverageVelocities.push(avgVelocity)
-                
-                for (const [key, values] of Object.entries(columns)) {
-                    values.push(trial[key])
-                }
-            })
-        })
-
-
+        const columns = [
+            'BlockType',
+            'TrialType',
+            'WordString',
+            'WordStringIndex',
+            'InkColor',
+            'CRESP',
+            'Time',
+            'TimedOut',
+            'RT',
+            'IncorrRT',
+            'IncorrResp',
+        ]
         if (window.location.host === "georgetown.az1.qualtrics.com") {
-            for (const [key, values] of Object.entries(columns)) {
-                Qualtrics.SurveyEngine.setEmbeddedData(key, values.join(';'))
-            }
-            Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent.replace(',', '|').replace(';','|'))
-            Qualtrics.SurveyEngine.setEmbeddedData('inputDevice', this.inputDevice)
-            Qualtrics.SurveyEngine.setEmbeddedData('SubjectID', this.participantID)
-            Qualtrics.SurveyEngine.setEmbeddedData('firstMouseMoves', firstMouseMoves.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDurations', mouseMoveDurations.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveDistances', mouseMoveDistances.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('mouseMoveAverageVelocities', mouseMoveAverageVelocities.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('RecipientFirstName', 'N/A')
-            Qualtrics.SurveyEngine.setEmbeddedData('RecipientLastName', 'N/A')
-            Qualtrics.SurveyEngine.setEmbeddedData('RecipientEmail', 'N/A')
-            Qualtrics.SurveyEngine.setEmbeddedData('ExternalReference', 'N/A')
-
+            const qualtricsClient = new QualtricsClient(columns, this.inputDevice, this.participantID)
+            this.rounds.forEach((round) => qualtricsClient.collectTrialData(round.trials))
+            qualtricsClient.submitEmbeddedData()
             this.engine.clickNextButton()
         }
     }
