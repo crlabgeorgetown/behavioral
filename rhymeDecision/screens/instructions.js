@@ -9,7 +9,7 @@ class InstructionsOne extends Screen {
         let instructionText
         switch (this.task.type) {
             case 'auditory':
-                instructionText = 'You will hear a word.\nSome of these words are real words.\nOthers are not real words.'
+                instructionText = 'You will hear two words.\nDecide if they rhyme or not.'
                 break
             case 'written':
                 instructionText = 'You will see two words.\nDecide if they rhyme or not.'

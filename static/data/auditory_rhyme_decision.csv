@@ -15,7 +15,7 @@ ItemNum,Procedure,TrialType,Sound1,Sound2,RhymeMatch,OrthoMatch,CRESP
 14,showtrial,Real,lime,mime,yes,yes,yes
 15,showtrial,Real,gall,yell,no,no,no
 16,showtrial,Real,hive,give,no,yes,no
-17,showtrial,Real,front,stunt,yes,no,yes
+17,showtrial,Real,stunt,front,yes,no,yes
 18,showtrial,Real,cup,nap,no,no,no
 19,showtrial,Real,dune,tune,yes,yes,yes
 20,showtrial,Real,bite,kite,yes,yes,yes
@@ -30,7 +30,7 @@ ItemNum,Procedure,TrialType,Sound1,Sound2,RhymeMatch,OrthoMatch,CRESP
 29,showtrial,Real,mold,held,no,no,no
 30,showtrial,Real,trait,rate,yes,no,yes
 31,showtrial,Real,step,pep,yes,yes,yes
-32,showtrial,Real,bead,head,no,yes,no
+32,showtrial,Real,head,bead,no,yes,no
 33,showtrial,Real,wart,mart,no,yes,no
 34,showtrial,Real,ply,tie,yes,no,yes
 35,showtrial,Real,spent,haunt,no,no,no
@@ -58,7 +58,7 @@ ItemNum,Procedure,TrialType,Sound1,Sound2,RhymeMatch,OrthoMatch,CRESP
 57,showtrial,Real,lint,pint,no,yes,no
 58,showtrial,Real,duck,pack,no,no,no
 59,showtrial,Real,hood,mood,no,yes,no
-60,showtrial,Real,blown,cone,yes,no,yes
+60,showtrial,Real,cone,blown,yes,no,yes
 61,showtrial,Real,mute,cute,yes,yes,yes
 62,showtrial,Real,couch,touch,no,yes,no
 63,showtrial,Real,punt,tint,no,no,no

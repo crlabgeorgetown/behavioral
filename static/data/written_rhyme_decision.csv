@@ -4,8 +4,8 @@ ItemNum,Procedure,TrialType,Sound1,Sound2,RhymeMatch,OrthoMatch,CRESP
 3,showlastpractice,Practice,food,good,no,yes,no
 4,showtrial,Real,lose,pose,no,yes,no
 5,showtrial,Real,map,tap,yes,yes,yes
-6,showtrial,Real,front,stunt,yes,no,yes
-7,showtrial,Real,bead,head,no,yes,no
+6,showtrial,Real,stunt,front,yes,no,yes
+7,showtrial,Real,head,bead,no,yes,no
 8,showtrial,Real,gall,yell,no,no,no
 9,showtrial,Real,host,roast,yes,no,yes
 10,showtrial,Real,cash,bush,no,no,no
@@ -21,7 +21,7 @@ ItemNum,Procedure,TrialType,Sound1,Sound2,RhymeMatch,OrthoMatch,CRESP
 20,showtrial,Real,loose,juice,yes,no,yes
 21,showtrial,Real,bath,path,yes,yes,yes
 22,showtrial,Real,threat,treat,no,yes,no
-23,showtrial,Real,blown,cone,yes,no,yes
+23,showtrial,Real,cone,blown,yes,no,yes
 24,showtrial,Real,dirt,curt,yes,no,yes
 25,showtrial,Real,spent,haunt,no,no,no
 26,showtrial,Real,step,pep,yes,yes,yes
