@@ -35,7 +35,7 @@ ItemNum,Procedure,Item,CRESP,TrialType,WordType,Frequency,Regularity,Imageabilit
 34,showtrial,sheer,yes,Real,LF_LI_Regular,low,Regular,low,Adjective,Real
 35,showtrial,term,yes,Real,HF_LI_Regular,high,Regular,low,Noun,Real
 36,showtrial,stilp,no,Real,PW_No_Analogy,N/A,N/A,N/A,N/A,Pseudo
-37,showtrial,bord,no,Real,PH,N/A,N/A,N/A,N/A,Pseudo
+37,showtrial,gaim,no,Real,PH,N/A,N/A,N/A,N/A,Pseudo
 38,showtrial,choose,yes,Real,HF_LI_Exception,high,Exception,low,Verb,Real
 39,showtrial,froum,no,Real,PW_No_Analogy,N/A,N/A,N/A,N/A,Pseudo
 40,showtrial,brear,no,Real,PW_Exception,N/A,N/A,N/A,N/A,Pseudo
@@ -58,7 +58,7 @@ ItemNum,Procedure,Item,CRESP,TrialType,WordType,Frequency,Regularity,Imageabilit
 57,showtrial,dense,yes,Real,LF_LI_Regular,low,Regular,low,Adjective,Real
 58,showtrial,chead,no,Real,PW_Inconsistent,N/A,N/A,N/A,N/A,Pseudo
 ,showasbreak,BREAK,,Break,,N/A,N/A,N/A,N/A,N/A
-59,showtrial,crain,no,Real,PH,N/A,N/A,N/A,N/A,Pseudo
+59,showtrial,trane,no,Real,PH,N/A,N/A,N/A,N/A,Pseudo
 60,showtrial,bush,yes,Real,HF_HI_Exception,high,Exception,high,Noun,Real
 61,showtrial,maich,no,Real,PW_No_Analogy,N/A,N/A,N/A,N/A,Pseudo
 62,showtrial,praud,no,Real,PW_Regular,N/A,N/A,N/A,N/A,Pseudo
@@ -108,7 +108,7 @@ ItemNum,Procedure,Item,CRESP,TrialType,WordType,Frequency,Regularity,Imageabilit
 106,showtrial,teapt,no,Real,PW_Exception,N/A,N/A,N/A,N/A,Pseudo
 107,showtrial,womb,yes,Real,LF_HI_Exception,low,Exception,high,Noun,Real
 108,showtrial,toast,yes,Real,HF_HI_Regular,high,Regular,high,Noun,Real
-109,showtrial,bote,no,Real,PH,N/A,N/A,N/A,N/A,Pseudo
+109,showtrial,gote,no,Real,PH,N/A,N/A,N/A,N/A,Pseudo
 110,showtrial,fraud,yes,Real,HF_LI_Regular,high,Regular,low,Noun,Real
 111,showtrial,vage,no,Real,PW_Analogy_Regular,N/A,N/A,N/A,N/A,Pseudo
 ,showasbreak,BREAK,,Break,,N/A,N/A,N/A,N/A,N/A
@@ -162,6 +162,6 @@ ItemNum,Procedure,Item,CRESP,TrialType,WordType,Frequency,Regularity,Imageabilit
 159,showtrial,doad,no,Real,PW_Exception,N/A,N/A,N/A,N/A,Pseudo
 160,showtrial,pint,yes,Real,LF_HI_Exception,low,Exception,high,Noun,Real
 161,showtrial,stole,yes,Real,HF_LI_Regular,high,Regular,low,Verb,Real
-162,showtrial,flaim,no,Real,PH,N/A,N/A,N/A,N/A,Pseudo
-163,showtrial,coup,yes,Real,LF_LI_Exception,low,Exception,low,Noun,Real
+162,showtrial,coup,yes,Real,LF_LI_Exception,low,Exception,low,Noun,Real
+163,showtrial,stail,no,Real,PH,N/A,N/A,N/A,N/A,Pseudo
 164,showtrial,dearth,yes,Real,LF_LI_Exception,low,Exception,low,Noun,Real
