@@ -3,12 +3,13 @@ import { Trial } from './trial'
 
 
 class Round {
-    constructor(config) {        
+    constructor(blockNum, config) {
         this.blockType = BlockType.fromString(config.BlockType)
         this.trialType = config.TrialType
         this.InkColorSchedule = config.InkColorSchedule
         this.WordStringSchedule = config.WordStringSchedule
         this.trials = []
+        this.blockNum = blockNum
     }
 
     get isDone() {
@@ -21,6 +22,8 @@ class Round {
 
     newTrial() {
         this.trials.push(new Trial(
+            this.blockNum,
+            this.trials.length + 1,
             this.trialType,
             this.blockType, 
             this.InkColorSchedule[this.trials.length], 

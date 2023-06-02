@@ -57,11 +57,13 @@ class Task extends BaseTask {
     }
 
     newRound() {
-        this.rounds.push(new Round(this.data[this.rounds.length]))
+        this.rounds.push(new Round(this.rounds.length + 1, this.data[this.rounds.length]))
     }
 
     submit() {
         const columns = [
+            'BlockNum',
+            'BlockTrial',
             'BlockType',
             'TrialType',
             'WordString',

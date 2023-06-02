@@ -2,8 +2,10 @@ import { BaseTrial } from "../shared/trial"
 
 
 class Trial extends BaseTrial {
-    constructor(trialType, blockType, inkColorIndex, wordIndex) {
+    constructor(blockNum, blockTrial, trialType, blockType, inkColorIndex, wordIndex) {
         super()
+        this.blockNum = blockNum
+        this.blockTrial = blockTrial
         this.trialType = trialType
         this.blockType = blockType
         this.inkColorIndex = parseInt(inkColorIndex)
@@ -12,6 +14,14 @@ class Trial extends BaseTrial {
         this.renderTime = null
         this.responseTimes = []
         this.responses = []
+    }
+
+    get BlockNum() {
+        return this.blockNum
+    }
+
+    get BlockTrial() {
+        return this.blockTrial
     }
 
     get BlockType() {
@@ -35,7 +45,7 @@ class Trial extends BaseTrial {
     }
 
     get CRESP() {
-        return this.inkColorIndex
+        return this.blockType.buttonLabel(this.inkColorIndex)
     }
 
     get Time() {

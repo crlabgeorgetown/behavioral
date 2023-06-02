@@ -39,6 +39,11 @@ class BlockType {
         2: 'green',
         3: 'blue'
     }
+    buttonLabelMap = {
+        1: 'leftbutton',
+        2: 'middlebutton',
+        3: 'rightbutton'
+    }
 
     constructor(name) {
         this.name = name
@@ -50,6 +55,10 @@ class BlockType {
 
     inkColor(index) {
         return this.inkColorMap[index]
+    }
+
+    buttonLabel(index) {
+        return this.buttonLabelMap[index]
     }
 
     static fromString(string) {
