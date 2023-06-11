@@ -64,6 +64,17 @@ class Trial extends BaseTrial {
         } 
     }
 
+    get Accuracy() {
+        if (this.responses.length > 0 && this.isCorrectResponse(this.responses[this.responses.length - 1])) {
+            return true
+        }
+        return false
+    }
+
+    get Volume() {
+        return NaN
+    }
+
     get IncorrRT() {
         const incorrectResponseTimes = []
         this.responses.forEach((response, index) => {

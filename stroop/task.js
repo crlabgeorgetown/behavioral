@@ -75,6 +75,8 @@ class Task extends BaseTask {
             'RT',
             'IncorrRT',
             'IncorrResp',
+            'Accuracy',
+            'Volume'
         ]
         if (window.location.host === "georgetown.az1.qualtrics.com") {
             const qualtricsClient = new QualtricsClient(columns, this.inputDevice, this.participantID)
