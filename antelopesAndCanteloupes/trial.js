@@ -2,8 +2,10 @@ import { BaseTrial } from "../shared/trial"
 
 
 class Trial extends BaseTrial {
-    constructor(trialType, stimuli, imageNumbers, searchStimulus, taskType) {
+    constructor(roundIndex, trialNumber, trialType, stimuli, imageNumbers, searchStimulus, taskType) {
         super()
+        this.roundIndex = roundIndex
+        this.trialNumber = trialNumber
         this.trialType = trialType
         this.startTime = null
         this.stimuli = stimuli
@@ -28,6 +30,18 @@ class Trial extends BaseTrial {
 
     isCorrectResponse(stimulus) {
         return this.searchStimulus === stimulus
+    }
+
+    get TotalElementNum() {
+        return this.trialNumber
+    }
+
+    get PatternChoiceOrder() {
+        return 'ABCD'
+    }
+
+    get PatternNumber() {
+        return this.roundIndex
     }
 
     get OptionA() {
@@ -94,7 +108,7 @@ class Trial extends BaseTrial {
     }
 
     get RunInPeriod() {
-        return this.trialType === 'practice' ? 1 : 0
+        return this.trialType === 'practice'
     }
 }
 

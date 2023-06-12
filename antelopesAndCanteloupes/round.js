@@ -3,7 +3,8 @@ import { Trial } from "./trial"
 
 
 class Round {
-    constructor(taskType, roundSchedule) {
+    constructor(roundIndex, taskType, roundSchedule) {
+        this.roundIndex = roundIndex
         this.taskType = taskType
         this.orderedStimuli = taskType.stimuli
         this.roundSchedule = roundSchedule
@@ -64,6 +65,8 @@ class Round {
         }
         
         this.trials.push(new Trial(
+            this.roundIndex,
+            this.trials.length + 1,
             trialType,
             shuffled,
             imageNumbers,

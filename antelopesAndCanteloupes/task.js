@@ -53,7 +53,11 @@ class Task extends BaseTask {
     }
 
     newRound() {
-        this.rounds.push(new Round(this.taskType, this.taskType.roundSchedule[this.rounds.length]))
+        this.rounds.push(new Round(
+            this.rounds.length + 1,
+            this.taskType,
+            this.taskType.roundSchedule[this.rounds.length]
+        ))
     }
 
     isDone() {
@@ -75,6 +79,8 @@ class Task extends BaseTask {
             'RunInPeriod': [],
             'Time': [],
             'TimedOut': [],
+            'PatternChoiceOrder': [],
+            'PatternNumber': []
         }
         const mouseMoveDistances = []
         const mouseMoveDurations = []
@@ -83,11 +89,10 @@ class Task extends BaseTask {
 
         const thePattern = []
         const patternLength = []
-        const patternNumber = []
         const curPatternElementNum = []
         const timeOnSequence = []
 
-        this.rounds.map((round, roundIndex) => {
+        this.rounds.map((round) => {
             round.trials.map((trial, trialIndex) => {
                 let firstMouseMove, duration, distance, avgVelocity 
                 [firstMouseMove, duration, distance, avgVelocity] = trial.computeMousemoveStats()
@@ -100,8 +105,7 @@ class Task extends BaseTask {
                     values.push(trial[key])
                 }
 
-                patternNumber.push(roundIndex + 1)
-                thePattern.push(round.roundSchedule.join(''))
+                thePattern.push(round.roundSchedule.map(idx => idx + 1).join(''))
                 patternLength.push(round.roundSchedule.length)
                 curPatternElementNum.push(trialIndex % round.roundSchedule.length + 1)
 
@@ -115,7 +119,6 @@ class Task extends BaseTask {
             }
             Qualtrics.SurveyEngine.setEmbeddedData('ThePattern', thePattern.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('PatternLength', patternLength.join(';'))
-            Qualtrics.SurveyEngine.setEmbeddedData('PatternNumber', patternNumber.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('CurPatternElementNum', curPatternElementNum.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('TimeOnSequence', timeOnSequence.join(';'))
             Qualtrics.SurveyEngine.setEmbeddedData('userAgent', navigator.userAgent.replace(',', '|').replace(';','|'))
