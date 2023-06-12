@@ -80,7 +80,8 @@ class Task extends BaseTask {
             'Time': [],
             'TimedOut': [],
             'PatternChoiceOrder': [],
-            'PatternNumber': []
+            'PatternNumber': [],
+            'TotalElementNum': []
         }
         const mouseMoveDistances = []
         const mouseMoveDurations = []
