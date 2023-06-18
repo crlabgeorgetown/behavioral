@@ -94,7 +94,7 @@ class Trial extends BaseTrial {
         let incorrectResponse = 'N/A'
         this.responses.forEach((response) => {
             if (!this.isCorrectResponse(response)) {
-                incorrectResponse = this.taskType.stimuli.indexOf(response)
+                incorrectResponse = response
             }
         })
         return incorrectResponse

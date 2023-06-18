@@ -1,4 +1,3 @@
-import { tickStep } from "d3"
 import { MAX_PRACTICE_TRIALS } from "./constants"
 import { Trial } from "./trial"
 
