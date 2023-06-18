@@ -81,26 +81,23 @@ class Trial extends BaseTrial {
     }
 
     get IncorrRT() {
-        const incorrectResponseTimes = []
+        let incorrectResponseTime = 0
         this.responses.forEach((response, index) => {
             if (!this.isCorrectResponse(response)) {
-                incorrectResponseTimes.push(this.responseTimes[index] - this.startTime)
+                incorrectResponseTime = this.responseTimes[index] - this.startTime
             }
         })
-        if (incorrectResponseTimes.length === 0) {
-            return 0
-        }
-        return incorrectResponseTimes.join('|')
+        return incorrectResponseTime
     }
 
     get IncorrResp() {
-        const incorrectResponses = []
+        let incorrectResponse = 'N/A'
         this.responses.forEach((response) => {
             if (!this.isCorrectResponse(response)) {
-                incorrectResponses.push(this.taskType.stimuli.indexOf(response))
+                incorrectResponse = this.taskType.stimuli.indexOf(response)
             }
         })
-        return incorrectResponses.join('|')
+        return incorrectResponse
     }
 
     get TimedOut() {

@@ -1,3 +1,4 @@
+import { tickStep } from "d3"
 import { MAX_PRACTICE_TRIALS } from "./constants"
 import { Trial } from "./trial"
 
@@ -66,7 +67,7 @@ class Round {
         
         this.trials.push(new Trial(
             this.roundIndex,
-            this.trials.length + 1,
+            this.trials.length < 3 ? this.trials.length + 1 : this.trials.length - 2,
             trialType,
             shuffled,
             imageNumbers,
