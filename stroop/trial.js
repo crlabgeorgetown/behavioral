@@ -76,7 +76,7 @@ class Trial extends BaseTrial {
     }
 
     get IncorrRT() {
-        const incorrectResponseTime = 0
+        let incorrectResponseTime = 0
         this.responses.forEach((response, index) => {
             if (!this.isCorrectResponse(response)) {
                 incorrectResponseTime = this.responseTimes[index] - this.startTime
@@ -86,7 +86,7 @@ class Trial extends BaseTrial {
     }
 
     get IncorrResp() {
-        const incorrectResponse = 'N/A'
+        let incorrectResponse = 'N/A'
         this.responses.forEach((response) => {
             if (!this.isCorrectResponse(response)) {
                 incorrectResponse = this.blockType.buttonLabel(response)
