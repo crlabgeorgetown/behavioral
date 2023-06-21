@@ -65,10 +65,7 @@ class Trial extends BaseTrial {
     }
 
     get Accuracy() {
-        if (this.responses.length > 0 && this.isCorrectResponse(this.responses[this.responses.length - 1])) {
-            return true
-        }
-        return false
+        return this.responses.length > 0 && this.isCorrectResponse(this.responses[this.responses.length - 1]) ? 1 : 0
     }
 
     get Volume() {
