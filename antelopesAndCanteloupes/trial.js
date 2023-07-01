@@ -16,12 +16,12 @@ class Trial extends BaseTrial {
         this.responseTimes = []
     }
 
-    getSearchStimulusIndex() {
-        return this.stimuli.indexOf(this.searchStimulus)
+    getStimulusIndex(stimulus) {
+        return this.stimuli.indexOf(stimulus)
     }
 
     getSearchStimuliImageNumber() {
-        return this.imageNumbers[this.getSearchStimulusIndex()]
+        return this.imageNumbers[this.getStimulusIndex(this.searchStimulus)]
     }
 
     getImages() {

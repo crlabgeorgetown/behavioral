@@ -51,6 +51,10 @@ class TaskType {
         return this.name !== STANDARD
     }
 
+    get shouldShuffleImageNumbers() {
+        return this.name !== STANDARD
+    }
+
     get instructionsOne() {
         return {
             [PHONOLOGICAL]: 'Every screen will show pictures of a can, coin(s), a cone, and corn, but the exact pictures will change.',

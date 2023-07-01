@@ -14,14 +14,20 @@ class Round {
     }
 
     incrementScheduleIndex() {
-        this.scheduleIndex++
-        if (this.scheduleIndex === this.roundSchedule.length) {
-            this.scheduleIndex = 0
-        }
+        // TODO: this only works for roundSchedule lengths 1 or 2
+        this.scheduleIndex = this.roundSchedule.length - this.scheduleIndex - 1
     }
  
     getSearchStimuli() {
         return this.orderedStimuli[this.roundSchedule[this.scheduleIndex]]
+    }
+
+    getPreviousSearchStimulus() {
+        if (this.getStimuliSchedule().length > 1) {
+            return this.orderedStimuli[this.roundSchedule[1 - this.scheduleIndex]]
+        }
+
+        return this.orderedStimuli[this.roundSchedule[0]]
     }
 
     getStimuliSchedule() {
@@ -51,16 +57,23 @@ class Round {
 
     newTrial() {
         const trialType = this.trials.length < MAX_PRACTICE_TRIALS * this.roundSchedule.length ? 'practice': 'experiment'
-        const searchStimuli = this.getSearchStimuli()
+        const searchStimulus = this.getSearchStimuli()
         let shuffled = this.shuffle()
         let imageNumbers = this.getRandomImageNumbers()
-        
-        if (this.currentTrial) {
-            while (this.currentTrial.getSearchStimulusIndex() === shuffled.indexOf(searchStimuli)) {
+
+        if (this.trials.length > 0) {
+            // ensure full shuffle such that all stimuli are at new locations
+            while (
+                shuffled.some((el, idx) => this.currentTrial.stimuli.indexOf(el) === idx)
+            ) {
                 shuffled = this.shuffle()
             }
-            while (this.currentTrial.getSearchStimuliImageNumber() === imageNumbers[shuffled.indexOf(searchStimuli)]) {
-                imageNumbers = this.getRandomImageNumbers()
+
+            // STANDARD tasktype only has 1 image for each stimulus, so no need to shuffle the image number
+            if (this.taskType.shouldShuffleImageNumbers) {
+                while (this.currentTrial.getSearchStimuliImageNumber() === imageNumbers[shuffled.indexOf(searchStimulus)]) {
+                    imageNumbers = this.getRandomImageNumbers()
+                }
             }
         }
         
@@ -70,7 +83,7 @@ class Round {
             trialType,
             shuffled,
             imageNumbers,
-            searchStimuli,
+            searchStimulus,
             this.taskType
         ))
     }
