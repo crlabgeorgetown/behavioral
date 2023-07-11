@@ -62,9 +62,11 @@ class Round {
         let imageNumbers = this.getRandomImageNumbers()
 
         if (this.trials.length > 0) {
-            // ensure full shuffle such that all stimuli are at new locations
+            // ensure full shuffle such that all stimuli are at new locations and the new stimulus location is
+            // also different for alternating rounds
             while (
-                shuffled.some((el, idx) => this.currentTrial.stimuli.indexOf(el) === idx)
+                shuffled.some((el, idx) => this.currentTrial.stimuli.indexOf(el) === idx) ||
+                this.currentTrial.stimuli.indexOf(this.getPreviousSearchStimulus()) == shuffled.indexOf(searchStimulus)
             ) {
                 shuffled = this.shuffle()
             }
