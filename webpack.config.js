@@ -7,7 +7,8 @@ module.exports = {
     antelopesAndCanteloupes: './antelopesAndCanteloupes/task.js',
     lexicalDecision: './lexicalDecision/task.js',
     rhymeDecision: './rhymeDecision/task.js',
-    stroop: './stroop/task.js'
+    stroop: './stroop/task.js',
+    wordReading: './wordReading/task.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

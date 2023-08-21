@@ -33,7 +33,7 @@ class Trial extends BaseTrial {
 
     audioSource(sourceIndex) {
         const sound = sourceIndex === 1 ? this.Sound1 : this.Sound2
-        return `https://jslawjslaw.github.io/behavioral/static/auditory_rhyme_decision_wav_files/${sound}.wav`
+        return `https://crlabgeorgetown.github.io/behavioral/static/auditory_rhyme_decision_wav_files/${sound}.wav`
     }
 }
 
