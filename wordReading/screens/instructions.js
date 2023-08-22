@@ -1,5 +1,4 @@
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../shared/components/instructionButtons"
-import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons"
 import { TEXT_CONTAINER } from "../../shared/components/textContainer"
 import Screen from "../../shared/screens/base"
 

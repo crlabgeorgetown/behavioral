@@ -15,7 +15,9 @@
     <div id="Wrapper"></div>
     <script src="../dist/wordReading.bundle.js"></script>
     <script>
-        new wordReading.Task(null, this, 'crossed')
+        d3.csv('https://jslawjslaw.github.io/behavioral/static/wordReading/multimorphic_words.csv').then((data) => {
+            new wordReading.Task(data, this, 'crossed')
+        })
     </script>
 </body>
 </html>

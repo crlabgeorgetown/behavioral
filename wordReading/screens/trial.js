@@ -1,7 +1,7 @@
 import { TEXT_CONTAINER } from "../../shared/components/textContainer";
 import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../shared/components/audioContainer";
 import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons";
-import { Screen } from "../../shared/screens/base";
+import Screen from "../../shared/screens/base";
 
 
 class TrialScreen extends Screen {
@@ -15,7 +15,6 @@ class TrialScreen extends Screen {
             [BUTTON_LABEL_CONTAINER, {}]
         ])
     }
-    
 
     render() {
         setTimeout(() => {
