@@ -28,7 +28,6 @@ class AuditoryTrialScreen extends DecisionTrialScreen {
                         AUDIO_CONTAINER[0].play()
                         break
                     case 2:
-                        this.task.currentTrial.startTime = new Date()
                         this.task.inTrial = true
                         TEXT_CONTAINER.text('')
                         this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
@@ -37,6 +36,7 @@ class AuditoryTrialScreen extends DecisionTrialScreen {
             })
             AUDIO_CONTAINER[0].load()
             AUDIO_CONTAINER[0].play()
+            this.task.currentTrial.startTime = new Date()
         }, 250)
     }
 }
