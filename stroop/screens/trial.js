@@ -23,7 +23,7 @@ class TrialScreen extends Screen {
 
     colorButtonClickHandler(colorIndex) {
         this.task.currentTrial.newResponse(colorIndex)
-        if (this.task.currentTrial.isCorrectResponse(colorIndex)) {
+        if (!this.task.currentTrial.isIncorrectResponse(colorIndex)) {
             this.task.inTask = false
             this.task.currentScreen = this.task.trialScreen
             if (this.task.currentRound.isDone) {
