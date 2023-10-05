@@ -67,14 +67,13 @@ class Task extends BaseTask {
             'BlockType',
             'TrialType',
             'WordString',
-            'WordStringIndex',
             'InkColor',
             'CRESP',
             'Time',
             'TimedOut',
             'RT',
-            'IncorrRT',
-            'IncorrResp',
+            'RESP',
+            'ErrorOnTrial',
             'Accuracy',
             'Volume'
         ]

@@ -36,12 +36,20 @@ class Trial extends BaseTrial {
         return this.blockType.stimulus(this.wordIndex)
     }
 
-    get WordStringIndex() {
-        return this.wordIndex
-    }
-
     get InkColor() {
         return this.blockType.inkColor(this.inkColorIndex)
+    }
+
+    get RESP() {
+        if (this.responses.length > 0) {
+            return this.blockType.buttonLabel(this.responses[this.responses.length - 1])
+        } else {
+            return 'NR'
+        }
+    }
+
+    get ErrorOnTrial() {
+        return this.responses.some(this.isIncorrectResponse) ? 1 : 0
     }
 
     get CRESP() {
@@ -57,7 +65,7 @@ class Trial extends BaseTrial {
     }
 
     get RT() {
-        if (this.responseTimes.length > 0 && this.isCorrectResponse(this.responses[this.responses.length - 1])) {
+        if (this.responseTimes.length > 0 && !this.isIncorrectResponse(this.responses[this.responses.length - 1])) {
             return this.responseTimes[this.responseTimes.length - 1] - this.startTime
         } else {
             return 'N/A'
@@ -65,35 +73,15 @@ class Trial extends BaseTrial {
     }
 
     get Accuracy() {
-        return this.responses.length > 0 && this.isCorrectResponse(this.responses[this.responses.length - 1]) ? 1 : 0
+        return this.responses.length > 0 && !this.isIncorrectResponse(this.responses[this.responses.length - 1]) ? 1 : 0
     }
 
     get Volume() {
         return NaN
     }
 
-    get IncorrRT() {
-        let incorrectResponseTime = 0
-        this.responses.forEach((response, index) => {
-            if (!this.isCorrectResponse(response)) {
-                incorrectResponseTime = this.responseTimes[index] - this.startTime
-            }
-        })
-        return incorrectResponseTime
-    }
-
-    get IncorrResp() {
-        let incorrectResponse = 'N/A'
-        this.responses.forEach((response) => {
-            if (!this.isCorrectResponse(response)) {
-                incorrectResponse = this.blockType.buttonLabel(response)
-            }
-        })
-        return incorrectResponse
-    }
-
-    isCorrectResponse(colorIndex) {
-        return this.inkColorIndex === colorIndex
+    isIncorrectResponse(colorIndex) {
+        return this.inkColorIndex !== colorIndex
     }
 
     newResponse(colorIndex) {
