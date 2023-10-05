@@ -49,7 +49,7 @@ class Trial extends BaseTrial {
     }
 
     get ErrorOnTrial() {
-        return this.responses.some(this.isIncorrectResponse) ? 1 : 0
+        return this.responses.any((colorIndex) => this.isIncorrectResponse(colorIndex)) ? 1 : 0
     }
 
     get CRESP() {
