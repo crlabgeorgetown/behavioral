@@ -25,7 +25,10 @@ class AuditoryTrialScreen extends DecisionTrialScreen {
                         sourceIndex++
                         AUDIO_SOURCE.attr('src', this.task.currentTrial.audioSource(2))
                         AUDIO_CONTAINER[0].load()
-                        AUDIO_CONTAINER[0].play()
+                        setTimeout(() => {
+                            AUDIO_CONTAINER[0].play()
+                            this.task.currentTrial.startTime = new Date()
+                        }, 500)
                         break
                     case 2:
                         this.task.inTrial = true
@@ -36,7 +39,6 @@ class AuditoryTrialScreen extends DecisionTrialScreen {
             })
             AUDIO_CONTAINER[0].load()
             AUDIO_CONTAINER[0].play()
-            this.task.currentTrial.startTime = new Date()
         }, 250)
     }
 }
