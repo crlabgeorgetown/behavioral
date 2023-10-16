@@ -53,18 +53,15 @@ class Task extends BaseTask {
 
     submit() {
         const columns = [
-            'ItemNum',
-            'CRESP',
-            'TimedOut',
-            'RT',
-            'Accuracy',
-            'Response',
-            'Sound1',
-            'Sound2',
-            'RhymeMatch',
-            'OrthoMatch',
+            'Word',
             'TrialType',
-            'Time',
+            'Repetitions',
+            'WordType',
+            'Length',
+            'Frequency',
+            'Phonemes',
+            'Syllables',
+            'PartofSpeech',
         ]
         if (window.location.host === "georgetown.az1.qualtrics.com") {
             const qualtricsClient = new QualtricsClient(columns, this.inputDevice, this.participantID)
