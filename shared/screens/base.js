@@ -32,7 +32,7 @@ export default class Screen {
         for (const [id, callback] of Object.entries(this.clickHandlers)) {
             const element = jQuery(`#${id}`)
             element.off('click')
-            element.click(callback)
+            element.on('click', () => callback())
         }
     }
 
@@ -52,6 +52,13 @@ export default class Screen {
                 break
         }
         this.task.currentScreen.render()
+    }
+
+    audioContainerClickHandler(nextItem, audio) {
+        if (Date.now() - this.renderTime > 500) {
+            audio.addEventListener('ended', () => this.containerClickHandler(nextItem))
+            audio.play()
+        }
     }
 
     containerClickHandler(nextItem) {

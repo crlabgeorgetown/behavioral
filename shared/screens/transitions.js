@@ -4,6 +4,17 @@ import { INSTRUCTION_BUTTON_CONTAINER } from "../components/instructionButtons"
 import Screen from "./base"
 
 
+class Begin extends Screen {
+    components = new Map([
+        [TEXT_CONTAINER, {text: `Any questions?\nLet's begin`}],
+    ])
+
+    get clickHandlers() {
+        return {container: () => this.audioContainerClickHandler(false, this.task.type.beginAudio)}
+    }
+}
+
+
 class BeginOrPracticeAgain extends Screen {
     components = new Map([
         [TEXT_CONTAINER, {text: `Any questions?\nLet's begin`}],
@@ -104,4 +115,4 @@ class TimeOut extends Screen {
 }
 
 
-export { BeginOrPracticeAgain, Break, Finished, Incorrect, LetsPractice, TimeOut }
+export { Begin, BeginOrPracticeAgain, Break, Finished, Incorrect, LetsPractice, TimeOut }

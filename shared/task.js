@@ -1,5 +1,5 @@
 import { CONTAINER } from "./components/container"
-import { BeginOrPracticeAgain, Break, Finished, Incorrect, LetsPractice, TimeOut } from "./screens/transitions"
+import { Begin, BeginOrPracticeAgain, Break, Finished, Incorrect, LetsPractice, TimeOut } from "./screens/transitions"
 
 class BaseTask {
 
@@ -15,6 +15,7 @@ class BaseTask {
 
         this.incorrectScreen = new Incorrect(this)
         this.breakScreen = new Break(this)
+        this.beginScreen = new Begin(this)
         this.beginOrPracticeAgainScreen = new BeginOrPracticeAgain(this)
         this.finishedScreen = new Finished(this)
         this.letsPracticeScreen = new LetsPractice(this)

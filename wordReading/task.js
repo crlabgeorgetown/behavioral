@@ -5,18 +5,18 @@ import { InstructionsOne } from "./screens/instructions"
 import { TrialScreen } from "./screens/trial"
 import { QualtricsClient } from "../shared/qualtricsClient"
 import { Trial } from "./trial"
+import { TaskType } from "./constants"
 
 
 class Task extends BaseTask {
-	constructor(data, engine, type) {
+	constructor(data, engine, taskType) {
         super()
         
         this.engine = engine
         this.trials = []
         this.data = data
-        this.dataIndex = 0
         this.inTrial = false
-        this.type = type
+        this.type = TaskType.fromString(taskType)
 
         this.initializeScreens()
 	}
@@ -40,15 +40,15 @@ class Task extends BaseTask {
     }
 
     get currentProcedure() {
-        return this.data[this.dataIndex].Procedure
+        return this.data[this.trials.length - 1].Procedure
     }
 
     get isDone() {
-        return this.dataIndex === this.data.length - 1
+        return this.data.length === this.trials.length
     }
 
     newTrial() {
-        this.trials.push(new Trial(this.data[this.dataIndex]))
+        this.trials.push(new Trial(this.data[this.trials.length]))
     }
 
     submit() {

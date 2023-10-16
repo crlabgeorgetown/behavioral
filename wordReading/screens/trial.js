@@ -1,31 +1,45 @@
 import { TEXT_CONTAINER } from "../../shared/components/textContainer";
-import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../shared/components/audioContainer";
-import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons";
+import { PROCEED_CONTAINER } from "../../shared/components/rightChevron";
 import Screen from "../../shared/screens/base";
 
 
 class TrialScreen extends Screen {
 
     get components() {
-        AUDIO_SOURCE.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/beep.wav')
         return new Map([
             [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}],
-            [AUDIO_CONTAINER, {}],
-            [BUTTON_CONTAINER, {}],
-            [BUTTON_LABEL_CONTAINER, {}]
+            [PROCEED_CONTAINER, {}]
         ])
     }
 
+    get clickHandlers() {
+        return {
+            rightChevron: () => this.proceedClickHandler(),
+        }
+    }
+
+    proceedClickHandler() {
+        clearTimeout(this.timeoutID) 
+        this.task.currentScreen = this.task.trialScreen       
+        if (this.task.currentProcedure === 'showlastpractice') {
+            this.task.currentScreen = this.task.beginScreen
+        } else if (this.task.isDone) {
+            this.task.currentScreen = this.task.finishedScreen
+        }
+        this.task.currentScreen.render()
+    }
+
     render() {
+        super.render()
+        this.task.type.trialAudio.play()
         setTimeout(() => {
             this.task.newTrial()
             TEXT_CONTAINER.text(`${this.task.currentTrial.Word}`)
-            super.render()
-            this.task.currentTrial.startTime = new Date()
             this.task.inTrial = true
+            this.task.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
                 this.task.currentScreen = this.task.timeoutScreen
-
+                this.task.currentScreen.render()
             }, 10000)
         }, 200)
     }
