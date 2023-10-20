@@ -23,14 +23,14 @@ class AuditoryTrialScreen extends DecisionTrialScreen {
             this.task.newTrial()
             super.render()
             AUDIO_SOURCE.attr('src', this.task.currentTrial.audioSource)
-            AUDIO_CONTAINER.off('ended')
-            AUDIO_CONTAINER.on('ended', () => {
-                this.task.inTrial = true
-                TEXT_CONTAINER.text('')
-                this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
-            })
             AUDIO_CONTAINER[0].load()
-            AUDIO_CONTAINER[0].play()
+            AUDIO_CONTAINER[0].play().then(() => {
+                setTimeout(() => TEXT_CONTAINER.text(''), 750)
+                setTimeout(() => {
+                    this.task.inTrial = true
+                    this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
+                }, 800)
+            })
             // Start time used to compute RT is recorded when the audio plays
             this.task.currentTrial.startTime = new Date()
         }, 250)
