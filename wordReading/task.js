@@ -26,7 +26,6 @@ class Task extends BaseTask {
 
         this.instructionScreens = [
             new ParticipantIdScreen(this),
-            new InputDevicesScreen(this), 
             new InstructionsOne(this),
             this.letsPracticeScreen,
             this.trialScreen,
@@ -64,7 +63,7 @@ class Task extends BaseTask {
             'PartofSpeech',
         ]
         if (window.location.host === "georgetown.az1.qualtrics.com") {
-            const qualtricsClient = new QualtricsClient(columns, this.inputDevice, this.participantID)
+            const qualtricsClient = new QualtricsClient(columns, 'mouse', this.participantID)
             qualtricsClient.collectTrialData(this.trials)
             qualtricsClient.submitEmbeddedData()
             this.engine.clickNextButton()
