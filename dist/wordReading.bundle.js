@@ -137,7 +137,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   TaskType: () => (/* binding */ TaskType)\n/* harmony export */ });\n/* harmony import */ var _static_wordReading_beep_440Hz_300ms_wav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../static/wordReading/beep_440Hz_300ms.wav */ \"./static/wordReading/beep_440Hz_300ms.wav\");\n/* harmony import */ var _static_wordReading_87_ETID_wav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../static/wordReading/87_ETID.wav */ \"./static/wordReading/87_ETID.wav\");\n/* harmony import */ var _static_wordReading_71_ETID_wav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../static/wordReading/71_ETID.wav */ \"./static/wordReading/71_ETID.wav\");\n\n\n\n\nconst CROSSED_REAL = 'CROSSED_REAL'\nconst PSEUDOWORD = 'PSEUDOWORD'\nconst MULTIMORPHEMIC = 'MULTIMORPHEMIC'\nconst POS_AND_LENGTH_EFFECT = 'POS_AND_LENGTH_EFFECT'\n\n\nclass TaskType {\n    static CrossedReal = new TaskType(CROSSED_REAL)\n    static Pseudoword = new TaskType(PSEUDOWORD)\n    static Multimorphemic = new TaskType(MULTIMORPHEMIC)\n    static POSAndLengthEffect = new TaskType(POS_AND_LENGTH_EFFECT)\n\n    constructor(name) {\n        this.name = name\n        this.trialAudio = new Audio(_static_wordReading_beep_440Hz_300ms_wav__WEBPACK_IMPORTED_MODULE_0__)\n        this.beginBeep = {\n            [MULTIMORPHEMIC]: new Audio(_static_wordReading_87_ETID_wav__WEBPACK_IMPORTED_MODULE_1__),\n            [POS_AND_LENGTH_EFFECT]: new Audio(_static_wordReading_71_ETID_wav__WEBPACK_IMPORTED_MODULE_2__)\n        }\n    }\n\n    static fromString(string) {\n        switch(string) {\n            case CROSSED_REAL:\n                return TaskType.CrossedReal\n            case PSEUDOWORD:\n                return TaskType.Pseudoword\n            case MULTIMORPHEMIC:\n                return TaskType.Multimorphemic\n            case POS_AND_LENGTH_EFFECT:\n                return TaskType.POSAndLengthEffect\n            default:\n                throw new Error(`Undefined task type: ${string}`)\n        }\n    }\n\n    get beginAudio() {\n        return this.beginBeep[this.name]\n    }\n}\n\n\n\n\n//# sourceURL=webpack://behavioral/./wordReading/constants.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   TaskType: () => (/* binding */ TaskType)\n/* harmony export */ });\n/* harmony import */ var _static_wordReading_beep_440Hz_300ms_wav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../static/wordReading/beep_440Hz_300ms.wav */ \"./static/wordReading/beep_440Hz_300ms.wav\");\n/* harmony import */ var _static_wordReading_92_ETID_wav__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../static/wordReading/92_ETID.wav */ \"./static/wordReading/92_ETID.wav\");\n/* harmony import */ var _static_wordReading_93_ETID_wav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../static/wordReading/93_ETID.wav */ \"./static/wordReading/93_ETID.wav\");\n/* harmony import */ var _static_wordReading_87_ETID_wav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../static/wordReading/87_ETID.wav */ \"./static/wordReading/87_ETID.wav\");\n/* harmony import */ var _static_wordReading_71_ETID_wav__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../static/wordReading/71_ETID.wav */ \"./static/wordReading/71_ETID.wav\");\n\n\n\n\n\n\nconst CROSSED_REAL = 'CROSSED_REAL'\nconst PSEUDOWORD_1 = 'PSEUDOWORD_1'\nconst PSEUDOWORD_2 = 'PSEUDOWORD_2'\nconst MULTIMORPHEMIC = 'MULTIMORPHEMIC'\nconst POS_AND_LENGTH_EFFECT = 'POS_AND_LENGTH_EFFECT'\n\n\nclass TaskType {\n    static CrossedReal = new TaskType(CROSSED_REAL)\n    static Pseudoword1 = new TaskType(PSEUDOWORD_1)\n    static Pseudoword2 = new TaskType(PSEUDOWORD_2)\n    static Multimorphemic = new TaskType(MULTIMORPHEMIC)\n    static POSAndLengthEffect = new TaskType(POS_AND_LENGTH_EFFECT)\n\n    constructor(name) {\n        this.name = name\n        this.trialAudio = new Audio(_static_wordReading_beep_440Hz_300ms_wav__WEBPACK_IMPORTED_MODULE_0__)\n        this.beginBeep = {\n            [PSEUDOWORD_1]: new Audio(_static_wordReading_92_ETID_wav__WEBPACK_IMPORTED_MODULE_1__),\n            [PSEUDOWORD_2]: new Audio(_static_wordReading_93_ETID_wav__WEBPACK_IMPORTED_MODULE_2__),\n            [MULTIMORPHEMIC]: new Audio(_static_wordReading_87_ETID_wav__WEBPACK_IMPORTED_MODULE_3__),\n            [POS_AND_LENGTH_EFFECT]: new Audio(_static_wordReading_71_ETID_wav__WEBPACK_IMPORTED_MODULE_4__)\n        }\n    }\n\n    static fromString(string) {\n        switch(string) {\n            case CROSSED_REAL:\n                return TaskType.CrossedReal\n            case PSEUDOWORD_1:\n                return TaskType.Pseudoword1\n            case PSEUDOWORD_2:\n                return TaskType.Pseudoword2\n            case MULTIMORPHEMIC:\n                return TaskType.Multimorphemic\n            case POS_AND_LENGTH_EFFECT:\n                return TaskType.POSAndLengthEffect\n            default:\n                throw new Error(`Undefined task type: ${string}`)\n        }\n    }\n\n    get beginAudio() {\n        return this.beginBeep[this.name]\n    }\n}\n\n\n\n\n//# sourceURL=webpack://behavioral/./wordReading/constants.js?");
 
 /***/ }),
 
@@ -208,6 +208,26 @@ eval("module.exports = __webpack_require__.p + \"ccfb5c0d56089d35dd7e.wav\";\n\n
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 eval("module.exports = __webpack_require__.p + \"5a76a060a378f907dad7.wav\";\n\n//# sourceURL=webpack://behavioral/./static/wordReading/87_ETID.wav?");
+
+/***/ }),
+
+/***/ "./static/wordReading/92_ETID.wav":
+/*!****************************************!*\
+  !*** ./static/wordReading/92_ETID.wav ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"0340450a73c53ac5e220.wav\";\n\n//# sourceURL=webpack://behavioral/./static/wordReading/92_ETID.wav?");
+
+/***/ }),
+
+/***/ "./static/wordReading/93_ETID.wav":
+/*!****************************************!*\
+  !*** ./static/wordReading/93_ETID.wav ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"41f6870cd6c80c664aa8.wav\";\n\n//# sourceURL=webpack://behavioral/./static/wordReading/93_ETID.wav?");
 
 /***/ }),
 
