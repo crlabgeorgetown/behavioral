@@ -30,10 +30,16 @@ class TrialScreen extends Screen {
     }
 
     render() {
+        this.task.newTrial()
+        if (this.task.currentProcedure === 'showasbreak') {
+            this.task.currentScreen = this.task.breakScreen
+            this.task.currentScreen.render()
+            return
+        }
+
         super.render()
         this.task.type.trialAudio.play()
         setTimeout(() => {
-            this.task.newTrial()
             TEXT_CONTAINER.text(`${this.task.currentTrial.Word}`)
             this.task.inTrial = true
             this.task.currentTrial.startTime = new Date()

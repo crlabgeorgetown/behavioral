@@ -1,4 +1,3 @@
-import { InputDevicesScreen } from "../shared/screens/inputDevices"
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { BaseTask } from "../shared/task"
 import { InstructionsOne } from "./screens/instructions"
