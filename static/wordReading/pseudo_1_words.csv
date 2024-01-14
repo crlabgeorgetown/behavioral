@@ -1,4 +1,4 @@
-Weight,Nested,Procedure,word,forwardbutton,TrialWasAdministered,TrialType,0,BlockNumber,WordType
+Weight,Nested,Procedure,Word,forwardbutton,TrialWasAdministered,TrialType,0,BlockNumber,WordType
 1,,showtrial,dape,forwardbutton,0,practice,0,1,practice
 1,,showtrial,frode,forwardbutton,0,practice,0,1,practice
 1,,showlastpractice,thid,forwardbutton,0,practice,0,1,practice
