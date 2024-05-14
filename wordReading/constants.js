@@ -1,4 +1,6 @@
 import Beep from '../static/wordReading/beep_440Hz_300ms.wav'
+import CrossedRealWord1Beep from '../static/wordReading/39_ETID.wav'
+import CrossedRealWord2Beep from '../static/wordReading/44_ETID.wav'
 import Pseudoword1Beep from '../static/wordReading/92_ETID.wav'
 import Pseudoword2Beep from '../static/wordReading/93_ETID.wav'
 import MultimorphemicBeep from '../static/wordReading/87_ETID.wav'
@@ -24,6 +26,8 @@ class TaskType {
         this.name = name
         this.trialAudio = new Audio(Beep)
         this.beginBeep = {
+            [CROSSED_REALWORD_1]: new Audio(CrossedRealWord1Beep),
+            [CROSSED_REALWORD_2]: new Audio(CrossedRealWord2Beep),
             [PSEUDOWORD_1]: new Audio(Pseudoword1Beep),
             [PSEUDOWORD_2]: new Audio(Pseudoword2Beep),
             [MULTIMORPHEMIC]: new Audio(MultimorphemicBeep),
