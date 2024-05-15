@@ -10,7 +10,7 @@ class Begin extends Screen {
     ])
 
     get clickHandlers() {
-        return {container: () => this.audioContainerClickHandler(false, this.task.type.beginAudio)}
+        return {container: () => this.audioContainerClickHandler(false, this.task.type.beep)}
     }
 }
 

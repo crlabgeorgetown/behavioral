@@ -46,7 +46,7 @@ class TrialScreen extends Screen {
             this.timeoutID = setTimeout(() => {
                 this.task.currentScreen = this.task.timeoutScreen
                 this.task.currentScreen.render()
-            }, 10000)
+            }, this.task.type.timeToTimeout)
         }, 200)
     }
 }

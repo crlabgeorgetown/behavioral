@@ -1,0 +1,13 @@
+Item ,Procedure,TrialType,Word
+P1,showtrial,practice,The man reads a book. 
+P2,showlastpractice,practice,The cat bites the dog. 
+1,showtrial,real,It's six o'clock
+2,showtrial,real,Father comes home
+3,showtrial,real,He parks the car
+4,showtrial,real,It goes between two others
+5,showtrial,real,He finds the keys in his pocket
+6,showtrial,real,They are where they should be
+7,showtrial,real,He unlocks the heavy oak door
+8,showtrial,real,It looks as if nobody is around 
+9,showtrial,real,He picks up the paper from the coffee table
+10,showtrial,real,He opens it to the sports page for the basketball scores 

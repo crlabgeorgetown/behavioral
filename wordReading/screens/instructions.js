@@ -4,10 +4,12 @@ import Screen from "../../shared/screens/base"
 
 
 class InstructionsOne extends Screen {
-    components = new Map([
-        [TEXT_CONTAINER, {text: 'You will see a word on the screen.\nRead the word out loud.', addClass: 'base-text large-text'}],
-        [INSTRUCTION_BUTTON_CONTAINER, {}]
-    ])
+    get components() {
+        return new Map([
+            [TEXT_CONTAINER, {text: this.task.type.instructionText, addClass: 'base-text large-text'}],
+            [INSTRUCTION_BUTTON_CONTAINER, {}]
+        ])
+    } 
 
     get clickHandlers() {
         return {
