@@ -47,14 +47,15 @@ class TaskType {
         this.instructionText = {
             [CROSSED_REALWORD_1]: DEFAULT_INSTRUCTIONS,
             [CROSSED_REALWORD_2]: DEFAULT_INSTRUCTIONS,
-            [PSEUDOWORD_1]: DEFAULT_INSTRUCTIONS,
-            [PSEUDOWORD_2]: DEFAULT_INSTRUCTIONS,
+            [PSEUDOWORD_1]: 'You will see words that are not real words.\nThey are all made-up words.\n\nRead the words out loud.',
+            [PSEUDOWORD_2]: 'You will see words that are not real words.\nThey are all made-up words.\n\nRead the words out loud.',
             [MULTIMORPHEMIC]: DEFAULT_INSTRUCTIONS,
             [POS_AND_LENGTH_EFFECT]: DEFAULT_INSTRUCTIONS,
             [ORAL_SENTENCE_READING]: 'Read the following sentences out loud.',
             [SPOKEN_LETTER_NAMING]: 'You will see a letter on the screen.\nName the letter out loud.'
         }[name]
 
+        this.shouldShowInstructionScreenTwo = [PSEUDOWORD_1, PSEUDOWORD_2].includes(name)
         this.timeToTimeout = name === ORAL_SENTENCE_READING ? 30000 : 10000
     }
 

@@ -1,6 +1,6 @@
 import { ParticipantIdScreen } from "../shared/screens/participantID"
 import { BaseTask } from "../shared/task"
-import { InstructionsOne } from "./screens/instructions"
+import { InstructionsOne, InstructionsTwo } from "./screens/instructions"
 import { TrialScreen } from "./screens/trial"
 import { QualtricsClient } from "../shared/qualtricsClient"
 import { Trial } from "./trial"
@@ -26,9 +26,15 @@ class Task extends BaseTask {
         this.instructionScreens = [
             new ParticipantIdScreen(this),
             new InstructionsOne(this),
+        ]
+        if (this.type.shouldShowInstructionScreenTwo) {
+            this.instructionScreens.push(new InstructionsTwo(this))
+        }
+
+        this.instructionScreens.push(
             this.letsPracticeScreen,
             this.trialScreen,
-        ]
+        )
 
         this.setupInstructionScreens()
     }
