@@ -10,14 +10,14 @@
         src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
         crossorigin="anonymous"></script>
-    <script src="../dist/lexicalDecision.bundle.js"></script>
-    <script>
-        d3.csv('https://jslawjslaw.github.io/behavioral/static/data/written_lexical_decision_2.csv').then((data) => {
-            new lexicalDecision.Task(data, this, 'written')
-        })
-    </script>
 </head>
 <body> 
     <div id="Wrapper"></div>
+    <script src="../dist/wordReading.bundle.js"></script>
+    <script>
+        d3.csv('../static/data/realword_repetition.csv').then((data) => {
+            new wordReading.Task(data, this, 'REALWORD_REPETITION')
+        })
+    </script>
 </body>
 </html>
