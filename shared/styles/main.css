@@ -10,3 +10,10 @@ html, body {
     overflow: hidden;
     touch-action: none;
 }
+
+video {
+    object-fit: fill;
+    aspect-ratio: 16 / 9;
+    width: 50%;
+    border: 2px solid;
+}

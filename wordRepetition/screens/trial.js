@@ -18,18 +18,22 @@ class TrialScreen extends Screen {
             return
         }
 
+        VIDEO_CONTAINER.hide()
+        PROCEED_CONTAINER.hide()
+        super.render()
+
         setTimeout(() => {
             this.task.newTrial()
-            super.render()
+            TEXT_CONTAINER.hide()
+            VIDEO_CONTAINER.show()
             VIDEO_SOURCE.attr('src', this.task.currentTrial.source)
-            VIDEO_CONTAINER[0].load()
-            VIDEO_CONTAINER[0].play().then(() => {
-                setTimeout(() => TEXT_CONTAINER.text(''), 750)
-                setTimeout(() => {
-                    this.task.inTrial = true
-                    this.timeoutID = setTimeout(() => this.responseClickHandler('NR'), 5000)
-                }, 800)
+            VIDEO_CONTAINER.off('ended')
+            VIDEO_CONTAINER.on('ended', () => {
+                VIDEO_CONTAINER.hide()
+                PROCEED_CONTAINER.show()
             })
+            VIDEO_CONTAINER[0].load()
+            VIDEO_CONTAINER[0].play()
             // Start time used to compute RT is recorded when the audio plays
             this.task.currentTrial.startTime = new Date()
         }, 100)

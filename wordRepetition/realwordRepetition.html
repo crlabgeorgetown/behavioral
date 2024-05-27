@@ -13,10 +13,10 @@
 </head>
 <body> 
     <div id="Wrapper"></div>
-    <script src="../dist/wordReading.bundle.js"></script>
+    <script src="../dist/wordRepetition.bundle.js"></script>
     <script>
-        d3.csv('../static/data/realword_repetition.csv').then((data) => {
-            new wordReading.Task(data, this, 'REALWORD_REPETITION')
+        d3.csv('https://jslawjslaw.github.io/behavioral/static/data/realword_repetition.csv').then((data) => {
+            new wordRepetition.Task(data, this, 'REALWORD_REPETITION')
         })
     </script>
 </body>

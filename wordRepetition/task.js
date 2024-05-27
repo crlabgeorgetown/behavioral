@@ -38,7 +38,7 @@ class Task extends BaseTask {
     }
 
     get currentProcedure() {
-        return this.data[this.trials.length - 1].Procedure
+        return this.data[this.trials.length].Procedure
     }
 
     get isDone() {
