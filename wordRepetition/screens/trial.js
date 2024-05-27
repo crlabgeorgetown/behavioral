@@ -31,6 +31,7 @@ class TrialScreen extends Screen {
 
     render() {
         this.task.newTrial()
+        TEXT_CONTAINER.show()
         VIDEO_CONTAINER.hide()
         PROCEED_CONTAINER.hide()
         super.render()
@@ -45,7 +46,13 @@ class TrialScreen extends Screen {
                 PROCEED_CONTAINER.show()
             })
             VIDEO_CONTAINER[0].load()
-            VIDEO_CONTAINER[0].play()
+            VIDEO_CONTAINER[0].play().then(() => {
+                this.timeoutID = setTimeout(() => {
+                    this.task.currentScreen = this.task.timeoutScreen
+                    this.task.currentScreen.render()
+                    TEXT_CONTAINER.show()
+                }, this.task.type.timeToTimeout)
+            })
             // Start time used to compute RT is recorded when the audio plays
             this.task.currentTrial.startTime = new Date()
         }, 100)

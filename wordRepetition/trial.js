@@ -35,7 +35,7 @@ class Trial extends BaseTrial {
     }
 
     get source() {
-        return `https://crlabgeorgetown.github.io/static/wordRepetition/${this.Item}.mp4`
+        return `https://crlabgeorgetown.github.io/behavioral/static/wordRepetition/${this.Item}.mp4`
     }
 }
 
