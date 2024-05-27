@@ -1,6 +1,6 @@
 ItemNum,Procedure,Item,TrialType,WordType,
-1,showpractice,desk,Practice,practice,
-2,showpractice,porcupine,Practice,practice,
+1,showtrial,desk,Practice,practice,
+2,showtrial,porcupine,Practice,practice,
 3,showlastpractice,tractor,Practice,practice,
 4,showtrial,bridge,Real,real,
 5,showtrial,envelope,Real,real,
