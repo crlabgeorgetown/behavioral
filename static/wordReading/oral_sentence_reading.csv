@@ -1,4 +1,4 @@
-Item ,Procedure,TrialType,Word
+Item,Procedure,TrialType,Word
 P1,showtrial,practice,The man reads a book. 
 P2,showlastpractice,practice,The cat bites the dog. 
 1,showtrial,real,It's six o'clock.

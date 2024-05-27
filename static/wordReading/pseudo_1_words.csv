@@ -12,7 +12,7 @@ Weight,Nested,Procedure,Word,forwardbutton,TrialWasAdministered,TrialType,0,Bloc
 1,,showtrial,bolg,forwardbutton,0,real,0,1,NoAnalogyPW
 1,,showtrial,fron,forwardbutton,0,real,0,1,InconsistentPW
 1,,showtrial,wribe,forwardbutton,0,real,0,1,RegularPW
-1,,showtrial,plede,forwardbutton,0,real,0,1,Pseudohomophone
+1,,showtrial,bord,forwardbutton,0,real,0,1,Pseudohomophone
 1,,showtrial,hish,forwardbutton,0,real,0,1,RegularPW
 1,,showtrial,glown,forwardbutton,0,real,0,1,InconsistentPW
 1,,showtrial,plear,forwardbutton,0,real,0,1,InconsistentPW
