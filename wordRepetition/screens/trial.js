@@ -11,19 +11,31 @@ class TrialScreen extends Screen {
         [PROCEED_CONTAINER, {}],
     ])
 
-    render() {
-        if (this.task.currentProcedure === 'showasbreak') {
-            this.task.currentScreen = this.task.breakScreen
-            this.task.currentScreen.render()
-            return
+    get clickHandlers() {
+        return {
+            rightChevron: () => this.proceedClickHandler(),
         }
+    }
 
+    proceedClickHandler() {
+        clearTimeout(this.timeoutID) 
+        this.task.currentScreen = this.task.trialScreen      
+        if (this.task.currentProcedure === 'showlastpractice') {
+            this.task.currentScreen = this.task.beginScreen
+            TEXT_CONTAINER.show()
+        } else if (this.task.isDone) {
+            this.task.currentScreen = this.task.finishedScreen
+        }
+        this.task.currentScreen.render()
+    }
+
+    render() {
+        this.task.newTrial()
         VIDEO_CONTAINER.hide()
         PROCEED_CONTAINER.hide()
         super.render()
 
         setTimeout(() => {
-            this.task.newTrial()
             TEXT_CONTAINER.hide()
             VIDEO_CONTAINER.show()
             VIDEO_SOURCE.attr('src', this.task.currentTrial.source)

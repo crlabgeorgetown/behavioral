@@ -6,7 +6,7 @@ import Screen from "./base"
 
 class Begin extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {text: `Any questions?\nLet's begin`}],
+        [TEXT_CONTAINER, {text: `Any questions?\nLet's begin.`}],
     ])
 
     get clickHandlers() {
@@ -17,7 +17,7 @@ class Begin extends Screen {
 
 class BeginOrPracticeAgain extends Screen {
     components = new Map([
-        [TEXT_CONTAINER, {text: `Any questions?\nLet's begin`}],
+        [TEXT_CONTAINER, {text: `Any questions?\nLet's begin.`}],
         [BEGIN_OR_PRACTICE_CONTAINER, {}]
     ])
 

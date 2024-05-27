@@ -35,7 +35,7 @@ class Trial extends BaseTrial {
     }
 
     get audioSource() {
-        return `https://jslawjslaw.github.io/behavioral/static/auditory_lexical_decision_normalized_wav_files/${this.Item}.wav`
+        return `https://crlabgeorgetown.github.io/behavioral/static/auditory_lexical_decision_normalized_wav_files/${this.Item}.wav`
     }
 }
 
