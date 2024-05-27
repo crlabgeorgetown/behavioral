@@ -22,10 +22,10 @@ class TrialScreen extends Screen {
         this.task.currentScreen = this.task.trialScreen      
         if (this.task.currentProcedure === 'showlastpractice') {
             this.task.currentScreen = this.task.beginScreen
-            TEXT_CONTAINER.show()
         } else if (this.task.isDone) {
             this.task.currentScreen = this.task.finishedScreen
         }
+        TEXT_CONTAINER.show()
         this.task.currentScreen.render()
     }
 
