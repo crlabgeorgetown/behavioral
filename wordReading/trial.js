@@ -3,21 +3,21 @@ import { BaseTrial } from "../shared/trial"
 class Trial extends BaseTrial {
     constructor(config) {
         super()
+        this.ItemNum = config.ItemNum
         this.Word = config.Word
         this.TrialType = config.TrialType
-        this.Repetitions = config.Repetitions
+        this.Repetitions = 0
         this.WordType = config.WordType
-        this.Length = config.Length
+        this.PrecedingWordType = config.PrecedingWordType
+        this.Imageability = config.Imageability
         this.Frequency = config.Frequency
-        this.Phonemes = config.Phonemes
-        this.Syllables = config.Syllables
         this.PartofSpeech = config.PartofSpeech
         this.Response = null
         this.startTime = null
         this.responseTime = null
     }
 
-    get RT() {
+    get TimeOnItem() {
         return this.responseTime - this.startTime
     }
 
@@ -31,6 +31,14 @@ class Trial extends BaseTrial {
 
     get Time() {
         return this.startTime.toTimeString().split(' ')[0]
+    }
+
+    get Date() {
+        return this.startTime.toLocaleDateString('en-US')
+    }
+
+    get Item() {
+        return this.Word
     }
 }
 

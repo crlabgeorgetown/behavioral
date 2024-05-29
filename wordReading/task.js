@@ -57,14 +57,18 @@ class Task extends BaseTask {
 
     submit() {
         const columns = [
-            'Word',
+            'ItemNum',
+            'Date',
+            'Time',
+            'TimeOnItem',
+            'Item',
+            'TimedOut',
             'TrialType',
             'Repetitions',
             'WordType',
-            'Length',
+            'Imageability',
             'Frequency',
-            'Phonemes',
-            'Syllables',
+            'Regularity',
             'PartofSpeech',
         ]
         if (window.location.host === "georgetown.az1.qualtrics.com") {
