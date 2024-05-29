@@ -25,18 +25,15 @@ class TrialScreen extends Screen {
             this.task.currentScreen = this.task.beginScreen
         } else if (this.task.isDone) {
             this.task.currentScreen = this.task.finishedScreen
+        } else if (this.task.nextProcedure === 'showasbreak') {
+            this.task.currentScreen = this.task.breakScreen
         }
+        this.task.dataIndex++
         this.task.currentScreen.render()
     }
 
     render() {
         this.task.newTrial()
-        if (this.task.currentProcedure === 'showasbreak') {
-            this.task.currentScreen = this.task.breakScreen
-            this.task.currentScreen.render()
-            return
-        }
-
         super.render()
         this.task.type.trialAudio.play()
         setTimeout(() => {
@@ -44,6 +41,7 @@ class TrialScreen extends Screen {
             this.task.inTrial = true
             this.task.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
+                this.task.trials[this.task.trials.length - 1].TimedOut = true
                 this.task.currentScreen = this.task.timeoutScreen
                 this.task.currentScreen.render()
             }, this.task.type.timeToTimeout)

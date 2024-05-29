@@ -14,6 +14,7 @@ class Task extends BaseTask {
         this.engine = engine
         this.trials = []
         this.data = data
+        this.dataIndex = 0
         this.inTrial = false
         this.type = TaskType.fromString(taskType)
 
@@ -44,15 +45,19 @@ class Task extends BaseTask {
     }
 
     get currentProcedure() {
-        return this.data[this.trials.length - 1].Procedure
+        return this.data[this.dataIndex].Procedure
+    }
+
+    get nextProcedure() {
+        return this.data[this.dataIndex + 1].Procedure
     }
 
     get isDone() {
-        return this.data.length === this.trials.length
+        return this.dataIndex === this.data.length - 1
     }
 
     newTrial() {
-        this.trials.push(new Trial(this.data[this.trials.length]))
+        this.trials.push(new Trial(this.data[this.dataIndex]))
     }
 
     submit() {
