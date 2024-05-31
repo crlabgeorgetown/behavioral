@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no" />
 	<title>Cognitive Recovery Lab</title>
-    <link rel="stylesheet" href="../shared/styles/main.css">
+    <link rel="stylesheet" href="../../shared/styles/main.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script
         src="https://code.jquery.com/jquery-3.6.3.min.js"
@@ -13,10 +13,10 @@
 </head>
 <body> 
     <div id="Wrapper"></div>
-    <script src="../dist/wordReading.bundle.js"></script>
+    <script src="../../dist/wordReading.bundle.js"></script>
     <script>
-        d3.csv('https://jslawjslaw.github.io/behavioral/static/wordReading/crossed_real_word_1.csv').then((data) => {
-            new wordReading.Task(data, this, 'CROSSED_REALWORD_1')
+        d3.csv('https://jslawjslaw.github.io/behavioral/static/wordReading/oral_sentence_reading.csv').then((data) => {
+            new wordReading.Task(data, this, 'ORAL_SENTENCE_READING')
         })
     </script>
 </body>

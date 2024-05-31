@@ -1,10 +1,9 @@
-import { BaseTrial } from "../shared/trial"
 
-class Trial extends BaseTrial {
+
+export default class Trial {
     constructor(config) {
-        super()
         this.ItemNum = config.ItemNum
-        this.Word = config.Word
+        this.Item = config.Word
         this.TrialType = config.TrialType
         this.Repetitions = 0
         this.WordType = config.WordType
@@ -15,6 +14,17 @@ class Trial extends BaseTrial {
         this.startTime = null
         this.responseTime = null
         this.TimedOut = false
+        this.Regularity = config.Regularity
+        this.Block = config.Block
+    }
+
+    get columns() {
+        return [
+            ...Object.keys(this),
+            'TimeOnItem',
+            'Time',
+            'Date',
+        ]
     }
 
     get TimeOnItem() {
@@ -28,11 +38,4 @@ class Trial extends BaseTrial {
     get Date() {
         return this.startTime.toLocaleDateString('en-US')
     }
-
-    get Item() {
-        return this.Word
-    }
 }
-
-
-export { Trial }

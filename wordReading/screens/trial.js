@@ -1,9 +1,13 @@
-import { TEXT_CONTAINER } from "../../shared/components/textContainer";
 import { PROCEED_CONTAINER } from "../../shared/components/rightChevron";
-import Screen from "../../shared/screens/base";
+import { TEXT_CONTAINER } from "../../shared/components/textContainer";
+import Screen from "./base";
 
 
-class TrialScreen extends Screen {
+export default class Trial extends Screen {
+    constructor(orchestrator, trialManager) {
+        super(orchestrator)
+        this.trialManager = trialManager
+    }
 
     get components() {
         return new Map([
@@ -14,40 +18,27 @@ class TrialScreen extends Screen {
 
     get clickHandlers() {
         return {
-            rightChevron: () => this.proceedClickHandler(),
+            rightChevron: (event) => this.proceedClickHandler(event),
         }
     }
 
-    proceedClickHandler() {
-        clearTimeout(this.timeoutID) 
-        this.task.currentScreen = this.task.trialScreen       
-        if (this.task.currentProcedure === 'showlastpractice') {
-            this.task.currentScreen = this.task.beginScreen
-        } else if (this.task.isDone) {
-            this.task.currentScreen = this.task.finishedScreen
-        } else if (this.task.nextProcedure === 'showasbreak') {
-            this.task.currentScreen = this.task.breakScreen
-        }
-        this.task.dataIndex++
-        this.task.currentScreen.render()
+    proceedClickHandler(event) {
+        event.stopPropagation()  // required in order to prevent container on clicks from triggering immediately after being set
+        clearTimeout(this.timeoutID)
+        this.orchestrator.currentTrial.responseTime = new Date()
+        this.orchestrator.next()
     }
 
-    render() {
-        this.task.newTrial()
-        super.render()
-        this.task.type.trialAudio.play()
+    startTrial() {
+        this.orchestrator.variant.fixationAudio.play()
         setTimeout(() => {
-            TEXT_CONTAINER.text(`${this.task.currentTrial.Word}`)
-            this.task.inTrial = true
-            this.task.currentTrial.startTime = new Date()
+            TEXT_CONTAINER.text(`${this.orchestrator.currentTrial.Item}`)
+            this.orchestrator.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
-                this.task.trials[this.task.trials.length - 1].TimedOut = true
-                this.task.currentScreen = this.task.timeoutScreen
-                this.task.currentScreen.render()
-            }, this.task.type.timeToTimeout)
+                this.orchestrator.currentTrial.TimedOut = true
+                this.orchestrator.timedOut()
+            }, this.orchestrator.variant.timeToTimeout)
         }, 200)
     }
+
 }
-
-
-export { TrialScreen }
