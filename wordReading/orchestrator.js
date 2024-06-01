@@ -55,7 +55,7 @@ export default class Orchestrator {
                 current = new SequenceNode(this.breakScreen)
             } else {
                 current = new SequenceNode(this.trialScreen)
-                current.initializeTrial(row)
+                current.initializeTrial(this.variant.trialClass, row)
             }
 
             previous.next = current

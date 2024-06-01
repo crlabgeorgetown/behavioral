@@ -1,4 +1,3 @@
-import Trial from './trial'
 
 
 export default class SequenceNode {
@@ -9,7 +8,7 @@ export default class SequenceNode {
         this.trial = null
     }
 
-    initializeTrial(trial) {
-        this.trial = new Trial(trial)
+    initializeTrial(trialClass, trial) {
+        this.trial = new trialClass(trial)
     }
 }

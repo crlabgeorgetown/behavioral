@@ -10,6 +10,7 @@ import SpokenLetterNamingBeep from '../static/wordReading/64_ETID.wav'
 
 import { InstructionOne, InstructionTwo, ParticipantId } from "./screens/instruction"
 import { LetsPractice } from './screens/transition'
+import { CrossedRealWordTrial, PseudoWordTrial } from './trial'
 
 
 const CROSSED_REALWORD_1 = 'CROSSED_REALWORD_1'
@@ -61,6 +62,7 @@ class CrossedRealWord1 extends Base {
         this.ePrimeTemplateID = 39
         this.instructionOne = DEFAULT_INSTRUCTION_ONE
         this.beginAudio = new Audio(CrossedRealWord1Beep)
+        this.trialClass = CrossedRealWordTrial
     }
 }
 
@@ -78,6 +80,7 @@ class CrossedRealWord2 extends Base {
         this.ePrimeTemplateID = 44
         this.instructionOne = DEFAULT_INSTRUCTION_ONE
         this.beginAudio = new Audio(CrossedRealWord2Beep)
+        this.trialClass = CrossedRealWordTrial
     }
 }
 
@@ -149,6 +152,7 @@ class Pseudoword1 extends Base {
         this.instructionOne = PSEUDOWORD_INSTRUCTION_ONE
         this.instructionTwo = INSTRUCTION_TWO
         this.beginAudio = new Audio(Pseudoword1Beep)
+        this.trialClass = PseudoWordTrial
     }
 }
 
@@ -168,6 +172,7 @@ class Pseudoword2 extends Base {
         this.instructionOne = PSEUDOWORD_INSTRUCTION_ONE
         this.instructionTwo = INSTRUCTION_TWO
         this.beginAudio = new Audio(Pseudoword2Beep)
+        this.trialClass = PseudoWordTrial
     }
 }
 

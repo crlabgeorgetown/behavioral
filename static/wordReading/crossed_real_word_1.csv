@@ -1,4 +1,4 @@
-ItemNum,Word,Procedure,TrialType,Block,Imageability,Frequency,Regularity,WordType,PrecedingWordType,PartofSpeech
+ItemNum,Item,Procedure,TrialType,Block,Imageability,Frequency,Regularity,WordType,PrecedingWordType,PartofSpeech
 1,cat,showtrial,practice,1,N/A,N/A,N/A,N/A,N/A,N/A
 2,book,showtrial,practice,1,N/A,N/A,N/A,N/A,N/A,N/A
 3,whale,showlastpractice,practice,1,N/A,N/A,N/A,N/A,N/A,N/A
