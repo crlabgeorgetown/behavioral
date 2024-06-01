@@ -75,7 +75,7 @@ class Complete extends Screen {
 
     get timeouts() {
         return new Map([
-            [this.orchestrator.complete, 1000]
+            [() => this.orchestrator.complete(), 1000]
         ])
     }
 }

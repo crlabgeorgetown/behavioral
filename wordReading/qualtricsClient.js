@@ -44,8 +44,8 @@ export default class QualtricsClient {
             for (const [key, value] of Object.entries(this.metaData)) {
                 Qualtrics.SurveyEngine.setEmbeddedData(key, value)
             }
-        }
 
-        this.engine.clickNextButton()
+            this.engine.clickNextButton()
+        }
     }
 }

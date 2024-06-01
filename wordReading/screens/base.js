@@ -43,8 +43,6 @@ export default class Screen {
     }
 
     setTimeouts() {
-        for (const [callback, milliseconds] of Object.entries(this.timeouts)) {
-            setTimeout(callback, milliseconds)
-        }
+        this.timeouts.forEach((milliseconds, callback) => setTimeout(callback, milliseconds))
     }
 }

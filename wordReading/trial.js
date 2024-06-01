@@ -32,7 +32,7 @@ export default class Trial {
     }
 
     get Time() {
-        return this.startTime.toTimeString().split(' ')[0]
+        return this.startTime.toLocaleTimeString('en-US')
     }
 
     get Date() {
