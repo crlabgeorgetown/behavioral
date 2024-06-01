@@ -36,6 +36,7 @@ export default class Trial extends Screen {
             this.orchestrator.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
                 this.orchestrator.currentTrial.TimedOut = true
+                this.orchestrator.currentTrial.responseTime = new Date()
                 this.orchestrator.timedOut()
             }, this.orchestrator.variant.timeToTimeout)
         }, 200)
