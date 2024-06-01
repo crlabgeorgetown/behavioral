@@ -61,7 +61,7 @@ class TimeOut extends Screen {
     }
 
     get clickHandlers() {
-        return {container: () => this.orchestrator.reenterSequence()}
+        return { container: () => this.timeoutContainerClickHandler() }
     }
 }
 
@@ -73,8 +73,10 @@ class Complete extends Screen {
         ])
     }
 
-    render() {
-        setTimeout(() => this.orchestrator.complete())
+    get timeouts() {
+        return new Map([
+            [this.orchestrator.complete, 1000]
+        ])
     }
 }
 

@@ -36,7 +36,7 @@ export default class QualtricsClient {
 
     submit(root) {
         this.collectTrialData(root)
-        
+
         if (window.location.host === "georgetown.az1.qualtrics.com") {
             for (const [key, values] of Object.entries(this.trialData)) {
                 Qualtrics.SurveyEngine.setEmbeddedData(key, values.join(';'))

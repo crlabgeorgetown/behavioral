@@ -105,5 +105,6 @@ export default class Orchestrator {
         }
         this.currentScreen.screen.setClasses()
         this.currentScreen.screen.setClickHandlers()
+        this.currentScreen.screen.setTimeouts()
     }
 }

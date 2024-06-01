@@ -8,6 +8,8 @@ export default class Screen {
 
     get clickHandlers() { return {} }
 
+    get timeouts() { return [] }
+
     audioContainerClickHandler(audio) {
         audio.addEventListener('ended', () => this.containerClickHander())
         audio.play()
@@ -16,6 +18,11 @@ export default class Screen {
     containerClickHander() {
         CONTAINER.off('click')
         this.orchestrator.next()
+    }
+
+    timeoutContainerClickHandler() {
+        CONTAINER.off('click')
+        this.orchestrator.reenterSequence()
     }
 
     setClasses() {
@@ -35,4 +42,9 @@ export default class Screen {
         }
     }
 
+    setTimeouts() {
+        for (const [callback, milliseconds] of Object.entries(this.timeouts)) {
+            setTimeout(callback, milliseconds)
+        }
+    }
 }
