@@ -1,10 +1,12 @@
 
 
 export default class QualtricsClient {
-    constructor(engine) {
+    constructor(engine, variant) {
         this.engine = engine
         this.trialData = {}
         this.metaData = {
+            'ExperimentNameShort': variant.testNameShort,
+            'BuildTestID': variant.buildTestID,
             'userAgent': navigator.userAgent.replace(',', '|').replace(';','|'),
             'RecipientFirstName': 'N/A',
             'RecipientLastName': 'N/A',

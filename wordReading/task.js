@@ -5,17 +5,15 @@ import { variantFromString } from "./variants"
 
 
 class Task {
-	constructor(data, engine, variant) {
+	constructor(data, engine, variantString) {
         jQuery("#Questions").remove()
         jQuery("#PushStickyFooter").remove()
         jQuery("#Plug").hide()
         jQuery(".SkinInner").hide()
         jQuery("#Wrapper").append(CONTAINER)
         
-        this.orchestrator = new Orchestrator(
-            variantFromString(variant),
-            new QualtricsClient(engine)
-        )
+        const variant = variantFromString(variantString)
+        this.orchestrator = new Orchestrator(variant, new QualtricsClient(engine, variant))
         this.orchestrator.initialize(data)
         this.orchestrator.render()
 	}
