@@ -85,4 +85,46 @@ class PseudoWordTrial {
 }
 
 
-export { CrossedRealWordTrial, PseudoWordTrial }
+class OralSentenceReadingTrial {
+    constructor(config) {
+        this.ItemNum = config.ItemNum
+        this.Item = config.Item
+        this.TrialType = config.TrialType
+        this.Repetitions = 0
+        this.Accuracy = -1
+        this.Version = 'ReadMap'
+        this.WordType = config.WordType
+        this.startTime = null
+        this.responseTime = null
+        this.TimedOut = false
+    }
+
+    get columns() {
+        return [
+            ...Object.keys(this),
+            'TrialWasAdministered',
+            'TimeOnItem',
+            'Time',
+            'Date',
+        ]
+    }
+
+    get TrialWasAdministered() {
+        return !this.TimedOut
+    }
+
+    get TimeOnItem() {
+        return this.responseTime - this.startTime
+    }
+
+    get Time() {
+        return this.startTime.toLocaleTimeString('en-US')
+    }
+
+    get Date() {
+        return this.startTime.toLocaleDateString('en-US')
+    }
+}
+
+
+export { CrossedRealWordTrial, OralSentenceReadingTrial, PseudoWordTrial }

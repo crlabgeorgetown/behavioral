@@ -10,7 +10,7 @@ import SpokenLetterNamingBeep from '../static/wordReading/64_ETID.wav'
 
 import { InstructionOne, InstructionTwo, ParticipantId } from "./screens/instruction"
 import { LetsPractice } from './screens/transition'
-import { CrossedRealWordTrial, PseudoWordTrial } from './trial'
+import { CrossedRealWordTrial, OralSentenceReadingTrial, PseudoWordTrial } from './trial'
 
 
 const CROSSED_REALWORD_1 = 'CROSSED_REALWORD_1'
@@ -116,6 +116,7 @@ class OralSentenceReading extends Base {
         this.instructionOne = 'Read the following sentences out loud.'
         this.timeToTimeout = 30000
         this.beginAudio = new Audio(OralSentenceReadingBeep)
+        this.trialClass = OralSentenceReadingTrial
     }
 }
 
