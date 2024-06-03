@@ -172,6 +172,51 @@ class OralSentenceReadingTrial {
 }
 
 
+class POSAndLengthEffectTrial {
+    constructor(config) {
+        this.ItemNum = config.ItemNum
+        this.Item = config.Item
+        this.TrialType = config.TrialType
+        this.Repetitions = 0
+        this.Version = 'v2'
+        this.Accuracy = -1
+        this.LetterCount = config.LetterCount
+        this.SyllableCount = config.SyllableCount
+        this.PartOfSpeech = config.PartOfSpeech
+        this.startTime = null
+        this.responseTime = null
+        this.TimedOut = false
+        this.BlockNumber = config.BlockNumber
+    }
+
+    get columns() {
+        return [
+            ...Object.keys(this),
+            'TrialWasAdministered',
+            'TimeOnItem',
+            'Time',
+            'Date',
+        ]
+    }
+
+    get TrialWasAdministered() {
+        return !this.TimedOut
+    }
+
+    get TimeOnItem() {
+        return this.responseTime - this.startTime
+    }
+
+    get Time() {
+        return this.startTime.toLocaleTimeString('en-US')
+    }
+
+    get Date() {
+        return this.startTime.toLocaleDateString('en-US')
+    }
+}
+
+
 class SpokenLetterNamingTrial {
     constructor(config) {
         this.ItemNum = config.ItemNum
@@ -212,4 +257,4 @@ class SpokenLetterNamingTrial {
 
 
 
-export { CrossedRealWordTrial, MultimorphemicTrial, OralSentenceReadingTrial, PseudoWordTrial, SpokenLetterNamingTrial }
+export { CrossedRealWordTrial, MultimorphemicTrial, OralSentenceReadingTrial, POSAndLengthEffectTrial, PseudoWordTrial, SpokenLetterNamingTrial }

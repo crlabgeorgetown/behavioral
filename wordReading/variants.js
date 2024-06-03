@@ -10,7 +10,7 @@ import SpokenLetterNamingBeep from '../static/wordReading/64_ETID.wav'
 
 import { InstructionOne, InstructionTwo, ParticipantId } from "./screens/instruction"
 import { LetsPractice } from './screens/transition'
-import { CrossedRealWordTrial, MultimorphemicTrial, OralSentenceReadingTrial, PseudoWordTrial, SpokenLetterNamingTrial } from './trial'
+import { CrossedRealWordTrial, MultimorphemicTrial, OralSentenceReadingTrial, POSAndLengthEffectTrial, PseudoWordTrial, SpokenLetterNamingTrial } from './trial'
 
 
 const CROSSED_REALWORD_1 = 'CROSSED_REALWORD_1'
@@ -135,6 +135,7 @@ class POSAndLengthEffect extends Base {
         this.ePrimeTemplateID = 71
         this.instructionOne = DEFAULT_INSTRUCTION_ONE
         this.beginAudio = new Audio(POSAndLengthEffectBeep)
+        this.trialClass = POSAndLengthEffectTrial
     }
 }
 
