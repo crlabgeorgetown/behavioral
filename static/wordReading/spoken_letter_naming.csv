@@ -1,4 +1,4 @@
-Item,Word,TrialType,Procedure
+ItemNum,Item,TrialType,Procedure
 P1,b,practice,showtrial
 P2,o,practice,showlastpractice
 1,n,real,showtrial

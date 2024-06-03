@@ -10,7 +10,7 @@ import SpokenLetterNamingBeep from '../static/wordReading/64_ETID.wav'
 
 import { InstructionOne, InstructionTwo, ParticipantId } from "./screens/instruction"
 import { LetsPractice } from './screens/transition'
-import { CrossedRealWordTrial, MultimorphemicTrial, OralSentenceReadingTrial, PseudoWordTrial } from './trial'
+import { CrossedRealWordTrial, MultimorphemicTrial, OralSentenceReadingTrial, PseudoWordTrial, SpokenLetterNamingTrial } from './trial'
 
 
 const CROSSED_REALWORD_1 = 'CROSSED_REALWORD_1'
@@ -191,6 +191,7 @@ class SpokenLetterNaming extends Base {
         this.ePrimeTemplateID = 64
         this.instructionOne = 'You will see a letter on the screen.\nName the letter out loud.'
         this.beginAudio = new Audio(SpokenLetterNamingBeep)
+        this.trialClass = SpokenLetterNamingTrial
     }
 }
 
