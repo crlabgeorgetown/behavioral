@@ -85,6 +85,51 @@ class PseudoWordTrial {
 }
 
 
+class MultimorphemicTrial {
+    constructor(config) {
+        this.ItemNum = config.ItemNum
+        this.Item = config.Item
+        this.TrialType = config.TrialType
+        this.Repetitions = 0
+        this.Length = config.Length
+        this.Frequency = config.Frequency
+        this.Phonemes = config.Phonemes
+        this.Syllables = config.Syllables
+        this.PartofSpeech = config.PartofSpeech
+        this.WordType = config.WordType
+        this.startTime = null
+        this.responseTime = null
+        this.TimedOut = false
+    }
+
+    get columns() {
+        return [
+            ...Object.keys(this),
+            'TrialWasAdministered',
+            'TimeOnItem',
+            'Time',
+            'Date',
+        ]
+    }
+
+    get TrialWasAdministered() {
+        return !this.TimedOut
+    }
+
+    get TimeOnItem() {
+        return this.responseTime - this.startTime
+    }
+
+    get Time() {
+        return this.startTime.toLocaleTimeString('en-US')
+    }
+
+    get Date() {
+        return this.startTime.toLocaleDateString('en-US')
+    }
+}
+
+
 class OralSentenceReadingTrial {
     constructor(config) {
         this.ItemNum = config.ItemNum
@@ -127,4 +172,4 @@ class OralSentenceReadingTrial {
 }
 
 
-export { CrossedRealWordTrial, OralSentenceReadingTrial, PseudoWordTrial }
+export { CrossedRealWordTrial, MultimorphemicTrial, OralSentenceReadingTrial, PseudoWordTrial }
