@@ -1,13 +1,13 @@
 ItemNum,Procedure,TrialType,Item,WordType
-1,showtrial,practice,The man reads a book.,Practice
-2,showlastpractice,practice,The cat bites the dog.,Practice
-2,showtrial,real,It's six o'clock.,Real
-3,showtrial,real,Father comes home.,Real
-4,showtrial,real,He parks the car.,Real
-5,showtrial,real,It goes between two others.,Real
-6,showtrial,real,He finds the keys in his pocket.,Real
-7,showtrial,real,They are where they should be.,Real
-8,showtrial,real,He unlocks the heavy oak door.,Real
-9,showtrial,real,It looks as if nobody is around.,Real
-10,showtrial,real,He picks up the paper from the coffee table.,Real
-11,showtrial,real,He opens it to the sports page for the basketball scores.,Real
+P1,showtrial,practice,The man reads a book.,Practice
+P2,showlastpractice,practice,The cat bites the dog.,Practice
+1,showtrial,real,It's six o'clock.,Real
+2,showtrial,real,Father comes home.,Real
+3,showtrial,real,He parks the car.,Real
+4,showtrial,real,It goes between two others.,Real
+5,showtrial,real,He finds the keys in his pocket.,Real
+6,showtrial,real,They are where they should be.,Real
+7,showtrial,real,He unlocks the heavy oak door.,Real
+8,showtrial,real,It looks as if nobody is around.,Real
+9,showtrial,real,He picks up the paper from the coffee table.,Real
+10,showtrial,real,He opens it to the sports page for the basketball scores.,Real

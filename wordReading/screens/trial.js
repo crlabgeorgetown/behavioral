@@ -32,7 +32,6 @@ export default class Trial extends Screen {
     startTrial() {
         this.orchestrator.variant.fixationAudio.play()
         setTimeout(() => {
-            debugger
             TEXT_CONTAINER.text(`${this.orchestrator.currentTrial.Item}`)
             this.orchestrator.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
