@@ -1,45 +1,46 @@
 import { PROCEED_CONTAINER } from "../../shared/components/rightChevron"
 import { VIDEO_CONTAINER, VIDEO_SOURCE } from "../../shared/components/videoContainer"
 import { TEXT_CONTAINER } from "../../shared/components/textContainer"
-import Screen from "../../shared/screens/base"
+import Screen from "./base"
 
 
-class TrialScreen extends Screen {
-    components = new Map([
-        [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text fixed-height'}],
-        [VIDEO_CONTAINER, {}],
-        [PROCEED_CONTAINER, {}],
-    ])
+export default class Trial extends Screen {
+    constructor(orchestrator, trialManager) {
+        super(orchestrator)
+        this.trialManager = trialManager
+    }
+
+    get components() {
+        return new Map([
+            [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}],
+            [VIDEO_CONTAINER, {}],
+            [PROCEED_CONTAINER, {}]
+        ])
+    }
 
     get clickHandlers() {
         return {
-            rightChevron: () => this.proceedClickHandler(),
+            rightChevron: (event) => this.proceedClickHandler(event),
         }
     }
 
-    proceedClickHandler() {
-        clearTimeout(this.timeoutID) 
-        this.task.currentScreen = this.task.trialScreen      
-        if (this.task.currentProcedure === 'showlastpractice') {
-            this.task.currentScreen = this.task.beginScreen
-        } else if (this.task.isDone) {
-            this.task.currentScreen = this.task.finishedScreen
-        }
+    proceedClickHandler(event) {
+        event.stopPropagation()  // required in order to prevent container on clicks from triggering immediately after being set
+        clearTimeout(this.timeoutID)
+        this.orchestrator.currentTrial.responseTime = new Date()
         TEXT_CONTAINER.show()
-        this.task.currentScreen.render()
+        this.orchestrator.next()
     }
 
-    render() {
-        this.task.newTrial()
+    startTrial() {
         TEXT_CONTAINER.show()
         VIDEO_CONTAINER.hide()
         PROCEED_CONTAINER.hide()
-        super.render()
 
         setTimeout(() => {
             TEXT_CONTAINER.hide()
             VIDEO_CONTAINER.show()
-            VIDEO_SOURCE.attr('src', this.task.currentTrial.source)
+            VIDEO_SOURCE.attr('src', this.orchestrator.currentTrial.source)
             VIDEO_CONTAINER.off('ended')
             VIDEO_CONTAINER.on('ended', () => {
                 VIDEO_CONTAINER.hide()
@@ -48,15 +49,17 @@ class TrialScreen extends Screen {
             VIDEO_CONTAINER[0].load()
             VIDEO_CONTAINER[0].play().then(() => {
                 this.timeoutID = setTimeout(() => {
-                    this.task.currentScreen = this.task.timeoutScreen
-                    this.task.currentScreen.render()
+                    this.orchestrator.currentTrial.TimedOut = true
+                    this.orchestrator.currentTrial.responseTime = new Date()
                     TEXT_CONTAINER.show()
-                }, this.task.type.timeToTimeout)
+                    this.orchestrator.timedOut()
+                }, this.orchestrator.variant.timeToTimeout)
             })
             // Start time used to compute RT is recorded when the audio plays
-            this.task.currentTrial.startTime = new Date()
+            this.orchestrator.currentTrial.startTime = new Date()
         }, 100)
     }
 }
 
-export { TrialScreen }
+
+export { Trial }

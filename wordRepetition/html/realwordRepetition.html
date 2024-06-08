@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no" />
 	<title>Cognitive Recovery Lab</title>
-    <link rel="stylesheet" href="../shared/styles/main.css">
+    <link rel="stylesheet" href="../../shared/styles/main.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script
         src="https://code.jquery.com/jquery-3.6.3.min.js"
@@ -13,10 +13,10 @@
 </head>
 <body> 
     <div id="Wrapper"></div>
-    <script src="../dist/wordRepetition.bundle.js"></script>
+    <script src="../../dist/wordRepetition.bundle.js"></script>
     <script>
-        d3.csv('https://jslawjslaw.github.io/behavioral/static/data/pseudoword_repetition.csv').then((data) => {
-            new wordRepetition.Task(data, this, 'PSEUDOWORD_REPETITION')
+        d3.csv('https://jslawjslaw.github.io/behavioral/static/data/realword_repetition.csv').then((data) => {
+            new wordRepetition.Task(data, this, 'REALWORD_REPETITION')
         })
     </script>
 </body>

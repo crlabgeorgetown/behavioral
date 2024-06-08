@@ -1,37 +1,36 @@
-import { BaseTrial } from "../shared/trial"
 
-class Trial extends BaseTrial {
+class Trial {
     constructor(config) {
-        super()
         this.ItemNum = config.ItemNum
         this.TrialType = config.TrialType
         this.Item = config.Item
-        this.Lexicality = config.Lexicality
-        this.CRESP = config.CRESP
-        this.WordType = config.WordType
-        this.Frequency = config.Frequency
-        this.Regularity = config.Regularity
-        this.Imageability = config.Imageability
-        this.PartofSpeech = config.PartofSpeech
-        this.Response = null
         this.startTime = null
         this.responseTime = null
+        this.TimedOut = false
+        this.Accuracy = -1
+        this.Repetitions = 0
+        this.TrialWasAdministered = true
     }
 
-    get RT() {
+    get columns() {
+        return [
+            ...Object.keys(this),
+            'TimeOnItem',
+            'Time',
+            'Date',
+        ]
+    }
+
+    get TimeOnItem() {
         return this.responseTime - this.startTime
     }
 
-    get TimedOut() {
-        return this.Response === 'NR'
-    }
-
-    get Accuracy() {
-        return this.Response === this.CRESP ? 1 : 0
-    }
-
     get Time() {
-        return this.startTime.toTimeString().split(' ')[0]
+        return this.startTime.toLocaleTimeString('en-US')
+    }
+
+    get Date() {
+        return this.startTime.toLocaleDateString('en-US')
     }
 
     get source() {
