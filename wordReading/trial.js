@@ -32,7 +32,7 @@ class CrossedRealWordTrial {
     }
 
     get Time() {
-        return this.startTime.toLocaleTimeString('en-US')
+        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }
 
     get Date() {
@@ -76,7 +76,7 @@ class PseudoWordTrial {
     }
 
     get Time() {
-        return this.startTime.toLocaleTimeString('en-US')
+        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }
 
     get Date() {
@@ -121,7 +121,7 @@ class MultimorphemicTrial {
     }
 
     get Time() {
-        return this.startTime.toLocaleTimeString('en-US')
+        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }
 
     get Date() {
@@ -163,7 +163,7 @@ class OralSentenceReadingTrial {
     }
 
     get Time() {
-        return this.startTime.toLocaleTimeString('en-US')
+        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }
 
     get Date() {
@@ -208,7 +208,7 @@ class POSAndLengthEffectTrial {
     }
 
     get Time() {
-        return this.startTime.toLocaleTimeString('en-US')
+        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }
 
     get Date() {
@@ -247,7 +247,7 @@ class SpokenLetterNamingTrial {
     }
 
     get Time() {
-        return this.startTime.toLocaleTimeString('en-US')
+        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }
 
     get Date() {
