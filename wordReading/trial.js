@@ -32,9 +32,7 @@ class CrossedRealWordTrial {
     }
 
     get Time() {
-        const time = this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
-        console.log(time)
-        return time
+        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }
 
     get Date() {
@@ -249,7 +247,9 @@ class SpokenLetterNamingTrial {
     }
 
     get Time() {
-        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
+        const time = this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
+        console.log(time)
+        return time
     }
 
     get Date() {
