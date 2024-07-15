@@ -247,9 +247,7 @@ class SpokenLetterNamingTrial {
     }
 
     get Time() {
-        const time = this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
-        console.log(time)
-        return time
+        return this.startTime.toTimeString().split(' ')[0]
     }
 
     get Date() {
