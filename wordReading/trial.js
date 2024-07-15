@@ -208,7 +208,6 @@ class POSAndLengthEffectTrial {
     }
 
     get Time() {
-        console.log("hi")
         return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }
 
@@ -248,6 +247,7 @@ class SpokenLetterNamingTrial {
     }
 
     get Time() {
+        console.log("hi")
         return this.startTime.toTimeString().split(' ')[0]
     }
 
