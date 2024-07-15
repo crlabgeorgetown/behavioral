@@ -12,6 +12,7 @@ class Task {
         jQuery(".SkinInner").hide()
         jQuery("#Wrapper").append(CONTAINER)
         
+        console.log('hello')
         const variant = variantFromString(variantString)
         this.orchestrator = new Orchestrator(variant, new QualtricsClient(engine, variant))
         this.orchestrator.initialize(data)
