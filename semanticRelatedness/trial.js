@@ -23,7 +23,6 @@ class WrittenTrial {
             'Date',
             'RT',
             'Accuracy',
-            'TimedOut',
             'TrialWasAdministered',
             'Repetitions'
         ]
@@ -43,10 +42,6 @@ class WrittenTrial {
 
     get RT() {
         return this.responseTime - this.startTime
-    }
-
-    get TimedOut() {
-        return this.Response === null
     }
 
     get Item() {
