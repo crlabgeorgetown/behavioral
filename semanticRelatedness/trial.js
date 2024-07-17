@@ -4,7 +4,6 @@ class WrittenTrial {
     constructor(config) {
         this.ItemNum = config.ItemNum
         this.TrialType = config.TrialType
-        this.WordType = config.WordType
         this.RelationType = config.RelationType
         this.Sound1 = config.Sound1
         this.Sound2 = config.Sound2
