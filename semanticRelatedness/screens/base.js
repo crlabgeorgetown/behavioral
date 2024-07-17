@@ -11,11 +11,11 @@ export default class Screen {
     get timeouts() { return [] }
 
     audioContainerClickHandler(audio) {
-        audio.addEventListener('ended', () => this.containerClickHander())
+        audio.addEventListener('ended', () => this.containerClickHandler())
         audio.play()
     }
 
-    containerClickHander() {
+    containerClickHandler() {
         CONTAINER.off('click')
         this.orchestrator.next()
     }

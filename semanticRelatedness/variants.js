@@ -1,5 +1,6 @@
-import { InstructionOne, InstructionThree, InstructionTwo, ParticipantId } from "./screens/instruction"
+import { InputDevice, InstructionOne, InstructionThree, InstructionTwo, ParticipantId } from "./screens/instruction"
 import { LetsPractice } from './screens/transition'
+import { WrittenTrial } from "./trial"
 
 
 const AUDITORY = 'AUDITORY'
@@ -20,6 +21,7 @@ function variantFromString(string) {
 class AuditorySemanticRelatedness {
     constructor() {
         this.screens = [
+            InputDevice,
             ParticipantId,
             InstructionOne,
             InstructionTwo,
@@ -32,14 +34,18 @@ class AuditorySemanticRelatedness {
         this.instructionOne = 'You will hear two words.'
         this.instructionTwo = INSTRUCTION_TWO
         this.instructionThree = INSTRUCTION_THREE
+        this.trialClass = WrittenTrial
     }
 }
 
 class WrittenSemanticRelatedness {
     constructor() {
         this.screens = [
+            InputDevice,
             ParticipantId,
             InstructionOne,
+            InstructionTwo,
+            InstructionThree,
             LetsPractice
         ]
         this.testNameShort = 'WrittenSemanticRelatednessJudgment'
@@ -48,6 +54,7 @@ class WrittenSemanticRelatedness {
         this.instructionOne = 'You will see two words.'
         this.instructionTwo = INSTRUCTION_TWO
         this.instructionThree = INSTRUCTION_THREE
+        this.trialClass = WrittenTrial
     }
 }
 

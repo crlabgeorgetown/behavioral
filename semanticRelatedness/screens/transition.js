@@ -11,11 +11,7 @@ class Begin extends Screen {
     }
 
     get clickHandlers() {
-        return {
-            container: () => {
-                this.audioContainerClickHandler(this.orchestrator.variant.beginAudio)
-            }
-        }
+        return {container: () => this.containerClickHandler()}
     }
 }
 
@@ -31,7 +27,26 @@ class Break extends Screen {
     }
 
     get clickHandlers() {
-        return {container: () => this.containerClickHander()}
+        return {container: () => this.containerClickHandler()}
+    }
+}
+
+
+class Incorrect extends Screen {
+    get components() {
+        return new Map([
+            [
+                TEXT_CONTAINER, 
+                {
+                    text: 'Incorrect, click or touch anywhere to try again.',
+                    addClass: 'base-text extra-large-text red'
+                }
+            ]
+        ])
+   }
+
+    get clickHandlers() {
+        return {container: () => this.containerClickHandler()}
     }
 }
 
@@ -81,4 +96,4 @@ class Complete extends Screen {
 }
 
 
-export { Begin, Break, Complete, LetsPractice, TimeOut }
+export { Begin, Break, Complete, Incorrect, LetsPractice, TimeOut }

@@ -1,6 +1,6 @@
 import { CONTAINER } from "../shared/components/container"
-import { Begin, Break, Complete, TimeOut } from "./screens/transition"
-// import Trial from "./screens/trial"
+import { Begin, Break, Complete, Incorrect, TimeOut } from "./screens/transition"
+import Trial from "./screens/trial"
 import SequenceNode from "./sequenceNode"
 
 
@@ -15,8 +15,9 @@ export default class Orchestrator {
         this.beginScreen = new Begin(this)
         this.breakScreen = new Break(this)
         this.completeScreen = new Complete(this)
+        this.incorrectScreen = new Incorrect(this)
         this.timeoutScreen = new TimeOut(this)
-        // this.trialScreen = new Trial(this)
+        this.trialScreen = new Trial(this)
     }
 
     get currentTrial() {
@@ -85,6 +86,19 @@ export default class Orchestrator {
         this.currentScreen = this.previousScreen.next
         this.render()
         if (this.currentScreen.trial !== null) this.currentScreen.screen.startTrial()
+    }
+
+    replay() {
+        const replayTrial = new SequenceNode(this.trialScreen)
+        replayTrial.initializeTrial(this.variant.trialClass, this.currentTrial)
+
+        const incorrectScreen = new SequenceNode(this.incorrectScreen)
+        
+        incorrectScreen.next = replayTrial
+        replayTrial.next = this.currentScreen.next
+        this.currentScreen.next = incorrectScreen
+
+        this.next()
     }
 
     next() {

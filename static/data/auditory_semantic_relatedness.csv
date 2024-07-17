@@ -1,5 +1,5 @@
 ItemNum,Procedure,TrialType,RelationType,Sound1,Sound2,CRESP
-1,showtrial,Practice,themes,hair,fur,yes
+1,showpractice,Practice,tax,hair,fur,yes
 2,showlastpractice,Practice,unrelated,lock,frog,no
 3,showtrial,Real,unrelated,canoe,jester,no
 4,showtrial,Real,tax,otter,rat,yes
