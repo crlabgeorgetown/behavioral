@@ -1,6 +1,5 @@
 import { CONTAINER } from "../shared/components/container"
 import { Begin, Break, Complete, Incorrect, TimeOut } from "./screens/transition"
-import Trial from "./screens/trial"
 import SequenceNode from "./sequenceNode"
 
 
@@ -17,7 +16,7 @@ export default class Orchestrator {
         this.completeScreen = new Complete(this)
         this.incorrectScreen = new Incorrect(this)
         this.timeoutScreen = new TimeOut(this)
-        this.trialScreen = new Trial(this)
+        this.trialScreen = new variant.trialScreenClass(this)
     }
 
     get currentTrial() {

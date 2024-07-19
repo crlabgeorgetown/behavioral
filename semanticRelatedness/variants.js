@@ -1,6 +1,7 @@
 import { InputDevice, InstructionOne, InstructionThree, InstructionTwo, ParticipantId } from "./screens/instruction"
 import { LetsPractice } from './screens/transition'
-import { WrittenTrial } from "./trial"
+import { AuditoryTrialScreen, WrittenTrialScreen } from "./screens/trial"
+import { Trial } from "./trial"
 
 
 const AUDITORY = 'AUDITORY'
@@ -34,7 +35,8 @@ class AuditorySemanticRelatedness {
         this.instructionOne = 'You will hear two words.'
         this.instructionTwo = INSTRUCTION_TWO
         this.instructionThree = INSTRUCTION_THREE
-        this.trialClass = WrittenTrial
+        this.trialClass = Trial
+        this.trialScreenClass = AuditoryTrialScreen
     }
 }
 
@@ -54,7 +56,8 @@ class WrittenSemanticRelatedness {
         this.instructionOne = 'You will see two words.'
         this.instructionTwo = INSTRUCTION_TWO
         this.instructionThree = INSTRUCTION_THREE
-        this.trialClass = WrittenTrial
+        this.trialClass = Trial
+        this.trialScreenClass = WrittenTrialScreen
     }
 }
 

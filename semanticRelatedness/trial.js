@@ -1,6 +1,6 @@
 
 
-class WrittenTrial {
+class Trial {
     constructor(config) {
         this.ItemNum = config.ItemNum
         this.TrialType = config.TrialType
@@ -54,7 +54,12 @@ class WrittenTrial {
     get Date() {
         return this.startTime.toLocaleDateString('en-US')
     }
+
+    source(index) {
+        const sound = this[`Sound${index}`]
+        return `https://crlabgeorgetown.github.io/behavioral/static/auditory_rhyme_decision_wav_files/${sound}.wav`
+    }
 }
 
 
-export { WrittenTrial }
+export { Trial }
