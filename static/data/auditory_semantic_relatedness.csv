@@ -24,7 +24,7 @@ ItemNum,Procedure,TrialType,RelationType,Sound1,Sound2,CRESP
 23,showtrial,Real,theme,candle,match,yes
 24,showtrial,Real,tax,floss,yarn,yes
 25,showtrial,Real,unrelated,rubber,turtle,no
-26,showtrial,Real,tax,Easter,Thanksgiving,yes
+26,showtrial,Real,tax,easter,thanksgiving,yes
 27,showtrial,Real,unrelated,chip,mountain,no
 28,showtrial,Real,theme,bed,pillow,yes
 29,showtrial,Real,theme,envelope,letter,yes

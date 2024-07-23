@@ -51,7 +51,7 @@ class ParticipantId extends Screen {
 class InstructionOne extends Screen {
     get components() {
         return new Map([
-            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionOne, addClass: 'base-text large-text'}],
+            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionOne, addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }
@@ -68,7 +68,7 @@ class InstructionOne extends Screen {
 class InstructionTwo extends Screen {
     get components() {
         return new Map([
-            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionTwo, addClass: 'base-text large-text'}],
+            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionTwo, addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }
@@ -85,7 +85,7 @@ class InstructionTwo extends Screen {
 class InstructionThree extends Screen {
     get components() {
         return new Map([
-            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionThree, addClass: 'base-text large-text'}],
+            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionThree, addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }

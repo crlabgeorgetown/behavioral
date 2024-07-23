@@ -12,7 +12,7 @@ ItemNum,Procedure,TrialType,RelationType,Sound1,Sound2,CRESP
 11,showtrial,Real,tax,floss,yarn,yes
 12,showtrial,Real,unrelated,glass,lion,no
 13,showtrial,Real,unrelated,cheese,kayak,no
-14,showtrial,Real,tax,Easter,Thanksgiving,yes
+14,showtrial,Real,tax,easter,thanksgiving,yes
 15,showtrial,Real,theme,bed,pillow,yes
 16,showtrial,Real,unrelated,glove,pretzel,no
 17,showtrial,Real,tax,crown,helmet,yes

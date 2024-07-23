@@ -3,7 +3,7 @@ import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
 import Screen from "../base";
 
 
-export default class Trial extends Screen {
+export default class WordReadingTrialScreen extends Screen {
     constructor(orchestrator, trialManager) {
         super(orchestrator)
         this.trialManager = trialManager

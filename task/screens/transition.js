@@ -54,7 +54,7 @@ class Incorrect extends Screen {
 class LetsPractice extends Screen {
     get components() {
        return new Map([
-            [TEXT_CONTAINER, {text: `Let's Practice.`, addClass: 'base-text extra-large-text'}],
+            [TEXT_CONTAINER, {text: `Let's Practice.`, addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }
