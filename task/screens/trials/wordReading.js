@@ -1,6 +1,6 @@
-import { PROCEED_CONTAINER } from '../../shared/components/rightChevron'
-import { TEXT_CONTAINER } from '../../shared/components/textContainer'
-import Screen from './base'
+import { PROCEED_CONTAINER } from "../../../shared/components/rightChevron";
+import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
+import Screen from "../base";
 
 
 export default class Trial extends Screen {

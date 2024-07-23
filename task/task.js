@@ -1,7 +1,7 @@
 import { CONTAINER } from "../shared/components/container"
 import Orchestrator from "./orchestrator"
 import QualtricsClient from "./qualtricsClient"
-import { variantFromString } from "./variants"
+import { variantFromString } from "./variants/index"
 
 
 class Task {

@@ -76,7 +76,7 @@ class TimeOut extends Screen {
     }
 
     get clickHandlers() {
-        return { container: () => this.timeoutContainerClickHandler() }
+        return { container: () => this.containerClickHandler() }
     }
 }
 

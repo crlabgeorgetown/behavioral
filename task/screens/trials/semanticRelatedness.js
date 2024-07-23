@@ -1,7 +1,7 @@
-import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../shared/components/audioContainer";
-import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER, GREEN_LABEL, RED_LABEL } from "../../shared/components/responseButtons";
-import { TEXT_CONTAINER } from "../../shared/components/textContainer";
-import Screen from "./base";
+import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../../shared/components/audioContainer";
+import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER, GREEN_LABEL, RED_LABEL } from "../../../shared/components/responseButtons";
+import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
+import Screen from "../base";
 
 
 class BaseTrialScreen extends Screen {
@@ -51,7 +51,6 @@ class WrittenTrialScreen extends BaseTrialScreen {
             TEXT_CONTAINER.text(`${this.orchestrator.currentTrial.Sound1}\n${this.orchestrator.currentTrial.Sound2}`)
             this.orchestrator.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
-                this.orchestrator.currentTrial.TimedOut = true
                 this.orchestrator.currentTrial.responseTime = new Date()
                 this.orchestrator.timedOut()
             }, 10000)
@@ -82,7 +81,6 @@ class AuditoryTrialScreen extends BaseTrialScreen {
             AUDIO_CONTAINER[0].play()
             this.orchestrator.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
-                this.orchestrator.currentTrial.TimedOut = true
                 this.orchestrator.currentTrial.responseTime = new Date()
                 this.orchestrator.timedOut()
             }, 10000)

@@ -20,11 +20,6 @@ export default class Screen {
         this.orchestrator.next()
     }
 
-    timeoutContainerClickHandler() {
-        CONTAINER.off('click')
-        this.orchestrator.reenterSequence()
-    }
-
     setClasses() {
         for (const [component, settings] of this.components.entries()) {
             for (const [setting, value] of Object.entries(settings)) {

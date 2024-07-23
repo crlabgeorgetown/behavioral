@@ -1,22 +1,11 @@
-import { InputDevice, InstructionOne, InstructionThree, InstructionTwo, ParticipantId } from "../task/screens/instruction"
-import { LetsPractice } from '../task/screens/transition'
-import { AuditoryTrialScreen, WrittenTrialScreen } from "./screens/trial"
-import { Trial } from "./trial"
+import { InputDevice, InstructionOne, InstructionThree, InstructionTwo, ParticipantId } from "../screens/instruction"
+import { LetsPractice } from '../screens/transition'
+import { AuditoryTrialScreen, WrittenTrialScreen } from "../screens/trials/semanticRelatedness"
+import { Trial } from "../trials/semanticRelatedness"
 
-
-const AUDITORY = 'AUDITORY'
-const WRITTEN = 'WRITTEN'
 
 const INSTRUCTION_TWO = 'If they are related, press Related.\nFor example, juice and cup.'
 const INSTRUCTION_THREE = 'If they are NOT related, press Not Related.\nFor example, juice and roof.'
-
-
-function variantFromString(string) {
-    return new {
-        [AUDITORY]: AuditorySemanticRelatedness,
-        [WRITTEN]: WrittenSemanticRelatedness,
-    }[string]()
-}
 
 
 class AuditorySemanticRelatedness {
@@ -62,4 +51,4 @@ class WrittenSemanticRelatedness {
 }
 
 
-export { variantFromString }
+export { AuditorySemanticRelatedness, WrittenSemanticRelatedness }

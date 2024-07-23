@@ -8,7 +8,7 @@ module.exports = {
     lexicalDecision: './lexicalDecision/task.js',
     rhymeDecision: './rhymeDecision/task.js',
     stroop: './stroop/task.js',
-    semanticRelatedness: './semanticRelatedness/task.js',
+    task: './task/task.js',
     wordReading: './wordReading/task.js',
     wordRepetition: './wordRepetition/task.js'
   },

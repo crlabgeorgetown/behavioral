@@ -76,26 +76,25 @@ export default class Orchestrator {
     }
 
     timedOut() {
-        this.previousScreen = this.currentScreen
-        this.currentScreen = new SequenceNode(this.timeoutScreen)
-        this.render()
+        if (this.currentTrial.TrialType === 'Practice') {
+            this.replay(true)
+        } else {
+            const transitionScreen = new SequenceNode(this.timeoutScreen)
+            transitionScreen.next = this.currentScreen.next
+            this.currentScreen.next = transitionScreen
+            this.next()
+        }
     }
 
-    reenterSequence() {
-        this.currentScreen = this.previousScreen.next
-        this.render()
-        if (this.currentScreen.trial !== null) this.currentScreen.screen.startTrial()
-    }
-
-    replay() {
+    replay(timedOut = false) {
         const replayTrial = new SequenceNode(this.trialScreen)
         replayTrial.initializeTrial(this.variant.trialClass, this.currentTrial)
 
-        const incorrectScreen = new SequenceNode(this.incorrectScreen)
+        const transitionScreen = timedOut ? new SequenceNode(this.timeoutScreen) : new SequenceNode(this.incorrectScreen)
         
-        incorrectScreen.next = replayTrial
+        transitionScreen.next = replayTrial
         replayTrial.next = this.currentScreen.next
-        this.currentScreen.next = incorrectScreen
+        this.currentScreen.next = transitionScreen
 
         this.next()
     }
