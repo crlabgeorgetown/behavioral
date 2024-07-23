@@ -11,7 +11,11 @@ class Begin extends Screen {
     }
 
     get clickHandlers() {
-        return {container: () => this.containerClickHandler()}
+        if (this.orchestrator.variant.hasOwnProperty('beginAudio')) {
+            return {container: () => this.audioContainerClickHandler(this.orchestrator.variant.beginAudio)}
+        } else {
+            return {container: () => this.containerClickHandler()}
+        }
     }
 }
 
