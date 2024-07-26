@@ -35,6 +35,10 @@ class PictureNamingTrial {
     get Date() {
         return this.startTime.toLocaleDateString('en-US')
     }
+
+    get source() {
+        return `https://crlabgeorgetown.github.io/behavioral/static/pictureNaming/${this.Item.charAt(0).toUpperCase()}${this.Item.slice(1)}.jpg`
+    }
 }
 
 
