@@ -8,8 +8,7 @@ module.exports = {
     lexicalDecision: './lexicalDecision/task.js',
     rhymeDecision: './rhymeDecision/task.js',
     stroop: './stroop/task.js',
-    task: './task/task.js',
-    wordRepetition: './wordRepetition/task.js'
+    task: './task/task.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
