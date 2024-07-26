@@ -29,9 +29,9 @@ export default class PictureNamingTrialScreen extends Screen {
     }
 
     startTrial() {
-        this.orchestrator.variant.fixationAudio.play()
         IMAGE_CONTAINER.hide()
         IMAGE_CONTAINER.attr({src: this.orchestrator.currentTrial.source})
+        this.orchestrator.variant.fixationAudio.play()
         setTimeout(() => {
             TEXT_CONTAINER.hide()
             IMAGE_CONTAINER.show()

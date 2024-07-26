@@ -13,6 +13,9 @@ class PictureNamingTrial {
         this.Accuracy = -1
         this.Repetitions = 0
         this.TrialWasAdministered = 1
+
+        // preload image
+        new Image().src = this.source
     }
 
     get columns() {
