@@ -1,3 +1,4 @@
+import { PictureNaming } from "./pictureNaming"
 import { AuditorySemanticRelatedness, WrittenSemanticRelatedness } from "./semanticRelatedness"
 import { CrossedRealWord1, CrossedRealWord2, Multimorphemic, OralSentenceReading, POSAndLengthEffect, Pseudoword1, Pseudoword2, SpokenLetterNaming } from './wordReading'
 import { Pseudoword, Realword } from "./wordRepetition"
@@ -20,6 +21,9 @@ const SPOKEN_LETTER_NAMING = 'SPOKEN_LETTER_NAMING'
 const PSEUDOWORD_REPETITION = 'PSEUDOWORD_REPETITION'
 const REALWORD_REPETITION = 'REALWORD_REPETITION'
 
+// PICTURE NAMING
+const PICTURE_NAMING = 'PICTURE_NAMING'
+
 
 function variantFromString(string) {
     return new {
@@ -39,7 +43,10 @@ function variantFromString(string) {
         
         // WORD REPETITION
         [PSEUDOWORD_REPETITION]: Pseudoword,
-        [REALWORD_REPETITION]: Realword
+        [REALWORD_REPETITION]: Realword,
+
+        // PICTURE NAMING
+        [PICTURE_NAMING]: PictureNaming
     }[string]()
 }
 
