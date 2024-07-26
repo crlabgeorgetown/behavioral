@@ -1,10 +1,10 @@
-import { PROCEED_CONTAINER } from "../../shared/components/rightChevron"
-import { VIDEO_CONTAINER, VIDEO_SOURCE } from "../../shared/components/videoContainer"
-import { TEXT_CONTAINER } from "../../shared/components/textContainer"
-import Screen from "./base"
+import { PROCEED_CONTAINER } from '../../../shared/components/rightChevron'
+import { VIDEO_CONTAINER, VIDEO_SOURCE } from "../../../shared/components/videoContainer"
+import { TEXT_CONTAINER } from "../../../shared/components/textContainer"
+import Screen from "../base"
 
 
-export default class Trial extends Screen {
+export default class WordRepetitionTrialScreen extends Screen {
 
     get components() {
         return new Map([
@@ -58,4 +58,4 @@ export default class Trial extends Screen {
 }
 
 
-export { Trial }
+export { WordRepetitionTrialScreen }

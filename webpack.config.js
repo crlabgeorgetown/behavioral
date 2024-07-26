@@ -9,7 +9,6 @@ module.exports = {
     rhymeDecision: './rhymeDecision/task.js',
     stroop: './stroop/task.js',
     task: './task/task.js',
-    wordReading: './wordReading/task.js',
     wordRepetition: './wordRepetition/task.js'
   },
   output: {

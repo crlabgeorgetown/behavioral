@@ -4,10 +4,6 @@ import Screen from "../base";
 
 
 export default class WordReadingTrialScreen extends Screen {
-    constructor(orchestrator, trialManager) {
-        super(orchestrator)
-        this.trialManager = trialManager
-    }
 
     get components() {
         return new Map([
