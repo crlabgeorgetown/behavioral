@@ -15,7 +15,6 @@ class CrossedRealWordTrial {
         this.responseTime = null
         this.TimedOut = false
         this.Regularity = config.Regularity
-        this.Block = config.Block
         this.BlockNumber = config.BlockNumber
     }
 
