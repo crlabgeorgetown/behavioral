@@ -30,8 +30,8 @@ class TypingBaselineTrialScreen extends Screen {
     proceedClickHandler(event) {
         event.stopPropagation()  // required in order to prevent container on clicks from triggering immediately after being set
         clearTimeout(this.timeoutID)
+        
         this.orchestrator.currentTrial.responseTime = new Date()
-
         const isPractice = this.orchestrator.currentTrial.TrialType === 'Practice' 
         
         if (!this.orchestrator.currentTrial.isCorrect() && isPractice) {
