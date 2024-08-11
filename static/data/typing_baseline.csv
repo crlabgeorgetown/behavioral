@@ -1,0 +1,16 @@
+ItemNum,Item,TrialType,Procedure
+1,hat,Practice,showpractice
+2,leaf,Practice,showpractice
+3,owl,Practice,showlastpractice
+4,bread,Real,showtrial
+5,hair,Real,showtrial
+6,spoon,Real,showtrial
+7,ring,Real,showtrial
+8,hose,Real,showtrial
+9,crown,Real,showtrial
+10,ghost,Real,showtrial
+11,clown,Real,showtrial
+12,peas,Real,showtrial
+13,tent,Real,showtrial
+14,baby,Real,showtrial
+15,foot,Real,showtrial
