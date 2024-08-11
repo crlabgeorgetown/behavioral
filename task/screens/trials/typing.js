@@ -43,12 +43,12 @@ class TypingBaselineTrialScreen extends Screen {
 
     startTrial() {
         PROCEED_CONTAINER.hide()
-        TYPING_INPUT.hide()
+        TYPING_CONTAINER.hide()
         TYPING_INPUT.text(this.orchestrator.currentTrial.Response)
         setTimeout(() => {
             this.orchestrator.variant.fixationAudio.play()
             PROCEED_CONTAINER.show()
-            TYPING_INPUT.show()
+            TYPING_CONTAINER.show()
             this.orchestrator.currentTrial.startTime = new Date()
             TEXT_CONTAINER.text(this.orchestrator.currentTrial.Item)
             // this.timeoutID = setTimeout(() => {
