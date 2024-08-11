@@ -29,7 +29,7 @@ class TypingTrial {
         }
         
         this._KeysPressed.push(key)
-        this._KeyPressTiming.push(new Date())
+        this._KeyPressTiming.push(new Date() - this.startTime)
     }
 
     get columns() {
@@ -52,11 +52,11 @@ class TypingTrial {
     }
 
     get KeysPressed() {
-        return this._KeysPressed.join(';')
+        return this._KeysPressed.join('|')
     }
 
     get KeyPressTiming() {
-        return this._KeyPressTiming.join(';')
+        return this._KeyPressTiming.join('|')
     }
 
     get NumBackspaces() {

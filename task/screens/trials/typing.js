@@ -51,11 +51,11 @@ class TypingBaselineTrialScreen extends Screen {
             TYPING_CONTAINER.show()
             this.orchestrator.currentTrial.startTime = new Date()
             TEXT_CONTAINER.text(this.orchestrator.currentTrial.Item)
-            // this.timeoutID = setTimeout(() => {
-            //     this.orchestrator.currentTrial.TimedOut = true
-            //     this.orchestrator.currentTrial.responseTime = new Date()
-            //     this.orchestrator.timedOut()
-            // }, this.orchestrator.variant.timeToTimeout)
+            this.timeoutID = setTimeout(() => {
+                this.orchestrator.currentTrial.TimedOut = true
+                this.orchestrator.currentTrial.responseTime = new Date()
+                this.orchestrator.timedOut()
+            }, this.orchestrator.variant.timeToTimeout)
         }, this.orchestrator.variant.fixationDuration)
     }
 
