@@ -57,8 +57,13 @@ class Incorrect extends Screen {
 
 class LetsPractice extends Screen {
     get components() {
-       return new Map([
-            [TEXT_CONTAINER, {text: `Let's Practice.`, addClass: 'base-text medium-text'}],
+        let text = `Let's Practice.`
+        if (this.orchestrator.variant.hasOwnProperty('customPracticeText')) {
+            text = this.orchestrator.variant.customPracticeText
+        }
+
+        return new Map([
+            [TEXT_CONTAINER, {text: text, addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }

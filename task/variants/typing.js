@@ -19,6 +19,7 @@ class TypingBaseline {
         this.ePrimeTemplateID = 50
         this.instructionOne = 'Please use the keyboard to type each word you see.'
         this.instructionTwo = 'Press Backspace to delete a letter. Press Enter to move to the next word.'
+        this.customPracticeText = `We'll do some practice items before we begin.`
         this.fixationAudio = new Audio(Beep)
         this.fixationDuration = 1000
         this.timeToTimeout = 30000
