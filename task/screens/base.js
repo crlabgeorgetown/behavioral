@@ -8,6 +8,8 @@ export default class Screen {
 
     get clickHandlers() { return {} }
 
+    get eventListeners() { return {} }
+
     get timeouts() { return [] }
 
     audioContainerClickHandler(audio) {
@@ -39,5 +41,12 @@ export default class Screen {
 
     setTimeouts() {
         this.timeouts.forEach((milliseconds, callback) => setTimeout(callback, milliseconds))
+    }
+
+    setEventListeners() {
+        for (const [event, handler] of Object.entries(this.eventListeners)) {
+            jQuery(document).off(event)
+            jQuery(document).on(event, handler)
+        }
     }
 }

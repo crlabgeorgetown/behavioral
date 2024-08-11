@@ -6,22 +6,36 @@ class TypingTrial {
         this.TrialType = config.TrialType
         this.Item = config.Item
         
-        this.Response = []
+        this.Response = ''
         this._KeysPressed = []
         this._KeyPressTiming = []
 
         this.startTime = null
         this.responseTime = null
         this.TimedOut = false
-        this.Accuracy = -1
         this.Repetitions = 0
         this.TrialWasAdministered = 1
+    }
 
+    isCorrect() {
+        return this.Item === this.Response
+    }
+
+    keydown(key) {
+        if (key === 'Backspace') {
+            this.Response = this.Response.slice(0, -1)
+        } else if (key.length === 1) {
+            this.Response += key
+        }
+        
+        this._KeysPressed.push(key)
+        this._KeyPressTiming.push(new Date())
     }
 
     get columns() {
         return [
             ...Object.keys(this),
+            'Accuracy',
             'KeysPressed',
             'KeyPressTiming',
             'NumBackspaces',
@@ -33,6 +47,10 @@ class TypingTrial {
         ]
     }
 
+    get Accuracy() {
+        return this.isCorrect() ? 1 : 0
+    }
+
     get KeysPressed() {
         return this._KeysPressed.join(';')
     }
@@ -42,7 +60,7 @@ class TypingTrial {
     }
 
     get NumBackspaces() {
-        this._KeysPressed.filter(char => char === 'del').length
+        this._KeysPressed.filter(char => char === 'Backspace').length
     }
 
     get NumLettersFinalResponse() {
@@ -50,7 +68,7 @@ class TypingTrial {
     }
 
     get NumNonBackspaces() {
-        this._KeysPressed.filter(char => char !== 'del').length
+        this._KeysPressed.filter(char => char !== 'Backspace').length
     }
 
     get TimeOnItem() {

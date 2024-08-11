@@ -115,6 +115,7 @@ export default class Orchestrator {
         for (const [component, ] of this.currentScreen.screen.components.entries()) {
             CONTAINER.append(component)
         }
+        this.currentScreen.screen.setEventListeners()
         this.currentScreen.screen.setClasses()
         this.currentScreen.screen.setClickHandlers()
         this.currentScreen.screen.setTimeouts()

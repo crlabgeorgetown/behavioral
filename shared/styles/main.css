@@ -17,3 +17,32 @@ video {
     width: 50%;
     border: 2px solid;
 }
+
+.typing-container {
+    display: flex;
+}
+
+.typing-input {
+    background: rgb(240, 240, 240);
+    font-family: Arial;
+    font-size: 20pt;
+    text-align: center;
+    border: none;
+}
+
+.blinking-caret {
+    font-family: Arial;
+    font-size: 20pt;
+    animation: blink 1s step-end infinite;
+    color: black;
+}
+
+@keyframes blink {
+    from,
+    to {
+      color: transparent;
+    }
+    50% {
+      color: black;
+    }
+  }
