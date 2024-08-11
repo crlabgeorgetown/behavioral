@@ -60,7 +60,7 @@ class TypingTrial {
     }
 
     get NumBackspaces() {
-        this._KeysPressed.filter(char => char === 'Backspace').length
+        return this._KeysPressed.filter(char => char === 'Backspace').length
     }
 
     get NumLettersFinalResponse() {
@@ -68,7 +68,7 @@ class TypingTrial {
     }
 
     get NumNonBackspaces() {
-        this._KeysPressed.filter(char => char !== 'Backspace').length
+        return this._KeysPressed.filter(char => char !== 'Backspace').length
     }
 
     get TimeOnItem() {
