@@ -1,4 +1,4 @@
-import { InputDevice, InstructionOne, InstructionThree, InstructionTwo, ParticipantId } from "../screens/instruction"
+import { InputDevice, InstructionOne, InstructionThree, InstructionTwoWithButtons, ParticipantId } from "../screens/instruction"
 import { LetsPractice } from '../screens/transition'
 import { AuditoryTrialScreen, WrittenTrialScreen } from "../screens/trials/semanticRelatedness"
 import { Trial } from "../trials/semanticRelatedness"
@@ -8,13 +8,22 @@ const INSTRUCTION_TWO = 'If they are related, press Related.\nFor example, juice
 const INSTRUCTION_THREE = 'If they are NOT related, press Not Related.\nFor example, juice and roof.'
 
 
-class AuditorySemanticRelatedness {
+class Base {
     constructor() {
+        this.trialClass = Trial
+        this.instructionTwo = INSTRUCTION_TWO
+        this.instructionThree = INSTRUCTION_THREE
+    }
+}
+
+class AuditorySemanticRelatedness extends Base {
+    constructor() {
+        super()
         this.screens = [
             InputDevice,
             ParticipantId,
             InstructionOne,
-            InstructionTwo,
+            InstructionTwoWithButtons,
             InstructionThree,
             LetsPractice
         ]
@@ -22,20 +31,18 @@ class AuditorySemanticRelatedness {
         this.buildTestID = 209
         this.ePrimeTemplateID = 79
         this.instructionOne = 'You will hear two words.'
-        this.instructionTwo = INSTRUCTION_TWO
-        this.instructionThree = INSTRUCTION_THREE
-        this.trialClass = Trial
         this.trialScreenClass = AuditoryTrialScreen
     }
 }
 
-class WrittenSemanticRelatedness {
+class WrittenSemanticRelatedness extends Base {
     constructor() {
+        super()
         this.screens = [
             InputDevice,
             ParticipantId,
             InstructionOne,
-            InstructionTwo,
+            InstructionTwoWithButtons,
             InstructionThree,
             LetsPractice
         ]
@@ -43,9 +50,6 @@ class WrittenSemanticRelatedness {
         this.buildTestID = 204
         this.ePrimeTemplateID = 75
         this.instructionOne = 'You will see two words.'
-        this.instructionTwo = INSTRUCTION_TWO
-        this.instructionThree = INSTRUCTION_THREE
-        this.trialClass = Trial
         this.trialScreenClass = WrittenTrialScreen
     }
 }

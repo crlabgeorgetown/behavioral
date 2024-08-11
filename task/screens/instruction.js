@@ -2,6 +2,7 @@ import Screen from "./base"
 import { INPUT_DEVICE_CONTAINER, INPUT_DEVICE_LABEL_CONTAINER } from "../../shared/components/inputDevices"
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../shared/components/instructionButtons"
 import { PARTICIPANT_ID_CONTAINER } from "../../shared/components/participantID"
+import { BUTTON_CONTAINER, BUTTON_LABEL_CONTAINER } from "../../shared/components/responseButtons"
 import { TEXT_CONTAINER } from "../../shared/components/textContainer"
 
 
@@ -82,10 +83,12 @@ class InstructionTwo extends Screen {
 }
 
 
-class InstructionThree extends Screen {
+class InstructionTwoWithButtons extends Screen {
     get components() {
         return new Map([
-            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionThree, addClass: 'base-text medium-text'}],
+            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionTwo, addClass: 'base-text medium-text'}],
+            [BUTTON_CONTAINER, {}],
+            [BUTTON_LABEL_CONTAINER, {}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }
@@ -99,4 +102,23 @@ class InstructionThree extends Screen {
 }
 
 
-export { InputDevice, InstructionOne, InstructionTwo, InstructionThree, ParticipantId }
+class InstructionThree extends Screen {
+    get components() {
+        return new Map([
+            [TEXT_CONTAINER, {text: this.orchestrator.variant.instructionThree, addClass: 'base-text medium-text'}],
+            [BUTTON_CONTAINER, {}],
+            [BUTTON_LABEL_CONTAINER, {}],
+            [INSTRUCTION_BUTTON_CONTAINER, {}]
+        ])
+    }
+
+    get clickHandlers() {
+        return {
+            nextButton: () => this.orchestrator.next(),
+            previousButton: () => this.orchestrator.previous()
+        }
+    }
+}
+
+
+export { InputDevice, InstructionOne, InstructionTwo, InstructionTwoWithButtons, InstructionThree, ParticipantId }
