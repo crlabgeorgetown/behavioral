@@ -7,21 +7,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jslawjslaw/behavioral.git"
+    "url": "git+https://github.com/crlabgeorgetown/behavioral.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jslawjslaw/behavioral/issues"
+    "url": "https://github.com/crlabgeorgetown/behavioral/issues"
   },
-  "homepage": "https://github.com/jslawjslaw/behavioral#readme",
+  "homepage": "https://github.com/crlabgeorgetown/behavioral#readme",
   "dependencies": {
     "d3": "^7.8.2",
     "fs": "^0.0.1-security",
     "webpack": "^5.76.2"
   },
   "devDependencies": {
-    "webpack-cli": "^5.1.1"
+    "webpack-cli": "^5.1.4"
   }
 }
