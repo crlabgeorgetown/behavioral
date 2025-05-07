@@ -25,14 +25,14 @@ video {
 .typing-input {
     background: rgb(240, 240, 240);
     font-family: Arial;
-    font-size: 20pt;
+    font-size: 25px;
     text-align: center;
     border: none;
 }
 
 .blinking-caret {
     font-family: Arial;
-    font-size: 20pt;
+    font-size: 25px;
     animation: blink 1s step-end infinite;
     color: black;
 }
