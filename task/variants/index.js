@@ -1,6 +1,6 @@
 import { PictureNaming } from "./pictureNaming"
 import { AuditorySemanticRelatedness, WrittenSemanticRelatedness } from "./semanticRelatedness"
-import { TypingBaseline } from "./typing"
+import { TypingBaseline, TypingDiction } from "./typing"
 import { CrossedRealWord1, CrossedRealWord2, Multimorphemic, OralSentenceReading, POSAndLengthEffect, Pseudoword1, Pseudoword2, SpokenLetterNaming } from './wordReading'
 import { Pseudoword, Realword } from "./wordRepetition"
 
@@ -27,6 +27,7 @@ const PICTURE_NAMING = 'PICTURE_NAMING'
 
 // TYPING
 const TYPING_BASELINE = 'TYPING_BASELINE'
+const TYPING_TO_DICTION = 'TYPING_TO_DICTION'
 
 
 function variantFromString(string) {
@@ -53,7 +54,8 @@ function variantFromString(string) {
         [PICTURE_NAMING]: PictureNaming,
 
         // TYPING
-        [TYPING_BASELINE]: TypingBaseline
+        [TYPING_BASELINE]: TypingBaseline,
+        [TYPING_TO_DICTION]: TypingDiction
     }[string]()
 }
 
