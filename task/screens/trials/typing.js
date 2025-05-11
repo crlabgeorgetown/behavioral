@@ -70,8 +70,8 @@ class TypingDecisionTrialScreen extends Screen {
             [REPLAY_CONTAINER, {addClass: 'right-margined'}],
             [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}],
             [AUDIO_CONTAINER, {}],
-            [TYPING_CONTAINER, {}],
-            [PROCEED_CONTAINER, {}]
+            [PROCEED_CONTAINER, {}],
+            [TYPING_CONTAINER, {}]
         ])
     }
 

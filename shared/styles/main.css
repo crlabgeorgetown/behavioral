@@ -23,10 +23,10 @@ video {
 }
 
 .typing-input {
+    color: black;
     background: rgb(240, 240, 240);
     font-family: Arial;
     font-size: 60pt;
-    color: black;
     text-align: center;
     border: none;
 }
