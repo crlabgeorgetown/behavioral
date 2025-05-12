@@ -40,6 +40,6 @@ const botright = jQuery('<div/>', {
 
 SIX_LETTER_CONTAINER.append(topleft, topmid, topright, botleft, botmid, botright)
 
-//FOUR_LETTER_CONTAINER.append(topleft, topmid, topright, botleft)
+FOUR_LETTER_CONTAINER.append(topleft.clone(), topmid.clone(), topright.clone(), botleft.clone())
 
 export { SIX_LETTER_CONTAINER, FOUR_LETTER_CONTAINER, topleft, topmid, topright, botleft, botmid, botright }

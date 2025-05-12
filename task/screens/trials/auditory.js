@@ -9,7 +9,7 @@ class AuditoryLetterIDTrialScreen extends Screen {
         return new Map([
             [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}],
             [AUDIO_CONTAINER, {}],
-            [SIX_LETTER_CONTAINER, {}]
+            [SIX_LETTER_CONTAINER, {addClass: 'grid-container six-letter-container'}],
         ])
     }
 
@@ -77,7 +77,7 @@ class InstructionAuditoryLetterID extends Screen {
         botmid.text('q')
         botright.text('h')
         return new Map([
-            [SIX_LETTER_CONTAINER, {css: {width: '90vw', height: '45vh'}}],
+            [SIX_LETTER_CONTAINER, {addClass: 'grid-container-instruction six-letter-container'}],
             [TEXT_CONTAINER, {text: 'You will see six letters.\nYou will hear a letter.\n\nTouch the letter that you hear.', addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
