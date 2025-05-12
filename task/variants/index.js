@@ -3,6 +3,7 @@ import { AuditorySemanticRelatedness, WrittenSemanticRelatedness } from "./seman
 import { TypingBaseline, TypingDiction } from "./typing"
 import { CrossedRealWord1, CrossedRealWord2, Multimorphemic, OralSentenceReading, POSAndLengthEffect, Pseudoword1, Pseudoword2, SpokenLetterNaming } from './wordReading'
 import { Pseudoword, Realword } from "./wordRepetition"
+import { AuditoryLetterID } from "./auditory"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'
@@ -29,6 +30,8 @@ const PICTURE_NAMING = 'PICTURE_NAMING'
 const TYPING_BASELINE = 'TYPING_BASELINE'
 const TYPING_TO_DICTION = 'TYPING_TO_DICTION'
 
+// AUDITORY
+const AUDITORY_LETTER_ID = 'AUDITORY_LETTER_ID'
 
 function variantFromString(string) {
     return new {
@@ -55,7 +58,10 @@ function variantFromString(string) {
 
         // TYPING
         [TYPING_BASELINE]: TypingBaseline,
-        [TYPING_TO_DICTION]: TypingDiction
+        [TYPING_TO_DICTION]: TypingDiction,
+
+        // AUDITORY
+        [AUDITORY_LETTER_ID]: AuditoryLetterID
     }[string]()
 }
 

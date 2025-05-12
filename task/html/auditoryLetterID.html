@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html class="JFEScope" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no" />
+	<title>Cognitive Recovery Lab</title>
+    <link rel="stylesheet" href="../../shared/styles/main.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
+</head>
+<body> 
+    <div id="Wrapper"></div>
+    <script src="../../dist/task.bundle.js"></script>
+    <script>
+        const variant = 'AUDITORY_LETTER_ID'
+        const variantDataFilename = `https://crlabgeorgetown.github.io/behavioral/static/data/${variant.toLowerCase()}.csv`
+        d3.csv(variantDataFilename).then((data) => new task.Task(data, this, variant))
+    </script>
+</body>
+</html>
