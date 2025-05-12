@@ -37,7 +37,7 @@ class AuditoryLetterIDTrial {
     get columns() {
         return [
             ...Object.keys(this),
-            'Accruacy',
+            'Accuracy',
             'Time',
             'Date',
             'TimeOnItem',
