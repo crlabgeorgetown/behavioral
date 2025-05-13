@@ -1,0 +1,23 @@
+Type to diction
+-   Upload stimuli
+-   change audioSource in `task/trials/typing.js` line 175 to correct folder of
+    sounds
+-   Possibly change the replay audio image in `static/images/replayAudio.png`
+-   Where should we put the user response (typing) 'in-line' with the next
+    button, below (like it is in baseline), or above (like it is in diction)
+-   Is there aa specifci way to measure the accuracy? Currently, only if the
+    response matches the target. 
+
+Auditory letter id
+-   Upload stimuli
+-   change audioSource in `task/trials/auditory.js` line 67 to correct folder
+    of sounds
+-   For some reason Input Device is not being added to the Qualtrics
+-   Is there a specific way to measure accuracy? Currently, only if the
+    response matches the target.
+
+Auditory Syllable to Grapheme Matching
+-   Upload stimuli
+-   change audioSource in `task/trials/auditory.js` line 133 to correct folder
+    of sounds
+-   specific measure of accuracy?
