@@ -1,7 +1,8 @@
 import Screen from "../base";
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
 import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../../shared/components/audioContainer";
-import { SIX_LETTER_CONTAINER, topleft, topmid, topright, botleft, botmid, botright, FOUR_LETTER_CONTAINER } from "../../../shared/components/letterContainer";
+import { SIX_LETTER_CONTAINER, topleft6, topmid6, topright6, botleft6, botmid6, botright6 } from "../../../shared/components/letterContainer";
+import { FOUR_LETTER_CONTAINER, topleft4, topright4, botleft4, botright4 } from "../../../shared/components/letterContainer";
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instructionButtons";
 
 class AuditoryLetterIDTrialScreen extends Screen {
@@ -9,18 +10,18 @@ class AuditoryLetterIDTrialScreen extends Screen {
         return new Map([
             [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}],
             [AUDIO_CONTAINER, {}],
-            [SIX_LETTER_CONTAINER, {addClass: 'grid-container six-letter-container'}],
+            [SIX_LETTER_CONTAINER, {addClass: 'six-grid-container six-letter-container'}],
         ])
     }
 
     get clickHandlers() {
         return { 
-            topleft: (event) => this.proceedClickHandler(event, 'topleft'),
-            topmid: (event) => this.proceedClickHandler(event, 'topmid'),
-            topright: (event) => this.proceedClickHandler(event, 'topright'),
-            botleft: (event) => this.proceedClickHandler(event, 'botleft'),
-            botmid: (event) => this.proceedClickHandler(event, 'botmid'),
-            botright: (event) => this.proceedClickHandler(event, 'botright')
+            topleft6: (event) => this.proceedClickHandler(event, 'topleft'),
+            topmid6: (event) => this.proceedClickHandler(event, 'topmid'),
+            topright6: (event) => this.proceedClickHandler(event, 'topright'),
+            botleft6: (event) => this.proceedClickHandler(event, 'botleft'),
+            botmid6: (event) => this.proceedClickHandler(event, 'botmid'),
+            botright6: (event) => this.proceedClickHandler(event, 'botright')
         }
     }
 
@@ -43,12 +44,12 @@ class AuditoryLetterIDTrialScreen extends Screen {
 
     startTrial() {
         SIX_LETTER_CONTAINER.hide()
-        topleft.text(this.orchestrator.currentTrial.topleft)
-        topmid.text(this.orchestrator.currentTrial.topmid)
-        topright.text(this.orchestrator.currentTrial.topright)
-        botleft.text(this.orchestrator.currentTrial.botleft)
-        botmid.text(this.orchestrator.currentTrial.botmid)
-        botright.text(this.orchestrator.currentTrial.botright)
+        topleft6.text(this.orchestrator.currentTrial.topleft)
+        topmid6.text(this.orchestrator.currentTrial.topmid)
+        topright6.text(this.orchestrator.currentTrial.topright)
+        botleft6.text(this.orchestrator.currentTrial.botleft)
+        botmid6.text(this.orchestrator.currentTrial.botmid)
+        botright6.text(this.orchestrator.currentTrial.botright)
         setTimeout(() => {
             AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.audioSource())
             AUDIO_CONTAINER[0].load()
@@ -73,16 +74,16 @@ class AuditorySyllableToGraphemeMatchingTrialScreen extends Screen {
         return new Map([
             [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}],
             [AUDIO_CONTAINER, {}],
-            [FOUR_LETTER_CONTAINER, {addClass: 'grid-container four-letter-container'}],
+            [FOUR_LETTER_CONTAINER, {addClass: 'four-grid-container four-letter-container'}],
         ])
     }
 
     get clickHandlers() {
         return { 
-            topleft: (event) => this.proceedClickHandler(event, 'topleft'),
-            botleft: (event) => this.proceedClickHandler(event, 'botleft'),
-            botright: (event) => this.proceedClickHandler(event, 'botright'),
-            topright: (event) => this.proceedClickHandler(event, 'topright')
+            topleft4: (event) => this.proceedClickHandler(event, 'topleft'),
+            botleft4: (event) => this.proceedClickHandler(event, 'botleft'),
+            botright4: (event) => this.proceedClickHandler(event, 'botright'),
+            topright4: (event) => this.proceedClickHandler(event, 'topright')
         }
     }
 
@@ -105,10 +106,10 @@ class AuditorySyllableToGraphemeMatchingTrialScreen extends Screen {
 
     startTrial() {
         FOUR_LETTER_CONTAINER.hide()
-        topleft.text(this.orchestrator.currentTrial.topleft)
-        botleft.text(this.orchestrator.currentTrial.botleft)
-        botright.text(this.orchestrator.currentTrial.botright)
-        topright.text(this.orchestrator.currentTrial.topright)
+        topleft4.text(this.orchestrator.currentTrial.topleft)
+        botleft4.text(this.orchestrator.currentTrial.botleft)
+        botright4.text(this.orchestrator.currentTrial.botright)
+        topright4.text(this.orchestrator.currentTrial.topright)
         setTimeout(() => {
             AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.audioSource())
             AUDIO_CONTAINER[0].load()
@@ -130,14 +131,15 @@ class AuditorySyllableToGraphemeMatchingTrialScreen extends Screen {
 
 class InstructionAuditoryLetterID extends Screen {
     get components() {
-        topleft.text('d')
-        topmid.text('f')
-        topright.text('j')
-        botleft.text('n')
-        botmid.text('q')
-        botright.text('h')
+        topleft6.text('d')
+        topmid6.text('f')
+        topright6.text('j')
+        botleft6.text('n')
+        botmid6.text('q')
+        botright6.text('h')
+
         return new Map([
-            [SIX_LETTER_CONTAINER, {addClass: 'grid-container-instruction six-letter-container'}],
+            [SIX_LETTER_CONTAINER, {addClass: 'six-grid-container-instruction six-letter-container'}],
             [TEXT_CONTAINER, {text: 'You will see six letters.\nYou will hear a letter.\n\nTouch the letter that you hear.', addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
@@ -153,13 +155,13 @@ class InstructionAuditoryLetterID extends Screen {
 
 class InstructionAuditorySyllableToGraphemeMatching extends Screen {
     get components() {
-        topleft.text('g')
-        topright.text('s')
-        botleft.text('z')
-        botright.text('f')
+        topleft4.text('g')
+        topright4.text('s')
+        botleft4.text('z')
+        botright4.text('f')
 
         return new Map([
-            [FOUR_LETTER_CONTAINER, {addClass: 'grid-container-instruction four-letter-container'}],
+            [FOUR_LETTER_CONTAINER, {addClass: 'four-grid-container-instruction four-letter-container'}],
             [TEXT_CONTAINER, {text: 'You will hear a sound.\nTouch the one that you hear.', addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])

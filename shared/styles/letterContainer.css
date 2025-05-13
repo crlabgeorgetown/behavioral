@@ -1,4 +1,4 @@
-.grid-container {
+.six-grid-container {
     display: grid;
     gap: 5vw;
     row-gap: 10vh;
@@ -9,7 +9,7 @@
     padding: 5vw;
 }
 
-.grid-container-instruction {
+.six-grid-container-instruction {
     display: grid;
     gap: 3vw;
     justify-content: center;
@@ -19,13 +19,33 @@
     padding: 5vw;
 }
 
-.four-letter-container {
-    grid-template-columns: 1fr 1fr;
+.six-letter-container {
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
 
-.six-letter-container {
-    grid-template-columns: 1fr 1fr 1fr;
+.four-grid-container {
+    display: grid;
+    gap: 4vw;
+    justify-content: center;
+    align-content: center;
+    width: 65vw;
+    height: 60vh;
+    padding: 5vw;
+}
+
+.four-grid-container-instruction {
+    display: grid;
+    gap: 2vw;
+    justify-content: center;
+    align-content: center;
+    width: 60vw;
+    height: 60vh;
+    padding: 5vw;
+}
+
+.four-letter-container {
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
 }
 
