@@ -4,19 +4,20 @@
     flex-wrap: wrap;
     flex-direction: row;
     font-family: Arial;
+    font-size: 50pt;
     align-items: center;
     min-width: 100%;
 }
 
 .participant-id-label {
-    font-size: 35pt;
+    font-size: 50pt;
     color: #000000;
     margin-left: auto;
     margin-right: 20px;
 }
 
 .participant-id-input {
-    font-size: 25px;
+    font-size: 50pt;
     padding: 12px;
     width: 275px;
 }
