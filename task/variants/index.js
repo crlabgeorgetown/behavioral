@@ -4,6 +4,7 @@ import { TypingBaseline, TypingDiction } from "./typing"
 import { CrossedRealWord1, CrossedRealWord2, Multimorphemic, OralSentenceReading, POSAndLengthEffect, Pseudoword1, Pseudoword2, SpokenLetterNaming } from './wordReading'
 import { Pseudoword, Realword } from "./wordRepetition"
 import { AuditoryLetterID, AuditorySyllableToGraphemeMatching } from "./auditory"
+import { AuditoryWordToPictureMatchingReadmap } from "./wordToPicture"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'
@@ -34,6 +35,9 @@ const TYPING_TO_DICTION = 'TYPING_TO_DICTION'
 const AUDITORY_LETTER_ID = 'AUDITORY_LETTER_ID'
 const AUDITORY_SYLLABLE_TO_GRAPHEME_MATCHING = 'AUDITORY_SYLLABLE_TO_GRAPHEME_MATCHING'
 
+// WORD TO PICTURE
+const AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP = 'AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP'
+
 function variantFromString(string) {
     return new {
         // SEMANTIC RELATEDNESS
@@ -63,7 +67,10 @@ function variantFromString(string) {
 
         // AUDITORY
         [AUDITORY_LETTER_ID]: AuditoryLetterID,
-        [AUDITORY_SYLLABLE_TO_GRAPHEME_MATCHING]: AuditorySyllableToGraphemeMatching
+        [AUDITORY_SYLLABLE_TO_GRAPHEME_MATCHING]: AuditorySyllableToGraphemeMatching,
+
+        // WORD TO PICTURE
+        [AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP]: AuditoryWordToPictureMatchingReadmap
     }[string]()
 }
 
