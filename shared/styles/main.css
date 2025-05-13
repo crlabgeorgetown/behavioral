@@ -27,14 +27,14 @@ video {
     color: black;
     background: rgb(240, 240, 240);
     font-family: Arial;
-    font-size: 60pt;
+    font-size: 50pt;
     text-align: center;
     border: none;
 }
 
 .blinking-caret {
     font-family: Arial;
-    font-size: 60pt;
+    font-size: 50pt;
     animation: blink 1s step-end infinite;
     color: black;
 }
