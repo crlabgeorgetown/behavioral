@@ -1,7 +1,7 @@
 import Screen from "../base";
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
 import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../../shared/components/audioContainer";
-import { SIX_LETTER_CONTAINER, topleft, topmid, topright, botleft, botmid, botright } from "../../../shared/components/letterContainer";
+import { SIX_LETTER_CONTAINER, topleft, topmid, topright, botleft, botmid, botright, FOUR_LETTER_CONTAINER } from "../../../shared/components/letterContainer";
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instructionButtons";
 
 class AuditoryLetterIDTrialScreen extends Screen {
@@ -91,4 +91,26 @@ class InstructionAuditoryLetterID extends Screen {
     }
 }
 
-export { InstructionAuditoryLetterID, AuditoryLetterIDTrialScreen }
+class InstructionAuditorySyllableToGraphemeMatching extends Screen {
+    get components() {
+        topleft.text('g')
+        topright.text('s')
+        botleft.text('z')
+        botright.text('f')
+
+        return new Map([
+            [FOUR_LETTER_CONTAINER, {addClass: 'grid-container-instruction four-letter-container'}],
+            [TEXT_CONTAINER, {text: 'You will hear a sound.\nTouch the one that you hear.', addClass: 'base-text medium-text'}],
+            [INSTRUCTION_BUTTON_CONTAINER, {}]
+        ])
+    }
+
+    get clickHandlers() {
+        return { 
+            nextButton: () => this.orchestrator.next(),
+            previousButton: () => this.orchestrator.previous()
+        }
+    }
+}
+
+export { InstructionAuditoryLetterID, AuditoryLetterIDTrialScreen, InstructionAuditorySyllableToGraphemeMatching }
