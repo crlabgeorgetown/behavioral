@@ -20,14 +20,6 @@ export default class PictureNamingTrialScreen extends Screen {
         }
     }
 
-    get eventListeners() {
-        return { keydown: (event) => this.keydownHandler(event) }
-    }
-
-    keydownHandler(event) {
-        if (event.key === "Enter") {this.proceedClickHandler(event)}
-        this.orchestrator.currentTrial.keydown(event.key)
-    }
     proceedClickHandler(event) {
         event.stopPropagation()  // required in order to prevent container on clicks from triggering immediately after being set
         clearTimeout(this.timeoutID)
