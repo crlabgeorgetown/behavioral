@@ -1,7 +1,7 @@
 import { InputDevice, ParticipantId } from '../screens/instruction'
 import { LetsPractice } from '../screens/transition'
-import { AuditoryLetterIDTrial } from '../trials/auditory'
-import { InstructionAuditoryLetterID, AuditoryLetterIDTrialScreen } from '../screens/trials/auditory'
+import { AuditoryLetterIDTrial, AuditorySyllableToGraphemeMatchingTrial } from '../trials/auditory'
+import { InstructionAuditoryLetterID, AuditoryLetterIDTrialScreen, InstructionAuditorySyllableToGraphemeMatching, AuditorySyllableToGraphemeMatchingTrialScreen } from '../screens/trials/auditory'
 
 class AuditoryLetterID {
     constructor() {
@@ -24,6 +24,25 @@ class AuditoryLetterID {
     }
 }
 
+class AuditorySyllableToGraphemeMatching {
+    constructor() {
+        this.screens = [
+            ParticipantId, 
+            InputDevice,
+            InstructionAuditorySyllableToGraphemeMatching,
+            LetsPractice
+        ]
 
+        this.testNameShort = "AuditorySyllableToGraphemeMatching"
+        this.buildTestID = 206
+        this.ePrimeTemplateID = 77
+        this.fixationDuration = 500
+        this.timeToTimeout = 8000
+        this.waitDuration = 500
 
-export { AuditoryLetterID }
+        this.trialClass = AuditorySyllableToGraphemeMatchingTrial
+        this.trialScreenClass = AuditorySyllableToGraphemeMatchingTrialScreen
+    }
+}
+
+export { AuditoryLetterID, AuditorySyllableToGraphemeMatching }
