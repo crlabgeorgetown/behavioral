@@ -40,6 +40,6 @@
 /* Media Query for low resolution  Tablets, Ipads */
 @media (min-width: 481px) and (max-width: 767px) {
     .device-label {
-        font-size: 25px;
+        font-size: 40px;
     }
 }
