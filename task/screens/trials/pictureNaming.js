@@ -28,6 +28,13 @@ export default class PictureNamingTrialScreen extends Screen {
         TEXT_CONTAINER.show()
     }
 
+
+    keydownHandler(event) {
+        if (event.key === "Enter") {this.proceedClickHandler(event)}
+        this.orchestrator.currentTrial.keydown(event.key)
+        TYPING_INPUT.text(this.orchestrator.currentTrial.Response)
+    }
+
     startTrial() {
         IMAGE_CONTAINER.hide()
         IMAGE_CONTAINER.attr({src: this.orchestrator.currentTrial.source})
