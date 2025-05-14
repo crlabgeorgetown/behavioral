@@ -1,0 +1,57 @@
+.four-image-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15vw;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+    height: 90vh;
+    padding: 5vw;
+}
+
+.four-image-container-instruction {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10vw;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    height: 60vh;
+    padding: 5vw;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+
+    width: 325vw;
+    height: 212vh;
+    object-fit: contain;
+}
+
+.image-container:hover {
+    border: 3px solid black;
+}
+
+.image-container:active {
+    background-color: #ccc;
+}
+
+/* testing with overlaying things over each other
+ * instead of adding a text container to the image container
+ */
+
+.overlay-container {
+    position: relative;
+    top: calc(50%);
+    left: calc(50%);
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
