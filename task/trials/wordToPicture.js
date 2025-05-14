@@ -65,6 +65,26 @@ class AuditoryWordToPictureMatchingReadMapTrial {
         const sound = this.CRESP
         return `https://crlabgeorgetown.github.io/behavioral/static/auditory_rhyme_decision_wav_files/${sound}.wav`
     }
+
+    getTopLeft() {
+        const topleft = this.topleft
+        return `https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/${topleft}.jpeg`
+    }
+
+    getTopRight() {
+        const topright = this.topright
+        return `https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/${topright}.jpeg`
+    }
+
+    getBotLeft() {
+        const botleft = this.botleft
+        return `https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/${botleft}.jpeg`
+    }
+
+    getBotRight() {
+        const botright = this.botright
+        return `https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/${botright}.jpeg`
+    }
 }
 
 export { AuditoryWordToPictureMatchingReadMapTrial}
