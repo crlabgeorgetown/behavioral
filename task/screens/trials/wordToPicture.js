@@ -68,6 +68,68 @@ class AuditoryWordToPictureMatchingReadMapTrialScreen extends Screen {
     }
 }
 
+class WrittenWordToPictureMatchingReadMapTrialScreen extends Screen {
+    get components() {
+        return new Map([
+            [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container'}],
+            [TEXT_CRESP_CONTAINER, {}],
+            [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}]
+        ])
+    }
+
+    get clickHandlers() {
+        return { 
+            topleftImage: (event) => this.proceedClickHandler(event, 'topleft'),
+            toprightImage: (event) => this.proceedClickHandler(event, 'topright'),
+            botleftImage: (event) => this.proceedClickHandler(event, 'botleft'),
+            botrightImage: (event) => this.proceedClickHandler(event, 'botright')
+        }
+    }
+
+    proceedClickHandler(event, location) {
+        event.stopPropagation()
+        clearTimeout(this.timeoutID)
+
+        this.orchestrator.currentTrial.responseTime = new Date()
+        this.orchestrator.currentTrial.ResponseLocation = location
+        this.orchestrator.currentTrial.Response = this.orchestrator.currentTrial.location[location]
+        const isPractice = this.orchestrator.currentTrial.TrialType === 'Practice'
+
+        if (!this.orchestrator.currentTrial.isCorrect() && isPractice) {
+            this.orchestrator.replay()
+        } else {
+            this.orchestrator.next()
+        }
+
+        TEXT_CONTAINER.show()
+    }
+
+    startTrial() {
+        FOUR_IMAGE_CONTAINER.hide()
+        TEXT_CRESP_CONTAINER.hide()
+        topleftImage.attr('src', this.orchestrator.currentTrial.getTopLeft())
+        toprightImage.attr('src', this.orchestrator.currentTrial.getTopRight())
+        botleftImage.attr('src', this.orchestrator.currentTrial.getBotLeft())
+        botrightImage.attr('src', this.orchestrator.currentTrial.getBotRight())
+        TEXT_CRESP_CONTAINER.text(this.orchestrator.currentTrial.CRESP)
+
+        setTimeout(() => {
+            TEXT_CONTAINER.hide()
+            TEXT_CRESP_CONTAINER.show()
+            setTimeout(() => {
+                FOUR_IMAGE_CONTAINER.show()
+                this.orchestrator.currentTrial.startTime = new Date()
+                this.timeoutID = setTimeout(() => {
+                    this.orchestrator.currentTrial.TimedOut = true
+                    this.orchestrator.currentTrial.responseTime = new Date()
+                    this.orchestrator.timedOut()
+                    TEXT_CONTAINER.show()
+                }, this.orchestrator.variant.timeToTimeout)
+            }, this.orchestrator.variant.waitDuration)
+        }, this.orchestrator.variant.fixationDuration)
+    }
+}
+
 class InstructionAuditoryWordToPictureMatching extends Screen {
     get components() {
         topleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/swim.jpeg')
@@ -91,10 +153,10 @@ class InstructionAuditoryWordToPictureMatching extends Screen {
 
 class InstructionWrittenWordToPictureMatching extends Screen {
     get components() {
-        topleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/swim.jpeg')
-        toprightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/run.jpeg')
-        botleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/dance.jpeg')
-        botrightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/climb.jpeg')
+        topleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/swim.jpeg')
+        toprightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/run.jpeg')
+        botleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/dance.jpeg')
+        botrightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/climb.jpeg')
         return new Map([
             [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container-instruction'}],
             [TEXT_CRESP_CONTAINER, {text: "climb"}],
@@ -106,7 +168,8 @@ class InstructionWrittenWordToPictureMatching extends Screen {
     get clickHandlers() {
         return { 
             nextButton: (event) => this.orchestrator.next(),
-            previousButton: (event) => this.orchestrator.previous()
+            previousButton: (event) => this.orchestrator.previous(),
+            topleftImage: (event) => this.orchestrator.next()
         }
     }
 }

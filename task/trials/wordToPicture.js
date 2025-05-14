@@ -152,22 +152,22 @@ class WrittenWordToPictureMatchingReadMapTrial {
 
     getTopLeft() {
         const topleft = this.topleft
-        return `https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/${topleft}.jpeg`
+        return `https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/${topleft}.jpeg`
     }
 
     getTopRight() {
         const topright = this.topright
-        return `https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/${topright}.jpeg`
+        return `https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/${topright}.jpeg`
     }
 
     getBotLeft() {
         const botleft = this.botleft
-        return `https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/${botleft}.jpeg`
+        return `https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/${botleft}.jpeg`
     }
 
     getBotRight() {
         const botright = this.botright
-        return `https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/${botright}.jpeg`
+        return `https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/${botright}.jpeg`
     }
 }
 

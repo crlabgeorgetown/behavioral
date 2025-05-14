@@ -27,4 +27,9 @@ const botrightImage = jQuery('<img/>', {
 
 FOUR_IMAGE_CONTAINER.append(topleftImage, toprightImage, botleftImage, botrightImage)
 
-export { IMAGE_CONTAINER, FOUR_IMAGE_CONTAINER, topleftImage, toprightImage, botleftImage, botrightImage }
+const TEXT_CRESP_CONTAINER = jQuery('<div/>', {
+    id: 'text-cresp-container',
+    class: 'base-text extra-large-text large-fixed-height overlay-container'
+})
+
+export { IMAGE_CONTAINER, FOUR_IMAGE_CONTAINER, topleftImage, toprightImage, botleftImage, botrightImage, TEXT_CRESP_CONTAINER }
