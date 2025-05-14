@@ -12,7 +12,7 @@ class AuditoryWordToPictureMatchingReadMap {
             LetsPractice
         ]
 
-        this.testShortName = 'AuditoryWordToPictureMatchingReadMap'
+        this.testNameShort = 'AuditoryWordToPictureMatchingReadMap'
         this.buildTestID = 203
         this.ePrimeTemplateID = 74
         this.fixationDuration = 100

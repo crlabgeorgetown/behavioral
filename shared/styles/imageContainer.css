@@ -5,7 +5,7 @@
     gap: 10vw;
     justify-content: center;
     align-items: center;
-    width: 75vw;
+    width: 90vw;
     padding: 5vw;
     position: relative;
 }
@@ -17,7 +17,7 @@
     grid-template-rows: 1fr 1fr;
     justify-content: center;
     align-items: center;
-    width: 60vw;
+    width: 75vw;
     padding: 5vw;
     position: relative;
 }

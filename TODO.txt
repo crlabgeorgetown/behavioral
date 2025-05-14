@@ -25,8 +25,13 @@ Auditory Syllable to Grapheme Matching
 Auditory Word to Picture Matching ReadMap
 -   Upload audio stimuli
 -   change audioSource in `task/trials/wordToPicture.js` line 66 to correct
-    folder of sounds. 
+    folder of sounds. Currently pulling audio from
+    auditory_rhyme_decision_wav_files
 -   Should the first practice trial have showtrial as Procedure? Should it be,
     showpractice?
 -   Instruction page is showing the assiociated images from the written word to
     picture set of images. Do we use the ones for the auditory set of images?
+-   Timing calls for audio to be after 100ms fixation, then audio plays, while
+    the 500ms wait duration has started, the images pop up before the audio has
+    completed playing. The sample video shows the audio finishing before
+    showing the images.
