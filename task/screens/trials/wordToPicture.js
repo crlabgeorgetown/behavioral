@@ -2,7 +2,7 @@ import Screen from "../base";
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
 import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../../shared/components/audioContainer";
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instructionButtons";
-import { FOUR_IMAGE_CONTAINER, topleftImage, toprightImage, botleftImage, botrightImage } from "../../../shared/components/imageContainer";
+import { FOUR_IMAGE_CONTAINER, topleftImage, toprightImage, botleftImage, botrightImage, TEXT_CRESP_CONTAINER } from "../../../shared/components/imageContainer";
 
 class AuditoryWordToPictureMatchingReadMapTrialScreen extends Screen {
     get components() {
@@ -89,4 +89,26 @@ class InstructionAuditoryWordToPictureMatching extends Screen {
     }
 }
 
-export { InstructionAuditoryWordToPictureMatching, AuditoryWordToPictureMatchingReadMapTrialScreen }
+class InstructionWrittenWordToPictureMatching extends Screen {
+    get components() {
+        topleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/swim.jpeg')
+        toprightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/run.jpeg')
+        botleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/dance.jpeg')
+        botrightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordToPictureMatching/climb.jpeg')
+        return new Map([
+            [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container-instruction'}],
+            [TEXT_CRESP_CONTAINER, {text: "climb"}],
+            [TEXT_CONTAINER, {text: 'You will see four pictures.\nYou will also see a word.\nTouch the picture that matches the word.', addClass: 'base-text medium-text'}],
+            [INSTRUCTION_BUTTON_CONTAINER, {}]
+        ])
+    }
+
+    get clickHandlers() {
+        return { 
+            nextButton: (event) => this.orchestrator.next(),
+            previousButton: (event) => this.orchestrator.previous()
+        }
+    }
+}
+
+export { InstructionAuditoryWordToPictureMatching, AuditoryWordToPictureMatchingReadMapTrialScreen, InstructionWrittenWordToPictureMatching, WrittenWordToPictureMatchingReadMapTrialScreen }
