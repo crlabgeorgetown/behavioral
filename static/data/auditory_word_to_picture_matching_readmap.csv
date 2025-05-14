@@ -44,7 +44,7 @@
 43,showtrial,fruit,oats,toast,egg,toast,HI_HF_Reg,Noun,Real,botleft
 44,showtrial,ship,raft,sailboat,yacht,yacht,HI_LF_Irr,Noun,Real,botright
 45,showtrial,woods,beach,plain,swamp,beach,HI_HF_Reg,Noun,Real,topright
-46,showtrial,sock ,vest,shoe,glove,shoe,HI_HF_Irr,Noun,Real,botleft
+46,showtrial,sock,vest,shoe,glove,shoe,HI_HF_Irr,Noun,Real,botleft
 47,showtrial,claw1,paw1,hoof,fin,hoof,HI_LF_Irr,Noun,Real,botleft
 48,showtrial,plum,corn,peach1,fig,plum,HI_LF_Reg,Noun,Real,topleft
 49,showtrial,shell,sand,sponge,fish2,shell,HI_HF_Reg,Noun,Real,topleft

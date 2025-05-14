@@ -63,7 +63,7 @@
 }
 
 .letter-container:hover {
-    border: 3px solid black;
+    border: 2px solid black;
 }
 
 .letter-container:active {

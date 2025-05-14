@@ -1,29 +1,28 @@
-.four-image-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 15vw;
-    justify-content: center;
-    align-items: center;
-    width: 90vw;
-    height: 90vh;
-    padding: 5vw;
-}
-
-.four-image-container-instruction {
+.four-image-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 10vw;
     justify-content: center;
     align-items: center;
-    width: 60vw;
-    height: 60vh;
+    width: 75vw;
     padding: 5vw;
+    position: relative;
 }
 
-.image-container {
-    display: flex;
+.four-image-container-instruction{
+    display: grid;
+    gap: 7vw;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+    padding: 5vw;
+    position: relative;
+}
+
+.image-container{
     justify-content: center;
     align-items: center;
     background-color: white;
@@ -31,25 +30,26 @@
     border: 2px solid #ccc;
     box-sizing: border-box;
 
-    width: 325vw;
-    height: 212vh;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
 .image-container:hover {
-    border: 3px solid black;
+    border: 2px solid black;
 }
 
 .image-container:active {
     background-color: #ccc;
 }
 
-/* testing with overlaying things over each other
+/* 
+ * testing with overlaying things over each other
  * instead of adding a text container to the image container
  */
 
 .overlay-container {
-    position: relative;
+    position: absolute;
     top: calc(50%);
     left: calc(50%);
     transform: translate(-50%, -50%);
