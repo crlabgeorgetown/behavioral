@@ -76,7 +76,7 @@ class InstructionAuditoryWordToPictureMatching extends Screen {
         botrightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/climb.jpeg')
         return new Map([
             [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container-instruction'}],
-            [TEXT_CONTAINER, {text: 'You will hear a word.\nTouch the picture that matches the word.', addClass: 'base-text medium-text'}],
+            [TEXT_CONTAINER, {text: 'You will see four pictures.\nYou will hear a word.\nTouch the picture that matches the word.', addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }
