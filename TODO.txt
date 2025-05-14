@@ -1,5 +1,5 @@
 Type to diction
--   Upload stimuli
+-   Upload audio stimuli
 -   change audioSource in `task/trials/typing.js` line 175 to correct folder of
     sounds
 -   Possibly change the replay audio image in `static/images/replayAudio.png`
@@ -9,7 +9,7 @@ Type to diction
     response matches the target. 
 
 Auditory letter id
--   Upload stimuli
+-   Upload audio stimuli
 -   change audioSource in `task/trials/auditory.js` line 67 to correct folder
     of sounds
 -   For some reason Input Device is not being added to the Qualtrics
@@ -17,7 +17,14 @@ Auditory letter id
     response matches the target.
 
 Auditory Syllable to Grapheme Matching
--   Upload stimuli
+-   Upload audio stimuli
 -   change audioSource in `task/trials/auditory.js` line 133 to correct folder
     of sounds
 -   specific measure of accuracy?
+
+Auditory Word to Picture Matching ReadMap
+-   Upload audio stimuli
+-   change audioSource in `task/trials/wordToPicture.js` line 66 to correct
+    folder of sounds. 
+-   Should the first practice trial have showtrial as Procedure? Should it be,
+    showpractice?
