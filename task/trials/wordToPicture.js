@@ -66,3 +66,5 @@ class AuditoryWordToPictureMatchingReadMapTrial {
         return `https://crlabgeorgetown.github.io/behavioral/static/auditory_rhyme_decision_wav_files/${sound}.wav`
     }
 }
+
+export { AuditoryWordToPictureMatchingReadMapTrial}

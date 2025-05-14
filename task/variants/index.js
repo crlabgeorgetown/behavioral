@@ -4,7 +4,7 @@ import { TypingBaseline, TypingDiction } from "./typing"
 import { CrossedRealWord1, CrossedRealWord2, Multimorphemic, OralSentenceReading, POSAndLengthEffect, Pseudoword1, Pseudoword2, SpokenLetterNaming } from './wordReading'
 import { Pseudoword, Realword } from "./wordRepetition"
 import { AuditoryLetterID, AuditorySyllableToGraphemeMatching } from "./auditory"
-import { AuditoryWordToPictureMatchingReadmap } from "./wordToPicture"
+import { AuditoryWordToPictureMatchingReadMap } from "./wordToPicture"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'
@@ -70,7 +70,7 @@ function variantFromString(string) {
         [AUDITORY_SYLLABLE_TO_GRAPHEME_MATCHING]: AuditorySyllableToGraphemeMatching,
 
         // WORD TO PICTURE
-        [AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP]: AuditoryWordToPictureMatchingReadmap
+        [AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP]: AuditoryWordToPictureMatchingReadMap
     }[string]()
 }
 
