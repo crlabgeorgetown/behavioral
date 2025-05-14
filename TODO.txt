@@ -35,3 +35,6 @@ Auditory Word to Picture Matching ReadMap
     the 500ms wait duration has started, the images pop up before the audio has
     completed playing. The sample video shows the audio finishing before
     showing the images.
+
+Written Word to Picture Matching ReadMap
+-   
