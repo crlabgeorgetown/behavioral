@@ -4,7 +4,7 @@ import { TypingBaseline, TypingDiction } from "./typing"
 import { CrossedRealWord1, CrossedRealWord2, Multimorphemic, OralSentenceReading, POSAndLengthEffect, Pseudoword1, Pseudoword2, SpokenLetterNaming } from './wordReading'
 import { Pseudoword, Realword } from "./wordRepetition"
 import { AuditoryLetterID, AuditorySyllableToGraphemeMatching } from "./auditory"
-import { AuditoryWordToPictureMatchingReadMap } from "./wordToPicture"
+import { AuditoryWordToPictureMatchingReadMap, WrittenWordToPictureMatchingReadMap } from "./wordToPicture"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'
@@ -37,6 +37,7 @@ const AUDITORY_SYLLABLE_TO_GRAPHEME_MATCHING = 'AUDITORY_SYLLABLE_TO_GRAPHEME_MA
 
 // WORD TO PICTURE
 const AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP = 'AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP'
+const WRITTEN_WORD_TO_PICTURE_MATCHING_READMAP = 'WRITTEN_WORD_TO_PICTURE_MATCHING_READMAP'
 
 function variantFromString(string) {
     return new {
@@ -70,7 +71,8 @@ function variantFromString(string) {
         [AUDITORY_SYLLABLE_TO_GRAPHEME_MATCHING]: AuditorySyllableToGraphemeMatching,
 
         // WORD TO PICTURE
-        [AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP]: AuditoryWordToPictureMatchingReadMap
+        [AUDITORY_WORD_TO_PICTURE_MATCHING_READMAP]: AuditoryWordToPictureMatchingReadMap,
+        [WRITTEN_WORD_TO_PICTURE_MATCHING_READMAP]: WrittenWordToPictureMatchingReadMap
     }[string]()
 }
 
