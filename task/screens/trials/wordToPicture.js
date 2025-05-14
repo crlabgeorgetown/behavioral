@@ -72,7 +72,7 @@ class WrittenWordToPictureMatchingReadMapTrialScreen extends Screen {
     get components() {
         return new Map([
             [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container'}],
-            [TEXT_CRESP_CONTAINER, {}],
+            [TEXT_CRESP_CONTAINER, {addClass: 'base-text extra-large-text large-fixed-height overlay-container'}],
             [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}]
         ])
     }
@@ -159,7 +159,7 @@ class InstructionWrittenWordToPictureMatching extends Screen {
         botrightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/climb.jpeg')
         return new Map([
             [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container-instruction'}],
-            [TEXT_CRESP_CONTAINER, {text: "climb"}],
+            [TEXT_CRESP_CONTAINER, {text: "climb", addClass: 'base-text large-text large-fixed-height overlay-container-instruction'}],
             [TEXT_CONTAINER, {text: 'You will see four pictures.\nYou will also see a word.\nTouch the picture that matches the word.', addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])

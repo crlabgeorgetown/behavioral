@@ -17,7 +17,7 @@
     grid-template-rows: 1fr 1fr;
     justify-content: center;
     align-items: center;
-    width: 65vw;
+    width: 60vw;
     padding: 5vw;
     position: relative;
 }
@@ -53,5 +53,13 @@
     top: calc(50%);
     left: calc(50%);
     transform: translate(-50%, -50%);
-    z-index: 2;
+    z-index: 5;
+}
+
+.overlay-container-instruction {
+    position: absolute;
+    top: calc(37%);
+    left: calc(50%);
+    transform: translate(-37%, -50%);
+    z-index: 5;
 }
