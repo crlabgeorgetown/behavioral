@@ -1,7 +1,8 @@
 import { InputDevice, ParticipantId } from "../screens/instruction";
 import { LetsPractice } from "../screens/transition";
-import { AuditoryWordToPictureMatchingReadMapTrial } from "../trials/wordToPicture";
+import { AuditoryWordToPictureMatchingReadMapTrial, WrittenWordToPictureMatchingReadMapTrial } from "../trials/wordToPicture";
 import { AuditoryWordToPictureMatchingReadMapTrialScreen, InstructionAuditoryWordToPictureMatching } from "../screens/trials/wordToPicture";
+import { WrittenWordToPictureMatchingReadMapTrialScreen, InstructionWrittenWordToPictureMatching } from "../screens/trials/wordToPicture";
 
 class AuditoryWordToPictureMatchingReadMap {
     constructor() {
@@ -24,4 +25,25 @@ class AuditoryWordToPictureMatchingReadMap {
     }
 }
 
-export {AuditoryWordToPictureMatchingReadMap }
+class WrittenWordToPictureMatchingReadMap {
+    constructor() {
+        this.screens = [
+            ParticipantId,
+            InputDevice,
+            InstructionWrittenWordToPictureMatching,
+            LetsPractice
+        ]
+
+        this.testNameShort = 'WrittenWordToPictureMatchingReadMap'
+        this.buildTestID = 201
+        this.ePrimeTemplateID = 72
+        this.fixationDuration = 100
+        this.timeToTimeout = 10000
+        this.waitDuration = 500
+
+        this.trialClass = WrittenWordToPictureMatchingReadMapTrial
+        this.trialScreenClass = WrittenWordToPictureMatchingReadMapTrialScreen
+    }
+}
+
+export {AuditoryWordToPictureMatchingReadMap, WrittenWordToPictureMatchingReadMap }
