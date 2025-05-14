@@ -28,3 +28,5 @@ Auditory Word to Picture Matching ReadMap
     folder of sounds. 
 -   Should the first practice trial have showtrial as Procedure? Should it be,
     showpractice?
+-   Instruction page is showing the assiociated images from the written word to
+    picture set of images. Do we use the ones for the auditory set of images?
