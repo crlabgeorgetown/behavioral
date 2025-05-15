@@ -168,8 +168,7 @@ class InstructionWrittenWordToPictureMatching extends Screen {
     get clickHandlers() {
         return { 
             nextButton: (event) => this.orchestrator.next(),
-            previousButton: (event) => this.orchestrator.previous(),
-            topleftImage: (event) => this.orchestrator.next()
+            previousButton: (event) => this.orchestrator.previous()
         }
     }
 }
