@@ -93,6 +93,7 @@
     position: absolute;
     width: 25vw;
     height: 20vw;
+    aspect-ratio: 203/144;
     object-fit: contain;
     top: 50%;
     left: 50%;
@@ -101,8 +102,6 @@
     border: 2px solid black;
     box-sizing: border-box;
     background-color: white;
-    max-width: 609px;
-    max-height: 432px;
 }
 
 .AZTL{
