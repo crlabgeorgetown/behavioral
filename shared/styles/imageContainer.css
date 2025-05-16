@@ -81,7 +81,7 @@
 }
 
 .arizona-image:hover{
-    border: 2px solid red;
+    border: 2px solid black;
 }
 
 .arizona-image:active{
@@ -105,19 +105,47 @@
 .AZTL{
     top: 5%;
     left: 5%;
+    position: absolute;
+    width: 25vw;
+    height: 20vw;
+    object-fit: contain;
+    border: 2px solid white;
+    box-sizing: border-box;
+    background-color: white;
 }
 
 .AZTR{
     top: 5%;
     right: 5%;
+    position: absolute;
+    width: 25vw;
+    height: 20vw;
+    object-fit: contain;
+    border: 2px solid white;
+    box-sizing: border-box;
+    background-color: white;
 }
 
 .AZBL{
     bottom: 5%;
     left: 5%;
+    position: absolute;
+    width: 25vw;
+    height: 20vw;
+    object-fit: contain;
+    border: 2px solid white;
+    box-sizing: border-box;
+    background-color: white;
 }
 
 .AZBR{
     bottom: 5%;
     right: 5%;
+    position: absolute;
+    width: 25vw;
+    height: 20vw;
+    object-fit: contain;
+    border: 2px solid white;
+    box-sizing: border-box;
+    background-color: white;
 }
