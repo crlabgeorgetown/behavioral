@@ -1,7 +1,7 @@
 import Screen from "../base";
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instructionButtons";
-import { IMAGE_CONTAINER, topleftImage } from "../../../shared/components/imageContainer";
+import { IMAGE_CONTAINER, ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomeleftImage, ArizonabottomrightImage } from "../../../shared/components/imageContainer";
 
 class ArizonaSemanticTestTrialScreen extends Screen {
     get components() {
@@ -41,19 +41,23 @@ class ArizonaSemanticTestTrialScreen extends Screen {
     startTrial() {
         // prepare the trial
         // load the pictures into the containers
-        IMAGE_CONTAINER.hide()
-        topleftImage.attr('src', this.orchestrator.currentTrial.getTopLeft())
-        toprightImage.attr('src', this.orchestrator.currentTrial.getTopRight())
-        bottomleftImage.attr('src', this.orchestrator.currentTrial.getBotLeft())
-        bottomrightImage.attr('src', this.orchestrator.currentTrial.getBotRight())
-
+        ARIZONA_IMAGE_CONTAINER.hide()
+        ArizonatopleftImage.attr('src', this.orchestrator.currentTrial.gettopleftimage())
+        ArizonatoprightImage.attr('src', this.orchestrator.currentTrial.gettoprightimage())
+        Arizonatargetimage.attr('src', this.orchestrator.currentTrial.gettargetimage())
+        ArizonabottomeleftImage.attr('src', this.orchestrator.currentTrial.getbottomleftimage())
+        ArizonabottomrightImage.attr('src', this.orchestrator.currentTrial.getbottomrightimage())
         setTimeout(() => {
-            IMAGE_CONTAINER.show()
+            TEXT_CONTAINER.hide()
+            ARIZONA_IMAGE_CONTAINER.show()
             this.orchestrator.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
-                this.orchestrator.next()
-            }, this.orchestrator.currentTrial.timeToTimeout)
-        }, 1000)
+                this.orchestrator.currentTrial.TimedOut = true
+                this.orchestrator.currentTrial.responseTime = new Date()
+                this.orchestrator.timedOut()
+                TEXT_CONTAINER.show()
+            }, this.orchestrator.variant.timeToTimeout)
+        }, this.orchestrator.variants.fixationDuration)
     }
 }
 
