@@ -66,7 +66,7 @@ class InstructionArizonaSemanticTest extends Screen {
         IMAGE_CONTAINER.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/arizonaSemanticTest/PictureASTInstructions.png')
         return new Map([
             [IMAGE_CONTAINER, {}],
-            [TEXT_CONTAINER, {text: 'Show me which of these pictures goes with this one.', addClass: 'base-text large-text'}],
+            [TEXT_CONTAINER, {text: 'Show me which of these pictures goes with this one.', addClass: 'base-text medium-text'}],
             [INSTRUCTION_BUTTON_CONTAINER, {}]
         ])
     }

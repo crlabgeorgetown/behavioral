@@ -74,7 +74,7 @@
     position: absolute;
     width: 25vw;
     height: 20vw;
-    object-fit: scale-down;
+    object-fit: contain;
     border: 2px solid white;
     box-sizing: border-box;
     background-color: white;
@@ -92,7 +92,7 @@
     position: absolute;
     width: 25vw;
     height: 20vw;
-    object-fit: scale-down;
+    object-fit: contain;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
