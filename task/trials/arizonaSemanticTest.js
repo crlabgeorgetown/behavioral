@@ -59,27 +59,27 @@ class ArizonaSemanticTestTrial {
         return this.startTime.toLocaleDateString('en-US')
     }
 
-    getTargetImage() {
+    gettargetimage() {
         const targetimage = this.targetimage
         return `https://crlabgeorgetown.github.io/behavioral/static/arizonaSemanticTest/${targetimage}.png`
     }
 
-    getTopLeft() {
+    gettopleftimage() {
         const topleft = this.topleft
         return `https://crlabgeorgetown.github.io/behavioral/static/arizonaSemanticTest/${topleft}.png`
     }
 
-    getTopRight() {
+    gettoprightimage() {
         const topright = this.topright
         return `https://crlabgeorgetown.github.io/behavioral/static/arizonaSemanticTest/${topright}.png`
     }
 
-    getBottomLeft() {
+    getbottomleftimage() {
         const bottomleft = this.bottomleft
         return `https://crlabgeorgetown.github.io/behavioral/static/arizonaSemanticTest/${bottomleft}.png`
     }
 
-    getBottomRight() {
+    getbottomrightimage() {
         const bottomright = this.bottomright
         return `https://crlabgeorgetown.github.io/behavioral/static/arizonaSemanticTest/${bottomright}.png`
     }

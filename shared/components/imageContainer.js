@@ -41,32 +41,32 @@ const ARIZONA_IMAGE_CONTAINER = jQuery('<div/>', {
     class: 'arizona-container'
 })
 
-const ArizonaTopleftImage = jQuery('<img/>', {
+const ArizonatopleftImage = jQuery('<img/>', {
     id: 'arizona-topleftImage',
     class: 'arizona-image'
 })
 
-const ArizonaTopRightImage = jQuery('<img/>', {
+const ArizonatoprightImage = jQuery('<img/>', {
     id: 'arizona-toprightImage',
     class: 'arizona-image'
 })
 
-const ArizonaTargetImage = jQuery('<img/>', {
+const Arizonatargetimage = jQuery('<img/>', {
     id: 'arizona-targetImage',
     class: 'arizona-image'
 })
 
-const ArizonaBottomeLeftImage = jQuery('<img/>', {
+const ArizonabottomeleftImage = jQuery('<img/>', {
     id: 'arizona-botleftImage',
     class: 'arizona-image'
 })
 
-const ArizonaBottomRightImage = jQuery('<img/>', {
+const ArizonabottomrightImage = jQuery('<img/>', {
     id: 'arizona-botrightImage',
     class: 'arizona-image'
 })
 
-ARIZONA_IMAGE_CONTAINER.append(ArizonaTopleftImage, ArizonaTopRightImage, ArizonaTargetImage, ArizonaBottomeLeftImage, ArizonaBottomRightImage)
+ARIZONA_IMAGE_CONTAINER.append(ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomeleftImage, ArizonabottomrightImage)
 
 export { IMAGE_CONTAINER, FOUR_IMAGE_CONTAINER, topleftImage, toprightImage, botleftImage, botrightImage, TEXT_CRESP_CONTAINER,
-    ARIZONA_IMAGE_CONTAINER, ArizonaTopleftImage, ArizonaTopRightImage, ArizonaTargetImage, ArizonaBottomeLeftImage, ArizonaBottomRightImage }
+    ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomeleftImage, ArizonabottomrightImage }
