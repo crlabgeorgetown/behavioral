@@ -1,7 +1,7 @@
 import Screen from "../base";
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instructionButtons";
-import { IMAGE_CONTAINER, ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomeleftImage, ArizonabottomrightImage } from "../../../shared/components/imageContainer";
+import { IMAGE_CONTAINER, ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage } from "../../../shared/components/imageContainer";
 
 class ArizonaSemanticTestTrialScreen extends Screen {
     get components() {
@@ -13,10 +13,10 @@ class ArizonaSemanticTestTrialScreen extends Screen {
 
     get clickHandlers() {
         return {
-            topleftImage: (event) => this.proceedClickHandler(event, 'topleft'),
-            toprightImage: (event) => this.proceedClickHandler(event, 'topright'),
-            bottomleftImage: (event) => this.proceedClickHandler(event, 'bottomleft'),
-            bottomrightImage: (event) => this.proceedClickHandler(event, 'bottomright')
+            ArizonatopleftImage: (event) => this.proceedClickHandler(event, 'topleft'),
+            ArizonatoprightImage: (event) => this.proceedClickHandler(event, 'topright'),
+            ArizonabottomleftImage: (event) => this.proceedClickHandler(event, 'bottomleft'),
+            ArizonabottomrightImage: (event) => this.proceedClickHandler(event, 'bottomright')
         }
     }
 
@@ -45,7 +45,7 @@ class ArizonaSemanticTestTrialScreen extends Screen {
         ArizonatopleftImage.attr('src', this.orchestrator.currentTrial.gettopleftimage())
         ArizonatoprightImage.attr('src', this.orchestrator.currentTrial.gettoprightimage())
         Arizonatargetimage.attr('src', this.orchestrator.currentTrial.gettargetimage())
-        ArizonabottomeleftImage.attr('src', this.orchestrator.currentTrial.getbottomleftimage())
+        ArizonabottomleftImage.attr('src', this.orchestrator.currentTrial.getbottomleftimage())
         ArizonabottomrightImage.attr('src', this.orchestrator.currentTrial.getbottomrightimage())
         setTimeout(() => {
             TEXT_CONTAINER.hide()
@@ -57,7 +57,7 @@ class ArizonaSemanticTestTrialScreen extends Screen {
                 this.orchestrator.timedOut()
                 TEXT_CONTAINER.show()
             }, this.orchestrator.variant.timeToTimeout)
-        }, this.orchestrator.variants.fixationDuration)
+        }, this.orchestrator.variant.fixationDuration)
     }
 }
 
