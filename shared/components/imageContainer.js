@@ -43,27 +43,27 @@ const ARIZONA_IMAGE_CONTAINER = jQuery('<div/>', {
 
 const ArizonatopleftImage = jQuery('<img/>', {
     id: 'ArizonatopleftImage',
-    class: 'arizona-image'
+    class: 'arizona-image AZTL'
 })
 
 const ArizonatoprightImage = jQuery('<img/>', {
     id: 'ArizonatoprightImage',
-    class: 'arizona-image'
+    class: 'arizona-image AZTR'
 })
 
 const Arizonatargetimage = jQuery('<img/>', {
     id: 'ArizonatargetImage',
-    class: 'arizona-image'
+    class: 'arizona-target-image'
 })
 
 const ArizonabottomleftImage = jQuery('<img/>', {
     id: 'ArizonabottomleftImage',
-    class: 'arizona-image'
+    class: 'arizona-image AZBL'
 })
 
 const ArizonabottomrightImage = jQuery('<img/>', {
     id: 'ArizonabottomrightImage',
-    class: 'arizona-image'
+    class: 'arizona-image AZBR'
 })
 
 ARIZONA_IMAGE_CONTAINER.append(ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage)
