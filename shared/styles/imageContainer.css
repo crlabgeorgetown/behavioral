@@ -74,12 +74,11 @@
     position: absolute;
     width: 25vw;
     height: 20vw;
+    aspect-ratio: 203/144;
     object-fit: contain;
     border: 2px solid white;
     box-sizing: border-box;
     background-color: white;
-    max-width: 203px;
-    max-height: 144px;
 }
 
 .arizona-image:hover{
@@ -102,8 +101,8 @@
     border: 2px solid black;
     box-sizing: border-box;
     background-color: white;
-    max-width: 203px;
-    max-height: 144px;
+    max-width: 609px;
+    max-height: 432px;
 }
 
 .AZTL{
