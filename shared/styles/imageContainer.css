@@ -35,11 +35,11 @@
     object-fit: contain;
 }
 
-.image-container:hover {
+.image-container:hover{
     border: 2px solid black;
 }
 
-.image-container:active {
+.image-container:active{
     background-color: #ccc;
 }
 
@@ -48,7 +48,7 @@
  * instead of adding a text container to the image container
  */
 
-.overlay-container {
+.overlay-container{
     position: absolute;
     top: calc(50%);
     left: calc(50%);
@@ -56,7 +56,7 @@
     z-index: 5;
 }
 
-.overlay-container-instruction {
+.overlay-container-instruction{
     position: absolute;
     top: calc(33%);
     left: calc(50%);
@@ -64,13 +64,13 @@
     z-index: 5;
 }
 
-.arizona-container {
+.arizona-container{
     position: relative;
     width: 90vw;
     height: 60vw;
 }
 
-.arizona-image {
+.arizona-image{
     position: absolute;
     width: 25vw;
     height: 20vw;
@@ -80,15 +80,15 @@
     background-color: white;
 }
 
-.arizona-image:hover {
-    border: 2px solid black;
+.arizona-image:hover{
+    border: 2px solid red;
 }
 
-.arizona-image:active {
+.arizona-image:active{
     background-color: white;
 }
 
-.arizona-target-image {
+.arizona-target-image{
     position: absolute;
     width: 25vw;
     height: 20vw;
@@ -102,22 +102,22 @@
     background-color: white;
 }
 
-.AZTL {
+.AZTL{
     top: 5%;
     left: 5%;
 }
 
-.AZTR {
+.AZTR{
     top: 5%;
     right: 5%;
 }
 
-.AZBL {
+.AZBL{
     bottom: 5%;
     left: 5%;
 }
 
-.AZBR {
+.AZBR{
     bottom: 5%;
     right: 5%;
 }
