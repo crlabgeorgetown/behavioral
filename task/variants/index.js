@@ -5,7 +5,7 @@ import { CrossedRealWord1, CrossedRealWord2, Multimorphemic, OralSentenceReading
 import { Pseudoword, Realword } from "./wordRepetition"
 import { AuditoryLetterID, AuditorySyllableToGraphemeMatching } from "./auditory"
 import { AuditoryWordToPictureMatchingReadMap, WrittenWordToPictureMatchingReadMap } from "./wordToPicture"
-import { ArizonaSemanticTest } from "./arizonaSemanticTest"
+import { ArizonaSemanticTest, WrittenArizonaSemanticTest } from "./arizonaSemanticTest"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'
@@ -42,6 +42,7 @@ const WRITTEN_WORD_TO_PICTURE_MATCHING_READMAP = 'WRITTEN_WORD_TO_PICTURE_MATCHI
 
 // ARIZONA SEMANTIC TEST
 const ARIZONA_SEMANTIC_TEST = 'ARIZONA_SEMANTIC_TEST'
+const WRITTEN_ARIZONA_SEMANTIC_TEST = 'WRITTEN_ARIZONA_SEMANTIC_TEST'
 
 function variantFromString(string) {
     return new {
@@ -79,7 +80,8 @@ function variantFromString(string) {
         [WRITTEN_WORD_TO_PICTURE_MATCHING_READMAP]: WrittenWordToPictureMatchingReadMap,
 
         // ARIZONA SEMANTIC TEST
-        [ARIZONA_SEMANTIC_TEST]: ArizonaSemanticTest
+        [ARIZONA_SEMANTIC_TEST]: ArizonaSemanticTest,
+        [WRITTEN_ARIZONA_SEMANTIC_TEST]: WrittenArizonaSemanticTest
     }[string]()
 }
 
