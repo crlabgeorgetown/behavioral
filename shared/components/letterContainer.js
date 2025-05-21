@@ -1,3 +1,4 @@
+// Auditory Letter ID
 const SIX_LETTER_CONTAINER = jQuery('<div/>', {
     id: 'SIX_LETTER_CONTAINER',
     class: 'six-grid-container six-letter-container'
@@ -35,6 +36,7 @@ const botright6 = jQuery('<div/>', {
 
 SIX_LETTER_CONTAINER.append(topleft6, topmid6, topright6, botleft6, botmid6, botright6)
 
+// Auditory Syllable to Grapheme Matching
 const FOUR_LETTER_CONTAINER = jQuery('<div/>', {
     id: 'FOUR_LETTER_CONTAINER',
     class: 'four-grid-container four-letter-container'
@@ -62,6 +64,41 @@ const botright4 = jQuery('<div/>', {
 
 FOUR_LETTER_CONTAINER.append(topleft4, topright4, botleft4, botright4)
 
-export { SIX_LETTER_CONTAINER, FOUR_LETTER_CONTAINER, 
+// Written Arizona Semantic Test
+const ARIZONA_TEXT_CONTAINER = jQuery('<div/>', {
+    id: 'arizona-text-container',
+    class: 'arizona-container',
+})
+
+const Arizonatopleft = jQuery('<div/>', {
+    id: 'Arizonatopleft',
+    class: 'arizona-image base-text large-text large-fixed-height AZTL'
+})
+
+const Arizonatopright = jQuery('<div/>', {
+    id: 'Arizonatopright',
+    class: 'arizona-image base-text large-text large-fixed-height AZTR'
+})
+
+const Arizonatarget = jQuery('<div/>', {
+    id: 'Arizonatarget',
+    class: 'arizona-target-image base-text large-text large-fixed-height AZT'
+})
+
+const Arizonabottomleft = jQuery('<div/>', {
+    id: 'Arizonabottomleft',
+    class: 'arizona-image base-text large-text large-fixed-height AZBL'
+})
+
+const Arizonabottomright = jQuery('<div/>', {
+    id: 'Arizonabottomright',
+    class: 'arizona-image base-text large-text large-fixed-height AZBR'
+})
+
+ARIZONA_TEXT_CONTAINER.append(Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright)
+
+
+export { SIX_LETTER_CONTAINER, FOUR_LETTER_CONTAINER, ARIZONA_TEXT_CONTAINER,
     topleft6, topmid6, topright6, botleft6, botmid6, botright6,
-    topleft4, topright4, botleft4, botright4 }
+    topleft4, topright4, botleft4, botright4,
+    Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright }

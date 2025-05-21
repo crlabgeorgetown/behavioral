@@ -42,3 +42,7 @@ Written Word to Picture Matching ReadMap
 Arizona Semantic Test
 -   The practice items on the pptx and sample video are different, went with
     the ordering shown in pptx.
+
+Written Arizona Semantic Test
+-   Ordering of stimuli are inconsistent, which ordering should we put?
+-   Where is the correct stimuli?
