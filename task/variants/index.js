@@ -6,6 +6,7 @@ import { Pseudoword, Realword } from "./wordRepetition"
 import { AuditoryLetterID, AuditorySyllableToGraphemeMatching } from "./auditory"
 import { AuditoryWordToPictureMatchingReadMap, WrittenWordToPictureMatchingReadMap } from "./wordToPicture"
 import { ArizonaSemanticTest, WrittenArizonaSemanticTest } from "./arizonaSemanticTest"
+import { CrossCaseLetter } from "./matching"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'
@@ -44,6 +45,9 @@ const WRITTEN_WORD_TO_PICTURE_MATCHING_READMAP = 'WRITTEN_WORD_TO_PICTURE_MATCHI
 const ARIZONA_SEMANTIC_TEST = 'ARIZONA_SEMANTIC_TEST'
 const WRITTEN_ARIZONA_SEMANTIC_TEST = 'WRITTEN_ARIZONA_SEMANTIC_TEST'
 
+// MATCHING
+const CROSS_CASE_LETTER = 'CROSS_CASE_LETTER'
+
 function variantFromString(string) {
     return new {
         // SEMANTIC RELATEDNESS
@@ -81,7 +85,10 @@ function variantFromString(string) {
 
         // ARIZONA SEMANTIC TEST
         [ARIZONA_SEMANTIC_TEST]: ArizonaSemanticTest,
-        [WRITTEN_ARIZONA_SEMANTIC_TEST]: WrittenArizonaSemanticTest
+        [WRITTEN_ARIZONA_SEMANTIC_TEST]: WrittenArizonaSemanticTest,
+
+        // MATCHING
+        [CROSS_CASE_LETTER]: CrossCaseLetter
     }[string]()
 }
 
