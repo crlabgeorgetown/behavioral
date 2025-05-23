@@ -116,7 +116,12 @@ const right2 = jQuery('<div/>', {
 
 const topimage = jQuery('<div/>', {
     id: 'topimage',
-    class: 'letter-container base-text large-text large-fixed-height'
+    class: 'top-image-2 base-text large-text large-fixed-height'
+})
+
+const divider = jQuery('<hr/>', {
+    id: 'divider',
+    class: 'divider'
 })
 
 
@@ -126,4 +131,4 @@ export { SIX_LETTER_CONTAINER, FOUR_LETTER_CONTAINER, ARIZONA_TEXT_CONTAINER, TW
     topleft6, topmid6, topright6, botleft6, botmid6, botright6,
     topleft4, topright4, botleft4, botright4,
     Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright,
-    left2, right2, topimage }
+    left2, right2, topimage, divider }

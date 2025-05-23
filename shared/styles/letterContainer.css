@@ -72,10 +72,30 @@
 
 .two-letter-container {
     display: grid;
-    gap: 10vw;
+    gap: 15vw;
     justify-content: center;
     align-items: center;
-    width: 75vw;
+    width: 85vw;
+    height: 35vh;
     padding: 5vw;
     grid-template-columns: 1fr 1fr;
+}
+
+.top-image-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+
+    height: 35vh;
+    width: 35vw;
+}
+
+.divider {
+    width: 100%;
+    size: 2px;
+    background-color: black;
 }
