@@ -18,6 +18,8 @@ class CrossCaseLetter {
         this.fixationDuration = 500;
         this.timeToTimeout = 5000;
 
+        this.InstructionOne = "You will see a letter.\n\nSelect the matching letter."
+
         this.trialClass = CrossCaseLetterTrial;
         this.trialScreenClass = CrossCaseLetterTrialScreen;
     }
