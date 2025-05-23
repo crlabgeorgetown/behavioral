@@ -1,5 +1,5 @@
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
-import { TWO_LETTER_CONTAINER, left2, right2, topimage } from "../../../shared/components/letterContainer";
+import { TWO_LETTER_CONTAINER, left2, right2, topimage, divider } from "../../../shared/components/letterContainer";
 import Screen from "../base";
 
 class CrossCaseLetterTrialScreen extends Screen {
@@ -7,6 +7,7 @@ class CrossCaseLetterTrialScreen extends Screen {
         return new Map([
             [TEXT_CONTAINER, { text: '+', addClass: 'base-text extra-large-text large-fixed-height' }],
             [topimage, {}],
+            [divider, {}],
             [TWO_LETTER_CONTAINER, {}]
         ]);
     }
@@ -37,13 +38,15 @@ class CrossCaseLetterTrialScreen extends Screen {
 
     startTrial() {
         TWO_LETTER_CONTAINER.hide()
+        divider.hide()
         topimage.hide()
-        left2.text(this.orchestrator.currentTrial.leftimage)
-        right2.text(this.orchestrator.currentTrial.rightimage)
-        topimage.text(this.orchestrator.currentTrial.topimage)
+        left2.text(this.orchestrator.currentTrial.leftimage.split('_')[0])
+        right2.text(this.orchestrator.currentTrial.rightimage.split('_')[0])
+        topimage.text(this.orchestrator.currentTrial.topimage.split('_')[0])
         setTimeout(() => {
             TEXT_CONTAINER.hide()
             topimage.show()
+            divider.show()
             TWO_LETTER_CONTAINER.show()
             this.timeoutID = setTimeout(() => {
                 this.orchestrator.currentTrial.TimedOut = true
