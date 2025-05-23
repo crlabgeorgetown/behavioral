@@ -97,8 +97,33 @@ const Arizonabottomright = jQuery('<div/>', {
 
 ARIZONA_TEXT_CONTAINER.append(Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright)
 
+// Matching: Cross Case Letter & Written Homophone to picture Matching
 
-export { SIX_LETTER_CONTAINER, FOUR_LETTER_CONTAINER, ARIZONA_TEXT_CONTAINER,
+const TWO_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'TWO_LETTER_CONTAINER',
+    class: 'two-grid-container two-letter-container'
+})
+
+const left2 = jQuery('<div/>', {
+    id: 'left2',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const right2 = jQuery('<div/>', {
+    id: 'right2',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const topimage = jQuery('<div/>', {
+    id: 'topimage',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+
+TWO_LETTER_CONTAINER.append(left2, right2)
+
+export { SIX_LETTER_CONTAINER, FOUR_LETTER_CONTAINER, ARIZONA_TEXT_CONTAINER, TWO_LETTER_CONTAINER,
     topleft6, topmid6, topright6, botleft6, botmid6, botright6,
     topleft4, topright4, botleft4, botright4,
-    Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright }
+    Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright,
+    left2, right2, topimage }
