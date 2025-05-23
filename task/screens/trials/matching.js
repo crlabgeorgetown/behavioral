@@ -37,11 +37,13 @@ class CrossCaseLetterTrialScreen extends Screen {
 
     startTrial() {
         TWO_LETTER_CONTAINER.hide()
+        topimage.hide()
         left2.text(this.orchestrator.currentTrial.leftimage)
         right2.text(this.orchestrator.currentTrial.rightimage)
         topimage.text(this.orchestrator.currentTrial.topimage)
         setTimeout(() => {
             TEXT_CONTAINER.hide()
+            topimage.show()
             TWO_LETTER_CONTAINER.show()
             this.timeoutID = setTimeout(() => {
                 this.orchestrator.currentTrial.TimedOut = true

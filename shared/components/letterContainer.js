@@ -101,7 +101,7 @@ ARIZONA_TEXT_CONTAINER.append(Arizonatopleft, Arizonatopright, Arizonatarget, Ar
 
 const TWO_LETTER_CONTAINER = jQuery('<div/>', {
     id: 'TWO_LETTER_CONTAINER',
-    class: 'two-grid-container two-letter-container'
+    class: 'two-letter-container'
 })
 
 const left2 = jQuery('<div/>', {

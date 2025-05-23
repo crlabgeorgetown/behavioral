@@ -69,3 +69,13 @@
 .letter-container:active {
     background-color: #ccc;
 }
+
+.two-letter-container {
+    display: grid;
+    gap: 10vw;
+    justify-content: center;
+    align-items: center;
+    width: 75vw;
+    padding: 5vw;
+    grid-template-columns: 1fr 1fr;
+}
