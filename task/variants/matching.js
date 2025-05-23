@@ -18,8 +18,8 @@ class CrossCaseLetter {
         this.fixationDuration = 500
         this.timeToTimeout = 5000
 
-        this.InstructionOne = "You will see a letter.\n\nSelect the matching letter."
-        this.InstructionTwo = "We'll start with a few practice items before we begin."
+        this.instructionOne = "You will see a letter.\nSelect the matching letter."
+        this.instructionTwo = "We'll start with a few practice items before we begin."
 
         this.trialClass = CrossCaseLetterTrial
         this.trialScreenClass = CrossCaseLetterTrialScreen
