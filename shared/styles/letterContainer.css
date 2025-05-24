@@ -76,7 +76,7 @@
     justify-content: center;
     align-items: center;
     width: 85vw;
-    height: 45vh;
+    height: 50vh;
     padding: 5vw;
     grid-template-columns: 1fr 1fr;
 }
@@ -85,8 +85,8 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    width: 40vw;
-    height: 45vh;
+    width: 42.5vw;
+    height: 50vh;
     padding: 5vw;
     grid-template-columns: 1fr;
 }
