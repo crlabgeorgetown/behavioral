@@ -121,6 +121,7 @@ class AuditorySyllableToGraphemeMatchingTrial {
     get TimeOnItem() {
         return this.responseTime - this.startTime
     }
+
     get Time() {
         return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
     }

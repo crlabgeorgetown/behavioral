@@ -121,7 +121,7 @@ const right2 = jQuery('<div/>', {
 
 const topimage = jQuery('<div/>', {
     id: 'topimage',
-    class: 'letter-container base-text large-text large-fixed-height'
+    class: 'top-image-2 base-text large-text large-fixed-height'
 })
 
 const divider = jQuery('<hr/>', {
