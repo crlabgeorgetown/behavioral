@@ -76,18 +76,17 @@
     justify-content: center;
     align-items: center;
     width: 85vw;
-    height: 35vh;
+    height: 45vh;
     padding: 5vw;
     grid-template-columns: 1fr 1fr;
 }
 
 .one-letter-container {
     display: grid;
-    gap: 15vw;
     justify-content: center;
     align-items: center;
-    width: 35vw;
-    height: 35vh;
+    width: 40vw;
+    height: 45vh;
     padding: 5vw;
     grid-template-columns: 1fr;
 }
