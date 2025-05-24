@@ -35,9 +35,7 @@ class CrossCaseLetterTrial {
             'Accuracy',
             'Time',
             'Date',
-            'RT',
-            'TimedOut',
-            'TrialWasAdministered'
+            'RT'
         ]
     }
 
@@ -55,14 +53,6 @@ class CrossCaseLetterTrial {
 
     get Date() {
         return this.startTime.toLocaleDateString('en-US')
-    }
-
-    get TimedOut() {
-        return this.TimedOut
-    }
-
-    get TrialWasAdministered() {
-        return this.TrialWasAdministered
     }
 }
 
