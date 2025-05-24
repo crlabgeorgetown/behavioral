@@ -1,32 +1,32 @@
 class CrossCaseLetterTrial {
     constructor(config) {
-        this.ItemNum = config.ItemNum;
-        this.TrialType = config.TrialType;
-        this.Procedure = config.Procedure;
+        this.ItemNum = config.ItemNum
+        this.TrialType = config.TrialType
+        this.Procedure = config.Procedure
 
-        this.topimage = config.topimage;
-        this.leftimage = config.leftimage;
-        this.rightimage = config.rightimage;
+        this.topimage = config.topimage
+        this.leftimage = config.leftimage
+        this.rightimage = config.rightimage
 
         this.location = {
             ['left']: config.leftimage,
             ['right']: config.rightimage
         }
 
-        this.CRESP = config.CRESP;
-        this.TargetLocation = config.TargetLocation;
+        this.CRESP = config.CRESP
+        this.TargetLocation = config.TargetLocation
 
-        this.Response = '';
-        this.ResponseLocation = '';
+        this.Response = ''
+        this.ResponseLocation = ''
 
-        this.startTime = null;
-        this.responseTime = null;
-        this.TimedOut = null;
-        this.TrialWasAdministered = 1;
+        this.startTime = null
+        this.responseTime = null
+        this.TimedOut = null
+        this.TrialWasAdministered = 1
     }
 
     isCorrect() {
-        return this.ResponseLocation === this.TargetLocation;
+        return this.ResponseLocation === this.TargetLocation
     }
 
     get columns() {
@@ -42,11 +42,11 @@ class CrossCaseLetterTrial {
     }
 
     get Accuracy() {
-        return this.isCorrect() ? 1 : 0;
+        return this.isCorrect() ? 1 : 0
     }
 
     get RT() {
-        return this.responseTime - this.startTime;
+        return this.responseTime - this.startTime
     }
 
     get Time() {
@@ -54,7 +54,7 @@ class CrossCaseLetterTrial {
     }
 
     get Date() {
-        return this.startTime.toLocaleDateString('en-US');
+        return this.startTime.toLocaleDateString('en-US')
     }
 }
 

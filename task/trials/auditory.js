@@ -34,6 +34,7 @@ class AuditoryLetterIDTrial {
     isCorrect() {
         return this.ResponseLocation === this.TargetLocation
     }
+
     get columns() {
         return [
             ...Object.keys(this),

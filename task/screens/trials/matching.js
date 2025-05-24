@@ -9,31 +9,31 @@ class CrossCaseLetterTrialScreen extends Screen {
             [topimage, {}],
             [divider, {}],
             [TWO_LETTER_CONTAINER, {}]
-        ]);
+        ])
     }
 
     get clickHandlers() {
         return {
             left2: (event) => this.proceedClickHandler(event, 'left'),
             right2: (event) => this.proceedClickHandler(event, 'right')
-        };
+        }
     }
 
     proceedClickHandler(event, location) {
-        event.stopPropagation();
-        clearTimeout(this.timeoutID);
+        event.stopPropagation()
+        clearTimeout(this.timeoutID)
 
-        this.orchestrator.currentTrial.responseTime = new Date();
-        this.orchestrator.currentTrial.ResponseLocation = location;
-        this.orchestrator.currentTrial.Response = this.orchestrator.currentTrial.location[location];
-        const isPractice = this.orchestrator.currentTrial.TrialType === 'Practice';
+        this.orchestrator.currentTrial.responseTime = new Date()
+        this.orchestrator.currentTrial.ResponseLocation = location
+        this.orchestrator.currentTrial.Response = this.orchestrator.currentTrial.location[location]
+        const isPractice = this.orchestrator.currentTrial.TrialType === 'Practice'
 
         if (!this.orchestrator.currentTrial.isCorrect() && isPractice) {
-            this.orchestrator.replay();
+            this.orchestrator.replay()
         } else {
-            this.orchestrator.next();
+            this.orchestrator.next()
         }
-        TEXT_CONTAINER.show();
+        TEXT_CONTAINER.show()
     }
 
     startTrial() {
