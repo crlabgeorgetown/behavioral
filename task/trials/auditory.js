@@ -60,7 +60,7 @@ class AuditoryLetterIDTrial {
     }
 
     get Date() {
-        return this.startTime.toLocaleTimeString('en-US')
+        return this.startTime.toLocaleDateString('en-US')
     }
 
     audioSource() {
@@ -126,7 +126,7 @@ class AuditorySyllableToGraphemeMatchingTrial {
     }
 
     get Date() {
-        return this.startTime.toLocaleTimeString('en-US')
+        return this.startTime.toLocaleDateString('en-US')
     }
 
     audioSource() {

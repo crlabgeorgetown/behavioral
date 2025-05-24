@@ -35,8 +35,8 @@ class CrossCaseLetterTrial {
             'Accuracy',
             'Time',
             'Date',
-            'TimedOut',
             'RT',
+            'TimedOut',
             'TrialWasAdministered'
         ]
     }
@@ -50,7 +50,7 @@ class CrossCaseLetterTrial {
     }
 
     get Time() {
-        return this.startTime.toLocaleString('en-US', {hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h24'})
+        return this.startTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', hourCycle: 'h24'})
     }
 
     get Date() {
