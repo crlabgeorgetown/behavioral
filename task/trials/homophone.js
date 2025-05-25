@@ -2,6 +2,7 @@ class WrittenHomophoneToPictureMatchingTrial {
     constructor(config) {
         this.ItemNum = config.ItemNum
         this.TrialType = config.TrialType
+        this.Procedure = config.Procedure
 
         this.leftimage = config.leftimage
         this.rightimage = config.rightimage
