@@ -68,5 +68,19 @@ const ArizonabottomrightImage = jQuery('<img/>', {
 
 ARIZONA_IMAGE_CONTAINER.append(ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage)
 
+// Written Homoephone to Picture Matching
+const topimage = jQuery('<img/>', {
+    id: 'topimage',
+    class: 'top-image-container'
+})
+
+const ONE_IMAGE_CONTAINER = jQuery('<div/>', {
+    id: 'one-image-container',
+    class: 'one-image-container'
+})
+
+ONE_IMAGE_CONTAINER.append(topimage)
+
 export { IMAGE_CONTAINER, FOUR_IMAGE_CONTAINER, topleftImage, toprightImage, botleftImage, botrightImage, TEXT_CRESP_CONTAINER,
-    ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage }
+    ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage,
+    ONE_IMAGE_CONTAINER, topimage }

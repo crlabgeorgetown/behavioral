@@ -59,7 +59,7 @@ class WrittenHomophoneToPictureMatchingTrial {
 
     gettopimage() {
         const topimage = this.topimage
-        return `https://3m1l1032.github.io/behavioral/static/homophones/${topimage}.jpeg`
+        return `https://crlabgeorgetown.github.io/behavioral/static/homophones/${topimage}.jpeg`
     }
 }
 

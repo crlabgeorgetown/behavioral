@@ -14,7 +14,7 @@ class WrittenHomophoneToPictureMatching {
         this.testNameShort = 'WrittenHomophonetoPictureMatching'
         this.buildTestID = 205
         this.ePrimeTemplateID = 76
-        this.instructionOne = 'You will see a word and three pictures.\nPlease select the picture that matches the word.'
+        this.instructionOne = 'You will see a picture and two words.\nDecide which word goes with the picture.'
         this.fixationDuration = 500
         this.timeToTimeout = 8000
 
