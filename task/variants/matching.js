@@ -1,4 +1,5 @@
 import { InputDevice, ParticipantId, InstructionOne, InstructionTwo } from "../screens/instruction"
+import { LetsPractice } from "../screens/transition"
 import { CrossCaseLetterTrial } from "../trials/matching"
 import { CrossCaseLetterTrialScreen } from "../screens/trials/matching"
 
@@ -8,7 +9,8 @@ class CrossCaseLetter {
             ParticipantId,
             InputDevice,
             InstructionOne,
-            InstructionTwo
+            InstructionTwo,
+            LetsPractice
         ]
 
         this.testNameShort = 'CrossCaseLetter'

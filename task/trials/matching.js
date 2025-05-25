@@ -35,7 +35,9 @@ class CrossCaseLetterTrial {
             'Accuracy',
             'Time',
             'Date',
-            'RT'
+            'RT',
+            'TimedOut',
+            'TrialWasAdministered'
         ]
     }
 
