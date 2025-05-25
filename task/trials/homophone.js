@@ -56,6 +56,11 @@ class WrittenHomophoneToPictureMatchingTrial {
     get Date() {
         return this.startTime.toLocaleDateString('en-US')
     }
+
+    gettopimage() {
+        const topimage = this.topimage
+        return `https://3m1l1032.github.io/behavioral/static/homophones/${topimage}.jpeg`
+    }
 }
 
 export { WrittenHomophoneToPictureMatchingTrial }
