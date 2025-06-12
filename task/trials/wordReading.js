@@ -226,6 +226,7 @@ class SpokenLetterNamingTrial {
         this.startTime = null
         this.responseTime = null
         this.TimedOut = false
+        this.Accuracy = -1
     }
 
     get columns() {
@@ -235,6 +236,7 @@ class SpokenLetterNamingTrial {
             'RT',
             'Time',
             'Date',
+            'Accuracy',
         ]
     }
 

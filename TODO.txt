@@ -53,3 +53,17 @@ Cross Letter Matching
 
 Written Homophone To Picture Matching
 -   Data is not submitting to Qualtrics correctly (at all).
+
+Pseudoword Oral Reading ReadMap 1
+-   There were no changes in the stumulus list from list in box 'PW Oral
+    Reading EPrime' to the list distributed.
+-   Should the first practice trials be 'showtrial' or 'showpractice' in the 
+    Procedure column? Currently, it has 'showtrial' both in the data file and
+    in the Sample Data file. Typically practice trials contain 'showpractice'.
+
+Pseudoword Oral Reading ReadMap 2
+-   There were no changes in the stumulus list from list in box 'PW Oral
+    Reading EPrime' to the list distributed.
+-   Should the first practice trials be 'showtrial' or 'showpractice' in the 
+    Procedure column? Currently, it has 'showtrial' both in the data file and
+    in the Sample Data file. Typically practice trials contain 'showpractice'.
