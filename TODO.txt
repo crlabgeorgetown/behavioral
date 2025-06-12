@@ -1,6 +1,3 @@
-Typing Baseline
--   Input font already at max
-
 Type to Diction
 -   Upload audio stimuli
 -   change audioSource in `task/trials/typing.js` line 175 to correct folder of
