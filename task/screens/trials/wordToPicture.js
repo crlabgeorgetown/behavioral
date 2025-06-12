@@ -65,6 +65,29 @@ class AuditoryWordToPictureMatchingReadMapTrialScreen extends Screen {
                 }, this.orchestrator.variant.timeToTimeout)
             }, this.orchestrator.variant.waitDuration)
         }, this.orchestrator.variant.fixationDuration)
+        /*
+        to show options after audio ends
+        setTimeout(() => {
+            AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.audioSource())
+            AUDIO_CONTAINER.off('ended')
+            AUDIO_CONTAINER.on('ended', () => {
+                setTimeout(() => {
+                    TEXT_CONTAINER.hide()
+                    FOUR_IMAGE_CONTAINER.show()
+                    this.orchestrator.currentTrial.startTime = new Date()
+                    this.timeoutID = setTimeout(() => {
+                        this.orchestrator.currentTrial.TimedOut = true
+                        this.orchestrator.currentTrial.responseTime = new Date()
+                        this.orchestrator.timedOut()
+                        TEXT_CONTAINER.show()
+                    }, this.orchestrator.variant.timeToTimeout)
+                }, this.orchestrator.variant.waitDuration)
+            })
+            AUDIO_CONTAINER[0].load()
+            AUDIO_CONTAINER[0].play()
+
+        }, this.orchestrator.variant.fixationDuration)
+        */
     }
 }
 

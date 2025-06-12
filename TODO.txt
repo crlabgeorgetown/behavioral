@@ -1,4 +1,7 @@
-Type to diction
+Typing Baseline
+-   Input font already at max
+
+Type to Diction
 -   Upload audio stimuli
 -   change audioSource in `task/trials/typing.js` line 175 to correct folder of
     sounds
@@ -8,7 +11,7 @@ Type to diction
 -   Is there aa specifci way to measure the accuracy? Currently, only if the
     response matches the target. 
 
-Auditory letter id
+Auditory Letter ID
 -   Upload audio stimuli
 -   change audioSource in `task/trials/auditory.js` line 67 to correct folder
     of sounds
@@ -67,3 +70,9 @@ Pseudoword Oral Reading ReadMap 2
 -   Should the first practice trials be 'showtrial' or 'showpractice' in the 
     Procedure column? Currently, it has 'showtrial' both in the data file and
     in the Sample Data file. Typically practice trials contain 'showpractice'.
+
+Picture Naming ReadMap
+-   Pictures already at width 30% and height 70%
+
+Written Lexical Decision ReadMap 1
+-   
