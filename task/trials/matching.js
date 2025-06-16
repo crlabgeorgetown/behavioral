@@ -69,9 +69,8 @@ class WrittenHomophoneToPictureMatchingTrial {
         this.topimage = config.topimage
 
         this.location = {
-            ['leftimage']: config.leftimage,
-            ['rightimage']: config.rightimage,
-            ['topimage']: config.topimage
+            ['left']: config.leftimage,
+            ['right']: config.rightimage,
         }
 
         this.CRESP = config.CRESP
