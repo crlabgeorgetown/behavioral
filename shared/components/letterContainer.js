@@ -119,7 +119,7 @@ const right2 = jQuery('<div/>', {
     class: 'letter-container base-text large-text large-fixed-height'
 })
 
-const topimage = jQuery('<div/>', {
+const topletter = jQuery('<div/>', {
     id: 'topimage',
     class: 'top-image-2 base-text large-text large-fixed-height'
 })
@@ -130,10 +130,10 @@ const divider = jQuery('<hr/>', {
 })
 
 TWO_LETTER_CONTAINER.append(left2, right2)
-ONE_LETTER_CONTAINER.append(topimage)
+ONE_LETTER_CONTAINER.append(topletter)
 
 export { SIX_LETTER_CONTAINER, FOUR_LETTER_CONTAINER, ARIZONA_TEXT_CONTAINER, TWO_LETTER_CONTAINER,
     topleft6, topmid6, topright6, botleft6, botmid6, botright6,
     topleft4, topright4, botleft4, botright4,
     Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright,
-    left2, right2, topimage, divider, ONE_LETTER_CONTAINER }
+    left2, right2, topletter, divider, ONE_LETTER_CONTAINER }
