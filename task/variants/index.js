@@ -6,8 +6,7 @@ import { Pseudoword, Realword } from "./wordRepetition"
 import { AuditoryLetterID, AuditorySyllableToGraphemeMatching } from "./auditory"
 import { AuditoryWordToPictureMatchingReadMap, WrittenWordToPictureMatchingReadMap } from "./wordToPicture"
 import { ArizonaSemanticTest, WrittenArizonaSemanticTest } from "./arizonaSemanticTest"
-import { CrossCaseLetter } from "./matching"
-import { WrittenHomophoneToPictureMatching } from "./homophone"
+import { CrossCaseLetter, WrittenHomophoneToPictureMatching } from "./matching"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'

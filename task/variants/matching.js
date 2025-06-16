@@ -1,7 +1,7 @@
 import { InputDevice, ParticipantId, InstructionOne } from "../screens/instruction"
 import { LetsPractice } from "../screens/transition"
-import { CrossCaseLetterTrial } from "../trials/matching"
-import { CrossCaseLetterTrialScreen } from "../screens/trials/matching"
+import { CrossCaseLetterTrial, WrittenHomophoneToPictureMatchingTrial } from "../trials/matching"
+import { CrossCaseLetterTrialScreen, WrittenHomophoneToPictureMatchingTrialScreen } from "../screens/trials/matching"
 
 class CrossCaseLetter {
     constructor() {
@@ -26,4 +26,24 @@ class CrossCaseLetter {
     }
 }
 
-export { CrossCaseLetter }
+class WrittenHomophoneToPictureMatching {
+    constructor() {
+        this.screens = [
+            ParticipantId,
+            InstructionOne,
+            LetsPractice
+        ]
+
+        this.testNameShort = 'WrittenHomophonetoPictureMatching'
+        this.buildTestID = 205
+        this.ePrimeTemplateID = 76
+        this.instructionOne = 'You will see a picture and two words.\nDecide which word goes with the picture.'
+        this.fixationDuration = 500
+        this.timeToTimeout = 8000
+
+        this.trialClass = WrittenHomophoneToPictureMatchingTrial
+        this.trialScreenClass = WrittenHomophoneToPictureMatchingTrialScreen
+    }
+}
+
+export { CrossCaseLetter, WrittenHomophoneToPictureMatching }
