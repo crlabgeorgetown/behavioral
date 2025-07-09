@@ -1,46 +1,19 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Component Samples</title>
+  <link rel="stylesheet" href="behavioral/shared/styles/main.css"> <!-- adjust path -->
+  <script src="https://crlabgeorgetown.github.io/behavioral/shared/styles/main.css"></script>
+</head>
 <body>
-<style>
-        /* Include this here if the external CSS is not accessible */
-        .four-image-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 10vw;
-            justify-content: center;
-            align-items: center;
-            width: 90vw;
-            padding: 5vw;
-            position: relative;
-        }
 
-        .image-container {
-            justify-content: center;
-            align-items: center;
-            background-color: white;
-            color: black;
-            border: 2px solid #ccc;
-            box-sizing: border-box;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+  <h1>Component Samples</h1>
 
-        .image-container:hover {
-            border: 2px solid black;
-        }
+  <h2>Four-Image Container</h2>
+  <div id="sample-four-image-container"></div>
 
-        .image-container:active {
-            background-color: #ccc;
-        }
-    </style>
-    <h1>Sample: Four Image Container</h1>
-
-    <div class="four-image-container">
-        <img class="image-container" src="https://via.placeholder.com/300x200?text=Top+Left" alt="Top Left">
-        <img class="image-container" src="https://via.placeholder.com/300x200?text=Top+Right" alt="Top Right">
-        <img class="image-container" src="https://via.placeholder.com/300x200?text=Bottom+Left" alt="Bottom Left">
-        <img class="image-container" src="https://via.placeholder.com/300x200?text=Bottom+Right" alt="Bottom Right">
-    </div>
+  <script src="static/js/sample-four-image.js"></script> <!-- defines and mounts the container -->
 
 </body>
+</html>

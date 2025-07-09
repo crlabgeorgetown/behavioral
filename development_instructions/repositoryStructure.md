@@ -1,5 +1,3 @@
-This will have the instructions and examples for future task development (or editing, using the new system under behavioral/task).
-
 # Structure of Repository - `crlabgeorgetown/behavioral/` #
 
 Main repository (directory, or folder) for task development, distribution, and storage. Contains configuration files and internal guidance (such as instructions, TO-DOs, and code configuration).
