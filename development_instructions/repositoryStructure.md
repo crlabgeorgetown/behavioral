@@ -31,7 +31,7 @@ Contains the distribution bundles used by Qualtrics. The bundles combine all sou
 
 `task.bundle.js` containing most of the tasks and newly developed tasks.
 
-*DO NOT EDIT THIS FOLDER OR ITS CONTENTS!* More on distribution later.
+***DO NOT EDIT THIS FOLDER OR ITS CONTENTS!*** More on distribution later.
 
 ### 4. `docs/` ###
 
@@ -61,6 +61,8 @@ Contains source code for visual elements seen on various HTML pages (instruction
 
 Use these to create new screens for new task development. See __ link __ for code and resulting page examples.
 
+*Do not edit existing components to fit new tasks.* 
+
 #### 7.2. `shared/screens/` ####
 
 Contains base implementation for older tasks' visual screens.
@@ -72,6 +74,8 @@ Contains base implementation for older tasks' visual screens.
 Contains CSS styling for HTML components found in `shared/components/`. Edit CSS to change styling in components. Since these are shared, remember all tasks will be affected by changes.
 
 More on how to change styling for individual tasks or components of a task later.
+
+*Do not edit existing styles to fit new tasks.* 
 
 ### 8. `static/` ###
 
