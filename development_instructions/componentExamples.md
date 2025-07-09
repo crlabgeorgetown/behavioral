@@ -28,10 +28,70 @@ When setting up a
 
 #### Audio ####
 
-The audio containers acts like a regular components
+`AUDIO_CONTAINER`
+
+#### Video ####
+
+`VIDEO_CONTAINER`
+
+#### Text ####
+
+`TEXT_CONTAINER`
+
+`TEXT_CRESP_CONTAINER`
+
+`SIX_LETTER_CONTAINER`
+
+`FOUR_LETTER_CONTAINER`
+
+`ARIZONA_TEXT_CONTAINER`
+
+`TWO_LETTER_CONTAINER`
+
+`ONE_LETTER_CONTAINER`
+
 
 #### Images ####
 
 Contain images with formatting. 
 
+`IMAGE_CONTAINER`
+
 `FOUR_IMAGE_CONTAINER`
+
+`ARIZONA_IMAGE_CONTAINER`
+
+`ONE_IMAGE_CONTAINER`
+
+#### Typing ####
+
+`TYPING_CONTAINER`
+
+#### Trial ####
+
+`REPLAY_CONTAINER`
+
+`BUTTON_CONTAINER`
+
+`BUTTON_LABEL_CONTAINER`
+
+`PROCEED_CONTAINER`
+
+`STOP`
+
+
+#### Instructional ####
+
+`BEGIN_OR_PRACTICE_CONTAINER`
+
+`INPUT_DEVICE_CONTAINER`
+
+`INPUT_DEVICE_LABEL_CONTAINER`
+
+`INSTRUCTIONAL_BUTTON_CONTAINER`
+
+`PARTICIPANT_ID_CONTAINER`
+
+#### Other ####
+
+`CONTAINER`
