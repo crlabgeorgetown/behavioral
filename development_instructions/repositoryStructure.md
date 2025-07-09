@@ -4,6 +4,8 @@ This will have the instructions and examples for future task development (or edi
 
 Main repository (directory, or folder) for task development, distribution, and storage. Contains configuration files and internal guidance (such as instructions, TO-DOs, and code configuration).
 
+[`task/`](#10-task) is the main folder for new task development. Using components from [`shared/components/`](#71-sharedcomponents).
+
 Below are folders within the `crlabgeorgetown/behavioral/` GitHub repository.
 
 ### 1. `antelopesAndCanteloupes/` ###
