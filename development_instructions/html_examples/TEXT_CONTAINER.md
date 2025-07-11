@@ -1,5 +1,3 @@
-<html>
-<body>
 <style>
 html, body {
     overflow: hidden;
@@ -41,6 +39,4 @@ html, body {
 <div id="textContainer" class="base-text extra-large-text large-fixed-height">
 +
 </div>
-</body>
-</html>
 
