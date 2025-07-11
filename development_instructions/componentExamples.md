@@ -26,11 +26,11 @@ When setting up a
 
 ## Components ##
 
-#### Audio ####
+### Audio ###
 
 `AUDIO_CONTAINER`
 
-#### Video ####
+### Video ###
 
 `VIDEO_CONTAINER`
 
@@ -81,7 +81,7 @@ ___
 `ONE_LETTER_CONTAINER`
 
 
-#### Images ####
+### Images ###
 
 Contain images with formatting. 
 
@@ -93,11 +93,11 @@ Contain images with formatting.
 
 `ONE_IMAGE_CONTAINER`
 
-#### Typing ####
+### Typing ###
 
 `TYPING_CONTAINER`
 
-#### Trial ####
+### Trial ###
 
 `REPLAY_CONTAINER`
 
@@ -110,7 +110,7 @@ Contain images with formatting.
 `STOP`
 
 
-#### Instructional ####
+### Instructional ###
 
 `BEGIN_OR_PRACTICE_CONTAINER`
 
@@ -122,7 +122,7 @@ Contain images with formatting.
 
 `PARTICIPANT_ID_CONTAINER`
 
-#### Other ####
+### Other ###
 
 `CONTAINER`
 
