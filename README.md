@@ -25,3 +25,5 @@ npx webpack --watch
 ```
 1. Webpack is now listening for changes made to the Javascript code, and updating the bundle.js file immediately. 
 1. Bundles are deployed to github pages after pushing to the `main` branch.
+
+[Component examples](./development_instructions/componentExamples.md)
