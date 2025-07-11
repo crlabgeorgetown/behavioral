@@ -1,6 +1,4 @@
-<style>
-.base-text {
-    display: flex;
+<div id="textContainer" style="display: flex;
     justify-content: center;
     align-content: center;
     text-align: center;
@@ -11,15 +9,8 @@
     margin-top: auto;
     margin-bottom: auto;
     font-family: Arial;
-}
-.extra-large-text {
     font-size: 60pt;
-}
-.large-fixed-height {
-    height: 275px;
-}
-</style>
-<div id="textContainer" class="base-text extra-large-text large-fixed-height">
+    height: 275px;">
 +
 </div>
 
