@@ -38,9 +38,9 @@ When setting up a
 
 ### `TEXT_CONTAINER` ###
 
-Simple container to display text. No strict formatting, would probably show up in the middle of the screen when placed alone. 
+[![TEXT_CONTAINER image](./componentExamples/TEXT_CONTAINER.png)](./html_examples/TEXT_CONTAINER.md)
 
-![TEXT_CONTAINER image](./componentExamples/TEXT_CONTAINER.png)
+Simple container to display text. No strict formatting, would probably show up in the middle of the screen when placed alone. 
 
 ```
 const TEXT_CONTAINER = jQuery("<div/>", {id: 'textContainer'})
@@ -54,13 +54,9 @@ Where the displayed text is "+" and the classes are formatting styles defined in
 
 ### `TEXT_CRESP_CONTAINER` ###
 
+
+
 While not too different from `TEXT_CONTAINER`, this text container allows words to be displayed at the center of the screen, regardless of other components. This simplifies formats for the other components. 
-
-___
-
-
-
-___
 
 ### `SIX_LETTER_CONTAINER` ###
 
