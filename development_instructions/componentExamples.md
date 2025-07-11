@@ -40,7 +40,7 @@ When setting up a
 
 Simple container to display text. No strict formatting, would probably show up in the middle of the screen when placed alone. 
 
-![TEXT_CONTAINER image](./docs/componentExamples/TEXT_CONTAINER.png)
+![TEXT_CONTAINER image](./componentExamples/TEXT_CONTAINER.png)
 
 ```
 const TEXT_CONTAINER = jQuery("<div/>", {id: 'textContainer'})
