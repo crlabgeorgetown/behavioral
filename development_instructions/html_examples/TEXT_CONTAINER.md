@@ -1,21 +1,4 @@
 <style>
-html, body {
-    overflow: hidden;
-    touch-action: none;
-}
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape)
-  and (-webkit-min-device-pixel-ratio: 2) {
-    .large-text {
-        font-size: 33pt;
-    }
-
-    .medium-text {
-        font-size: 27pt;
-    }
-}
 .base-text {
     display: flex;
     justify-content: center;
