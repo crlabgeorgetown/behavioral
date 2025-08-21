@@ -38,7 +38,7 @@ When setting up a
 
 ### `TEXT_CONTAINER` ###
 ___
-[![TEXT_CONTAINER image](./componentExamples/TEXT_CONTAINER.png)](./html_examples/TEXT_CONTAINER.md)
+[![TEXT_CONTAINER image](./componentExamples/TEXT_CONTAINER.png)](./componentExamples/TEXT_CONTAINER.png)
 ___
 
 Simple container to display text. No strict formatting, would probably show up in the middle of the screen when placed alone. 
