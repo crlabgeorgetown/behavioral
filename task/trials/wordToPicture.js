@@ -26,7 +26,7 @@ class AuditoryWordToPictureMatchingReadMapTrial {
 
         this.startTime = null
         this.responseTime = null
-        this.TimedOut = null
+        this.TimedOut = false
         this.TrialWasAdministered = 1
     }
 
@@ -115,7 +115,7 @@ class WrittenWordToPictureMatchingReadMapTrial {
 
         this.startTime = null
         this.responseTime = null
-        this.TimedOut = null
+        this.TimedOut = false
         this.TrialWasAdministered = 1
     }
 
