@@ -2,22 +2,184 @@
 <html class="JFEScope" lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="no" />
-	<title>Cognitive Recovery Lab</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" user-scalable="yes" />
     <link rel="stylesheet" href="../../shared/styles/main.css">
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script
-        src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-        crossorigin="anonymous"></script>
+	<title>Cognitive Recovery Lab</title>
+    <style>
+        body {
+            font-family: futura-pt, sans-serif;
+            font-style: normal;
+            text-transform: none;
+            text-rendering: optimizeLegibility;
+            text-align: center;
+        }
+
+        section {
+            padding-bottom: 30px;
+        }
+
+        #grid {
+            display: grid;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10%;
+        }
+
+        .sized {
+            width: 175px;
+            height: 25px;
+        }
+
+        .small-button-text {
+            font-size: 15pt;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h1 {
+            font-size: 51px;
+            letter-spacing: 4.19px;
+            line-height: 1.2em;
+            font-weight: 300;
+        }
+
+        h2, h3 {
+            margin-top: 0%;
+            font-weight: 300;
+        }
+    </style>
 </head>
 <body> 
-    <div id="Wrapper"></div>
-    <script src="../../dist/task.bundle.js"></script>
-    <script>
-        const variant = 'TYPING_BASELINE'
-        const variantDataFilename = `https://crlabgeorgetown.github.io/behavioral/static/data/${variant.toLowerCase()}.csv`
-        d3.csv(variantDataFilename).then((data) => new task.Task(data, this, variant))
-    </script>
+    <div>
+        <h1>COGNITIVE RECOVERY LAB</h1>
+        <h2>Behavioral Tasks</h2>
+        <div id="grid">
+            <section>
+                <h3>Semantic Relatedness</h3>
+                <div id="container">
+                    <a href="./auditorySemanticRelatedness.html">
+                        <div class="grey-button small-button-text sized">Auditory</div>
+                    </a>
+                    <a href="./writtenSemanticRelatedness.html">
+                        <div class="grey-button small-button-text sized">Written</div>
+                    </a>
+                </div>
+            </section>
+
+            <section>
+                <h3>Word Reading</h3>
+                <div id="container">
+                    <a href="./crossedRealWord1.html">
+                        <div class="grey-button extra-small-button-text sized">Crossed Real Word 1</div>
+                    </a>
+                    <a href="./crossedRealWord2.html">
+                        <div class="grey-button extra-small-button-text sized">Crossed Real Word 2</div>
+                    </a>
+                    <a href="./pseudowordReading1.html">
+                        <div class="grey-button extra-small-button-text sized">Pseudoword Reading 1</div>
+                    </a>
+                    <a href="./pseudowordReading2.html">
+                        <div class="grey-button extra-small-button-text sized">Pseudoword Reading 2</div>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <div id="container">
+                    <a href="./multimorphemic.html">
+                        <div class="grey-button extra-small-button-text sized">Multimorphemic Word</div>
+                    </a>
+                    <a href="./POSAndLengthEffect.html">
+                        <div class="grey-button extra-small-button-text sized">POS and Length Effect</div>
+                    </a>
+                    <a href="./oralSentence.html">
+                        <div class="grey-button small-button-text sized">Oral Sentence</div>
+                    </a>
+                    <a href="./spokenLetterNaming.html">
+                        <div class="grey-button small-button-text sized">Spoken Letter</div>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h3>Word Repetition</h3>
+                <div id="container">
+                    <a href="./pseudowordRepetition.html">
+                        <div class="grey-button small-button-text sized">Pseudoword</div>
+                    </a>
+                    <a href="./realwordRepetition.html">
+                        <div class="grey-button small-button-text sized">Real Word</div>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h3>Picture Naming</h3>
+                <div id="container">
+                    <a href="./pictureNaming.html">
+                        <div class="grey-button small-button-text sized">Picture Naming</div>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h3>Typing</h3>
+                <div id="container">
+                    <a href="./typingBaseline.html">
+                        <div class="grey-button small-button-text sized">Typing Baseline</div>
+                    </a>
+                    <a href="./typingToDiction.html">
+                        <div class="grey-button small-button-text sized">Typing to Diction</div>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h3>Auditory</h3>
+                <div id="container">
+                    <a href="auditoryLetterID.html">
+                        <div class="grey-button small-button-text sized">Letter ID</div>
+                    </a>
+                    <a href="auditorySyllableToGraphemeMatching.html">
+                        <div class="grey-button extra-small-button-text sized">Syllable to Grapheme</div>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h3>Word to Picture</h3>
+                <div id="container">
+                    <a href="./auditoryWordToPictureMatchingReadMap.html">
+                        <div class="grey-button small-button-text sized">Auditory</div>
+                    </a>
+                    <a href="./writtenWordToPictureMatchingReadMap.html">
+                        <div class="grey-button small-button-text sized">Written</div>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h3>Arizona Semantic Test</h3>
+                <div id="container">
+                    <a href="./arizonaSemanticTest.html">
+                        <div class="grey-button extra-small-button-text sized">Arizona Semantic Test</div>
+                    </a>
+                    <a href="./writtenArizonaSemanticTest.html">
+                        <div class="grey-button small-button-text sized">Written</div>
+                    </a>
+                </div>
+            </section>
+            <section>
+                <h3>Matching</h3>
+                <div id="container">
+                    <a href="./crossCaseLetter.html">
+                        <div class="grey-button small-button-text sized">Cross-Case Letter</div>
+                    </a>
+                    <a href="./writtenHomophoneToPictureMatching.html">
+                        <div class="grey-button extra-small-button-text sized">Homophone to Picture</div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
 </body>
 </html>
