@@ -22,13 +22,21 @@ Styling for components, texts, and images can be found in `crlabgeorgetown/behav
 
 ## Use ##
 
-When setting up a 
+When setting up a new task, you may use these components sample code and screenshots of the various components are below.
+
+To see these components in action, please check out the Component Sample Task. A mock task (no data is being collected nor sent anywhere) to showcase the components with names. Please refer back to this document for more details on implementing. 
 
 # Components #
 
 ## Audio ##
 
 ### `AUDIO_CONTAINER` ###
+___
+<div><iframe src="../../dist/task.bundle.js" height="300">
+
+</iframe></div>
+
+___
 
 ## Video ##
 
