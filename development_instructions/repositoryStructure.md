@@ -57,7 +57,7 @@ Contains base implementations for older tasks (Antelopes and Canteloupes, Lexica
 
 Contains source code for visual elements seen on various HTML pages (instructional and trial). Visual elements should be pulled from this directory, new visual elements should be added here. These are HTML objects implemented in JaveScript.
 
-Use these to create new screens for new task development. See [Component Examples](development_instructions/componentExamples.md) for code and resulting page examples.
+Use these to create new screens for new task development. See [Component Examples](componentExamples.md) for code and resulting page examples.
 
 *Do not edit existing components to fit new tasks.* 
 
