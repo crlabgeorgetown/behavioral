@@ -41,11 +41,27 @@ This container allows browser to play audio. Does not really take up space on sc
 const AUDIO_CONTAINER = jQuery("<audio/>", {id: 'audioContainer'})
 const AUDIO_SOURCE = jQuery("<source/>", {id: 'audioSource', type: 'audio/wav'})
 ```
-In use, 
+In use, `task/screens/trials/auditory.js` lines 12, 54-55, 59:
+```
+[AUDIO_CONTAINER, {}]
+
+...
+
+AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.audioSource())
+AUDIO_CONTAINER[0].load()
+
+...
+
+AUDIO_CONTAINER[0].play()
+```
+Where audio file is linked in `this.orchestrator.currentTrial.audioSource()`, any audio source link and be placed here.
+
+*More details on audio coming soon*
 
 ## Video ##
 
 ### `VIDEO_CONTAINER` ###
+*More detail on video coming soon*
 
 ## Text ##
 
