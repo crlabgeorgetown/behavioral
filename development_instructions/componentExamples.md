@@ -239,7 +239,7 @@ Each button has their own ID to be able to control what each one displays, and w
 
 ### `ARIZONA_TEXT_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/ARIZONA_TEXT_CONTAINER.png" alt="ARIZONA_TEXT_CONTAINER image" width=433.3 height="279.4">
 
 ___
 TODO: Explain container
