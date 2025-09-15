@@ -32,8 +32,8 @@ To see these components in action, please check out the Component Sample Task. A
 
 ### `AUDIO_CONTAINER` ###
 ___
-[![AUDIO_CONTAINER image](./componentExamples/AUDIO_CONTAINER.png)](./componentExamples/AUDIO_CONTAINER.png)
-<img src="./componentExamples/AUDIO_CONTAINER.png" alt="AUDIO_CONTAINER image" width="500" height="300">
+<img src="./componentExamples/AUDIO_CONTAINER.png" alt="AUDIO_CONTAINER image" width="433.4" height="279.4">
+
 ___
 This container allows browser to play audio. Does not really take up space on screen.
 
@@ -51,7 +51,8 @@ In use,
 
 ### `TEXT_CONTAINER` ###
 ___
-[![TEXT_CONTAINER image](./componentExamples/TEXT_CONTAINER.png)](./componentExamples/TEXT_CONTAINER.png)
+<img src="./componentExamples/TEXT_CONTAINER.png" alt="TEXT_CONTAINER image" width=433.4 height="279.4">
+
 ___
 
 Simple container to display text. No strict formatting, would probably show up in the middle of the screen when placed alone. 
