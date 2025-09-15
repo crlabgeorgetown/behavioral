@@ -33,7 +33,7 @@ To see these components in action, please check out the Component Sample Task. A
 ### `AUDIO_CONTAINER` ###
 ___
 [![AUDIO_CONTAINER image](./componentExamples/AUDIO_CONTAINER.png)](./componentExamples/AUDIO_CONTAINER.png)
-<img src="/Users/e.cazares.borbon/Documents/Georgetown/DARN_Lab/Code/behavioral/development_instructions/componentExamples/AUDIO_CONTAINER.png" alt="Alt Text" width="500" height="300">
+<img src="./componentExamples/AUDIO_CONTAINER.png" alt="AUDIO_CONTAINER image" width="500" height="300">
 ___
 This container allows browser to play audio. Does not really take up space on screen.
 
