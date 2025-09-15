@@ -130,36 +130,112 @@ ___
 <img src="./componentExamples/SIX_LETTER_CONTAINER.png" alt="SIX_LETTER_CONTAINER image" width=433.3 height="279.4">
 
 ___
-
-
-```
+This container is six buttons arranged in two rows of three.
 
 ```
+const SIX_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'SIX_LETTER_CONTAINER',
+    class: 'six-grid-container six-letter-container'
+})
 
-In use, `` line
+const topleft6 = jQuery('<div/>', {
+    id: 'topleft6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
 
+const topmid6 = jQuery('<div/>', {
+    id: 'topmid6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const topright6 = jQuery('<div/>', {
+    id: 'topright6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botleft6 = jQuery('<div/>', {
+    id: 'botleft6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botmid6 = jQuery('<div/>', {
+    id: 'botmid6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botright6 = jQuery('<div/>', {
+    id: 'botright6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+SIX_LETTER_CONTAINER.append(topleft6, topmid6, topright6, botleft6, botmid6, botright6)
 ```
 
+In use, `task/screens/trials/auditory.js` lines 13, 47-52:
+
 ```
-TODO: Explain more detail about use
+[SIX_LETTER_CONTAINER, {addClass: 'six-grid-container six-letter-container'}]
+
+...
+
+topleft6.text(this.orchestrator.currentTrial.topleft)
+topmid6.text(this.orchestrator.currentTrial.topmid)
+topright6.text(this.orchestrator.currentTrial.topright)
+botleft6.text(this.orchestrator.currentTrial.botleft)
+botmid6.text(this.orchestrator.currentTrial.botmid)
+botright6.text(this.orchestrator.currentTrial.botright)
+```
+Each button has their own ID to be able to control what each one displays, and which one is selected.
 
 ### `FOUR_LETTER_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/FOUR_LETTER_CONTAINER.png" alt="FOUR_LETTER_CONTAINER image" width=433.3 height="279.4">
 
 ___
-TODO: Explain container
+Similar to the six button container, but two rows of two buttons.
 
 ```
+const FOUR_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'FOUR_LETTER_CONTAINER',
+    class: 'four-grid-container four-letter-container'
+})
 
+const topleft4 = jQuery('<div/>', {
+    id: 'topleft4',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const topright4 = jQuery('<div/>', {
+    id: 'topright4',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botleft4 = jQuery('<div/>', {
+    id: 'botleft4',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botright4 = jQuery('<div/>', {
+    id: 'botright4',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+FOUR_LETTER_CONTAINER.append(topleft4, topright4, botleft4, botright4)
 ```
 
-In use, `` line
+In use, `task/screens/trials/auditory.js` lines 77, 109-112:
 
 ```
+[FOUR_LETTER_CONTAINER, {addClass: 'four-grid-container four-letter-container'}]
 
+...
+
+topleft4.text(this.orchestrator.currentTrial.topleft)
+botleft4.text(this.orchestrator.currentTrial.botleft)
+botright4.text(this.orchestrator.currentTrial.botright)
+topright4.text(this.orchestrator.currentTrial.topright)
 ```
-TODO: Explain more detail about use
+Each button has their own ID to be able to control what each one displays, and which one is selected.
 
 ### `ARIZONA_TEXT_CONTAINER` ###
 ___

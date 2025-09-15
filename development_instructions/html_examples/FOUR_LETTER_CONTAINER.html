@@ -1,0 +1,81 @@
+<html>
+<body>
+<style>
+html, body {
+    overflow: hidden;
+    touch-action: none;
+}
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .large-text {
+        font-size: 33pt;
+    }
+
+    .medium-text {
+        font-size: 27pt;
+    }
+}
+.four-grid-container {
+    display: grid;
+    gap: 4vw;
+    justify-content: center;
+    align-content: center;
+    width: 90vw;
+    height: 90vh;
+    padding: 5vw;
+}
+.four-letter-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.letter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+
+    height: 100%;
+    width: 100%;
+}
+.letter-container:hover {
+    border: 2px solid black;
+}
+.letter-container:active {
+    background-color: #ccc;
+}
+.base-text {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    flex-direction: column;
+    color: #000000;
+    white-space: pre-line;
+    line-height: 1.7em;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: Arial;
+}
+.large-text {
+    font-size: 44pt;
+}
+.large-fixed-height {
+    height: 275px;
+}
+
+
+</style>
+<div id="four-letter-container" class="four-grid-container four-letter-container">
+    <div id="topleftImage" class="letter-container base-text large-text large-fixed-height">b</div>
+    <div id="toprightImage" class="letter-container base-text large-text large-fixed-height">e</div>
+    <div id="bottomleftImage" class="letter-container base-text large-text large-fixed-height">f</div>
+    <div id="bottomrightImage" class="letter-container base-text large-text large-fixed-height">u</div>
+</div>
+</body>
+</html>
