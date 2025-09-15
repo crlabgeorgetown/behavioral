@@ -51,7 +51,6 @@ To see these components in action, please check out the Component Sample Task. A
 ___
 <img src="./componentExamples/AUDIO_CONTAINER.png" alt="AUDIO_CONTAINER image" width="433.4" height="279.4">
 
-___
 This container allows browser to play audio. Does not really take up space on screen.
 
 ```
@@ -86,8 +85,6 @@ Where audio file is linked in `this.orchestrator.currentTrial.audioSource()`, an
 ___
 <img src="./componentExamples/TEXT_CONTAINER.png" alt="TEXT_CONTAINER image" width=433.4 height="279.4">
 
-___
-
 Simple container to display text. No strict formatting, would probably show up in the middle of the screen when placed alone. 
 
 ```
@@ -104,7 +101,6 @@ Where the displayed text is "+" and the classes are formatting styles defined in
 ___
 <img src="./componentExamples/TEXT_CRESP_CONTAINER.png" alt="TEXT_CRESP_CONTAINER image" width=433.4 height="279.4">
 
-___
 While not too different from `TEXT_CONTAINER`, this text container allows words to be displayed at the center of the screen, regardless of other components. This simplifies formats for the other components.
 
 ```
@@ -129,7 +125,6 @@ Where the displayed text is `this.orchestrator.currentTrial.CRESP`. The classes 
 ___
 <img src="./componentExamples/SIX_LETTER_CONTAINER.png" alt="SIX_LETTER_CONTAINER image" width=433.3 height="279.4">
 
-___
 This container is six buttons arranged in two rows of three.
 
 ```
@@ -191,7 +186,6 @@ Each button has their own ID to be able to control what each one displays, and w
 ___
 <img src="./componentExamples/FOUR_LETTER_CONTAINER.png" alt="FOUR_LETTER_CONTAINER image" width=433.3 height="279.4">
 
-___
 Similar to the six button container, but two rows of two buttons.
 
 ```
