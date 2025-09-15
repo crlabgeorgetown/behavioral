@@ -55,7 +55,7 @@ Contains base implementations for older tasks (Antelopes and Canteloupes, Lexica
 
 #### 7.1. `shared/components/` ####
 
-Contains source code for visual elements seen on various HTML pages (instructional and trial). Visual elements should be pulled from this directory, new visual elements should be added here. These are HTML objects implemented in JaveScript.
+Contains source code for visual elements seen on various HTML pages (instructional and trial). Visual elements should be pulled from this directory, new visual elements should be added here. These are HTML objects implemented in JavaScript.
 
 Use these to create new screens for new task development. See [Component Examples](componentExamples.md) for code and resulting page examples.
 
@@ -65,7 +65,7 @@ Use these to create new screens for new task development. See [Component Example
 
 Contains base implementation for older tasks' visual screens.
 
-*Do not use these implemenations for new task development.*
+*Do not use these implementations for new task development.*
 
 #### 7.3. `shared/styles/` ####
 
@@ -81,11 +81,11 @@ Contains static folders used by various tasks, such as, images, audio files, and
 
 #### 8.5. `static/data/` ####
 
-Contains CSV files for all tasks and task variations. These CSV files contain the ordering, descriptors, and other data used to create trial screens. Each task, more specifically, each task various (for example, Auitory Lexical Decision and Written Lexical Decision) should have its own CSV file.
+Contains CSV files for all tasks and task variations. These CSV files contain the ordering, descriptors, and other data used to create trial screens. Each task, more specifically, each task various (for example, Auditory Lexical Decision and Written Lexical Decision) should have its own CSV file.
 
 #### 8.7. `static/images/` ####
 
-Contains universal images used by intructional buttons. For example, next buttons, computer mouse, checkmark, etc.
+Contains universal images used by instructional buttons. For example, next buttons, computer mouse, checkmark, etc.
 
 ##### 8.7.1. `static/images/readmap/` #####
 
@@ -99,9 +99,9 @@ Contains source code for the Stroop task.
 
 ### 10. `task` ###
 
-Contains source code for most tasks (execpt for Antelopes and Canteloupes, Lexical Decision, Rhyme Decision, and Stroop tasks) and should be the starting point for new task development.
+Contains source code for most tasks (except for Antelopes and Canteloupes, Lexical Decision, Rhyme Decision, and Stroop tasks) and should be the starting point for new task development.
 
-Main folder contains base implementation for task objects, `task.js`. Also contains implemenations for trial sequencing, `sequenceNode.js`, formatter to send packaged, correctly formatted data to Qualtrics, `qualtricsClient.js`, and an orchestrator to format and connect all related data and source files, `orchestrator.js`.
+Main folder contains base implementation for task objects, `task.js`. Also contains implementations for trial sequencing, `sequenceNode.js`, formatter to send packaged, correctly formatted data to Qualtrics, `qualtricsClient.js`, and an orchestrator to format and connect all related data and source files, `orchestrator.js`.
 
 ***DO NOT EDIT THESE SOURCE CODE FILES***
 
@@ -113,7 +113,7 @@ Contains HTML files for quick launch of corresponding tasks. Allows for developm
 
 #### 10.2. `task/screens/` ####
 
-Contains base implemenations for visual screens (HTML pages).
+Contains base implementations for visual screens (HTML pages).
 
 * `base.js`
 * `instruction.js`
@@ -121,20 +121,20 @@ Contains base implemenations for visual screens (HTML pages).
 
 ##### 10.2.1. `task/screens/trials/` #####
 
-Contains task specific trial screen implemenations, the Trial Screen Class. These source files contain the logic for a task's trial. For example, what is displayed, when something is displayed, buttons (or response) data collection, like response time or decision.
-
-Each task should have its own file, and each task variant should have its own implemenation within the file.
-
-#### 10.3. `task/trials/` ####
-
-Contains task specific trial implemenations, the Trial Class. These source files contain the data used by a specific trial for a task. For example, the different options, stimuli, or other trial specific information. This object also stores the trial information, response data, and contains functions specific for trials (like getting audio/image file or formatting data to send to Qualtrics).
-
-Each task should have its own file, and each task variant should have its own implemenation within the file.
-
-#### 10.4. `task/variants/` ####
-
-Contains task implemenations, the Variant Class. These source files contain a task's intructional screens, "meta" data (like build test ID), and points to the task specific Trial Class and Trial Screen Class.
+Contains task specific trial screen implementations, the Trial Screen Class. These source files contain the logic for a task's trial. For example, what is displayed, when something is displayed, buttons (or response) data collection, like response time or decision.
 
 Each task should have its own file, and each task variant should have its own implementation within the file.
 
-`index.js` contains mapping of the different variants to their specific objects within the different tasks. This is used to connect input recieved from Qualtrics regarding the task Qualtrics is requesting. Each Qualtrics or HTML "request" sends the name of a task or task variant.
+#### 10.3. `task/trials/` ####
+
+Contains task specific trial implementations, the Trial Class. These source files contain the data used by a specific trial for a task. For example, the different options, stimuli, or other trial specific information. This object also stores the trial information, response data, and contains functions specific for trials (like getting audio/image file or formatting data to send to Qualtrics).
+
+Each task should have its own file, and each task variant should have its own implementation within the file.
+
+#### 10.4. `task/variants/` ####
+
+Contains task implementation, the Variant Class. These source files contain a task's instructional screens, "meta" data (like build test ID), and points to the task specific Trial Class and Trial Screen Class.
+
+Each task should have its own file, and each task variant should have its own implementation within the file.
+
+`index.js` contains mapping of the different variants to their specific objects within the different tasks. This is used to connect input received from Qualtrics regarding the task Qualtrics is requesting. Each Qualtrics or HTML "request" sends the name of a task or task variant.

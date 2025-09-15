@@ -235,55 +235,145 @@ Each button has their own ID to be able to control what each one displays, and w
 ___
 <img src="./componentExamples/ARIZONA_TEXT_CONTAINER.png" alt="ARIZONA_TEXT_CONTAINER image" width=433.3 height="279.4">
 
-___
-TODO: Explain container
+Four buttons with target in the center. Only the buttons can be selected.
 
 ```
+const ARIZONA_TEXT_CONTAINER = jQuery('<div/>', {
+    id: 'arizona-text-container',
+    class: 'arizona-container',
+})
 
+const Arizonatopleft = jQuery('<div/>', {
+    id: 'Arizonatopleft',
+    class: 'arizona-image base-text large-text large-fixed-height AZTL'
+})
+
+const Arizonatopright = jQuery('<div/>', {
+    id: 'Arizonatopright',
+    class: 'arizona-image base-text large-text large-fixed-height AZTR'
+})
+
+const Arizonatarget = jQuery('<div/>', {
+    id: 'Arizonatarget',
+    class: 'arizona-target-image base-text large-text large-fixed-height AZT'
+})
+
+const Arizonabottomleft = jQuery('<div/>', {
+    id: 'Arizonabottomleft',
+    class: 'arizona-image base-text large-text large-fixed-height AZBL'
+})
+
+const Arizonabottomright = jQuery('<div/>', {
+    id: 'Arizonabottomright',
+    class: 'arizona-image base-text large-text large-fixed-height AZBR'
+})
+
+ARIZONA_TEXT_CONTAINER.append(Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright)
 ```
 
-In use, `` line
+In use, `task/screens/trials/arizonaSemanticTest.js` lines 68, 104-108:
 
 ```
+[ARIZONA_TEXT_CONTAINER, {}]
 
+...
+
+Arizonatopleft.text(this.orchestrator.currentTrial.topleft)
+Arizonatopright.text(this.orchestrator.currentTrial.topright)
+Arizonatarget.text(this.orchestrator.currentTrial.targetimage)
+Arizonabottomleft.text(this.orchestrator.currentTrial.bottomleft)
+Arizonabottomright.text(this.orchestrator.currentTrial.bottomright)
 ```
-TODO: Explain more detail about use
+Where the text in the boxes is sourced from the current trial.
 
 ### `TWO_LETTER_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/TWO_LETTER_CONTAINER.png" alt="TWO_LETTER_CONTAINER image" width=433.3 height="279.4">
 
-___
-TODO: Explain container
-
-```
+Two buttons selections
 
 ```
+const TWO_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'TWO_LETTER_CONTAINER',
+    class: 'two-letter-container'
+})
 
-In use, `` line
+const left2 = jQuery('<div/>', {
+    id: 'left2',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
 
+const right2 = jQuery('<div/>', {
+    id: 'right2',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+TWO_LETTER_CONTAINER.append(left2, right2)
 ```
 
+In use, `task/screens/trials/matching.js` lines 12, 44-45
+
 ```
-TODO: Explain more detail about use
+[TWO_LETTER_CONTAINER, {}]
+
+...
+
+left2.text(this.orchestrator.currentTrial.leftimage.split('_')[0])
+right2.text(this.orchestrator.currentTrial.rightimage.split('_')[0])
+```
+You are able to choose the text to display.
 
 ### `ONE_LETTER_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/ONE_LETTER_CONTAINER.png" alt="ONE_LETTER_CONTAINER image" width=433.3 height="279.4">
 
+One display box, non-selectable.
+
+```
+const ONE_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'ONE_LETTER_CONTAINER',
+    class: 'one-letter-container'
+})
+
+const topletter = jQuery('<div/>', {
+    id: 'topimage',
+    class: 'top-image-2 base-text large-text large-fixed-height'
+})
+
+ONE_LETTER_CONTAINER.append(topletter)
+```
+
+In use, `task/screens/trials/matching.js` lines 10, 46:
+
+```
+[ONE_LETTER_CONTAINER, {}]
+
+...
+
+topletter.text(this.orchestrator.currentTrial.topimage.split('_')[0])
+```
+Choose the text to display.
+
+### One and two letter containers ###
 ___
-TODO: Explain container
+Both the `TWO_LETTER_CONTAINER` and `ONE_LETTER_CONTAINER` are used together with `divider` to create one page, sampled below. 
+
+<img src="./componentExamples/.png" alt=" image" width=433.3 height="279.4">
 
 ```
-
+const divider = jQuery('<hr/>', {
+    id: 'divider',
+    class: 'divider'
+})
 ```
 
-In use, `` line
+In use, `task/screens/trials/matching.js` lines 10-12:
 
 ```
-
+[ONE_LETTER_CONTAINER, {}],
+[divider, {}],
+[TWO_LETTER_CONTAINER, {}]
 ```
-TODO: Explain more detail about use
 
 ## Images ##
 
