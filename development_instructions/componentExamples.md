@@ -32,11 +32,16 @@ To see these components in action, please check out the Component Sample Task. A
 
 ### `AUDIO_CONTAINER` ###
 ___
-<div><iframe src="../../dist/task.bundle.js" height="300">
-
-</iframe></div>
-
+[![AUDIO_CONTAINER image](./componentExamples/AUDIO_CONTAINER.png)](./componentExamples/AUDIO_CONTAINER.png)
+<img src="/Users/e.cazares.borbon/Documents/Georgetown/DARN_Lab/Code/behavioral/development_instructions/componentExamples/AUDIO_CONTAINER.png" alt="Alt Text" width="500" height="300">
 ___
+This container allows browser to play audio. Does not really take up space on screen.
+
+```
+const AUDIO_CONTAINER = jQuery("<audio/>", {id: 'audioContainer'})
+const AUDIO_SOURCE = jQuery("<source/>", {id: 'audioSource', type: 'audio/wav'})
+```
+In use, 
 
 ## Video ##
 
