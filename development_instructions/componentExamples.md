@@ -358,7 +358,7 @@ Choose the text to display.
 ___
 Both the `TWO_LETTER_CONTAINER` and `ONE_LETTER_CONTAINER` are used together with `divider` to create one page, sampled below. 
 
-<img src="./componentExamples/.png" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/CROSS_CASE_LETTER.png" alt=" image" width=433.3 height="279.4">
 
 ```
 const divider = jQuery('<hr/>', {
