@@ -500,51 +500,33 @@ Arizonabottomright.text(this.orchestrator.currentTrial.bottomright)
 ```
 All images need sources from within GitHub. 
 
-### `ONE_IMAGE_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
 ## Typing ##
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
 
 ### `TYPING_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/TYPING_CONTAINER.png" alt="TYPING_CONTAINER image" width=433.3 height="279.4">
 
-___
-TODO: Explain container
+Allows for typed input, this was in combination of the a displayed text, and next button.
 
 ```
+const TYPING_INPUT = jQuery('<div/>', {
+    id: 'typing',
+    class: 'typing-input',
+    disabled: true
+})
 
+const CARET = jQuery('<div/>', {
+    id: 'caret',
+    class: 'blinking-caret',
+    text: '_'
+})
+
+const TYPING_CONTAINER = jQuery('<div/>', {
+    id: 'typingContainer',
+    class: 'typing-container'
+})
+
+TYPING_CONTAINER.append(TYPING_INPUT, CARET)
 ```
 
 In use, `` line
