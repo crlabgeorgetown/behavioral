@@ -381,57 +381,124 @@ Contain images with formatting.
 
 ### `IMAGE_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/IMAGE_CONTAINER.png" alt="IMAGE_CONTAINER image" width=433.3 height="279.4">
 
-___
-TODO: Explain container
-
-```
+Is able to contain image, formatting and source image is required.
 
 ```
-
-In use, `` line
-
+const IMAGE_CONTAINER = jQuery('<img/>', {id: 'stop', class: 'stop'})
 ```
 
+In use, `shared/components/stop.js` line 4:
+
 ```
-TODO: Explain more detail about use
+const STOP = jQuery('<img/>', {id: 'stop', class: 'stop', src: Stop})
+```
+Give the image that you want to appear in the "src" argument. It should be a file within the GitHub repository.
 
 ### `FOUR_IMAGE_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/FOUR_IMAGE_CONTAINER.png" alt="FOUR_IMAGE_CONTAINER image" width=433.3 height="279.4">
 
-___
-TODO: Explain container
-
-```
+This contains four images as selectable options. The text is a `TEXT_CRESP_CONTAINER`, not entirely part of this component.
 
 ```
+const FOUR_IMAGE_CONTAINER = jQuery('<div/>', {
+    id: 'four-image-container', 
+    class: 'four-image-container'
+})
 
-In use, `` line
+const topleftImage = jQuery('<img/>', {
+    id: 'topleftImage',
+    class: 'image-container'
+})
 
+const toprightImage = jQuery('<img/>', {
+    id: 'toprightImage',
+    class: 'image-container'
+})
+
+const botleftImage = jQuery('<img/>', {
+    id: 'botleftImage',
+    class: 'image-container'
+})
+
+const botrightImage = jQuery('<img/>', {
+    id: 'botrightImage',
+    class: 'image-container'
+})
+
+FOUR_IMAGE_CONTAINER.append(topleftImage, toprightImage, botleftImage, botrightImage)
 ```
 
+In use, `task/screens/trials/wordToPicture.js` lines 97, 
+
 ```
-TODO: Explain more detail about use
+[FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container'}],
+
+...
+
+topleftImage.attr('src', this.orchestrator.currentTrial.getTopLeft())
+toprightImage.attr('src', this.orchestrator.currentTrial.getTopRight())
+botleftImage.attr('src', this.orchestrator.currentTrial.getBotLeft())
+botrightImage.attr('src', this.orchestrator.currentTrial.getBotRight())
+```
+You are able to choose the source images, typically stored somewhere on the GitHub repository.
 
 ### `ARIZONA_IMAGE_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/ARIZONA_IMAGE_CONTAINER.png" alt="ARIZONA_IMAGE_CONTAINER image" width=433.3 height="279.4">
 
-___
-TODO: Explain container
-
-```
+Presents four selectiable image options with a referrance image in the center.
 
 ```
+const ARIZONA_IMAGE_CONTAINER = jQuery('<div/>', {
+    id: 'arizona-image-container',
+    class: 'arizona-container'
+})
 
-In use, `` line
+const ArizonatopleftImage = jQuery('<img/>', {
+    id: 'ArizonatopleftImage',
+    class: 'arizona-image AZTL'
+})
 
+const ArizonatoprightImage = jQuery('<img/>', {
+    id: 'ArizonatoprightImage',
+    class: 'arizona-image AZTR'
+})
+
+const Arizonatargetimage = jQuery('<img/>', {
+    id: 'ArizonatargetImage',
+    class: 'arizona-target-image'
+})
+
+const ArizonabottomleftImage = jQuery('<img/>', {
+    id: 'ArizonabottomleftImage',
+    class: 'arizona-image AZBL'
+})
+
+const ArizonabottomrightImage = jQuery('<img/>', {
+    id: 'ArizonabottomrightImage',
+    class: 'arizona-image AZBR'
+})
+
+ARIZONA_IMAGE_CONTAINER.append(ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage)
 ```
 
+In use, `task/screens/trials/arizonaSemanticTest.js` lines 68, :
+
 ```
-TODO: Explain more detail about use
+[ARIZONA_TEXT_CONTAINER, {}]
+
+...
+
+Arizonatopleft.text(this.orchestrator.currentTrial.topleft)
+Arizonatopright.text(this.orchestrator.currentTrial.topright)
+Arizonatarget.text(this.orchestrator.currentTrial.targetimage)
+Arizonabottomleft.text(this.orchestrator.currentTrial.bottomleft)
+Arizonabottomright.text(this.orchestrator.currentTrial.bottomright)
+```
+All images need sources from within GitHub. 
 
 ### `ONE_IMAGE_CONTAINER` ###
 ___
@@ -506,175 +573,6 @@ In use, `` line
 
 ```
 TODO: Explain more detail about use
-
-### `BUTTON_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-### `BUTTON_LABEL_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-### `PROCEED_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-### `STOP` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-
-## Instructional ##
-
-### `BEGIN_OR_PRACTICE_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-### `INPUT_DEVICE_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-### `INPUT_DEVICE_LABEL_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-### `INSTRUCTIONAL_BUTTON_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-### `PARTICIPANT_ID_CONTAINER` ###
-___
-<img src="" alt=" image" width=433.3 height="279.4">
-
-___
-TODO: Explain container
-
-```
-
-```
-
-In use, `` line
-
-```
-
-```
-TODO: Explain more detail about use
-
-## Other ##
-
-### `CONTAINER` ###
 
 # Styling #
 

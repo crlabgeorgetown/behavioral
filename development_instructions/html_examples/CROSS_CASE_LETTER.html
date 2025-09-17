@@ -1,106 +1,103 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>CR Task Layout</title>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .task-container {
+      width: 90vw;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    .one-letter-container {
+      width: 100%;
+      height: 25%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .top-image-2 {
+      background-color: white;
+      color: black;
+      border: 2px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 44pt;
+      width: 40%;
+      height: 100%;
+    }
+
+    .divider {
+      width: 100%;
+      border: none;
+      border-top: 2px solid #aaa;
+      margin: 20px 0;
+    }
+
+    .two-letter-container {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .letter-container {
+      background-color: white;
+      color: black;
+      border: 2px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 44pt;
+      width: 35%;
+      height: 100%;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .letter-container:hover {
+      border-color: black;
+    }
+
+    .letter-container:active {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
 <body>
-<style>
-html, body {
-    overflow: hidden;
-    touch-action: none;
-    background-color: rgb(240, 240, 240);
-}
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape)
-  and (-webkit-min-device-pixel-ratio: 2) {
-    .large-text {
-        font-size: 33pt;
-    }
+  <div class="task-container">
+    <div class="one-letter-container">
+      <div class="top-image-2">a</div>
+    </div>
 
-    .medium-text {
-        font-size: 27pt;
-    }
-}
-.two-letter-container {
-    display: grid;
-    gap: 15vw;
-    justify-content: center;
-    align-items: center;
-    width: 85vw;
-    height: 50vh;
-    padding: 5vw;
-    grid-template-columns: 1fr 1fr;
-}
-.letter-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    color: black;
-    border: 2px solid #ccc;
-    box-sizing: border-box;
+    <hr class="divider" />
 
-    height: 100%;
-    width: 100%;
-}
-.letter-container:hover {
-    border: 2px solid black;
-}
-.letter-container:active {
-    background-color: #ccc;
-}
-.one-letter-container {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    width: 42.5vw;
-    height: 50vh;
-    padding: 5vw;
-    grid-template-columns: 1fr;
-}
-.top-image-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    color: black;
-    border: 2px solid #ccc;
-    box-sizing: border-box;
-
-    height: 100%;
-    width: 100%;
-}
-.divider {
-    width: 100%;
-    size: 2px;
-    background-color: black;
-}
-.base-text {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
-    flex-direction: column;
-    color: #000000;
-    white-space: pre-line;
-    line-height: 1.7em;
-    margin-top: auto;
-    margin-bottom: auto;
-    font-family: Arial;
-}
-.large-text {
-    font-size: 44pt;
-}
-.large-fixed-height {
-    height: 275px;
-}
-
-</style>
-<div id="ONE_LETTER_CONTAINER" class="one-letter-container">
-    <div id="topimage" class="top-image-2 base-text large-text large-fixed-height">a</div>
-</div>
-<hr id="divider" class="divider">
-<div id="TWO_LETTER_CONTAINER" class="two-letter-container">
-    <div id="left2" class="letter-container base-text large-text large-fixed-height">A</div>
-    <div id="right2" class="letter-container base-text large-text large-fixed-height">B</div>
-</div>
+    <div class="two-letter-container">
+      <div class="letter-container">A</div>
+      <div class="letter-container">B</div>
+    </div>
+  </div>
 </body>
 </html>
