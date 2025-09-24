@@ -529,37 +529,49 @@ const TYPING_CONTAINER = jQuery('<div/>', {
 TYPING_CONTAINER.append(TYPING_INPUT, CARET)
 ```
 
-In use, `` line
+In use, `task/screens/trials/typing.js` lines 15, 50:
 
 ```
+[TYPING_CONTAINER, {}]
 
+...
+
+TYPING_INPUT.text(this.orchestrator.currentTrial.Response)
 ```
-TODO: Explain more detail about use
+The user input will be recorded in the response variable, or any variable you set.
 
 ## Trial ##
 
 ### `REPLAY_CONTAINER` ###
 ___
-<img src="" alt=" image" width=433.3 height="279.4">
+<img src="./componentExamples/REPLAY_CONTAINER.png" alt="REPLAY_CONTAINER image" width=433.3 height="279.4">
 
-___
-TODO: Explain container
-
-```
+This, along with other set buttons, takes in an icon and provides some action during the trial. For example, "REPLAY_CONTAINER" or the speaker icon will replay the audio for the current trial. Any action, response, or stimulus may be programmed to buttons.
 
 ```
-
-In use, `` line
-
+const REPLAY_AUDIO = jQuery('<img/>', {id: 'replayAudio', class: 'replay-audio', src: replayAudio})
 ```
 
+In use, `task/screens/trials/typing.js` lines 70, :
+
 ```
-TODO: Explain more detail about use
+[REPLAY_CONTAINER, {addClass: 'right-margined'}]
+
+...
+
+replayAudio: (event) => this.replayClickHandler(event)
+
+...
+
+replayClickHandler(event) {
+    AUDIO_CONTAINER[0].play()
+    this.orchestrator.currentTrial.Repetitions++
+}
+```
+Any action may be programmed in the event handler function.
 
 # Styling #
 
-Styling classes availble:
+Styles, in the CSS files, in `shared/styles`, allow all components to have unified in appearance. To change how all components, change these files. Since the components are all HTML object, styling is done in the CSS format. 
 
-## `test.css` ##
-
-* `base-text`
+For new styles, include the reference in `shared/styles/main.css`. 
