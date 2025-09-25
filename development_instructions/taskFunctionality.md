@@ -1,7 +1,12 @@
 # Task Architecture and Development Guide
 
+> Related: [Main README](../README.md) • [Trial Screen Guide](trialScreen.md) • [Creating New Tasks](newTask.md)
+
 ## Overview
 This document explains how a task is structured and executed, how it connects to Qualtrics, and what you need to implement when adding a new task variant. The core runtime is stable and shared; variants define task-specific behavior and screens.
+
+## Visual Flow
+CSV data → Orchestrator → Trial + Trial Screen → Participant Interactions → Qualtrics Client → Qualtrics variables
 
 ## Core Concepts
 
@@ -25,9 +30,9 @@ Important: You should not change `task/task.js`, `task/sequenceNode.js`, `task/q
 1. Qualtrics loads the distribution bundle and constructs `new Task({ data, engine, variant })`.
 2. The `Task` instantiates the Orchestrator.
 3. The Orchestrator reads the CSV `data` and the `variant` administrative/configuration class to:
-   - Create the default administrative screens (participant ID, instructions, etc.).
+   - Create the default administrative screens (participant ID, instructions, etc.). See also: [Creating New Tasks](newTask.md)
    - Build practice and real trial sequences as needed.
-   - For each trial row, create a `Trial` instance and a corresponding `TrialScreen` instance.
+   - For each trial row, create a `Trial` instance and a corresponding `TrialScreen` instance. See also: [Trial Screen Guide](trialScreen.md)
 4. The Orchestrator creates a linked list of `SequenceNode` objects representing the entire flow.
 5. Participants proceed through Screens. The `TrialScreen` manages display, timing, and event handling; the `Trial` stores trial-level data.
 6. On completion/submit, the Qualtrics Client serializes trial variables and sends them to Qualtrics.
@@ -44,7 +49,7 @@ Important: You should not change `task/task.js`, `task/sequenceNode.js`, `task/q
 Screens are what participants see. There are default screens (instructional, transitional/breaks) and variant-specific trial screens.
 
 - **Default screens**: Provided by the core system; include participant ID input, instructions, practice instructions, and transitional/break screens.
-- **Variant trial screens**: Defined by each variant’s Trial Screen Class. These render stimuli (text, images, audio, video), implement timing logic, and handle events (key presses, button clicks). They control when to present stimuli, when to start/stop collecting responses, and how to advance.
+- **Variant trial screens**: Defined by each variant’s Trial Screen Class. These render stimuli (text, images, audio, video), implement timing logic, and handle events (key presses, button clicks). They control when to present stimuli, when to start/stop collecting responses, and how to advance. See: [Trial Screen Guide](trialScreen.md)
 
 ## Variants
 
@@ -62,7 +67,7 @@ Each variant consists of four primary components (plus any assets like images/au
 4. **Trial Screen Class**: Implements the participant-facing trial behavior:
    - Composes HTML/UI components.
    - Defines event handlers (e.g., button clicks, key presses).
-   - Encodes timing (stimulus onset/offset, response windows, ITI) and flow (advance conditions).
+   - Encodes timing (stimulus onset/offset, response windows, ITI) and flow (advance conditions). See: [Trial Screen Guide](trialScreen.md)
 
 ## Data Flow Summary
 

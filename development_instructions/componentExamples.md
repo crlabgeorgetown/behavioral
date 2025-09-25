@@ -1,5 +1,7 @@
 # Components #
 
+> Related docs: [Main README](../README.md) • [Trial Screen Guide](trialScreen.md) • [Creating New Tasks](newTask.md)
+
 Tutorial on how to use different components, with visual and coding examples.
 
 This also includes other Container objects used throughout different tasks. Like audio, video, instructional buttons, typing, and other elements used to create trial or instructional screens.

@@ -1,5 +1,21 @@
 ### How to Create a New Task in the Aphasia Behavioral System
 
+> Quick links: [Main README](../README.md) • [Trial Screen Guide](trialScreen.md) • [Qualtrics Integration](qualtricsExplained.md)
+
+Checklist (10 steps)
+1) Put assets in `static/` (audio/images/video)
+2) Create CSV in `static/data/` with columns your Trial expects
+3) Add HTML entry in `task/html/` to load CSV and instantiate `task.Task`
+4) Create Variant class in `task/variants/`
+5) Create Trial class in `task/trials/`
+6) Create Trial Screen class in `task/screens/trials/`
+7) Register variant in `task/variants/index.js`
+8) Test locally via HTML
+9) Push to main, wait ~1.5 min for GitHub Pages
+10) Test in Qualtrics via anonymous link
+
+---
+
 This guide outlines the full process for creating a new behavioral task (a "variant") using this system, from file setup to Qualtrics integration.
 
 ---

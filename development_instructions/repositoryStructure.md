@@ -1,5 +1,7 @@
 # Structure of Repository - `crlabgeorgetown/behavioral/` #
 
+> Related docs: [Main README](../README.md) • [Creating New Tasks](newTask.md) • [Task Architecture](taskFunctionality.md)
+
 Main repository (directory, or folder) for task development, distribution, and storage. Contains configuration files and internal guidance (such as instructions, TO-DOs, and code configuration).
 
 [`task/`](#10-task) is the main folder for new task development. Using components from [`shared/components/`](#71-sharedcomponents).
@@ -12,9 +14,15 @@ Folder for the Antelopes and Canteloupes task.
 
 *More details on code soon.*
 
+Do: Browse to learn patterns
+Don’t: Use as a base for new tasks (prefer `task/`)
+
 ### 2. `development_instructions/` ### 
 
 Folder to organize the instructions for future task development.
+
+Do: Read and update docs
+Don’t: Store code or assets here
 
 ### 3. `dist/` ###
 
@@ -61,6 +69,11 @@ Use these to create new screens for new task development. See [Component Example
 
 *Do not edit existing components to fit new tasks.* 
 
+Examples:
+- Text container: `shared/components/textContainer.js`
+- Audio: `shared/components/audioContainer.js`
+- Typing: `shared/components/typing.js`
+
 #### 7.2. `shared/screens/` ####
 
 Contains base implementation for older tasks' visual screens.
@@ -79,9 +92,14 @@ More on how to change styling for individual tasks or components of a task later
 
 Contains static folders used by various tasks, such as, images, audio files, and trial ordering. Specific tasks may contain their own subfolder here with task specific images or audio files. 
 
+Do: Place CSVs under `static/data/`, media under appropriate subfolders
+Don’t: Reference local file paths (use repo-hosted assets)
+
 #### 8.5. `static/data/` ####
 
 Contains CSV files for all tasks and task variations. These CSV files contain the ordering, descriptors, and other data used to create trial screens. Each task, more specifically, each task various (for example, Auditory Lexical Decision and Written Lexical Decision) should have its own CSV file.
+
+Example CSV path: `static/data/typing_to_diction.csv`
 
 #### 8.7. `static/images/` ####
 
@@ -104,6 +122,31 @@ Contains source code for most tasks (except for Antelopes and Canteloupes, Lexic
 Main folder contains base implementation for task objects, `task.js`. Also contains implementations for trial sequencing, `sequenceNode.js`, formatter to send packaged, correctly formatted data to Qualtrics, `qualtricsClient.js`, and an orchestrator to format and connect all related data and source files, `orchestrator.js`.
 
 ***DO NOT EDIT THESE SOURCE CODE FILES***
+
+#### Task subtree (key files)
+```
+task/
+├─ html/                 # HTML entry points (local testing)
+├─ screens/
+│  ├─ base.js            # Base Screen class
+│  ├─ instruction.js     # Instruction screens
+│  ├─ transition.js      # Transition/break screens
+│  └─ trials/
+│     ├─ typing.js       # Trial screens for typing
+│     ├─ wordToPicture.js
+│     └─ ...
+├─ trials/
+│  ├─ typing.js          # Trial classes (data & export mapping)
+│  └─ ...
+├─ variants/
+│  ├─ typing.js          # Variant classes (admin/config)
+│  ├─ index.js           # Variant key → class mapping
+│  └─ ...
+├─ orchestrator.js       # Orchestration (do not edit)
+├─ sequenceNode.js       # Flow nodes (do not edit)
+├─ qualtricsClient.js    # Qualtrics submission (do not edit)
+└─ task.js               # Task entry (do not edit)
+```
 
 Below are folders within this `task/` folder:
 

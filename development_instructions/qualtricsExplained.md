@@ -1,5 +1,7 @@
 # Qualtrics Integration Guide
 
+> Related: [Main README](../README.md) • [Creating New Tasks](newTask.md) • [Trial Screen Guide](trialScreen.md)
+
 This guide covers how to integrate behavioral tasks with Qualtrics surveys, including setup, testing, and deployment considerations.
 
 ---
@@ -7,6 +9,8 @@ This guide covers how to integrate behavioral tasks with Qualtrics surveys, incl
 ## Overview
 
 The behavioral task system is designed to work seamlessly with Qualtrics by bypassing the standard Qualtrics UI. Tasks run as JavaScript applications that collect data and submit it directly to Qualtrics variables.
+
+> Warning (Preview vs Anonymous link): Do not use Qualtrics “Preview” to test the task. Always use the survey’s Anonymous Link so that the deployed GitHub Pages bundle is loaded.
 
 ---
 
@@ -47,10 +51,10 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 });
 ```
 
-### Key Components:
-- **CSV URL**: Points to your task's data file on GitHub Pages
-- **Task instantiation**: Creates the task with data, Qualtrics engine (`this`), and variant key
-- **Variant key**: Must match exactly what's registered in `task/variants/index.js`
+Replace:
+- `YOUR_VARIANT.csv` with your CSV filename in `static/data/`
+- `YOUR_TASK.Task` with the correct namespace (e.g., `task.Task` for the consolidated bundle)
+- `VARIANT_KEY` with the exact key registered in `task/variants/index.js`
 
 ---
 
@@ -76,6 +80,13 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 
 ## 4. Testing & Deployment
 
+### Deployment checklist
+- [ ] Code pushed to `main`
+- [ ] GitHub Actions “Build and Deploy” shows a green check
+- [ ] CSV accessible at its GitHub Pages URL
+- [ ] Task loads via the survey’s Anonymous Link (not Preview)
+- [ ] Submits and reaches Qualtrics Thank You screen
+
 ### Testing Workflow
 1. **Local preview**: Test task screens locally during development
 2. **Full integration**: Complete testing requires Qualtrics integration (responses are tied to Qualtrics)
@@ -83,101 +94,26 @@ Qualtrics.SurveyEngine.addOnUnload(function()
 4. **Deployment time**: Typically takes ~1.5 minutes for GitHub Pages to update
 5. **Verification**: Check GitHub Actions tab for successful deployment before testing
 
-### Testing Considerations
-- **No error handling**: Current system lacks comprehensive error handling
-- **Dependencies**: Minimal dependencies used for broad compatibility
-- **Legacy support**: Code designed to work across different systems and browsers
+---
+
+## 5. Technical Specs (quick)
+- Desktop focus, all browsers
+- Minimal dependencies; client-side timing
+- One submission to Qualtrics at end-of-task
 
 ---
 
-## 5. Technical Specifications
-
-### Browser Requirements
-- **Desktop focus**: Tasks designed for desktop/laptop screens
-- **Compatibility**: Minimal dependencies ensure broad browser support
-- **Qualtrics compatibility**: Follows Qualtrics' JavaScript requirements
-
-### Performance Considerations
-- **Local execution**: Script downloads and runs locally on participant's machine
-- **Response timing**: Accurate response time measurement is prioritized
-- **Data transmission**: Only final data is sent to Qualtrics (minimal bandwidth usage)
-
-### Timing & Synchronization
-- **Trial timing**: Each trial has its own timing parameters
-- **Local processing**: All timing calculations happen client-side
-- **Data submission**: Only occurs at task completion
+## 6. Recommended screenshots (for future)
+If you capture screenshots for this guide, these are most helpful:
+- Qualtrics: Adding a JavaScript question and where to paste the script
+- Qualtrics: Where to get the Anonymous Link
+- GitHub Actions: Successful “Build and Deploy” run (green check)
+- Browser DevTools: Network panel showing CSV loaded from GitHub Pages
 
 ---
 
-## 6. Participant Management
-
-### Participant ID
-- **Lab assignment**: Participant IDs are assigned by the research lab
-- **Task recording**: IDs are captured by the task and sent to Qualtrics
-- **Testing**: Use `XXX` as participant ID for developer testing
-
-### Data Tracking
-- **Researcher responsibility**: Lab researchers handle participant tracking
-- **Data export**: Researchers manage data export and analysis
-- **Consistency**: Task data structure remains consistent across participants
-
----
-
-## 7. Deployment & Maintenance
-
-### Version Control
-- **Code stability**: Tasks are designed to remain unchanged once deployed
-- **Research consistency**: No modifications after deployment to maintain testing consistency
-- **Single implementation**: Tasks are coded once and remain stable
-
-### Access Management
-- **Password protection**: Surveys are accessible to anyone with the password
-- **Team collaboration**: Multiple researchers can access surveys as needed
-
-### Update Process
-- **Minimal changes**: Avoid modifications to deployed tasks
-- **Research integrity**: Changes could affect data consistency across studies
-- **Stability priority**: System designed for long-term stability
-
----
-
-## 8. Troubleshooting
-
-### Common Issues
-- **GitHub Actions failure**: Don't test before successful deployment
-- **Data not submitting**: Ensure participants wait for "Thank you" message
-- **Script errors**: Check GitHub Pages deployment status
-- **Variable mapping**: Verify variant key matches registry
-
-### Debugging Steps
-1. Check GitHub Actions for successful deployment
-2. Verify CSV file accessibility
-3. Confirm variant key registration
-4. Test with anonymous survey link (not preview mode)
-5. Wait full deployment time (~2 minutes) before testing
-
----
-
-## 9. Best Practices
-
-### Development
-- Test locally first with sample data
-- Use consistent variable naming
-- Follow existing task patterns
-- Document any custom modifications
-
-### Deployment
-- Always test via anonymous link, not preview
-- Wait for GitHub Actions completion
-- Verify data submission in Qualtrics
-- Keep tasks unchanged after deployment
-
-### Data Management
-- Use consistent participant ID format
-- Document any data export requirements
-- Maintain task stability for research integrity
-- Coordinate with lab researchers on data needs
-
----
-
-This integration approach ensures reliable data collection while maintaining the flexibility needed for behavioral research tasks.
+## 7. Troubleshooting
+- CSV 404 or CORS: Check the exact GitHub Pages URL and that the commit has deployed
+- Script not updating: Wait for Actions to finish; hard-refresh browser (or open in a private window)
+- Data not arriving in Qualtrics: Ensure Submit is clicked and wait for Thank You page
+- Wrong variant: Check string key against `task/variants/index.js`
