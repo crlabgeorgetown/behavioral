@@ -1,5 +1,7 @@
 # Behavioral Task System
 
+> Note: This overview is now reflected in the root README.md. This file remains as a reference copy under development_instructions.
+
 JavaScript platform for creating behavioral research tasks that integrate with Qualtrics surveys.
 
 ## Documentation
