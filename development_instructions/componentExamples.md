@@ -1,0 +1,579 @@
+# Components #
+
+> Documentation: [Home - README](../README.md) • [Git & Setup](gitHub.md) • [Repository Structure](repositoryStructure.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Trial Screen Guide](trialScreen.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md)
+
+Tutorial on how to use different components, with visual and coding examples.
+
+This also includes other Container objects used throughout different tasks. Like audio, video, instructional buttons, typing, and other elements used to create trial or instructional screens.
+
+These are all HTML components.
+
+___
+### ~~~ PLEASE READ ME ~~~ ###
+
+**These components are used by all tasks. Editing them and their styling will affect any tasks that use these objects.** Only change the source file if the component needs to be changed for all tasks. Only change the styling if the component needs to be changed for all tasks.
+
+Change styling at the local level for a fine tune change of components. Style changing included along with other examples in the following.
+___
+
+## Location ##
+
+Components can be found in `crlabgeorgetown/behavioral/shared/components/`.
+
+Styling for components, texts, and images can be found in `crlabgeorgetown/behavioral/shared/styles`.
+
+## Use ##
+
+When setting up a new task, you may use these components sample code and screenshots of the various components are below.
+
+In practice, the containers are added in order as they are added to the map of containers. For example, from `task/screens/trials/wordToPicture.js` lines 8-14:
+```
+get components() {
+        return new Map([
+            [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container'}],
+            [TEXT_CRESP_CONTAINER, {addClass: 'base-text extra-large-text large-fixed-height overlay-container'}],
+            [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}]
+        ])
+    }
+```
+the `FOUR_IMAGE_CONTAINER` will appear before all the other components (top to bottom). Sometimes, when conducting tasks, you may need to hide some components on the page; you may hide and show different components at different times with the following functions in the following example. Again from `task/screens/trials/wordToPicture.js` lines 57-58:
+```
+TEXT_CONTAINER.hide()
+FOUR_IMAGE_CONTAINER.show()
+```
+For more examples, please check out the different tasks.
+
+To see these components in action, please check out the Component Sample Task. A mock task (no data is being collected nor sent anywhere) to showcase the components with names. Please refer back to this document for more details on implementing. 
+
+# Components #
+
+## Audio ##
+
+### `AUDIO_CONTAINER` ###
+___
+<img src="./componentExamples/AUDIO_CONTAINER.png" alt="AUDIO_CONTAINER image" width="433.4" height="279.4">
+
+This container allows browser to play audio. Does not really take up space on screen.
+
+```
+const AUDIO_CONTAINER = jQuery("<audio/>", {id: 'audioContainer'})
+const AUDIO_SOURCE = jQuery("<source/>", {id: 'audioSource', type: 'audio/wav'})
+```
+In use, `task/screens/trials/auditory.js` lines 12, 54-55, 59:
+```
+[AUDIO_CONTAINER, {}]
+
+...
+
+AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.audioSource())
+AUDIO_CONTAINER[0].load()
+
+...
+
+AUDIO_CONTAINER[0].play()
+```
+Where audio file is linked in `this.orchestrator.currentTrial.audioSource()`, any audio source link and be placed here.
+
+*More details on audio coming soon*
+
+## Video ##
+
+### `VIDEO_CONTAINER` ###
+*More detail on video coming soon*
+
+## Text ##
+
+### `TEXT_CONTAINER` ###
+___
+<img src="./componentExamples/TEXT_CONTAINER.png" alt="TEXT_CONTAINER image" width=433.4 height="279.4">
+
+Simple container to display text. No strict formatting, would probably show up in the middle of the screen when placed alone. 
+
+```
+const TEXT_CONTAINER = jQuery("<div/>", {id: 'textContainer'})
+```
+
+In use, `task/screens/trials/wordToPicture.js` line 99:
+```
+[TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}]
+```
+Where the displayed text is "+" and the classes are formatting styles defined in CSS files.
+
+### `TEXT_CRESP_CONTAINER` ###
+___
+<img src="./componentExamples/TEXT_CRESP_CONTAINER.png" alt="TEXT_CRESP_CONTAINER image" width=433.4 height="279.4">
+
+While not too different from `TEXT_CONTAINER`, this text container allows words to be displayed at the center of the screen, regardless of other components. This simplifies formats for the other components.
+
+```
+const TEXT_CRESP_CONTAINER = jQuery('<div/>', {
+    id: 'text-cresp-container',
+    class: 'base-text extra-large-text large-fixed-height overlay-container',
+    text: ''
+})
+```
+
+In use, `task/screens/trials/wordToPicture.js` lines 98, 137:
+```
+[TEXT_CRESP_CONTAINER, {addClass: 'base-text extra-large-text large-fixed-height overlay-container'}]
+
+...
+
+TEXT_CRESP_CONTAINER.text(this.orchestrator.currentTrial.CRESP)
+```
+Where the displayed text is `this.orchestrator.currentTrial.CRESP`. The classes are formatting styles defined in CSS files, particularily special for this component is the `overlay-container` class, which keeps the container in the center of the screen.
+
+### `SIX_LETTER_CONTAINER` ###
+___
+<img src="./componentExamples/SIX_LETTER_CONTAINER.png" alt="SIX_LETTER_CONTAINER image" width=433.3 height="279.4">
+
+This container is six buttons arranged in two rows of three.
+
+```
+const SIX_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'SIX_LETTER_CONTAINER',
+    class: 'six-grid-container six-letter-container'
+})
+
+const topleft6 = jQuery('<div/>', {
+    id: 'topleft6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const topmid6 = jQuery('<div/>', {
+    id: 'topmid6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const topright6 = jQuery('<div/>', {
+    id: 'topright6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botleft6 = jQuery('<div/>', {
+    id: 'botleft6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botmid6 = jQuery('<div/>', {
+    id: 'botmid6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botright6 = jQuery('<div/>', {
+    id: 'botright6',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+SIX_LETTER_CONTAINER.append(topleft6, topmid6, topright6, botleft6, botmid6, botright6)
+```
+
+In use, `task/screens/trials/auditory.js` lines 13, 47-52:
+
+```
+[SIX_LETTER_CONTAINER, {addClass: 'six-grid-container six-letter-container'}]
+
+...
+
+topleft6.text(this.orchestrator.currentTrial.topleft)
+topmid6.text(this.orchestrator.currentTrial.topmid)
+topright6.text(this.orchestrator.currentTrial.topright)
+botleft6.text(this.orchestrator.currentTrial.botleft)
+botmid6.text(this.orchestrator.currentTrial.botmid)
+botright6.text(this.orchestrator.currentTrial.botright)
+```
+Each button has their own ID to be able to control what each one displays, and which one is selected.
+
+### `FOUR_LETTER_CONTAINER` ###
+___
+<img src="./componentExamples/FOUR_LETTER_CONTAINER.png" alt="FOUR_LETTER_CONTAINER image" width=433.3 height="279.4">
+
+Similar to the six button container, but two rows of two buttons.
+
+```
+const FOUR_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'FOUR_LETTER_CONTAINER',
+    class: 'four-grid-container four-letter-container'
+})
+
+const topleft4 = jQuery('<div/>', {
+    id: 'topleft4',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const topright4 = jQuery('<div/>', {
+    id: 'topright4',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botleft4 = jQuery('<div/>', {
+    id: 'botleft4',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const botright4 = jQuery('<div/>', {
+    id: 'botright4',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+FOUR_LETTER_CONTAINER.append(topleft4, topright4, botleft4, botright4)
+```
+
+In use, `task/screens/trials/auditory.js` lines 77, 109-112:
+
+```
+[FOUR_LETTER_CONTAINER, {addClass: 'four-grid-container four-letter-container'}]
+
+...
+
+topleft4.text(this.orchestrator.currentTrial.topleft)
+botleft4.text(this.orchestrator.currentTrial.botleft)
+botright4.text(this.orchestrator.currentTrial.botright)
+topright4.text(this.orchestrator.currentTrial.topright)
+```
+Each button has their own ID to be able to control what each one displays, and which one is selected.
+
+### `ARIZONA_TEXT_CONTAINER` ###
+___
+<img src="./componentExamples/ARIZONA_TEXT_CONTAINER.png" alt="ARIZONA_TEXT_CONTAINER image" width=433.3 height="279.4">
+
+Four buttons with target in the center. Only the buttons can be selected.
+
+```
+const ARIZONA_TEXT_CONTAINER = jQuery('<div/>', {
+    id: 'arizona-text-container',
+    class: 'arizona-container',
+})
+
+const Arizonatopleft = jQuery('<div/>', {
+    id: 'Arizonatopleft',
+    class: 'arizona-image base-text large-text large-fixed-height AZTL'
+})
+
+const Arizonatopright = jQuery('<div/>', {
+    id: 'Arizonatopright',
+    class: 'arizona-image base-text large-text large-fixed-height AZTR'
+})
+
+const Arizonatarget = jQuery('<div/>', {
+    id: 'Arizonatarget',
+    class: 'arizona-target-image base-text large-text large-fixed-height AZT'
+})
+
+const Arizonabottomleft = jQuery('<div/>', {
+    id: 'Arizonabottomleft',
+    class: 'arizona-image base-text large-text large-fixed-height AZBL'
+})
+
+const Arizonabottomright = jQuery('<div/>', {
+    id: 'Arizonabottomright',
+    class: 'arizona-image base-text large-text large-fixed-height AZBR'
+})
+
+ARIZONA_TEXT_CONTAINER.append(Arizonatopleft, Arizonatopright, Arizonatarget, Arizonabottomleft, Arizonabottomright)
+```
+
+In use, `task/screens/trials/arizonaSemanticTest.js` lines 68, 104-108:
+
+```
+[ARIZONA_TEXT_CONTAINER, {}]
+
+...
+
+Arizonatopleft.text(this.orchestrator.currentTrial.topleft)
+Arizonatopright.text(this.orchestrator.currentTrial.topright)
+Arizonatarget.text(this.orchestrator.currentTrial.targetimage)
+Arizonabottomleft.text(this.orchestrator.currentTrial.bottomleft)
+Arizonabottomright.text(this.orchestrator.currentTrial.bottomright)
+```
+Where the text in the boxes is sourced from the current trial.
+
+### `TWO_LETTER_CONTAINER` ###
+___
+<img src="./componentExamples/TWO_LETTER_CONTAINER.png" alt="TWO_LETTER_CONTAINER image" width=433.3 height="279.4">
+
+Two buttons selections
+
+```
+const TWO_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'TWO_LETTER_CONTAINER',
+    class: 'two-letter-container'
+})
+
+const left2 = jQuery('<div/>', {
+    id: 'left2',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+const right2 = jQuery('<div/>', {
+    id: 'right2',
+    class: 'letter-container base-text large-text large-fixed-height'
+})
+
+TWO_LETTER_CONTAINER.append(left2, right2)
+```
+
+In use, `task/screens/trials/matching.js` lines 12, 44-45
+
+```
+[TWO_LETTER_CONTAINER, {}]
+
+...
+
+left2.text(this.orchestrator.currentTrial.leftimage.split('_')[0])
+right2.text(this.orchestrator.currentTrial.rightimage.split('_')[0])
+```
+You are able to choose the text to display.
+
+### `ONE_LETTER_CONTAINER` ###
+___
+<img src="./componentExamples/ONE_LETTER_CONTAINER.png" alt="ONE_LETTER_CONTAINER image" width=433.3 height="279.4">
+
+One display box, non-selectable.
+
+```
+const ONE_LETTER_CONTAINER = jQuery('<div/>', {
+    id: 'ONE_LETTER_CONTAINER',
+    class: 'one-letter-container'
+})
+
+const topletter = jQuery('<div/>', {
+    id: 'topimage',
+    class: 'top-image-2 base-text large-text large-fixed-height'
+})
+
+ONE_LETTER_CONTAINER.append(topletter)
+```
+
+In use, `task/screens/trials/matching.js` lines 10, 46:
+
+```
+[ONE_LETTER_CONTAINER, {}]
+
+...
+
+topletter.text(this.orchestrator.currentTrial.topimage.split('_')[0])
+```
+Choose the text to display.
+
+### One and two letter containers ###
+___
+Both the `TWO_LETTER_CONTAINER` and `ONE_LETTER_CONTAINER` are used together with `divider` to create one page, sampled below. 
+
+<img src="./componentExamples/CROSS_CASE_LETTER.png" alt=" image" width=433.3 height="279.4">
+
+```
+const divider = jQuery('<hr/>', {
+    id: 'divider',
+    class: 'divider'
+})
+```
+
+In use, `task/screens/trials/matching.js` lines 10-12:
+
+```
+[ONE_LETTER_CONTAINER, {}],
+[divider, {}],
+[TWO_LETTER_CONTAINER, {}]
+```
+
+## Images ##
+
+Contain images with formatting. 
+
+### `IMAGE_CONTAINER` ###
+___
+<img src="./componentExamples/IMAGE_CONTAINER.png" alt="IMAGE_CONTAINER image" width=433.3 height="279.4">
+
+Is able to contain image, formatting and source image is required.
+
+```
+const IMAGE_CONTAINER = jQuery('<img/>', {id: 'stop', class: 'stop'})
+```
+
+In use, `shared/components/stop.js` line 4:
+
+```
+const STOP = jQuery('<img/>', {id: 'stop', class: 'stop', src: Stop})
+```
+Give the image that you want to appear in the "src" argument. It should be a file within the GitHub repository.
+
+### `FOUR_IMAGE_CONTAINER` ###
+___
+<img src="./componentExamples/FOUR_IMAGE_CONTAINER.png" alt="FOUR_IMAGE_CONTAINER image" width=433.3 height="279.4">
+
+This contains four images as selectable options. The text is a `TEXT_CRESP_CONTAINER`, not entirely part of this component.
+
+```
+const FOUR_IMAGE_CONTAINER = jQuery('<div/>', {
+    id: 'four-image-container', 
+    class: 'four-image-container'
+})
+
+const topleftImage = jQuery('<img/>', {
+    id: 'topleftImage',
+    class: 'image-container'
+})
+
+const toprightImage = jQuery('<img/>', {
+    id: 'toprightImage',
+    class: 'image-container'
+})
+
+const botleftImage = jQuery('<img/>', {
+    id: 'botleftImage',
+    class: 'image-container'
+})
+
+const botrightImage = jQuery('<img/>', {
+    id: 'botrightImage',
+    class: 'image-container'
+})
+
+FOUR_IMAGE_CONTAINER.append(topleftImage, toprightImage, botleftImage, botrightImage)
+```
+
+In use, `task/screens/trials/wordToPicture.js` lines 97, 
+
+```
+[FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container'}],
+
+...
+
+topleftImage.attr('src', this.orchestrator.currentTrial.getTopLeft())
+toprightImage.attr('src', this.orchestrator.currentTrial.getTopRight())
+botleftImage.attr('src', this.orchestrator.currentTrial.getBotLeft())
+botrightImage.attr('src', this.orchestrator.currentTrial.getBotRight())
+```
+You are able to choose the source images, typically stored somewhere on the GitHub repository.
+
+### `ARIZONA_IMAGE_CONTAINER` ###
+___
+<img src="./componentExamples/ARIZONA_IMAGE_CONTAINER.png" alt="ARIZONA_IMAGE_CONTAINER image" width=433.3 height="279.4">
+
+Presents four selectiable image options with a referrance image in the center.
+
+```
+const ARIZONA_IMAGE_CONTAINER = jQuery('<div/>', {
+    id: 'arizona-image-container',
+    class: 'arizona-container'
+})
+
+const ArizonatopleftImage = jQuery('<img/>', {
+    id: 'ArizonatopleftImage',
+    class: 'arizona-image AZTL'
+})
+
+const ArizonatoprightImage = jQuery('<img/>', {
+    id: 'ArizonatoprightImage',
+    class: 'arizona-image AZTR'
+})
+
+const Arizonatargetimage = jQuery('<img/>', {
+    id: 'ArizonatargetImage',
+    class: 'arizona-target-image'
+})
+
+const ArizonabottomleftImage = jQuery('<img/>', {
+    id: 'ArizonabottomleftImage',
+    class: 'arizona-image AZBL'
+})
+
+const ArizonabottomrightImage = jQuery('<img/>', {
+    id: 'ArizonabottomrightImage',
+    class: 'arizona-image AZBR'
+})
+
+ARIZONA_IMAGE_CONTAINER.append(ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage)
+```
+
+In use, `task/screens/trials/arizonaSemanticTest.js` lines 68, :
+
+```
+[ARIZONA_TEXT_CONTAINER, {}]
+
+...
+
+Arizonatopleft.text(this.orchestrator.currentTrial.topleft)
+Arizonatopright.text(this.orchestrator.currentTrial.topright)
+Arizonatarget.text(this.orchestrator.currentTrial.targetimage)
+Arizonabottomleft.text(this.orchestrator.currentTrial.bottomleft)
+Arizonabottomright.text(this.orchestrator.currentTrial.bottomright)
+```
+All images need sources from within GitHub. 
+
+## Typing ##
+
+### `TYPING_CONTAINER` ###
+___
+<img src="./componentExamples/TYPING_CONTAINER.png" alt="TYPING_CONTAINER image" width=433.3 height="279.4">
+
+Allows for typed input, this was in combination of the a displayed text, and next button.
+
+```
+const TYPING_INPUT = jQuery('<div/>', {
+    id: 'typing',
+    class: 'typing-input',
+    disabled: true
+})
+
+const CARET = jQuery('<div/>', {
+    id: 'caret',
+    class: 'blinking-caret',
+    text: '_'
+})
+
+const TYPING_CONTAINER = jQuery('<div/>', {
+    id: 'typingContainer',
+    class: 'typing-container'
+})
+
+TYPING_CONTAINER.append(TYPING_INPUT, CARET)
+```
+
+In use, `task/screens/trials/typing.js` lines 15, 50:
+
+```
+[TYPING_CONTAINER, {}]
+
+...
+
+TYPING_INPUT.text(this.orchestrator.currentTrial.Response)
+```
+The user input will be recorded in the response variable, or any variable you set.
+
+## Trial ##
+
+### `REPLAY_CONTAINER` ###
+___
+<img src="./componentExamples/REPLAY_CONTAINER.png" alt="REPLAY_CONTAINER image" width=433.3 height="279.4">
+
+This, along with other set buttons, takes in an icon and provides some action during the trial. For example, "REPLAY_CONTAINER" or the speaker icon will replay the audio for the current trial. Any action, response, or stimulus may be programmed to buttons.
+
+```
+const REPLAY_AUDIO = jQuery('<img/>', {id: 'replayAudio', class: 'replay-audio', src: replayAudio})
+```
+
+In use, `task/screens/trials/typing.js` lines 70, :
+
+```
+[REPLAY_CONTAINER, {addClass: 'right-margined'}]
+
+...
+
+replayAudio: (event) => this.replayClickHandler(event)
+
+...
+
+replayClickHandler(event) {
+    AUDIO_CONTAINER[0].play()
+    this.orchestrator.currentTrial.Repetitions++
+}
+```
+Any action may be programmed in the event handler function.
+
+# Styling #
+
+Styles, in the CSS files, in `shared/styles`, allow all components to have unified in appearance. To change how all components, change these files. Since the components are all HTML object, styling is done in the CSS format. 
+
+For new styles, include the reference in `shared/styles/main.css`. 

@@ -1,0 +1,103 @@
+<html>
+<body>
+<style>
+html, body {
+    overflow: hidden;
+    touch-action: none;
+    background-color: rgb(240, 240, 240);
+}
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .large-text {
+        font-size: 33pt;
+    }
+
+    .medium-text {
+        font-size: 27pt;
+    }
+}
+.arizona-container{
+    position: relative;
+    width: 90vw;
+    height: 60vw;
+}
+.arizona-image{
+    position: absolute;
+    width: 25vw;
+    height: 20vw;
+    aspect-ratio: 203/144;
+    object-fit: contain;
+    border: 2px solid white;
+    box-sizing: border-box;
+    background-color: white;
+}
+.arizona-image:hover{
+    border: 2px solid black;
+}
+.arizona-image:active{
+    background-color: white;
+}
+.arizona-target-image{
+    position: absolute;
+    width: 25vw;
+    height: 20vw;
+    aspect-ratio: 203/144;
+    object-fit: contain;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: 2px solid black;
+    box-sizing: border-box;
+    background-color: white;
+}
+.AZTL{
+    top: 5%;
+    left: 5%;
+}
+.AZTR{
+    top: 5%;
+    right: 5%;
+}
+.AZBL{
+    bottom: 5%;
+    left: 5%;
+}
+.AZBR{
+    bottom: 5%;
+    right: 5%;
+}
+.base-text {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    flex-direction: column;
+    color: #000000;
+    white-space: pre-line;
+    line-height: 1.7em;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-family: Arial;
+}
+.large-text {
+    font-size: 44pt;
+}
+.large-fixed-height {
+    height: 275px;
+}
+
+
+</style>
+<div id="arizona-text-container" class="arizona-container">
+    <div id="Arizonatopleft" class="arizona-image base-text large-text large-fixed-height AZTL">celery</div>
+    <div id="Arizonatopright" class="arizona-image base-text large-text large-fixed-height AZTR">mushroom</div>
+    <div id="Arizonatarget" class="arizona-target-image base-text large-text large-fixed-height AZT">apple</div>
+    <div id="Arizonabotleft" class="arizona-image base-text large-text large-fixed-height AZBL">fork</div>
+    <div id="Arizonabotright" class="arizona-image base-text large-text large-fixed-height AZBR">banana</div>
+</div>
+</body>
+</html>
