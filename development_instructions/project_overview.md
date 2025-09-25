@@ -8,6 +8,8 @@ JavaScript platform for creating behavioral research tasks that integrate with Q
 - [Creating New Tasks](newTask.md)
 - [Component Examples](componentExamples.md)
 - [Qualtrics Integration](qualtricsExplained.md)
+- [Git & Setup](gitHub.md)
+- [Trial Screen Guide](trialScreen.md)
 
 ## Setup
 
@@ -35,19 +37,17 @@ open task/html/index.html
 
 ## Creating New Tasks
 
-See [Creating New Tasks](newTask.md) for detailed step-by-step guide.
+See [Creating New Tasks](newTask.md) for detailed step-by-step guide. For UI components, see [Component Examples](componentExamples.md).
 
 1. **Prepare stimuli** in `static/` folders
 2. **Create CSV data file** in `static/data/`
 3. **Create four core files**:
    - Variant class in `task/variants/`
    - Trial class in `task/trials/`
-   - Trial screen class in `task/screens/trials/`
+   - Trial screen class in `task/screens/trials/` (see [Trial Screen Guide](trialScreen.md))
    - HTML file in `task/html/`
 4. **Register variant** in `task/variants/index.js`
 5. **Test locally** before deployment
-
-For UI components, see [Component Examples](componentExamples.md).
 
 ## Deployment to Qualtrics
 
@@ -72,4 +72,4 @@ Qualtrics.SurveyEngine.addOnload(function()
 - `task/task.js`, `task/orchestrator.js`, `task/sequenceNode.js`, `task/qualtricsClient.js`
 - `dist/` folder (auto-generated)
 
-For system architecture details, see [Task Architecture](taskFunctionality.md).
+For system architecture details, see [Task Architecture](taskFunctionality.md). For Git basics and VS Code workflow, see [Git & Setup (Beginner)](gitHub.md).
