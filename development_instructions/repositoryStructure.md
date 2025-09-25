@@ -1,6 +1,6 @@
 # Structure of Repository - `crlabgeorgetown/behavioral/` #
 
-> Documentation: [Home - README](../README.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md) • [Git & Setup](gitHub.md) • [Trial Screen Guide](trialScreen.md)
+> Documentation: [Home - README](../README.md) • [Git & Setup](gitHub.md) • [Repository Structure](repositoryStructure.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Trial Screen Guide](trialScreen.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md)
 
 Main repository (directory, or folder) for task development, distribution, and storage. Contains configuration files and internal guidance (such as instructions, TO-DOs, and code configuration).
 

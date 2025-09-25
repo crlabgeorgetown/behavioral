@@ -1,6 +1,6 @@
 # Behavioral Task System
 
-> Documentation: [Home - README](README.md) • [Task Architecture](./development_instructions/taskFunctionality.md) • [Creating New Tasks](./development_instructions/newTask.md) • [Component Examples](./development_instructions/componentExamples.md) • [Qualtrics Integration](./development_instructions/qualtricsExplained.md) • [Git & Setup](./development_instructions/gitHub.md) • [Trial Screen Guide](./development_instructions/trialScreen.md)
+> Documentation: [Home - README](README.md) • [Git & Setup](./development_instructions/gitHub.md) • [Repository Structure](./development_instructions/repositoryStructure.md) • [Task Architecture](./development_instructions/taskFunctionality.md) • [Creating New Tasks](./development_instructions/newTask.md) • [Trial Screen Guide](./development_instructions/trialScreen.md) • [Component Examples](./development_instructions/componentExamples.md) • [Qualtrics Integration](./development_instructions/qualtricsExplained.md)
 
 JavaScript platform for creating behavioral research tasks that integrate with Qualtrics surveys.
 

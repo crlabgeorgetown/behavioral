@@ -1,6 +1,6 @@
 # Task Architecture and Development Guide
 
-> Documentation: [Home - README](../README.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md) • [Git & Setup](gitHub.md) • [Trial Screen Guide](trialScreen.md)
+> Documentation: [Home - README](../README.md) • [Git & Setup](gitHub.md) • [Repository Structure](repositoryStructure.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Trial Screen Guide](trialScreen.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md)
 
 ## Overview
 This document explains how a task is structured and executed, how it connects to Qualtrics, and what you need to implement when adding a new task variant. The core runtime is stable and shared; variants define task-specific behavior and screens.

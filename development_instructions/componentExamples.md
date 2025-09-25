@@ -1,6 +1,6 @@
 # Components #
 
-> Documentation: [Home - README](../README.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md) • [Git & Setup](gitHub.md) • [Trial Screen Guide](trialScreen.md)
+> Documentation: [Home - README](../README.md) • [Git & Setup](gitHub.md) • [Repository Structure](repositoryStructure.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Trial Screen Guide](trialScreen.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md)
 
 Tutorial on how to use different components, with visual and coding examples.
 
