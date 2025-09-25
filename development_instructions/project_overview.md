@@ -2,6 +2,13 @@
 
 JavaScript platform for creating behavioral research tasks that integrate with Qualtrics surveys.
 
+## Documentation
+
+- [Task Architecture](taskFunctionality.md)
+- [Creating New Tasks](newTask.md)
+- [Component Examples](componentExamples.md)
+- [Qualtrics Integration](qualtricsExplained.md)
+
 ## Setup
 
 1. Install Node.js from [here](https://nodejs.org/en/)
@@ -28,6 +35,8 @@ open task/html/index.html
 
 ## Creating New Tasks
 
+See [Creating New Tasks](newTask.md) for detailed step-by-step guide.
+
 1. **Prepare stimuli** in `static/` folders
 2. **Create CSV data file** in `static/data/`
 3. **Create four core files**:
@@ -38,7 +47,11 @@ open task/html/index.html
 4. **Register variant** in `task/variants/index.js`
 5. **Test locally** before deployment
 
+For UI components, see [Component Examples](componentExamples.md).
+
 ## Deployment to Qualtrics
+
+See [Qualtrics Integration](qualtricsExplained.md) for detailed setup guide.
 
 1. **Push to main branch** (triggers GitHub Actions)
 2. **Wait ~1.5 minutes** for GitHub Pages deployment
@@ -59,9 +72,4 @@ Qualtrics.SurveyEngine.addOnload(function()
 - `task/task.js`, `task/orchestrator.js`, `task/sequenceNode.js`, `task/qualtricsClient.js`
 - `dist/` folder (auto-generated)
 
-## Documentation
-
-- [Task Architecture](taskFunctionality.md)
-- [Creating New Tasks](newTask.md)
-- [Component Examples](componentExamples.md)
-- [Qualtrics Integration](qualtricsExplained.md)
+For system architecture details, see [Task Architecture](taskFunctionality.md).
