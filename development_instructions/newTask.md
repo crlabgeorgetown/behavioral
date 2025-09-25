@@ -6,10 +6,10 @@ Checklist (10 steps)
 1) Put assets in `static/` (audio/images/video)
 2) Create CSV in `static/data/` with columns your Trial expects
 3) Add HTML entry in `task/html/` to load CSV and instantiate `task.Task`
-4) Create Variant class in `task/variants/`
-5) Create Trial class in `task/trials/`
-6) Create Trial Screen class in `task/screens/trials/`
-7) Register variant in `task/variants/index.js`
+4) Register variant in `task/variants/index.js`
+5) Create Variant class in `task/variants/`
+6) Create Trial class in `task/trials/`
+7) Create Trial Screen class in `task/screens/trials/`
 8) Test locally via HTML
 9) Push to main, wait ~1.5 min for GitHub Pages
 10) Test in Qualtrics via anonymous link
