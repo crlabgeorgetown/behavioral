@@ -1,6 +1,6 @@
 ### How to Create a New Task in the Aphasia Behavioral System
 
-> Quick links: [Main README](../README.md) • [Trial Screen Guide](trialScreen.md) • [Qualtrics Integration](qualtricsExplained.md)
+> Documentation: [Home - README](../README.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md) • [Git & Setup](gitHub.md) • [Trial Screen Guide](trialScreen.md)
 
 Checklist (10 steps)
 1) Put assets in `static/` (audio/images/video)

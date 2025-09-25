@@ -1,6 +1,6 @@
 # Qualtrics Integration Guide
 
-> Related: [Main README](../README.md) • [Creating New Tasks](newTask.md) • [Trial Screen Guide](trialScreen.md)
+> Documentation: [Home - README](../README.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md) • [Git & Setup](gitHub.md) • [Trial Screen Guide](trialScreen.md)
 
 This guide covers how to integrate behavioral tasks with Qualtrics surveys, including setup, testing, and deployment considerations.
 

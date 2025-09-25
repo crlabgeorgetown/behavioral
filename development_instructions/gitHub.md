@@ -1,6 +1,6 @@
 # Beginner Guide: Environment, IDE, and GitHub Basics
 
-> Quick links: [Main README](../README.md) • [Creating New Tasks](newTask.md) • [Trial Screen Guide](trialScreen.md)
+> Documentation: [Home - README](../README.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md) • [Git & Setup](gitHub.md) • [Trial Screen Guide](trialScreen.md)
 
 This guide is for newcomers who know the tasks conceptually but need help with the coding setup: picking an IDE, installing tools, working with GitHub (VS Code GUI first), and organizing files.
 

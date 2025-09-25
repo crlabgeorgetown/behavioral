@@ -1,6 +1,6 @@
 # Beginner Guide: Trial Screen Class Structure
 
-> Quick links: [Main README](../README.md) • [Creating New Tasks](newTask.md) • [Qualtrics Integration](qualtricsExplained.md)
+> Documentation: [Home - README](../README.md) • [Task Architecture](taskFunctionality.md) • [Creating New Tasks](newTask.md) • [Component Examples](componentExamples.md) • [Qualtrics Integration](qualtricsExplained.md) • [Git & Setup](gitHub.md) • [Trial Screen Guide](trialScreen.md)
 
 This guide explains how to implement a Trial Screen class: setup, components, event handlers, `startTrial`, timing, and writing response variables back to the Trial class.
 
