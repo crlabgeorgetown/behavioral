@@ -28,12 +28,12 @@
 .four-image-container .image-container{
     position: absolute;
     /* Scale based on smaller viewport dimension to ensure visibility on all screens */
-    width: clamp(150px, min(35vw, 35vh), 40vw);
-    height: clamp(150px, min(35vw, 35vh), 40vh);
+    width: clamp(180px, min(42vw, 42vh), 48vw);
+    height: clamp(180px, min(42vw, 42vh), 48vh);
 }
 
 /* Position each image at a corner using percentages */
-#topleftImage{
+.four-image-container #topleftImage{
     top: 10%;
     left: 10%;
 }
