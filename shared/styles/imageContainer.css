@@ -5,15 +5,9 @@
 }
 
 .four-image-container-instruction{
-    display: grid;
-    gap: 7vw;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-content: center;
-    align-items: center;
-    width: 55vw;
-    padding: 5vw;
     position: relative;
+    width: 55vw;
+    height: 55vh;
 }
 
 .image-container{
@@ -28,12 +22,12 @@
 .four-image-container .image-container{
     position: absolute;
     /* Scale based on smaller viewport dimension to ensure visibility on all screens */
-    width: clamp(150px, min(35vw, 35vh), 40vw);
-    height: clamp(150px, min(35vw, 35vh), 40vh);
+    width: clamp(180px, min(42vw, 42vh), 48vw);
+    height: clamp(180px, min(42vw, 42vh), 48vh);
 }
 
-/* Position each image at a corner using percentages */
-#topleftImage{
+/* Position each image at a corner using percentages (only for .four-image-container) */
+.four-image-container #topleftImage{
     top: 10%;
     left: 10%;
 }
@@ -50,6 +44,35 @@
 
 .four-image-container #botrightImage{
     bottom: 10%;
+    right: 10%;
+}
+
+/* Apply absolute positioning and responsive sizing for instruction containers */
+.four-image-container-instruction .image-container{
+    position: absolute;
+    /* Scale based on smaller viewport dimension to ensure visibility on all screens */
+    width: clamp(150px, min(30vw, 30vh), 35vw);
+    height: clamp(150px, min(30vw, 30vh), 35vh);
+}
+
+/* Position each image at a corner using percentages (for .four-image-container-instruction) */
+.four-image-container-instruction #topleftImage{
+    top: 25%;
+    left: 10%;
+}
+
+.four-image-container-instruction #toprightImage{
+    top: 25%;
+    right: 10%;
+}
+
+.four-image-container-instruction #botleftImage{
+    bottom: 20%;
+    left: 10%;
+}
+
+.four-image-container-instruction #botrightImage{
+    bottom: 20%;
     right: 10%;
 }
 
