@@ -7,7 +7,8 @@ const FOUR_IMAGE_CONTAINER = jQuery('<div/>', {
 })
 
 const topleftImage = jQuery('<img/>', {
-    id: 'topleftImage'
+    id: 'topleftImage',
+    class: 'image-container'
 })
 
 const toprightImage = jQuery('<img/>', {
