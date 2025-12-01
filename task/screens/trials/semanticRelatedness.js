@@ -76,17 +76,17 @@ class AuditoryTrialScreen extends BaseTrialScreen {
                     AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.source(2))
                     AUDIO_CONTAINER[0].load()
                     AUDIO_CONTAINER[0].play()
-                }, 5000)
+                }, 500)
                 AUDIO_CONTAINER.off('ended')
-            })
+            },10000)
             AUDIO_CONTAINER[0].load()
             AUDIO_CONTAINER[0].play()
             this.orchestrator.currentTrial.startTime = new Date()
             this.timeoutID = setTimeout(() => {
                 this.orchestrator.currentTrial.responseTime = new Date()
                 this.orchestrator.timedOut()
-            }, 100000)
-        }, 10000)
+            }, 10000)
+        }, 100)
     }
 }
 
