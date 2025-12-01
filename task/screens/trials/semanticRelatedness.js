@@ -78,7 +78,7 @@ class AuditoryTrialScreen extends BaseTrialScreen {
                     AUDIO_CONTAINER[0].play()
                 }, 500)
                 AUDIO_CONTAINER.off('ended')
-            },1000)
+            })
             AUDIO_CONTAINER[0].load()
             AUDIO_CONTAINER[0].play()
             this.orchestrator.currentTrial.startTime = new Date()
@@ -86,7 +86,7 @@ class AuditoryTrialScreen extends BaseTrialScreen {
                 this.orchestrator.currentTrial.responseTime = new Date()
                 this.orchestrator.timedOut()
             }, 10000)
-        }, 100)
+        }, 10000)
     }
 }
 
