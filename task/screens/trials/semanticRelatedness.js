@@ -86,7 +86,7 @@ class AuditoryTrialScreen extends BaseTrialScreen {
                 this.orchestrator.currentTrial.responseTime = new Date()
                 this.orchestrator.timedOut()
             }, 10000)
-        }, 100)
+        }, 1000)
     }
 }
 
