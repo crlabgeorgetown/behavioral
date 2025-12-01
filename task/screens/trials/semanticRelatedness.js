@@ -78,7 +78,7 @@ class AuditoryTrialScreen extends BaseTrialScreen {
                     AUDIO_CONTAINER[0].play()
                 }, 500)
                 AUDIO_CONTAINER.off('ended')
-            },10000)
+            },1000)
             AUDIO_CONTAINER[0].load()
             AUDIO_CONTAINER[0].play()
             this.orchestrator.currentTrial.startTime = new Date()
