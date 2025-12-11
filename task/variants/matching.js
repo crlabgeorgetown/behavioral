@@ -30,6 +30,7 @@ class WrittenHomophoneToPictureMatching {
     constructor() {
         this.screens = [
             ParticipantId,
+            InputDevice,
             InstructionOne,
             LetsPractice
         ]
