@@ -20,8 +20,8 @@ class AuditorySemanticRelatedness extends Base {
     constructor() {
         super()
         this.screens = [
-            InputDevice,
             ParticipantId,
+            InputDevice,
             InstructionOne,
             InstructionTwoWithButtons,
             InstructionThree,
@@ -39,8 +39,8 @@ class WrittenSemanticRelatedness extends Base {
     constructor() {
         super()
         this.screens = [
-            InputDevice,
             ParticipantId,
+            InputDevice,
             InstructionOne,
             InstructionTwoWithButtons,
             InstructionThree,
