@@ -15,7 +15,7 @@
     <div id="Wrapper"></div>
     <script src="../../dist/task.bundle.js"></script>
     <script>
-        const variant = 'NAVS_'
+        const variant = 'NAVSSCT'
         const variantDataFilename = `https://crlabgeorgetown.github.io/behavioral/static/data/${variant.toLowerCase()}.csv`
         d3.csv(variantDataFilename).then((data) => new task.Task(data, this, variant))
     </script>
