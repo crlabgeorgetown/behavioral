@@ -51,7 +51,7 @@ const CROSS_CASE_LETTER = 'CROSS_CASE_LETTER'
 const WRITTEN_HOMOPHONE_TO_PICTURE_MATCHING = 'WRITTEN_HOMOPHONE_TO_PICTURE_MATCHING'
 
 // NAVS
-const NAVS = 'NAVS'
+const NAVSSCT = 'NAVSSCT'
 
 function variantFromString(string) {
     return new {
@@ -97,7 +97,7 @@ function variantFromString(string) {
         [WRITTEN_HOMOPHONE_TO_PICTURE_MATCHING]: WrittenHomophoneToPictureMatching,
 
         // NAVS
-        [NAVS]: NAVS
+        [NAVSSCT]: NAVS
     }[string]()
 }
 
