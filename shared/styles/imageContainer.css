@@ -1,3 +1,35 @@
+.navs-pic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+
+    height: 100%;
+    width: 100%;
+}
+
+.navs-pic:hover{
+    border: 2px solid black;
+}
+
+.navs-pic:active{
+    background-color: #ccc;
+}
+
+.navs-container{
+    display: grid;
+    gap: 10vw;
+    justify-content: center;
+    align-items: center;
+    width: 85vw;
+    height: 85vh;
+    padding: 5vw;
+    grid-template-columns: 1fr 1fr;
+}
+
 .four-image-container{
     position: relative;
     width: 100vw;

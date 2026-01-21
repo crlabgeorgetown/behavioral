@@ -3,21 +3,38 @@ class NAVSTrial {
         this.ItemNum = config.ItemNum
         this.TrialType = config.TrialType
         this.Procedure = config.Procedure
+
         this.Weight = config.Weight
+
         this.Sentence = config.Sentence
         this.PicLeft = config.PicLeft
         this.PicRight = config.PicRight
+
+        this.location = {
+            ['left']: config.PicLeft,
+            ['right']: config.PicRight
+        }
+
         this.CRESP = config.CRESP
-        this.TrialWasAdministered = 1
-        this.Repetitions = 0
+        this.Response = ''
+        this.ResponseLocation = ''
+        this.TargetLocation = config.TargetLocation
+
         this.SentType = config.SentType
         this.Canonicity = config.Canonicity
         this.takebreakafter = config.takebreakafter
-        this.Response = 'NR'
+
         this.startTime = null
         this.responseTime = null
         this.TimedOut = false
+
         this.Accuracy = -1
+        this.Repetitions = 0
+        this.TrialWasAdministered = 1
+    }
+
+    isCorrect() {
+        return this.TargetLocation === this.ResponseLocation
     }
 
     get columns() {
@@ -27,6 +44,10 @@ class NAVSTrial {
             'Date',
             'RT',
         ]
+    }
+
+    get Accuracy() {
+        return this.isCorrect() ? 1 : 0
     }
 
     get Time() {

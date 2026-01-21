@@ -81,6 +81,24 @@ const ONE_IMAGE_CONTAINER = jQuery('<div/>', {
 
 ONE_IMAGE_CONTAINER.append(topimage)
 
+// NAVS
+const PicLeft = jQuery('<img/>', {
+    id: 'PicLeft',
+    class: 'navs-pic'
+})
+
+const PicRight = jQuery('<img/>', {
+    id: 'PicRight',
+    class: 'navs-pic'
+})
+
+const NAVS_PIC_CONTAINER = jQuery('<div/>', {
+    id: 'navs-pic-container',
+    class: 'navs-container'
+})
+
+NAVS_PIC_CONTAINER.append(PicLeft, PicRight)
+
 export { IMAGE_CONTAINER, FOUR_IMAGE_CONTAINER, topleftImage, toprightImage, botleftImage, botrightImage, TEXT_CRESP_CONTAINER,
     ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage,
-    ONE_IMAGE_CONTAINER, topimage }
+    ONE_IMAGE_CONTAINER, topimage, PicLeft, PicRight, NAVS_PIC_CONTAINER }

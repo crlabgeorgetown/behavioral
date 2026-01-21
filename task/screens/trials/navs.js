@@ -1,50 +1,61 @@
 import Screen from "../base";
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer";
 import { AUDIO_CONTAINER, AUDIO_SOURCE } from "../../../shared/components/audioContainer";
-import { IMAGE_CONTAINER } from "../../../shared/components/imageContainer";
+import { PicLeft, PicRight, NAVS_PIC_CONTAINER } from "../../../shared/components/imageContainer";
 
 class NAVSTrialScreen extends Screen {
     get components() {
         return new Map([
             [TEXT_CONTAINER, {text: '+', addClass: 'base-text extra-large-text large-fixed-height'}],
-            [IMAGE_CONTAINER, {}],
+            [NAVS_PIC_CONTAINER, {}],
             [AUDIO_CONTAINER, {}]
         ])
     }
 
     get clickHandlers() {
         return {
-            IMAGE_CONTAINER: (event) => this.proceedClickHandler(event)
+            PicLeft: (event) => this.proceedClickHandler(event, 'left'),
+            PicRight: (event) => this.proceedClickHandler(event, 'right')
         }
     }
 
-    proceedClickHandler(event) {
-        event.stopPropagation()  // required in order to prevent container on clicks from triggering immediately after being set
+    proceedClickHandler(event, location) {
+        event.stopPropagation()
         clearTimeout(this.timeoutID)
+
         this.orchestrator.currentTrial.responseTime = new Date()
-        this.orchestrator.next()
+        this.orchestrator.currentTrial.ResponseLocation = location
+        this.orchestrator.currentTrial.Response = this.orchestrator.currentTrial.location[location]
+        const isPractice = this.orchestrator.currentTrial.TrialType === 'Practice'
+
+        if (!this.orchestrator.currentTrial.isCorrect() && isPractice) {
+            this.orchestrator.replay()
+        } else {
+            this.orchestrator.next()
+        }
+
         TEXT_CONTAINER.show()
     }
 
     startTrial() {
-        IMAGE_CONTAINER.hide()
-        IMAGE_CONTAINER.attr({src: this.orchestrator.currentTrial.PicLeftSource})
+        NAVS_PIC_CONTAINER.hide()
+        PicLeft.attr('src', this.orchestrator.currentTrial.getLeft())
+        PicRight.attr('src', this.orchestrator.currentTrial.getRight())
+        AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.SentenceSource)
+        AUDIO_CONTAINER[0].load()
 
         setTimeout(() => {
-            AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.SentenceSource)
-            AUDIO_CONTAINER[0].load()
             AUDIO_CONTAINER[0].play()
-            setTimeout(() => {
-                TEXT_CONTAINER.hide()
-                IMAGE_CONTAINER.show()
-                this.orchestrator.currentTrial.startTime = new Date()
-                this.timeoutID = setTimeout(() => {
-                    this.orchestrator.currentTrial.TimedOut = true
-                    this.orchestrator.currentTrial.responseTime = new Date()
-                    this.orchestrator.timedOut()
-                    TEXT_CONTAINER.show()
-                }, this.orchestrator.variant.timeToTimeout)
-            }, 500)
+            TEXT_CONTAINER.hide()
+            NAVS_PIC_CONTAINER.show()
+            this.orchestrator.currentTrial.startTime = new Date()
+            this.timeoutID = setTimeout(() => {
+                this.orchestrator.currentTrial.TimedOut = true
+                this.orchestrator.currentTrial.responseTime = new Date()
+                this.orchestrator.timedOut()
+                TEXT_CONTAINER.show()
+            }, this.orchestrator.variant.timeToTimeout)
+
         }, this.orchestrator.variant.fixationDuration)
     }
 }
