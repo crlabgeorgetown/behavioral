@@ -22,9 +22,14 @@ class Begin extends Screen {
 
 class Break extends Screen {
     get components() {
+        let text = 'Take a break. Click or touch anywhere to continue.'
+        if (this.orchestrator.variant.hasOwnProperty('customBreakText')) {
+            text = this.orchestrator.variant.customBreakText
+        }
+
         return new Map([
             [TEXT_CONTAINER, {
-                text: 'Take a break. Click or touch anywhere to continue.',
+                text: text,
                 addClass: 'base-text extra-large-text blue'
             }]
         ])
