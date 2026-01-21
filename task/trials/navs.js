@@ -70,7 +70,7 @@ class NAVSTrial {
         return `https://crlabgeorgetown.github.io/behavioral/static/navs/${this.PicRight}.bmp`
     }
 
-    SentenceSource() {
+    getSentenceSource() {
         return `https://crlabgeorgetown.github.io/behavioral/static/navs/${this.Sentence}.wav`
     }
 }
