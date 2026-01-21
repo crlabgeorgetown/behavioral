@@ -39,9 +39,9 @@ class NAVSTrialScreen extends Screen {
 
     startTrial() {
         NAVS_PIC_CONTAINER.hide()
-        PicLeft.attr('src', this.orchestrator.currentTrial.getLeft())
-        PicRight.attr('src', this.orchestrator.currentTrial.getRight())
-        AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.SentenceSource)
+        PicLeft.attr('src', this.orchestrator.currentTrial.PicLeftSource())
+        PicRight.attr('src', this.orchestrator.currentTrial.PicRightSource())
+        AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.SentenceSource())
         AUDIO_CONTAINER[0].load()
 
         setTimeout(() => {
