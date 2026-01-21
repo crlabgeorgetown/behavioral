@@ -8,7 +8,7 @@
     box-sizing: border-box;
 
     height: 100%;
-    width: 100%;
+    width: 83.333%;
 }
 
 .navs-pic:hover{
@@ -21,12 +21,12 @@
 
 .navs-container{
     display: grid;
-    gap: 10vw;
+    gap: 5vw;
     justify-content: center;
     align-items: center;
     width: 85vw;
     height: 85vh;
-    padding: 5vw;
+    padding: 0vw;
     grid-template-columns: 1fr 1fr;
 }
 
