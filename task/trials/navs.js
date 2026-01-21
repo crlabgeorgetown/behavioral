@@ -63,15 +63,15 @@ class NAVSTrial {
     }
 
     getPicLeftSource() {
-        return `https://crlabgeorgetown.github.io/behavioral/static/navs/${this.PicLeft}.bmp`
+        return `https://crlabgeorgetown.github.io/behavioral/static/NAVS/${this.PicLeft}.bmp`
     }
 
     getPicRightSource() {
-        return `https://crlabgeorgetown.github.io/behavioral/static/navs/${this.PicRight}.bmp`
+        return `https://crlabgeorgetown.github.io/behavioral/static/NAVS/${this.PicRight}.bmp`
     }
 
     getSentenceSource() {
-        return `https://crlabgeorgetown.github.io/behavioral/static/navs/${this.Sentence}.wav`
+        return `https://crlabgeorgetown.github.io/behavioral/static/NAVS/${this.Sentence}.wav`
     }
 }
 
