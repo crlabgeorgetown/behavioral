@@ -62,15 +62,15 @@ class NAVSTrial {
         return this.responseTime - this.startTime
     }
 
-    get PicLeftSource() {
+    getPicLeftSource() {
         return `https://crlabgeorgetown.github.io/behavioral/static/navs/${this.PicLeft}.bmp`
     }
 
-    get PicRightSource() {
+    getPicRightSource() {
         return `https://crlabgeorgetown.github.io/behavioral/static/navs/${this.PicRight}.bmp`
     }
 
-    get SentenceSource() {
+    SentenceSource() {
         return `https://crlabgeorgetown.github.io/behavioral/static/navs/${this.Sentence}.wav`
     }
 }
