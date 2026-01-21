@@ -28,7 +28,6 @@ class NAVSTrial {
         this.responseTime = null
         this.TimedOut = false
 
-        this.Accuracy = -1
         this.Repetitions = 0
         this.TrialWasAdministered = 1
     }
@@ -40,6 +39,7 @@ class NAVSTrial {
     get columns() {
         return [
             ...Object.keys(this),
+            'Accuracy',
             'Time',
             'Date',
             'RT',
