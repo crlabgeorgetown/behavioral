@@ -111,7 +111,7 @@ function variantFromString(string) {
 //        [VISUAL_FIELD]: VisualField
 
         // DIGIT SPAN
-        [DIGIT_SPAN_FORWARD]: 'DIGIT_SPAN_FORWARD'
+        [DIGIT_SPAN_FORWARD]: DigitSpanForward
     }[string]()
 }
 

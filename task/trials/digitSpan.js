@@ -4,13 +4,12 @@ class DigitSpanTrial {
         this.Weight = config.weight
         this.Nested = config.nested
         this.Procedure = config.Procedure
-        this.Video = config.Video
+        this.video = config.video
         this.forwardbutton = config.ForwardButton
         this.TrialWasAdministered = 1
         this.TrialType = config.TrialType
         this.repetitions = config.Repetitions
         this.LengthNumber = config.LengthNumber
-        this.Accuracy = -1
         this.Response = null
         this.startTime = null
         this.responseTime = null
@@ -44,12 +43,13 @@ class DigitSpanTrial {
         return this.Response
     }
 
-    get isCorrect() {
+    isCorrect() {
         return this.Response === '1'
     }
 
     get source() {
-        return `https://crlabgeorgetown.github.io/behavioral/static/digitSpan/${this.Video}.m4v`
+        
+        return `https://crlabgeorgetown.github.io/behavioral/static/digitSpan/${this.video}.m4v`
     }
 }
 
