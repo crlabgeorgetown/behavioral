@@ -36,6 +36,7 @@ class DigitSpanTrialScreen extends Screen {
             else { this.orchestrator.next() }
         }
         TEXT_CONTAINER.show()
+        
     }
 
     discontinue() {
