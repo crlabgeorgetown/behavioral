@@ -36,7 +36,7 @@ class DigitSpanTrialScreen extends Screen {
             else { this.orchestrator.next() }
         }
         TEXT_CONTAINER.show()
-        
+
     }
 
     discontinue() {
@@ -75,6 +75,9 @@ class DigitSpanTrialScreen extends Screen {
         completeNode.next = originalNext
         this.orchestrator.currentScreen.next = completeNode
         this.orchestrator.next()
+        if (this.orchestrator.currentScreen.screen === this.orchestrator.completeScreen) {
+            this.orchestrator.complete()
+        }
 
     }
 
@@ -83,6 +86,7 @@ class DigitSpanTrialScreen extends Screen {
         VIDEO_CONTAINER.hide()
 
         setTimeout(() => {
+            VIDEO_CONTAINER[0].load()
             TEXT_CONTAINER.hide()
             VIDEO_CONTAINER.show()
             VIDEO_SOURCE.attr('src', this.orchestrator.currentTrial.source)
@@ -90,7 +94,6 @@ class DigitSpanTrialScreen extends Screen {
             VIDEO_CONTAINER.on('ended', () => {
                 VIDEO_CONTAINER.hide()
             })
-            VIDEO_CONTAINER[0].load()
             VIDEO_CONTAINER[0].play()
 
             this.orchestrator.currentTrial.startTime = new Date()
