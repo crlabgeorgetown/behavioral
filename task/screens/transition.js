@@ -30,7 +30,7 @@ class Break extends Screen {
         return new Map([
             [TEXT_CONTAINER, {
                 text: text,
-                addClass: 'base-text extra-large-text blue'
+                addClass: 'base-text large-text blue'
             }]
         ])
     }
