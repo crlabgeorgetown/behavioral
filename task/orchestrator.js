@@ -51,15 +51,33 @@ export default class Orchestrator {
                 previous = current
             }
             
+            // Check for break row format (Procedure === 'showasbreak')
             if (row.Procedure === 'showasbreak') {
                 current = new SequenceNode(this.breakScreen)
+                previous.next = current
+                current.previous = previous
             } else {
+                // Create trial node
                 current = new SequenceNode(this.trialScreen)
                 current.initializeTrial(this.variant.trialClass, row)
+                previous.next = current
+                current.previous = previous
+                
+                // Check if this trial has takebreakafter flag
+                // Insert break screen after this trial if takebreakafter is truthy/non-zero
+                if (row.takebreakafter && 
+                    row.takebreakafter !== '0' && 
+                    row.takebreakafter !== 0) {
+                    const breakNode = new SequenceNode(this.breakScreen)
+                    // Link break node after the trial
+                    breakNode.previous = current
+                    current.next = breakNode
+                    // Update current to break node so next iteration links correctly
+                    current = breakNode
+                }
             }
 
-            previous.next = current
-            current.previous = previous
+            previous = current
             previousRow = row
         })
 
