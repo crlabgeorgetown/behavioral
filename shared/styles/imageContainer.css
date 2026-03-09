@@ -24,9 +24,9 @@
     gap: 5vw;
     justify-content: center;
     align-items: center;
-    width: 100vw;
+    width: 83.333vw;
     height: 100vh;
-    padding: 20vw;
+    padding: 5vw;
     grid-template-columns: 1fr 1fr;
 }
 

@@ -8,6 +8,8 @@ import { AuditoryWordToPictureMatchingReadMap, WrittenWordToPictureMatchingReadM
 import { ArizonaSemanticTest, WrittenArizonaSemanticTest } from "./arizonaSemanticTest"
 import { CrossCaseLetter, WrittenHomophoneToPictureMatching } from "./matching"
 import { NAVS } from "./navs"
+//import { VisualField } from "./visualField"
+import { DigitSpanForward } from "./digitSpan"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'
@@ -53,6 +55,12 @@ const WRITTEN_HOMOPHONE_TO_PICTURE_MATCHING = 'WRITTEN_HOMOPHONE_TO_PICTURE_MATC
 // NAVS
 const NAVSSCT = 'NAVSSCT'
 
+// VISUAL FIELD
+const VISUAL_FIELD = 'VISUAL_FIELD'
+
+// DIGIT SPAN
+const DIGIT_SPAN_FORWARD = 'DIGIT_SPAN_FORWARD'
+
 function variantFromString(string) {
     return new {
         // SEMANTIC RELATEDNESS
@@ -97,7 +105,13 @@ function variantFromString(string) {
         [WRITTEN_HOMOPHONE_TO_PICTURE_MATCHING]: WrittenHomophoneToPictureMatching,
 
         // NAVS
-        [NAVSSCT]: NAVS
+        [NAVSSCT]: NAVS,
+
+        // VISUAL FIELD
+//        [VISUAL_FIELD]: VisualField
+
+        // DIGIT SPAN
+        [DIGIT_SPAN_FORWARD]: 'DIGIT_SPAN_FORWARD'
     }[string]()
 }
 
