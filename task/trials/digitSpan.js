@@ -11,8 +11,8 @@ class DigitSpanTrial {
         this.repetitions = config.Repetitions
         this.LengthNumber = config.LengthNumber
         this.Response = null
-        this.startTime = null
-        this.responseTime = null
+        this.startTime = new Date()
+        this.responseTime = new Date()
         this.TimedOut = false
         this.Discontinued = false
     }
