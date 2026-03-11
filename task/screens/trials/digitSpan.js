@@ -92,8 +92,8 @@ class DigitSpanTrialScreen extends Screen {
                 VIDEO_CONTAINER.hide()
             })
             VIDEO_CONTAINER[0].load()
-            VIDEO_CONTAINER.show()
             TEXT_CONTAINER.hide()
+            VIDEO_CONTAINER.show()
             VIDEO_CONTAINER[0].play()
 
             this.orchestrator.currentTrial.startTime = new Date()
