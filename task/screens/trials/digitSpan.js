@@ -85,19 +85,27 @@ class DigitSpanTrialScreen extends Screen {
         TEXT_CONTAINER.show()
         VIDEO_CONTAINER.hide()
         
-        VIDEO_SOURCE.attr('src', this.orchestrator.currentTrial.source)
-        VIDEO_CONTAINER.off('ended')
-        VIDEO_CONTAINER.on('ended', () => {
-            VIDEO_CONTAINER.hide()
-        })
-        VIDEO_CONTAINER[0].load()
         setTimeout(() => {
             TEXT_CONTAINER.hide()
             VIDEO_CONTAINER.show()
-            VIDEO_CONTAINER[0].play()
-
+            VIDEO_SOURCE.attr('src', this.orchestrator.currentTrial.source)
+            VIDEO_CONTAINER.off('ended')
+            VIDEO_CONTAINER.on('ended', () => {
+                VIDEO_CONTAINER.hide()
+                TEXT_CONTAINER.show()
+            })
+            VIDEO_CONTAINER[0].load()
+            VIDEO_CONTAINER[0].play().then(() => {
+                this.timeoutID = setTimeout(() => {
+                    this.orchestrator.currentTrial.TimedOut = true
+                    this.orchestrator.currentTrial.responseTime = new Date()
+                    TEXT_CONTAINER.show()
+                    this.orchestrator.timedOut()
+                }, 1000000)
+            })
+            // Start time used to compute RT is recorded when the audio plays
             this.orchestrator.currentTrial.startTime = new Date()
-        }, this.orchestrator.variant.fixationTime)
+        }, this.orchestrator.variant.fixationDuration)
     }
 }
 
