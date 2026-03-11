@@ -84,14 +84,14 @@ class DigitSpanTrialScreen extends Screen {
     startTrial() {
         TEXT_CONTAINER.show()
         VIDEO_CONTAINER.hide()
-
+        
+        VIDEO_SOURCE.attr('src', this.orchestrator.currentTrial.source)
+        VIDEO_CONTAINER.off('ended')
+        VIDEO_CONTAINER.on('ended', () => {
+            VIDEO_CONTAINER.hide()
+        })
+        VIDEO_CONTAINER[0].load()
         setTimeout(() => {
-            VIDEO_SOURCE.attr('src', this.orchestrator.currentTrial.source)
-            VIDEO_CONTAINER.off('ended')
-            VIDEO_CONTAINER.on('ended', () => {
-                VIDEO_CONTAINER.hide()
-            })
-            VIDEO_CONTAINER[0].load()
             TEXT_CONTAINER.hide()
             VIDEO_CONTAINER.show()
             VIDEO_CONTAINER[0].play()
