@@ -9,7 +9,7 @@ import { ArizonaSemanticTest, WrittenArizonaSemanticTest } from "./arizonaSemant
 import { CrossCaseLetter, WrittenHomophoneToPictureMatching } from "./matching"
 import { NAVS } from "./navs"
 //import { VisualField } from "./visualField"
-import { DigitSpanForward } from "./digitSpan"
+import { DigitSpanForward, DigitSpanBackward } from "./digitSpan"
 
 // SEMANTIC RELATEDNESS
 const AUDITORY_SEMANTIC_RELATEDNESS = 'AUDITORY_SEMANTIC_RELATEDNESS'
@@ -60,6 +60,7 @@ const VISUAL_FIELD = 'VISUAL_FIELD'
 
 // DIGIT SPAN
 const DIGIT_SPAN_FORWARD = 'DIGIT_SPAN_FORWARD'
+const DIGIT_SPAN_BACKWARD = 'DIGIT_SPAN_BACKWARD'
 
 function variantFromString(string) {
     return new {
@@ -111,7 +112,8 @@ function variantFromString(string) {
 //        [VISUAL_FIELD]: VisualField
 
         // DIGIT SPAN
-        [DIGIT_SPAN_FORWARD]: DigitSpanForward
+        [DIGIT_SPAN_FORWARD]: DigitSpanForward,
+        [DIGIT_SPAN_BACKWARD]: DigitSpanBackward
     }[string]()
 }
 

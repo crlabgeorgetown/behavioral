@@ -92,7 +92,6 @@ class DigitSpanTrialScreen extends Screen {
             VIDEO_CONTAINER.off('ended')
             VIDEO_CONTAINER.on('ended', () => {
                 VIDEO_CONTAINER.hide()
-                TEXT_CONTAINER.show()
             })
             VIDEO_CONTAINER[0].load()
             VIDEO_CONTAINER[0].play().then(() => {
