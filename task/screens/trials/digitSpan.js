@@ -87,13 +87,13 @@ class DigitSpanTrialScreen extends Screen {
 
         setTimeout(() => {
             VIDEO_CONTAINER[0].load()
-            TEXT_CONTAINER.hide()
-            VIDEO_CONTAINER.show()
             VIDEO_SOURCE.attr('src', this.orchestrator.currentTrial.source)
             VIDEO_CONTAINER.off('ended')
             VIDEO_CONTAINER.on('ended', () => {
                 VIDEO_CONTAINER.hide()
             })
+            TEXT_CONTAINER.hide()
+            VIDEO_CONTAINER.show()
             VIDEO_CONTAINER[0].play()
 
             this.orchestrator.currentTrial.startTime = new Date()
