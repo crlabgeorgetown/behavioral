@@ -1,4 +1,4 @@
-import Screen from "../base"
+import Screen from "../../screens/base"
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instructionButtons"
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer"
 import {

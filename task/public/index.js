@@ -1,7 +1,7 @@
-import { CONTAINER } from "../shared/components/container"
+import { CONTAINER } from "../../shared/components/container"
 import LocalClient from "./localClient"
-import Orchestrator from "./orchestrator"
-import { PUBLIC_TASK_REGISTRY } from "./variants/public/index"
+import Orchestrator from "../orchestrator"
+import { PUBLIC_TASK_REGISTRY } from "./variants/index"
 
 
 // Thin subclass: replaces the shared Complete screen with the variant's

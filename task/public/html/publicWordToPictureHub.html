@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cognitive Recovery Lab</title>
+    <link rel="stylesheet" href="../../../shared/styles/main.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+        crossorigin="anonymous"></script>
+    <style>
+        /* ── Full-height centered shell (mirrors CONTAINER's inline style) ── */
+        .hub-screen {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            background: #f0f0f0;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ── Width-constraining wrapper so participant-id rows don't stretch ── */
+        .hub-form {
+            width: 60%;
+            min-width: 360px;
+            max-width: 680px;
+        }
+
+        /* ── Scoped overrides: fix participant-id layout inside hub-form ── */
+        /* Original uses margin-left:auto (for full-screen) and black text;  */
+        /* here we pin the label to a fixed left column and use gray.         */
+        .hub-form .participant-id-container {
+            margin-bottom: 18px;
+        }
+
+        .hub-form .participant-id-label {
+            margin-left: 0;
+            width: 200px;
+            text-align: right;
+            color: #909090;
+        }
+
+        .hub-form .participant-id-input {
+            width: auto;
+            flex: 1;
+        }
+
+        /* ── Task option rows (radio button boxes) — no shared equivalent ── */
+        .hub-task-options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .hub-task-option {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border: 2px solid #b0b0b0;
+            background: #ffffff;
+            padding: 14px 22px;
+            cursor: pointer;
+            font-family: Arial;
+            font-size: 22pt;
+            color: #333333;
+            user-select: none;
+        }
+
+        .hub-task-option input[type="radio"] {
+            width: 26px;
+            height: 26px;
+            margin-right: 22px;
+            flex-shrink: 0;
+            cursor: pointer;
+            accent-color: #333333;
+        }
+
+        /* ── Error line ── */
+        .hub-error {
+            min-height: 28px;
+            color: #a00000;
+            font-family: Arial;
+            font-size: 15pt;
+            text-align: center;
+        }
+
+        /* ── Full-screen task overlay ── */
+        #Wrapper {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Screen 1: Demographics ─────────────────────────────── -->
+    <div id="hubScreen1" class="hub-screen">
+        <div class="hub-form">
+
+            <div class="participant-id-container">
+                <div class="participant-id-label">Age</div>
+                <input id="ageInput" class="participant-id-input" type="number" min="1" max="120"
+                       placeholder="0" />
+            </div>
+
+            <div class="participant-id-container">
+                <div class="participant-id-label">Education</div>
+                <select id="educationInput" class="participant-id-input">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Some high school">Some high school</option>
+                    <option value="High school diploma / GED">High school diploma / GED</option>
+                    <option value="Some college">Some college</option>
+                    <option value="Associate's degree">Associate's degree</option>
+                    <option value="Bachelor's degree">Bachelor's degree</option>
+                    <option value="Some graduate school">Some graduate school</option>
+                    <option value="Master's degree">Master's degree</option>
+                    <option value="Doctoral degree">Doctoral degree</option>
+                    <option value="Professional degree (MD, JD, etc.)">Professional degree (MD, JD, etc.)</option>
+                </select>
+            </div>
+
+            <div class="participant-id-container">
+                <div class="participant-id-label">Code</div>
+                <input id="participantInput" class="participant-id-input" type="text"
+                       placeholder="Identifier (optional)" />
+            </div>
+
+            <div class="hub-error" id="hubError1"></div>
+
+            <div class="instruction-button-container">
+                <div id="toScreen2Button" class="grey-button medium-button-text">BEGIN&gt;</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ── Screen 2: Task selection ───────────────────────────── -->
+    <div id="hubScreen2" class="hub-screen" style="display:none;">
+        <div class="hub-form">
+
+            <div class="base-text medium-text" style="margin-bottom: 28px;">Choose a task</div>
+
+            <div class="hub-task-options" id="taskOptions"></div>
+
+            <div class="hub-error" id="hubError2"></div>
+
+            <div class="instruction-button-container">
+                <div id="startTaskButton" class="grey-button medium-button-text">START</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="Wrapper"></div>
+
+    <script src="../../../dist/taskPublic.bundle.js"></script>
+    <script>
+        // ── Populate task radio buttons from registry ─────────────
+        taskPublic.PUBLIC_TASK_REGISTRY.forEach((entry, i) => {
+            const label = jQuery('<label/>', { class: 'hub-task-option' })
+            const radio = jQuery('<input/>', {
+                type: 'radio',
+                name: 'taskVariant',
+                value: entry.key
+            })
+            if (i === 0) radio.prop('checked', true)
+            label.append(radio).append(document.createTextNode(entry.label))
+            jQuery('#taskOptions').append(label)
+        })
+
+        // ── Screen 1 → Screen 2 ───────────────────────────────────
+        jQuery('#toScreen2Button').on('click', () => {
+            const age = jQuery('#ageInput').val().trim()
+            const edu = jQuery('#educationInput').val()
+            if (!age) { jQuery('#hubError1').text('Age is required.'); return }
+            if (!edu)  { jQuery('#hubError1').text('Education is required.'); return }
+            jQuery('#hubError1').text('')
+            jQuery('#hubScreen1').hide()
+            jQuery('#hubScreen2').show()
+        })
+
+        // ── Screen 2 → Launch task ────────────────────────────────
+        const dataUrl = (key) => `https://crlabgeorgetown.github.io/behavioral/static/data/${key}.csv`
+
+        jQuery('#startTaskButton').on('click', () => {
+            const key = jQuery('input[name="taskVariant"]:checked').val()
+            if (!key) { jQuery('#hubError2').text('Please choose a task.'); return }
+            jQuery('#hubError2').text('')
+
+            const entry = taskPublic.PUBLIC_TASK_REGISTRY.find((e) => e.key === key)
+            const metadata = {
+                SubjectID: jQuery('#participantInput').val().trim() || 'XXX',
+                Age: jQuery('#ageInput').val().trim(),
+                Education: jQuery('#educationInput').val(),
+                Task: entry.label
+            }
+
+            jQuery('#hubScreen2').hide()
+            jQuery('#Wrapper').css('display', 'block')
+
+            d3.csv(dataUrl(key)).then((data) => {
+                new taskPublic.Task(data, entry.variantClass, metadata)
+            })
+        })
+    </script>
+</body>
+</html>

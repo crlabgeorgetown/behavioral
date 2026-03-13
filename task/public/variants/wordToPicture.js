@@ -6,7 +6,7 @@ import {
     PublicInstructionAuditoryWordToPictureMatching,
     PublicInstructionWrittenWordToPictureMatching,
     PublicComplete
-} from "../../screens/public/wordToPicture"
+} from "../screens/wordToPicture"
 
 
 class PublicAuditoryWordToPictureMatchingReadMap {

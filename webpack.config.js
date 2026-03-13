@@ -9,7 +9,7 @@ module.exports = {
     rhymeDecision: './rhymeDecision/task.js',
     stroop: './stroop/task.js',
     task: './task/task.js',
-    taskPublic: './task/publicTask.js'
+    taskPublic: './task/public/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
