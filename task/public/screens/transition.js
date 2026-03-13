@@ -32,6 +32,14 @@ class PublicLetsPractice extends Screen {
             playsinline: true
         })
         VIDEO_CONTAINER.prop('muted', false)
+        VIDEO_CONTAINER.off('ended.publicWrittenInstructionReplay ended.publicInstructionHeader')
+
+        const element = VIDEO_CONTAINER.get(0)
+        if (element) {
+            element.pause()
+            element.currentTime = 0
+            element.load()
+        }
 
         PUBLIC_PRACTICE_VIDEO_STACK.empty().append(VIDEO_CONTAINER, PUBLIC_PRACTICE_REPLAY_BUTTON)
 

@@ -114,3 +114,62 @@ body {
     transform: translate(-50%, -50%);
     z-index: 2;
 }
+
+.public-instruction-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: clamp(20px, 3vw, 44px);
+    width: min(92vw, 1050px);
+    margin-top: 10px;
+    margin-bottom: 6px;
+}
+
+.public-instruction-video {
+    width: clamp(205px, 21.5vw, 310px);
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.public-instruction-text {
+    font-family: Arial;
+    color: #000000;
+    white-space: pre-line;
+    text-align: left;
+    line-height: 1.25;
+    font-size: clamp(22px, 2.45vw, 44px);
+    margin-top: 0;
+    margin-bottom: 0;
+    flex: 1;
+}
+
+.public-instruction-header--written {
+    width: min(96vw, 1220px);
+    gap: clamp(18px, 2.4vw, 40px);
+}
+
+.public-instruction-video--written {
+    width: clamp(245px, 25.5vw, 360px);
+    max-width: 36vw;
+}
+
+.public-instruction-text--written {
+    max-width: none;
+    font-size: clamp(24px, 2.65vw, 48px);
+}
+
+.public-written-instruction-video-stack {
+    position: relative;
+    width: fit-content;
+    flex-shrink: 0;
+}
+
+.public-written-instruction-replay {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
