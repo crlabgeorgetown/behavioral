@@ -1,6 +1,6 @@
 class AuditoryWordToPictureMatchingReadMapTrial {
     constructor(config) {
-        this.ItemNum = config.ItemNum
+        this.ItemNum = config.ItemNum //comment
         this.TrialType = config.TrialType
         this.Procedure = config.Procedure
 
