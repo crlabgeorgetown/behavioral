@@ -7,6 +7,7 @@ import {
     PublicInstructionWrittenWordToPictureMatching,
     PublicComplete
 } from "../screens/wordToPicture"
+import { wordToPictureAnalysisProfile } from "../analysis/wordToPicture"
 
 
 class PublicAuditoryWordToPictureMatchingReadMap {
@@ -26,6 +27,7 @@ class PublicAuditoryWordToPictureMatchingReadMap {
         this.trialClass = AuditoryWordToPictureMatchingReadMapTrial
         this.trialScreenClass = AuditoryWordToPictureMatchingReadMapTrialScreen
         this.completeScreenClass = PublicComplete
+        this.analysisProfile = wordToPictureAnalysisProfile
 
         // Metadata passed in from the launcher (Age, Education, SubjectID, etc.)
         this.initialMetadata = metadata
@@ -50,6 +52,7 @@ class PublicWrittenWordToPictureMatchingReadMap {
         this.trialClass = WrittenWordToPictureMatchingReadMapTrial
         this.trialScreenClass = WrittenWordToPictureMatchingReadMapTrialScreen
         this.completeScreenClass = PublicComplete
+        this.analysisProfile = wordToPictureAnalysisProfile
 
         this.initialMetadata = metadata
     }

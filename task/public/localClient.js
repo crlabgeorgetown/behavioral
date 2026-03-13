@@ -1,4 +1,5 @@
 import { jsPDF } from "jspdf"
+import { defaultTaskAnalysisProfile } from "./analysis/default"
 
 export default class LocalClient {
     constructor(variant) {
@@ -54,7 +55,7 @@ export default class LocalClient {
             : 'N/A'
 
         return {
-            task: this.metaData.ExperimentNameShort || 'Unknown Task',
+            task: this.metaData.Task || this.metaData.ExperimentNameShort || 'Unknown Task',
             participantId: this.metaData.SubjectID || 'XXX',
             age: this.metaData.Age || 'N/A',
             education: this.metaData.Education || 'N/A',
@@ -66,8 +67,28 @@ export default class LocalClient {
         }
     }
 
+    getTaskAnalysis() {
+        const summary = this.getSummary()
+        const profile = this.variant.analysisProfile || defaultTaskAnalysisProfile
+
+        if (!profile || typeof profile.compute !== 'function') {
+            return defaultTaskAnalysisProfile.compute({
+                trialData: this.trialData,
+                metaData: this.metaData,
+                summary
+            })
+        }
+
+        return profile.compute({
+            trialData: this.trialData,
+            metaData: this.metaData,
+            summary
+        })
+    }
+
     exportPdf() {
         const s = this.getSummary()
+        const analysis = this.getTaskAnalysis()
         const doc = new jsPDF({ unit: 'pt', format: 'letter' })
 
         doc.setFontSize(16)
@@ -87,6 +108,39 @@ export default class LocalClient {
         ]
 
         lines.forEach((line, i) => doc.text(line, 40, 90 + i * 20))
+
+        let cursorY = 90 + lines.length * 20 + 24
+        doc.setFontSize(13)
+        doc.text(analysis.title || 'Task Analysis', 40, cursorY)
+        cursorY += 20
+
+        doc.setFontSize(11)
+        if (analysis.description) {
+            const wrappedDescription = doc.splitTextToSize(analysis.description, 530)
+            doc.text(wrappedDescription, 40, cursorY)
+            cursorY += wrappedDescription.length * 16
+        }
+
+        ;(analysis.metrics || []).forEach((metric) => {
+            doc.text(`${metric.label}: ${metric.value}`, 40, cursorY)
+            cursorY += 18
+        })
+
+        if (analysis.interpretation) {
+            cursorY += 8
+            const wrappedInterpretation = doc.splitTextToSize(`Interpretation: ${analysis.interpretation}`, 530)
+            doc.text(wrappedInterpretation, 40, cursorY)
+            cursorY += wrappedInterpretation.length * 16
+        }
+
+        if (analysis.reference && analysis.reference.label) {
+            cursorY += 8
+            const refText = analysis.reference.url
+                ? `Reference: ${analysis.reference.label} (${analysis.reference.url})`
+                : `Reference: ${analysis.reference.label}`
+            const wrappedReference = doc.splitTextToSize(refText, 530)
+            doc.text(wrappedReference, 40, cursorY)
+        }
 
         const safeName = String(s.task).replace(/[^a-zA-Z0-9_-]/g, '_')
         doc.save(`${safeName}_summary.pdf`)

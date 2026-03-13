@@ -72,6 +72,7 @@ class PublicComplete extends Screen {
         }
 
         const summary = this.orchestrator.client.getSummary()
+        const analysis = this.orchestrator.client.getTaskAnalysis()
 
         const completionRoot = jQuery('<div/>', {
             id: 'publicCompletionRoot',
@@ -119,9 +120,7 @@ class PublicComplete extends Screen {
             ['Education', summary.education],
             ['Input Device', summary.inputDevice],
             ['Completed At', summary.completedAt],
-            ['Trials Completed', summary.trialsCompleted],
-            ['Accuracy', summary.accuracyPct === 'N/A' ? 'N/A' : `${summary.accuracyPct}%`],
-            ['Average RT (ms)', summary.averageRT]
+            ['Trials Completed', summary.trialsCompleted]
         ]
 
         rows.forEach(([label, value], index) => {
@@ -156,6 +155,88 @@ class PublicComplete extends Screen {
             row.append(labelEl, valueEl)
             summaryCard.append(row)
         })
+
+        const analysisTitle = jQuery('<div/>', {
+            text: analysis.title || 'Task Analysis',
+            css: {
+                fontSize: '24pt',
+                fontWeight: '600',
+                marginTop: '12px',
+                marginBottom: '6px',
+                color: '#111111'
+            }
+        })
+        summaryCard.append(analysisTitle)
+
+        if (analysis.description) {
+            summaryCard.append(jQuery('<div/>', {
+                text: analysis.description,
+                css: {
+                    fontSize: '14pt',
+                    lineHeight: '1.35',
+                    color: '#333333',
+                    marginBottom: '8px'
+                }
+            }))
+        }
+
+        ;(analysis.metrics || []).forEach((metric, index) => {
+            const metricRow = jQuery('<div/>', {
+                css: {
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '24px',
+                    padding: '6px 0',
+                    borderBottom: (analysis.metrics || []).length - 1 === index ? 'none' : '1px solid #d8d8d8',
+                    fontSize: '18pt',
+                    color: '#111111'
+                }
+            })
+
+            metricRow.append(
+                jQuery('<div/>', { text: metric.label, css: { color: '#444444' } }),
+                jQuery('<div/>', { text: String(metric.value), css: { fontWeight: '600', textAlign: 'right' } })
+            )
+
+            summaryCard.append(metricRow)
+        })
+
+        if (analysis.interpretation) {
+            summaryCard.append(jQuery('<div/>', {
+                text: `Interpretation: ${analysis.interpretation}`,
+                css: {
+                    fontSize: '13.5pt',
+                    lineHeight: '1.35',
+                    color: '#333333',
+                    marginTop: '8px'
+                }
+            }))
+        }
+
+        if (analysis.reference && analysis.reference.label) {
+            const refContainer = jQuery('<div/>', {
+                css: {
+                    marginTop: '8px',
+                    fontSize: '13.5pt'
+                }
+            })
+
+            if (analysis.reference.url) {
+                refContainer.append(
+                    jQuery('<a/>', {
+                        href: analysis.reference.url,
+                        target: '_blank',
+                        rel: 'noopener noreferrer',
+                        text: analysis.reference.label
+                    })
+                )
+            } else {
+                refContainer.text(analysis.reference.label)
+            }
+
+            summaryCard.append(refContainer)
+        }
 
         const actionRow = jQuery('<div/>', {
             css: {
