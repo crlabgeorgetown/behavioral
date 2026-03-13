@@ -76,41 +76,17 @@ class PublicComplete extends Screen {
 
         const completionRoot = jQuery('<div/>', {
             id: 'publicCompletionRoot',
-            css: {
-                width: '100%',
-                minHeight: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '20px',
-                padding: '24px 0',
-                boxSizing: 'border-box',
-                fontFamily: 'Arial'
-            }
+            class: 'public-completion-root'
         })
 
         const titleEl = jQuery('<div/>', {
             text: `You've completed this exercise!`,
-            css: {
-                fontSize: '56px',
-                color: '#000000',
-                textAlign: 'center',
-                lineHeight: '1.15',
-                marginBottom: '8px'
-            }
+            class: 'public-completion-title'
         })
 
         const summaryCard = jQuery('<div/>', {
             id: 'publicSummaryCard',
-            css: {
-                width: 'min(900px, 92vw)',
-                border: '2px solid #a8a8a8',
-                background: '#f7f7f7',
-                padding: '18px 24px',
-                fontFamily: 'Arial',
-                boxSizing: 'border-box'
-            }
+            class: 'public-summary-card'
         })
 
         const rows = [
@@ -125,31 +101,18 @@ class PublicComplete extends Screen {
 
         rows.forEach(([label, value], index) => {
             const row = jQuery('<div/>', {
-                css: {
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: '24px',
-                    padding: '6px 0',
-                    borderBottom: index === rows.length - 1 ? 'none' : '1px solid #d8d8d8',
-                    fontSize: '20pt',
-                    color: '#111111'
-                }
+                class: 'public-summary-row'
             })
+            if (index === rows.length - 1) row.css('borderBottom', 'none')
 
             const labelEl = jQuery('<div/>', {
                 text: label,
-                css: {
-                    color: '#444444'
-                }
+                class: 'public-summary-label'
             })
 
             const valueEl = jQuery('<div/>', {
                 text: String(value),
-                css: {
-                    fontWeight: '600',
-                    textAlign: 'right'
-                }
+                class: 'public-summary-value'
             })
 
             row.append(labelEl, valueEl)
@@ -158,45 +121,26 @@ class PublicComplete extends Screen {
 
         const analysisTitle = jQuery('<div/>', {
             text: analysis.title || 'Task Analysis',
-            css: {
-                fontSize: '24pt',
-                fontWeight: '600',
-                marginTop: '12px',
-                marginBottom: '6px',
-                color: '#111111'
-            }
+            class: 'public-analysis-title'
         })
         summaryCard.append(analysisTitle)
 
         if (analysis.description) {
             summaryCard.append(jQuery('<div/>', {
                 text: analysis.description,
-                css: {
-                    fontSize: '14pt',
-                    lineHeight: '1.35',
-                    color: '#333333',
-                    marginBottom: '8px'
-                }
+                class: 'public-analysis-description'
             }))
         }
 
         ;(analysis.metrics || []).forEach((metric, index) => {
             const metricRow = jQuery('<div/>', {
-                css: {
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: '24px',
-                    padding: '6px 0',
-                    borderBottom: (analysis.metrics || []).length - 1 === index ? 'none' : '1px solid #d8d8d8',
-                    fontSize: '18pt',
-                    color: '#111111'
-                }
+                class: 'public-metric-row'
             })
+            if ((analysis.metrics || []).length - 1 === index) metricRow.css('borderBottom', 'none')
 
             metricRow.append(
-                jQuery('<div/>', { text: metric.label, css: { color: '#444444' } }),
-                jQuery('<div/>', { text: String(metric.value), css: { fontWeight: '600', textAlign: 'right' } })
+                jQuery('<div/>', { text: metric.label, class: 'public-metric-label' }),
+                jQuery('<div/>', { text: String(metric.value), class: 'public-metric-value' })
             )
 
             summaryCard.append(metricRow)
@@ -205,21 +149,13 @@ class PublicComplete extends Screen {
         if (analysis.interpretation) {
             summaryCard.append(jQuery('<div/>', {
                 text: `Interpretation: ${analysis.interpretation}`,
-                css: {
-                    fontSize: '13.5pt',
-                    lineHeight: '1.35',
-                    color: '#333333',
-                    marginTop: '8px'
-                }
+                class: 'public-analysis-interpretation'
             }))
         }
 
         if (analysis.reference && analysis.reference.label) {
             const refContainer = jQuery('<div/>', {
-                css: {
-                    marginTop: '8px',
-                    fontSize: '13.5pt'
-                }
+                class: 'public-analysis-reference'
             })
 
             if (analysis.reference.url) {
@@ -239,13 +175,7 @@ class PublicComplete extends Screen {
         }
 
         const actionRow = jQuery('<div/>', {
-            css: {
-                display: 'flex',
-                justifyContent: 'center',
-                gap: '18px',
-                width: '100%',
-                marginTop: '2px'
-            }
+            class: 'public-completion-actions'
         })
 
         const csvBtn = jQuery('<div/>', {

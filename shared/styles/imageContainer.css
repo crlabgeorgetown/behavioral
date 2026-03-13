@@ -31,75 +31,68 @@
 }
 
 .four-image-container{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    justify-items: stretch;
+    align-items: stretch;
+    width: min(94vw, 1400px);
+    height: min(88vh, 900px);
+    column-gap: clamp(60px, 11vw, 240px);
+    row-gap: clamp(72px, 13vh, 240px);
+    padding: clamp(8px, 1.2vw, 18px);
+    box-sizing: border-box;
     position: relative;
-    width: 100vw;
-    height: 100vh;
 }
 
 .four-image-container-instruction{
     display: grid;
-    gap: 7vw;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    justify-content: center;
-    align-items: center;
-    width: 55vw;
-    padding: 5vw;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    justify-items: stretch;
+    align-items: stretch;
+    width: min(88vw, 1080px);
+    height: min(56vh, 560px);
+    column-gap: clamp(24px, 5vw, 84px);
+    row-gap: clamp(24px, 5vh, 84px);
+    padding: clamp(10px, 2vw, 20px);
+    box-sizing: border-box;
     position: relative;
 }
 
 .image-container{
-    background-color: white;
+    background-color: transparent;
     color: black;
     border: 2px solid #ccc;
     box-sizing: border-box;
     object-fit: contain;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
 }
-
-/* Apply absolute positioning and responsive sizing only when inside .four-image-container */
-.four-image-container .image-container{
-    position: absolute;
-}
-
-/* Size buttons based on available space between window edges and centered text container */
-/* Text container is 275px tall (large-fixed-height) and centered at 50% */
-/* Top edge of text container: 50vh - 137.5px, Bottom edge: 50vh + 137.5px */
-/* Top buttons: available height = (50vh - 137.5px) - 10vh = 40vh - 137.5px */
-/* Bottom buttons: available height = 90vh - (50vh + 137.5px) = 40vh - 137.5px */
-/* Width: from 10vw margin to 50vw center = 40vw available */
 
 .four-image-container #topleftImage,
-.four-image-container #toprightImage{
-    top: 10%;
-    /* Height: 90% of available space (40vh - 137.5px) to leave some margin */
-    height: clamp(150px, calc((40vh - 137.5px) * 0.9), 500px);
-    /* Width: 85% of available space (40vw) to leave some margin */
-    width: clamp(150px, calc(40vw * 0.85), 500px);
+.four-image-container-instruction #topleftImage{
+    grid-row: 1;
+    grid-column: 1;
 }
 
-.four-image-container #topleftImage{
-    left: 10%;
-}
-
-.four-image-container #toprightImage{
-    right: 10%;
+.four-image-container #toprightImage,
+.four-image-container-instruction #toprightImage{
+    grid-row: 1;
+    grid-column: 2;
 }
 
 .four-image-container #botleftImage,
-.four-image-container #botrightImage{
-    bottom: 10%;
-    /* Height: same as top buttons */
-    height: clamp(150px, calc((40vh - 137.5px) * 0.9), 500px);
-    /* Width: same as top buttons */
-    width: clamp(150px, calc(40vw * 0.85), 500px);
+.four-image-container-instruction #botleftImage{
+    grid-row: 2;
+    grid-column: 1;
 }
 
-.four-image-container #botleftImage{
-    left: 10%;
-}
-
-.four-image-container #botrightImage{
-    right: 10%;
+.four-image-container #botrightImage,
+.four-image-container-instruction #botrightImage{
+    grid-row: 2;
+    grid-column: 2;
 }
 
 .image-container:hover{
@@ -125,10 +118,13 @@
 
 .overlay-container-instruction{
     position: absolute;
-    top: calc(33%);
-    left: calc(50%);
-    transform: translate(-33%, -50%);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
     z-index: 5;
+    text-align: center;
+    pointer-events: none;
 }
 
 .arizona-container{

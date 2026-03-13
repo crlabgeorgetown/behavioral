@@ -43,11 +43,11 @@ const wordToPictureAnalysisProfile = {
             title: 'Word-to-Picture Analysis',
             description: 'Performance is summarized overall and by lexical categories captured in the stimulus file.',
             metrics,
-            interpretation: 'Lower accuracy or slower responses in specific lexical categories may indicate selective language processing challenges.',
+            /*interpretation: 'Lower accuracy or slower responses in specific lexical categories may indicate selective language processing challenges.',
             reference: {
                 label: 'Laks et al., 2026',
                 url: 'https://doi.org/10.0000/example'
-            }
+            }*/
         }
     }
 }

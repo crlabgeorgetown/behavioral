@@ -1,0 +1,90 @@
+@import url('publicCompletion.css');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hub-screen {
+    width: 100%;
+    justify-content: flex-start !important;
+}
+
+.hub-form {
+    width: 60%;
+    min-width: 360px;
+    max-width: 680px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.hub-screen .instruction-button-container {
+    margin-top: 0;
+}
+
+.hub-form .participant-id-container {
+    margin-bottom: 18px;
+}
+
+.hub-form .participant-id-label {
+    margin-left: 0;
+    width: 200px;
+    text-align: right;
+    color: #909090;
+}
+
+.hub-form .participant-id-input {
+    width: auto;
+    flex: 1;
+}
+
+.hub-task-options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.hub-task-option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 2px solid #b0b0b0;
+    background: #ffffff;
+    padding: 14px 22px;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 22pt;
+    color: #333333;
+    user-select: none;
+}
+
+.hub-task-option input[type="radio"] {
+    width: 26px;
+    height: 26px;
+    margin-right: 22px;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: #333333;
+}
+
+.hub-error {
+    min-height: 28px;
+    color: #a00000;
+    font-family: Arial;
+    font-size: 15pt;
+    text-align: center;
+}
+
+#Wrapper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    overflow: hidden;
+}

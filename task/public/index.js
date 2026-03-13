@@ -2,6 +2,7 @@ import { CONTAINER } from "../../shared/components/container"
 import LocalClient from "./localClient"
 import Orchestrator from "../orchestrator"
 import { PUBLIC_TASK_REGISTRY } from "./variants/index"
+import { initPublicWordToPictureHub } from "./hub"
 
 
 // Thin subclass: replaces the shared Complete screen with the variant's
@@ -38,4 +39,11 @@ class Task {
     }
 }
 
-export { Task, PUBLIC_TASK_REGISTRY }
+if (typeof window !== 'undefined') {
+    initPublicWordToPictureHub({
+        publicTaskRegistry: PUBLIC_TASK_REGISTRY,
+        startTask: (data, VariantClass, metadata) => new Task(data, VariantClass, metadata)
+    })
+}
+
+export { Task, PUBLIC_TASK_REGISTRY, initPublicWordToPictureHub }
