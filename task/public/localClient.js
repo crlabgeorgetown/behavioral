@@ -33,6 +33,7 @@ export default class LocalClient {
     }
 
     submit(root) {
+        if (this.hasSubmitted) return
         this.collectTrialData(root)
         this.hasSubmitted = true
         this.submittedAt = new Date()
@@ -89,5 +90,62 @@ export default class LocalClient {
 
         const safeName = String(s.task).replace(/[^a-zA-Z0-9_-]/g, '_')
         doc.save(`${safeName}_summary.pdf`)
+    }
+
+    exportCsv() {
+        const escapeCsv = (value) => {
+            if (value === null || value === undefined) return ''
+            const stringValue = String(value)
+            if (/[",\n]/.test(stringValue)) {
+                return `"${stringValue.replace(/"/g, '""')}"`
+            }
+            return stringValue
+        }
+
+        const metadataRows = Object.entries(this.metaData).map(([key, value]) => [key, value])
+        if (this.submittedAt) {
+            metadataRows.push(['CompletedAt', this.submittedAt.toISOString()])
+        }
+
+        const trialColumns = Object.keys(this.trialData)
+        const trialRowCount = trialColumns.reduce((max, key) => {
+            const values = this.trialData[key] || []
+            return Math.max(max, values.length)
+        }, 0)
+
+        const csvLines = []
+        csvLines.push('MetadataKey,MetadataValue')
+        metadataRows.forEach(([key, value]) => {
+            csvLines.push(`${escapeCsv(key)},${escapeCsv(value)}`)
+        })
+        csvLines.push('')
+
+        if (trialColumns.length > 0) {
+            csvLines.push(trialColumns.map(escapeCsv).join(','))
+            for (let index = 0; index < trialRowCount; index++) {
+                const row = trialColumns.map((key) => {
+                    const columnValues = this.trialData[key] || []
+                    return escapeCsv(columnValues[index])
+                })
+                csvLines.push(row.join(','))
+            }
+        } else {
+            csvLines.push('No trial data available')
+        }
+
+        const blob = new Blob([csvLines.join('\n')], { type: 'text/csv;charset=utf-8;' })
+        const url = URL.createObjectURL(blob)
+
+        const summary = this.getSummary()
+        const safeName = String(summary.task).replace(/[^a-zA-Z0-9_-]/g, '_')
+
+        const link = document.createElement('a')
+        link.href = url
+        link.download = `${safeName}_trials.csv`
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+
+        URL.revokeObjectURL(url)
     }
 }
