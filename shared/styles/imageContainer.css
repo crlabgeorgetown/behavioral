@@ -103,6 +103,17 @@
     background-color: #ccc;
 }
 
+#text-cresp-container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    z-index: 5;
+    text-align: center;
+    pointer-events: none;
+}
+
 /* 
  * testing with overlaying things over each other
  * instead of adding a text container to the image container

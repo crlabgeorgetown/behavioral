@@ -3,8 +3,9 @@ import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instruc
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer"
 import {
     FOUR_IMAGE_CONTAINER,
-    topleftImage, toprightImage, botleftImage, botrightImage,
-    TEXT_CRESP_CONTAINER
+    setWordToPictureImages,
+    setWordToPictureCresp,
+    setWordToPictureImagesVisible
 } from "../../../shared/components/imageContainer"
 
 
@@ -12,10 +13,14 @@ import {
 
 class PublicInstructionAuditoryWordToPictureMatching extends Screen {
     get components() {
-        topleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/swim.jpeg')
-        toprightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/run.jpeg')
-        botleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/dance.jpeg')
-        botrightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/climb.jpeg')
+        setWordToPictureImages({
+            topleft: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/swim.jpeg',
+            topright: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/run.jpeg',
+            botleft: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/dance.jpeg',
+            botright: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/climb.jpeg'
+        })
+        setWordToPictureCresp('', 'base-text large-text word-to-picture-cresp')
+        setWordToPictureImagesVisible(true)
         return new Map([
             [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container-instruction'}],
             [TEXT_CONTAINER, {
@@ -39,13 +44,16 @@ class PublicInstructionAuditoryWordToPictureMatching extends Screen {
 
 class PublicInstructionWrittenWordToPictureMatching extends Screen {
     get components() {
-        topleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/swim.jpeg')
-        toprightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/run.jpeg')
-        botleftImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/dance.jpeg')
-        botrightImage.attr('src', 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/climb.jpeg')
+        setWordToPictureImages({
+            topleft: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/swim.jpeg',
+            topright: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/run.jpeg',
+            botleft: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/dance.jpeg',
+            botright: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/climb.jpeg'
+        })
+        setWordToPictureCresp('climb', 'base-text large-text word-to-picture-cresp')
+        setWordToPictureImagesVisible(true)
         return new Map([
             [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container-instruction'}],
-            [TEXT_CRESP_CONTAINER, {text: 'climb', addClass: 'base-text large-text large-fixed-height overlay-container-instruction'}],
             [TEXT_CONTAINER, {
                 text: 'You will see four pictures.\nYou will also see a word.\nTap the picture that matches the word.',
                 addClass: 'base-text medium-text'

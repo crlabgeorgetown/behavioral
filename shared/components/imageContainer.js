@@ -2,7 +2,7 @@ const IMAGE_CONTAINER = jQuery('<img/>', {id: 'stop', class: 'stop'})
 
 // Word to Picture Matching
 const FOUR_IMAGE_CONTAINER = jQuery('<div/>', {
-    id: 'four-image-container', 
+    id: 'four-image-container',
     class: 'four-image-container'
 })
 
@@ -29,11 +29,36 @@ const botrightImage = jQuery('<img/>', {
 
 const TEXT_CRESP_CONTAINER = jQuery('<div/>', {
     id: 'text-cresp-container',
-    class: 'base-text extra-large-text large-fixed-height overlay-container',
+    class: 'base-text extra-large-text word-to-picture-cresp',
     text: ''
 })
 
-FOUR_IMAGE_CONTAINER.append(topleftImage, toprightImage, botleftImage, botrightImage)
+FOUR_IMAGE_CONTAINER.append(topleftImage, toprightImage, botleftImage, botrightImage, TEXT_CRESP_CONTAINER)
+
+function setWordToPictureImages(sources) {
+    topleftImage.attr('src', sources.topleft || '')
+    toprightImage.attr('src', sources.topright || '')
+    botleftImage.attr('src', sources.botleft || '')
+    botrightImage.attr('src', sources.botright || '')
+}
+
+function setWordToPictureCresp(text, className = 'base-text extra-large-text word-to-picture-cresp') {
+    TEXT_CRESP_CONTAINER.removeClass()
+    TEXT_CRESP_CONTAINER.addClass(className)
+    TEXT_CRESP_CONTAINER.text(text || '')
+    TEXT_CRESP_CONTAINER.css('display', text ? 'flex' : 'none')
+}
+
+function setWordToPictureImagesVisible(visible) {
+    const visibility = visible ? 'visible' : 'hidden'
+    topleftImage.css('visibility', visibility)
+    toprightImage.css('visibility', visibility)
+    botleftImage.css('visibility', visibility)
+    botrightImage.css('visibility', visibility)
+}
+
+const WORD_TO_PICTURE_CONTAINER = FOUR_IMAGE_CONTAINER
+const WORD_TO_PICTURE_CRESP = TEXT_CRESP_CONTAINER
 
 // Arizona Semantic Test
 const ARIZONA_IMAGE_CONTAINER = jQuery('<div/>', {
@@ -99,6 +124,8 @@ const NAVS_PIC_CONTAINER = jQuery('<div/>', {
 
 NAVS_PIC_CONTAINER.append(PicLeft, PicRight)
 
-export { IMAGE_CONTAINER, FOUR_IMAGE_CONTAINER, topleftImage, toprightImage, botleftImage, botrightImage, TEXT_CRESP_CONTAINER,
+export { IMAGE_CONTAINER, FOUR_IMAGE_CONTAINER, TEXT_CRESP_CONTAINER, WORD_TO_PICTURE_CONTAINER, WORD_TO_PICTURE_CRESP,
+    topleftImage, toprightImage, botleftImage, botrightImage,
+    setWordToPictureImages, setWordToPictureCresp, setWordToPictureImagesVisible,
     ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage,
     ONE_IMAGE_CONTAINER, topimage, PicLeft, PicRight, NAVS_PIC_CONTAINER }
