@@ -8,8 +8,8 @@ function getDataUrl(key) {
 }
 
 
-function initPublicWordToPictureHub({ publicTaskRegistry, startTask }) {
-    const mountPoint = jQuery('#publicWordToPictureHubRoot')
+function initPublicTaskHub({ publicTaskRegistry, startTask }) {
+    const mountPoint = jQuery('#publicTaskHubRoot')
     if (mountPoint.length === 0) return
 
     const wrapper = jQuery('#Wrapper')
@@ -71,4 +71,4 @@ function initPublicWordToPictureHub({ publicTaskRegistry, startTask }) {
 }
 
 
-export { initPublicWordToPictureHub }
+export { initPublicTaskHub }
