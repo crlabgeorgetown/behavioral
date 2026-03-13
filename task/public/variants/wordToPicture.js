@@ -1,7 +1,7 @@
 import { InputDevice } from "../../screens/instruction"
-import { LetsPractice } from "../../screens/transition"
 import { AuditoryWordToPictureMatchingReadMapTrial, WrittenWordToPictureMatchingReadMapTrial } from "../../trials/wordToPicture"
 import { AuditoryWordToPictureMatchingReadMapTrialScreen, WrittenWordToPictureMatchingReadMapTrialScreen } from "../../screens/trials/wordToPicture"
+import { PublicLetsPractice } from "../screens/transition"
 import {
     PublicInstructionAuditoryWordToPictureMatching,
     PublicInstructionWrittenWordToPictureMatching,
@@ -15,7 +15,7 @@ class PublicAuditoryWordToPictureMatchingReadMap {
         this.screens = [
             InputDevice,
             PublicInstructionAuditoryWordToPictureMatching,
-            LetsPractice
+            PublicLetsPractice
         ]
 
         this.testNameShort = 'AuditoryWordToPictureMatchingReadMap'
@@ -40,7 +40,7 @@ class PublicWrittenWordToPictureMatchingReadMap {
         this.screens = [
             InputDevice,
             PublicInstructionWrittenWordToPictureMatching,
-            LetsPractice
+            PublicLetsPractice
         ]
 
         this.testNameShort = 'WrittenWordToPictureMatchingReadMap'
