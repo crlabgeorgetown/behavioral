@@ -182,7 +182,6 @@ const wordToPictureAnalysisProfile = {
 
         return {
             title,
-            description: 'Efficiency = 1000 × proportion correct ÷ median RT for accurate items. EfficiencyZ is computed per word type against control norms.',
             metrics,
             table: {
                 columns: ['', '', 'Accuracy (%)', 'RT (ms)', 'Efficiency', 'EfficiencyZ'],

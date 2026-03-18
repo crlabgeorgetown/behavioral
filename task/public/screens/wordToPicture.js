@@ -44,8 +44,8 @@ function createInstructionPairIcon({
     rightIcon,
     leftIconClass = 'public-pre-instruction-icon',
     rightIconClass = 'public-pre-instruction-icon',
-    leftMark = `${INSTRUCTION_BASE_URL}/greenCheckNoBack.png`,
-    rightMark = `${INSTRUCTION_BASE_URL}/redXNoBack.png`
+    leftMark = `${INSTRUCTION_BASE_URL}/greenCheck.png`,
+    rightMark = `${INSTRUCTION_BASE_URL}/redX.png`
 }) {
     const pair = jQuery('<div/>', {
         class: 'public-pre-instruction-pair'
@@ -143,8 +143,8 @@ class PublicInstructionLandscape extends PublicInstructionReminderScreen {
 
     get contentElement() {
         return createInstructionPairIcon({
-            leftIcon: `${INSTRUCTION_BASE_URL}/tabletNoBack.png`,
-            rightIcon: `${INSTRUCTION_BASE_URL}/tabletNoBack.png`,
+            leftIcon: `${INSTRUCTION_BASE_URL}/tablet.png`,
+            rightIcon: `${INSTRUCTION_BASE_URL}/tablet.png`,
             rightIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--portrait'
         })
     }
@@ -158,8 +158,8 @@ class PublicInstructionLeftHand extends PublicInstructionReminderScreen {
 
     get contentElement() {
         return createInstructionPairIcon({
-            leftIcon: `${INSTRUCTION_BASE_URL}/handsNoBack.png`,
-            rightIcon: `${INSTRUCTION_BASE_URL}/handsNoBack.png`,
+            leftIcon: `${INSTRUCTION_BASE_URL}/hands.png`,
+            rightIcon: `${INSTRUCTION_BASE_URL}/hands.png`,
             rightIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--mirror'
         })
     }
@@ -173,7 +173,7 @@ class PublicInstructionHeadphones extends PublicInstructionReminderScreen {
 
     get contentElement() {
         return createInstructionSingleIcon({
-            icon: `${INSTRUCTION_BASE_URL}/headphonesNoBack.png`,
+            icon: `${INSTRUCTION_BASE_URL}/headphones.png`,
             alt: 'Headphones'
         })
     }
@@ -357,6 +357,104 @@ class PublicInstructionWrittenWordToPictureMatching extends Screen {
 
 // ─── Public completion screen ─────────────────────────────────────────────────
 
+function createPublicAnalysisTable(analysisTable) {
+    const wrapper = jQuery('<div/>', {
+        class: 'public-analysis-table-wrap'
+    })
+
+    const table = jQuery('<table/>', {
+        class: 'public-analysis-table'
+    })
+
+    if (Array.isArray(analysisTable.columns) && analysisTable.columns.length > 0) {
+        const headRow = jQuery('<tr/>')
+        analysisTable.columns.forEach((column) => {
+            headRow.append(jQuery('<th/>', {
+                text: column || ''
+            }))
+        })
+        table.append(jQuery('<thead/>').append(headRow))
+    }
+
+    const tbody = jQuery('<tbody/>')
+    ;(analysisTable.rows || []).forEach((row) => {
+        const tr = jQuery('<tr/>', {
+            class: row?.type === 'section' ? 'public-analysis-table-section-row' : ''
+        })
+
+        const cells = Array.isArray(row?.cells) ? row.cells : []
+        cells.forEach((cell) => {
+            tr.append(jQuery('<td/>', {
+                text: cell === null || cell === undefined ? '' : String(cell)
+            }))
+        })
+
+        tbody.append(tr)
+    })
+
+    table.append(tbody)
+    wrapper.append(table)
+    return wrapper
+}
+
+function createAnalysisBlock(analysis, { showSectionTitle = false } = {}) {
+    const block = jQuery('<div/>', {
+        class: 'public-analysis-block'
+    })
+
+    if (showSectionTitle) {
+        block.append(jQuery('<div/>', {
+            text: analysis.title || 'Task Analysis',
+            class: 'public-analysis-subtitle'
+        }))
+    }
+
+    if (analysis.table && Array.isArray(analysis.table.rows)) {
+        block.append(createPublicAnalysisTable(analysis.table))
+    } else {
+        ;(analysis.metrics || []).forEach((metric, index) => {
+            block.append(createPublicInfoRow({
+                label: metric.label,
+                value: metric.value,
+                rowClass: 'public-metric-row',
+                labelClass: 'public-metric-label',
+                valueClass: 'public-metric-value',
+                removeBorder: (analysis.metrics || []).length - 1 === index
+            }))
+        })
+    }
+
+    if (analysis.interpretation) {
+        block.append(jQuery('<div/>', {
+            text: `Interpretation: ${analysis.interpretation}`,
+            class: 'public-analysis-interpretation'
+        }))
+    }
+
+    if (analysis.reference && analysis.reference.label) {
+        const refContainer = jQuery('<div/>', {
+            class: 'public-analysis-reference'
+        })
+
+        if (analysis.reference.url) {
+            refContainer.append(
+                jQuery('<a/>', {
+                    href: analysis.reference.url,
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    text: analysis.reference.label
+                })
+            )
+        } else {
+            refContainer.text(analysis.reference.label)
+        }
+
+        block.append(refContainer)
+    }
+
+    return block
+}
+
 class PublicComplete extends Screen {
     get components() {
         if (!this.orchestrator.client.hasSubmitted) {
@@ -364,9 +462,11 @@ class PublicComplete extends Screen {
         }
 
         const summary = this.orchestrator.client.getSummary()
+        const analysis = this.orchestrator.client.getTaskAnalysis()
         const analyses = typeof this.orchestrator.client.getTaskAnalyses === 'function'
             ? this.orchestrator.client.getTaskAnalyses()
-            : [this.orchestrator.client.getTaskAnalysis()]
+            : [analysis]
+        const hasMultipleAnalyses = Array.isArray(analyses) && analyses.length > 1
 
         const completionRoot = jQuery('<div/>', {
             id: 'publicCompletionRoot',
@@ -404,59 +504,23 @@ class PublicComplete extends Screen {
             }))
         })
 
-        analyses.forEach((analysis) => {
-            const analysisTitle = jQuery('<div/>', {
-                text: analysis.title || 'Task Analysis',
-                class: 'public-analysis-title'
-            })
-            summaryCard.append(analysisTitle)
-
-            if (analysis.description) {
-                summaryCard.append(jQuery('<div/>', {
-                    text: analysis.description,
-                    class: 'public-analysis-description'
-                }))
-            }
-
-            ;(analysis.metrics || []).forEach((metric, index) => {
-                summaryCard.append(createPublicInfoRow({
-                    label: metric.label,
-                    value: metric.value,
-                    rowClass: 'public-metric-row',
-                    labelClass: 'public-metric-label',
-                    valueClass: 'public-metric-value',
-                    removeBorder: (analysis.metrics || []).length - 1 === index
-                }))
-            })
-
-            if (analysis.interpretation) {
-                summaryCard.append(jQuery('<div/>', {
-                    text: `Interpretation: ${analysis.interpretation}`,
-                    class: 'public-analysis-interpretation'
-                }))
-            }
-
-            if (analysis.reference && analysis.reference.label) {
-                const refContainer = jQuery('<div/>', {
-                    class: 'public-analysis-reference'
-                })
-
-                if (analysis.reference.url) {
-                    refContainer.append(
-                        jQuery('<a/>', {
-                            href: analysis.reference.url,
-                            target: '_blank',
-                            rel: 'noopener noreferrer',
-                            text: analysis.reference.label
-                        })
-                    )
-                } else {
-                    refContainer.text(analysis.reference.label)
-                }
-
-                summaryCard.append(refContainer)
-            }
+        const analysisTitle = jQuery('<div/>', {
+            text: analysis.title || 'Task Analysis',
+            class: 'public-analysis-title'
         })
+        summaryCard.append(analysisTitle)
+
+        const analysisContainer = jQuery('<div/>', {
+            class: hasMultipleAnalyses ? 'public-analysis-scroll' : 'public-analysis-content'
+        })
+
+        ;(analyses || [analysis]).forEach((item) => {
+            analysisContainer.append(createAnalysisBlock(item, {
+                showSectionTitle: hasMultipleAnalyses
+            }))
+        })
+
+        summaryCard.append(analysisContainer)
 
         const actionRow = jQuery('<div/>', {
             class: 'public-completion-actions'
