@@ -1,3 +1,6 @@
+import { createLabeledFieldRow } from "../../../shared/components/publicTask"
+
+
 const EDUCATION_OPTIONS = [
     "Some high school",
     "High school diploma / GED",
@@ -14,19 +17,19 @@ const EDUCATION_OPTIONS = [
 function createDemographicsForm() {
     const form = jQuery('<div/>', { class: 'hub-form' })
 
-    const ageRow = jQuery('<div/>', { class: 'participant-id-container' })
-        .append(jQuery('<div/>', { class: 'participant-id-label', text: 'Age' }))
-        .append(jQuery('<input/>', {
-            id: 'ageInput',
-            class: 'participant-id-input',
-            type: 'number',
-            min: 1,
-            max: 120,
-            placeholder: '0'
-        }))
+    const ageInput = jQuery('<input/>', {
+        id: 'ageInput',
+        class: 'participant-id-input',
+        type: 'number',
+        min: 1,
+        max: 120,
+        placeholder: '0'
+    })
 
-    const educationRow = jQuery('<div/>', { class: 'participant-id-container' })
-        .append(jQuery('<div/>', { class: 'participant-id-label', text: 'Education' }))
+    const ageRow = createLabeledFieldRow({
+        labelText: 'Age',
+        field: ageInput
+    })
 
     const educationInput = jQuery('<select/>', {
         id: 'educationInput',
@@ -47,16 +50,22 @@ function createDemographicsForm() {
         }))
     })
 
-    educationRow.append(educationInput)
+    const educationRow = createLabeledFieldRow({
+        labelText: 'Education',
+        field: educationInput
+    })
 
-    const codeRow = jQuery('<div/>', { class: 'participant-id-container' })
-        .append(jQuery('<div/>', { class: 'participant-id-label', text: 'Code' }))
-        .append(jQuery('<input/>', {
-            id: 'participantInput',
-            class: 'participant-id-input',
-            type: 'text',
-            placeholder: 'Identifier (optional)'
-        }))
+    const codeInput = jQuery('<input/>', {
+        id: 'participantInput',
+        class: 'participant-id-input',
+        type: 'text',
+        placeholder: 'Identifier (optional)'
+    })
+
+    const codeRow = createLabeledFieldRow({
+        labelText: 'Code',
+        field: codeInput
+    })
 
     const error = jQuery('<div/>', { class: 'hub-error', id: 'hubError1' })
 

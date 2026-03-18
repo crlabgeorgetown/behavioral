@@ -1,4 +1,9 @@
 import Screen from "../../screens/base"
+import {
+    createPublicButton,
+    createPublicInfoRow,
+    createReplayButton
+} from "../../../shared/components/publicTask"
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instructionButtons"
 import { VIDEO_CONTAINER, VIDEO_SOURCE } from "../../../shared/components/videoContainer"
 import {
@@ -24,11 +29,9 @@ const PUBLIC_WRITTEN_INSTRUCTION_VIDEO_STACK = jQuery('<div/>', {
     class: 'public-written-instruction-video-stack'
 })
 
-const PUBLIC_WRITTEN_INSTRUCTION_REPLAY_BUTTON = jQuery('<div/>', {
+const PUBLIC_WRITTEN_INSTRUCTION_REPLAY_BUTTON = createReplayButton({
     id: 'publicWrittenInstructionReplayButton',
-    class: 'grey-button medium-button-text public-written-instruction-replay',
-    text: 'Replay',
-    ontouchstart: ''
+    className: 'public-written-instruction-replay'
 })
 
 const AUDITORY_INSTRUCTION_VIDEO_URL = 'https://crlabgeorgetown.github.io/behavioral/static/instruction/AuditoryWPM.mp4'
@@ -247,23 +250,14 @@ class PublicComplete extends Screen {
         ]
 
         rows.forEach(([label, value], index) => {
-            const row = jQuery('<div/>', {
-                class: 'public-summary-row'
-            })
-            if (index === rows.length - 1) row.css('borderBottom', 'none')
-
-            const labelEl = jQuery('<div/>', {
-                text: label,
-                class: 'public-summary-label'
-            })
-
-            const valueEl = jQuery('<div/>', {
-                text: String(value),
-                class: 'public-summary-value'
-            })
-
-            row.append(labelEl, valueEl)
-            summaryCard.append(row)
+            summaryCard.append(createPublicInfoRow({
+                label,
+                value,
+                rowClass: 'public-summary-row',
+                labelClass: 'public-summary-label',
+                valueClass: 'public-summary-value',
+                removeBorder: index === rows.length - 1
+            }))
         })
 
         const analysisTitle = jQuery('<div/>', {
@@ -280,17 +274,14 @@ class PublicComplete extends Screen {
         }
 
         ;(analysis.metrics || []).forEach((metric, index) => {
-            const metricRow = jQuery('<div/>', {
-                class: 'public-metric-row'
-            })
-            if ((analysis.metrics || []).length - 1 === index) metricRow.css('borderBottom', 'none')
-
-            metricRow.append(
-                jQuery('<div/>', { text: metric.label, class: 'public-metric-label' }),
-                jQuery('<div/>', { text: String(metric.value), class: 'public-metric-value' })
-            )
-
-            summaryCard.append(metricRow)
+            summaryCard.append(createPublicInfoRow({
+                label: metric.label,
+                value: metric.value,
+                rowClass: 'public-metric-row',
+                labelClass: 'public-metric-label',
+                valueClass: 'public-metric-value',
+                removeBorder: (analysis.metrics || []).length - 1 === index
+            }))
         })
 
         if (analysis.interpretation) {
@@ -325,18 +316,16 @@ class PublicComplete extends Screen {
             class: 'public-completion-actions'
         })
 
-        const csvBtn = jQuery('<div/>', {
+        const csvBtn = createPublicButton({
             id: 'exportCsvButton',
-            class: 'grey-button medium-button-text',
-            text: 'Download CSV',
-            ontouchstart: ''
+            className: 'grey-button medium-button-text',
+            text: 'Download CSV'
         })
 
-        const exportBtn = jQuery('<div/>', {
+        const exportBtn = createPublicButton({
             id: 'exportPdfButton',
-            class: 'grey-button medium-button-text',
-            text: 'Export PDF',
-            ontouchstart: ''
+            className: 'grey-button medium-button-text',
+            text: 'Export PDF'
         })
 
         actionRow.append(csvBtn, exportBtn)

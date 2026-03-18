@@ -1,14 +1,13 @@
 import { INSTRUCTION_BUTTON_CONTAINER } from "../../../shared/components/instructionButtons"
+import { createReplayButton } from "../../../shared/components/publicTask"
 import { TEXT_CONTAINER } from "../../../shared/components/textContainer"
 import { VIDEO_CONTAINER, VIDEO_SOURCE } from "../../../shared/components/videoContainer"
 import Screen from "../../screens/base"
 
 
-const PUBLIC_PRACTICE_REPLAY_BUTTON = jQuery('<div/>', {
+const PUBLIC_PRACTICE_REPLAY_BUTTON = createReplayButton({
     id: 'publicPracticeReplayButton',
-    class: 'grey-button medium-button-text public-practice-replay',
-    text: 'Replay',
-    ontouchstart: ''
+    className: 'public-practice-replay'
 })
 
 const PUBLIC_PRACTICE_VIDEO_STACK = jQuery('<div/>', {
