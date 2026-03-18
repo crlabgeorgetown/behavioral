@@ -121,10 +121,36 @@ export default class LocalClient {
             cursorY += wrappedDescription.length * 16
         }
 
-        ;(analysis.metrics || []).forEach((metric) => {
-            doc.text(`${metric.label}: ${metric.value}`, 40, cursorY)
+        if (analysis.table && Array.isArray(analysis.table.rows) && Array.isArray(analysis.table.columns)) {
+            const columns = analysis.table.columns
+            const rows = analysis.table.rows
+            const xPositions = [40, 130, 220, 315, 390, 470]
+
+            doc.setFont(undefined, 'bold')
+            columns.forEach((column, index) => {
+                if (!column) return
+                doc.text(String(column), xPositions[index] || 40, cursorY)
+            })
             cursorY += 18
-        })
+
+            rows.forEach((row) => {
+                const cells = Array.isArray(row?.cells) ? row.cells : []
+                const style = row?.type === 'section' ? 'bold' : 'normal'
+                doc.setFont(undefined, style)
+                cells.forEach((cell, index) => {
+                    if (cell === null || cell === undefined || cell === '') return
+                    doc.text(String(cell), xPositions[index] || 40, cursorY)
+                })
+                cursorY += 18
+            })
+
+            doc.setFont(undefined, 'normal')
+        } else {
+            ;(analysis.metrics || []).forEach((metric) => {
+                doc.text(`${metric.label}: ${metric.value}`, 40, cursorY)
+                cursorY += 18
+            })
+        }
 
         if (analysis.interpretation) {
             cursorY += 8

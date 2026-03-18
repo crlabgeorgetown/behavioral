@@ -299,6 +299,44 @@
     margin-bottom: 6px;
 }
 
+.public-analysis-table-wrap {
+    margin-top: 8px;
+}
+
+.public-analysis-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.public-analysis-table th,
+.public-analysis-table td {
+    padding: 6px 4px;
+    border-bottom: 1px solid #d8d8d8;
+    color: #111111;
+    font-size: clamp(18px, 1.2vw, 26px);
+}
+
+.public-analysis-table th {
+    font-weight: 600;
+    color: #444444;
+}
+
+.public-analysis-table th:nth-child(n+3),
+.public-analysis-table td:nth-child(n+3) {
+    text-align: right;
+}
+
+.public-analysis-table th:nth-child(-n+2),
+.public-analysis-table td:nth-child(-n+2) {
+    text-align: left;
+}
+
+.public-analysis-table-section-row td {
+    font-weight: 600;
+    color: #444444;
+}
+
 .public-analysis-interpretation {
     font-size: clamp(15px, 1vw, 20px);
     line-height: 1.35;

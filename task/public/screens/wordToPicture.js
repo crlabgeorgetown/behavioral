@@ -102,6 +102,46 @@ function createInstructionSingleIcon({ icon, alt }) {
     }))
 }
 
+function createPublicAnalysisTable(analysisTable) {
+    const wrapper = jQuery('<div/>', {
+        class: 'public-analysis-table-wrap'
+    })
+
+    const table = jQuery('<table/>', {
+        class: 'public-analysis-table'
+    })
+
+    if (Array.isArray(analysisTable.columns) && analysisTable.columns.length > 0) {
+        const headRow = jQuery('<tr/>')
+        analysisTable.columns.forEach((column) => {
+            headRow.append(jQuery('<th/>', {
+                text: column || ''
+            }))
+        })
+        table.append(jQuery('<thead/>').append(headRow))
+    }
+
+    const tbody = jQuery('<tbody/>')
+    ;(analysisTable.rows || []).forEach((row) => {
+        const tr = jQuery('<tr/>', {
+            class: row?.type === 'section' ? 'public-analysis-table-section-row' : ''
+        })
+
+        const cells = Array.isArray(row?.cells) ? row.cells : []
+        cells.forEach((cell) => {
+            tr.append(jQuery('<td/>', {
+                text: cell === null || cell === undefined ? '' : String(cell)
+            }))
+        })
+
+        tbody.append(tr)
+    })
+
+    table.append(tbody)
+    wrapper.append(table)
+    return wrapper
+}
+
 
 class PublicInstructionReminderScreen extends Screen {
     get instructionText() { return '' }
@@ -415,16 +455,20 @@ class PublicComplete extends Screen {
             }))
         }
 
-        ;(analysis.metrics || []).forEach((metric, index) => {
-            summaryCard.append(createPublicInfoRow({
-                label: metric.label,
-                value: metric.value,
-                rowClass: 'public-metric-row',
-                labelClass: 'public-metric-label',
-                valueClass: 'public-metric-value',
-                removeBorder: (analysis.metrics || []).length - 1 === index
-            }))
-        })
+        if (analysis.table && Array.isArray(analysis.table.rows)) {
+            summaryCard.append(createPublicAnalysisTable(analysis.table))
+        } else {
+            ;(analysis.metrics || []).forEach((metric, index) => {
+                summaryCard.append(createPublicInfoRow({
+                    label: metric.label,
+                    value: metric.value,
+                    rowClass: 'public-metric-row',
+                    labelClass: 'public-metric-label',
+                    valueClass: 'public-metric-value',
+                    removeBorder: (analysis.metrics || []).length - 1 === index
+                }))
+            })
+        }
 
         if (analysis.interpretation) {
             summaryCard.append(jQuery('<div/>', {
