@@ -364,7 +364,9 @@ class PublicComplete extends Screen {
         }
 
         const summary = this.orchestrator.client.getSummary()
-        const analysis = this.orchestrator.client.getTaskAnalysis()
+        const analyses = typeof this.orchestrator.client.getTaskAnalyses === 'function'
+            ? this.orchestrator.client.getTaskAnalyses()
+            : [this.orchestrator.client.getTaskAnalysis()]
 
         const completionRoot = jQuery('<div/>', {
             id: 'publicCompletionRoot',
@@ -402,57 +404,59 @@ class PublicComplete extends Screen {
             }))
         })
 
-        const analysisTitle = jQuery('<div/>', {
-            text: analysis.title || 'Task Analysis',
-            class: 'public-analysis-title'
-        })
-        summaryCard.append(analysisTitle)
-
-        if (analysis.description) {
-            summaryCard.append(jQuery('<div/>', {
-                text: analysis.description,
-                class: 'public-analysis-description'
-            }))
-        }
-
-        ;(analysis.metrics || []).forEach((metric, index) => {
-            summaryCard.append(createPublicInfoRow({
-                label: metric.label,
-                value: metric.value,
-                rowClass: 'public-metric-row',
-                labelClass: 'public-metric-label',
-                valueClass: 'public-metric-value',
-                removeBorder: (analysis.metrics || []).length - 1 === index
-            }))
-        })
-
-        if (analysis.interpretation) {
-            summaryCard.append(jQuery('<div/>', {
-                text: `Interpretation: ${analysis.interpretation}`,
-                class: 'public-analysis-interpretation'
-            }))
-        }
-
-        if (analysis.reference && analysis.reference.label) {
-            const refContainer = jQuery('<div/>', {
-                class: 'public-analysis-reference'
+        analyses.forEach((analysis) => {
+            const analysisTitle = jQuery('<div/>', {
+                text: analysis.title || 'Task Analysis',
+                class: 'public-analysis-title'
             })
+            summaryCard.append(analysisTitle)
 
-            if (analysis.reference.url) {
-                refContainer.append(
-                    jQuery('<a/>', {
-                        href: analysis.reference.url,
-                        target: '_blank',
-                        rel: 'noopener noreferrer',
-                        text: analysis.reference.label
-                    })
-                )
-            } else {
-                refContainer.text(analysis.reference.label)
+            if (analysis.description) {
+                summaryCard.append(jQuery('<div/>', {
+                    text: analysis.description,
+                    class: 'public-analysis-description'
+                }))
             }
 
-            summaryCard.append(refContainer)
-        }
+            ;(analysis.metrics || []).forEach((metric, index) => {
+                summaryCard.append(createPublicInfoRow({
+                    label: metric.label,
+                    value: metric.value,
+                    rowClass: 'public-metric-row',
+                    labelClass: 'public-metric-label',
+                    valueClass: 'public-metric-value',
+                    removeBorder: (analysis.metrics || []).length - 1 === index
+                }))
+            })
+
+            if (analysis.interpretation) {
+                summaryCard.append(jQuery('<div/>', {
+                    text: `Interpretation: ${analysis.interpretation}`,
+                    class: 'public-analysis-interpretation'
+                }))
+            }
+
+            if (analysis.reference && analysis.reference.label) {
+                const refContainer = jQuery('<div/>', {
+                    class: 'public-analysis-reference'
+                })
+
+                if (analysis.reference.url) {
+                    refContainer.append(
+                        jQuery('<a/>', {
+                            href: analysis.reference.url,
+                            target: '_blank',
+                            rel: 'noopener noreferrer',
+                            text: analysis.reference.label
+                        })
+                    )
+                } else {
+                    refContainer.text(analysis.reference.label)
+                }
+
+                summaryCard.append(refContainer)
+            }
+        })
 
         const actionRow = jQuery('<div/>', {
             class: 'public-completion-actions'
@@ -492,11 +496,84 @@ class PublicComplete extends Screen {
 }
 
 
+class PublicContinueToNextTaskComplete extends Screen {
+    constructor(orchestrator) {
+        super(orchestrator)
+        this.hasTriggeredNextTask = false
+    }
+
+    get components() {
+        if (!this.orchestrator.client.hasSubmitted) {
+            this.orchestrator.client.submit(this.orchestrator.root)
+        }
+
+        const completionRoot = jQuery('<div/>', {
+            id: 'publicCompletionRoot',
+            class: 'public-completion-root'
+        })
+
+        const titleEl = jQuery('<div/>', {
+            text: `Great job! Loading the next task...`,
+            class: 'public-completion-title'
+        })
+
+        completionRoot.append(titleEl)
+
+        return new Map([
+            [completionRoot, {}]
+        ])
+    }
+
+    get timeouts() {
+        return new Map([
+            [() => {
+                if (this.hasTriggeredNextTask) return
+                this.hasTriggeredNextTask = true
+
+                if (typeof this.orchestrator.onPublicRunComplete === 'function') {
+                    this.orchestrator.onPublicRunComplete(this.orchestrator)
+                }
+            }, 100]
+        ])
+    }
+}
+
+
+class PublicCombinedComplete extends PublicComplete {
+    constructor(orchestrator) {
+        super(orchestrator)
+        this.hasMergedCurrentRun = false
+    }
+
+    get components() {
+        const combinedClient = this.orchestrator.publicCombinedClient
+        if (combinedClient && !this.hasMergedCurrentRun) {
+            if (!this.orchestrator.client.hasSubmitted) {
+                this.orchestrator.client.submit(this.orchestrator.root)
+            }
+
+            const runSummary = this.orchestrator.client.getSummary()
+            combinedClient.addRun({
+                label: runSummary.task,
+                client: this.orchestrator.client
+            })
+
+            this.orchestrator.client = combinedClient
+            this.hasMergedCurrentRun = true
+        }
+
+        return super.components
+    }
+}
+
+
 export {
     PublicInstructionLandscape,
     PublicInstructionLeftHand,
     PublicInstructionHeadphones,
     PublicInstructionAuditoryWordToPictureMatching,
     PublicInstructionWrittenWordToPictureMatching,
-    PublicComplete
+    PublicComplete,
+    PublicContinueToNextTaskComplete,
+    PublicCombinedComplete
 }

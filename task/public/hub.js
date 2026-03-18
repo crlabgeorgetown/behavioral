@@ -65,8 +65,10 @@ function initPublicTaskHub({ publicTaskRegistry, startTask }) {
             screen2.hide()
             wrapper.css('display', 'block')
 
-            d3.csv(getDataUrl(key)).then((data) => {
-                startTask(data, entry.variantClass, metadata)
+            startTask({
+                entry,
+                metadata,
+                getDataUrl
             })
         }
     })

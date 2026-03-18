@@ -12,12 +12,33 @@ const PUBLIC_TASK_REGISTRY = [
     {
         key: 'auditory_word_to_picture_matching_readmap',
         label: 'Auditory Word-to-Picture',
-        variantClass: PublicAuditoryWordToPictureMatchingReadMap
+        variantClass: PublicAuditoryWordToPictureMatchingReadMap,
+        mode: 'single'
     },
     {
         key: 'written_word_to_picture_matching_readmap',
         label: 'Written Word-to-Picture',
-        variantClass: PublicWrittenWordToPictureMatchingReadMap
+        variantClass: PublicWrittenWordToPictureMatchingReadMap,
+        mode: 'single'
+    },
+    {
+        key: 'both_word_to_picture_matching_readmap',
+        label: 'Both',
+        mode: 'sequence',
+        sequence: [
+            {
+                key: 'written_word_to_picture_matching_readmap',
+                label: 'Written Word-to-Picture',
+                variantClass: PublicWrittenWordToPictureMatchingReadMap,
+                modality: 'written'
+            },
+            {
+                key: 'auditory_word_to_picture_matching_readmap',
+                label: 'Auditory Word-to-Picture',
+                variantClass: PublicAuditoryWordToPictureMatchingReadMap,
+                modality: 'auditory'
+            }
+        ]
     }
 ]
 
