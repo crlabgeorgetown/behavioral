@@ -3,6 +3,9 @@ import { AuditoryWordToPictureMatchingReadMapTrial, WrittenWordToPictureMatching
 import { AuditoryWordToPictureMatchingReadMapTrialScreen, WrittenWordToPictureMatchingReadMapTrialScreen } from "../../screens/trials/wordToPicture"
 import { PublicLetsPractice } from "../screens/transition"
 import {
+    PublicInstructionLandscape,
+    PublicInstructionLeftHand,
+    PublicInstructionHeadphones,
     PublicInstructionAuditoryWordToPictureMatching,
     PublicInstructionWrittenWordToPictureMatching,
     PublicComplete
@@ -14,6 +17,9 @@ class PublicAuditoryWordToPictureMatchingReadMap {
     constructor(metadata = {}) {
         this.screens = [
             InputDevice,
+            PublicInstructionLandscape,
+            PublicInstructionLeftHand,
+            PublicInstructionHeadphones,
             PublicInstructionAuditoryWordToPictureMatching,
             PublicLetsPractice
         ]
@@ -39,6 +45,8 @@ class PublicWrittenWordToPictureMatchingReadMap {
     constructor(metadata = {}) {
         this.screens = [
             InputDevice,
+            PublicInstructionLandscape,
+            PublicInstructionLeftHand,
             PublicInstructionWrittenWordToPictureMatching,
             PublicLetsPractice
         ]

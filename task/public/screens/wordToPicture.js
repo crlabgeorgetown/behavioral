@@ -36,6 +36,148 @@ const PUBLIC_WRITTEN_INSTRUCTION_REPLAY_BUTTON = createReplayButton({
 
 const AUDITORY_INSTRUCTION_VIDEO_URL = 'https://crlabgeorgetown.github.io/behavioral/static/instruction/AuditoryWPM.mp4'
 const WRITTEN_INSTRUCTION_VIDEO_URL = 'https://crlabgeorgetown.github.io/behavioral/static/instruction/WrittenWPM.mp4'
+const INSTRUCTION_BASE_URL = 'https://crlabgeorgetown.github.io/behavioral/static/instruction'
+
+
+function createInstructionPairIcon({
+    leftIcon,
+    rightIcon,
+    leftIconClass = 'public-pre-instruction-icon',
+    rightIconClass = 'public-pre-instruction-icon',
+    leftMark = `${INSTRUCTION_BASE_URL}/greenCheck.png`,
+    rightMark = `${INSTRUCTION_BASE_URL}/redX.png`
+}) {
+    const pair = jQuery('<div/>', {
+        class: 'public-pre-instruction-pair'
+    })
+
+    const left = jQuery('<div/>', {
+        class: 'public-pre-instruction-item'
+    })
+
+    const leftMarkEl = jQuery('<img/>', {
+        class: 'public-pre-instruction-mark',
+        src: leftMark,
+        alt: 'Correct'
+    })
+
+    const leftIconEl = jQuery('<img/>', {
+        class: leftIconClass,
+        src: leftIcon,
+        alt: 'Recommended'
+    })
+
+    left.append(leftMarkEl, leftIconEl)
+
+    const right = jQuery('<div/>', {
+        class: 'public-pre-instruction-item'
+    })
+
+    const rightMarkEl = jQuery('<img/>', {
+        class: 'public-pre-instruction-mark',
+        src: rightMark,
+        alt: 'Not recommended'
+    })
+
+    const rightIconEl = jQuery('<img/>', {
+        class: rightIconClass,
+        src: rightIcon,
+        alt: 'Not recommended'
+    })
+
+    right.append(rightMarkEl, rightIconEl)
+
+    pair.append(left, right)
+    return pair
+}
+
+
+function createInstructionSingleIcon({ icon, alt }) {
+    return jQuery('<div/>', {
+        class: 'public-pre-instruction-single'
+    }).append(jQuery('<img/>', {
+        class: 'public-pre-instruction-icon public-pre-instruction-icon--single',
+        src: icon,
+        alt
+    }))
+}
+
+
+class PublicInstructionReminderScreen extends Screen {
+    get instructionText() { return '' }
+
+    get contentElement() {
+        return jQuery('<div/>')
+    }
+
+    get components() {
+        const root = jQuery('<div/>', {
+            class: 'public-pre-instruction-root'
+        }).append(this.contentElement)
+
+        const text = jQuery('<div/>', {
+            class: 'public-pre-instruction-text',
+            text: this.instructionText
+        })
+
+        return new Map([
+            [root, {}],
+            [text, {}],
+            [INSTRUCTION_BUTTON_CONTAINER, {}]
+        ])
+    }
+
+    get clickHandlers() {
+        return {
+            nextButton: () => this.orchestrator.next(),
+            previousButton: () => this.orchestrator.previous()
+        }
+    }
+}
+
+
+class PublicInstructionLandscape extends PublicInstructionReminderScreen {
+    get instructionText() {
+        return 'Keep your screen in landscape.'
+    }
+
+    get contentElement() {
+        return createInstructionPairIcon({
+            leftIcon: `${INSTRUCTION_BASE_URL}/tablet.png`,
+            rightIcon: `${INSTRUCTION_BASE_URL}/tablet.png`,
+            rightIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--portrait'
+        })
+    }
+}
+
+
+class PublicInstructionLeftHand extends PublicInstructionReminderScreen {
+    get instructionText() {
+        return 'Use your left hand to respond.'
+    }
+
+    get contentElement() {
+        return createInstructionPairIcon({
+            leftIcon: `${INSTRUCTION_BASE_URL}/hands.png`,
+            rightIcon: `${INSTRUCTION_BASE_URL}/hands.png`,
+            rightIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--mirror'
+        })
+    }
+}
+
+
+class PublicInstructionHeadphones extends PublicInstructionReminderScreen {
+    get instructionText() {
+        return 'Wear headphones.'
+    }
+
+    get contentElement() {
+        return createInstructionSingleIcon({
+            icon: `${INSTRUCTION_BASE_URL}/headphones.png`,
+            alt: 'Headphones'
+        })
+    }
+}
 
 
 function setupInstructionHeader(text, { writtenMode = false, videoUrl = AUDITORY_INSTRUCTION_VIDEO_URL } = {}) {
@@ -351,6 +493,9 @@ class PublicComplete extends Screen {
 
 
 export {
+    PublicInstructionLandscape,
+    PublicInstructionLeftHand,
+    PublicInstructionHeadphones,
     PublicInstructionAuditoryWordToPictureMatching,
     PublicInstructionWrittenWordToPictureMatching,
     PublicComplete
