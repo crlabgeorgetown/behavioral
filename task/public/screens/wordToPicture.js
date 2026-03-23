@@ -37,6 +37,7 @@ const PUBLIC_WRITTEN_INSTRUCTION_REPLAY_BUTTON = createReplayButton({
 const AUDITORY_INSTRUCTION_VIDEO_URL = 'https://crlabgeorgetown.github.io/behavioral/static/instruction/AuditoryWPM.mp4'
 const WRITTEN_INSTRUCTION_VIDEO_URL = 'https://crlabgeorgetown.github.io/behavioral/static/instruction/WrittenWPM.mp4'
 const INSTRUCTION_BASE_URL = 'https://crlabgeorgetown.github.io/behavioral/static/instruction'
+const REPLAY_BUTTON_SELECTOR = '#publicWrittenInstructionReplayButton'
 
 
 function createInstructionPairIcon({
@@ -228,7 +229,7 @@ function pauseInstructionVideo() {
 
 
 function bindInstructionReplayBehavior() {
-    const replayButton = jQuery('#publicWrittenInstructionReplayButton')
+    const replayButton = jQuery(REPLAY_BUTTON_SELECTOR)
     replayButton.hide()
 
     VIDEO_CONTAINER.off('ended.publicWrittenInstructionReplay')
@@ -242,28 +243,61 @@ function playInstructionVideoFromStart() {
     const element = VIDEO_CONTAINER.get(0)
     if (!element) return
 
-    jQuery('#publicWrittenInstructionReplayButton').hide()
+    jQuery(REPLAY_BUTTON_SELECTOR).hide()
     element.currentTime = 0
     element.play().catch(() => {})
 }
 
 
-// ─── Instruction: Auditory ────────────────────────────────────────────────────
+function hideInstructionReplayButton() {
+    jQuery(REPLAY_BUTTON_SELECTOR).hide()
+}
 
-class PublicInstructionAuditoryWordToPictureMatching extends Screen {
+
+const AUDITORY_WTP_INSTRUCTION = {
+    text: 'You will hear a word.\nThen you will see four pictures.\nTouch the picture that matches the word.',
+    writtenMode: false,
+    videoUrl: AUDITORY_INSTRUCTION_VIDEO_URL,
+    images: {
+        topleft: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/swim.jpeg',
+        topright: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/run.jpeg',
+        botleft: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/dance.jpeg',
+        botright: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/climb.jpeg'
+    },
+    cresp: ''
+}
+
+const WRITTEN_WTP_INSTRUCTION = {
+    text: 'You will see a word.\nThen you will see four pictures.\nTouch the picture that matches the word.',
+    writtenMode: true,
+    videoUrl: WRITTEN_INSTRUCTION_VIDEO_URL,
+    images: {
+        topleft: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/swim.jpeg',
+        topright: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/run.jpeg',
+        botleft: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/dance.jpeg',
+        botright: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/climb.jpeg'
+    },
+    cresp: 'climb'
+}
+
+
+class PublicInstructionWordToPictureMatchingBase extends Screen {
+    get instructionConfig() {
+        return AUDITORY_WTP_INSTRUCTION
+    }
+
     get components() {
-        setupInstructionHeader('You will hear a word.\nThen you will see four pictures.\nTouch the picture that matches the word.', {
-            videoUrl: AUDITORY_INSTRUCTION_VIDEO_URL
+        const config = this.instructionConfig
+
+        setupInstructionHeader(config.text, {
+            writtenMode: config.writtenMode,
+            videoUrl: config.videoUrl
         })
 
-        setWordToPictureImages({
-            topleft: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/swim.jpeg',
-            topright: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/run.jpeg',
-            botleft: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/dance.jpeg',
-            botright: 'https://crlabgeorgetown.github.io/behavioral/static/auditoryWordToPictureMatching/climb.jpeg'
-        })
-        setWordToPictureCresp('', 'base-text large-text word-to-picture-cresp')
+        setWordToPictureImages(config.images)
+        setWordToPictureCresp(config.cresp, 'base-text large-text word-to-picture-cresp')
         setWordToPictureImagesVisible(true)
+
         return new Map([
             [PUBLIC_INSTRUCTION_HEADER, {}],
             [VIDEO_CONTAINER, { addClass: 'public-instruction-video' }],
@@ -278,12 +312,12 @@ class PublicInstructionAuditoryWordToPictureMatching extends Screen {
             publicWrittenInstructionReplayButton: () => this.replayInstructionVideo(),
             nextButton: () => {
                 pauseInstructionVideo()
-                jQuery('#publicWrittenInstructionReplayButton').hide()
+                hideInstructionReplayButton()
                 this.orchestrator.next()
             },
             previousButton: () => {
                 pauseInstructionVideo()
-                jQuery('#publicWrittenInstructionReplayButton').hide()
+                hideInstructionReplayButton()
                 this.orchestrator.previous()
             }
         }
@@ -297,60 +331,24 @@ class PublicInstructionAuditoryWordToPictureMatching extends Screen {
 
     replayInstructionVideo() {
         playInstructionVideoFromStart()
+    }
+}
+
+
+// ─── Instruction: Auditory ────────────────────────────────────────────────────
+
+class PublicInstructionAuditoryWordToPictureMatching extends PublicInstructionWordToPictureMatchingBase {
+    get instructionConfig() {
+        return AUDITORY_WTP_INSTRUCTION
     }
 }
 
 
 // ─── Instruction: Written ─────────────────────────────────────────────────────
 
-class PublicInstructionWrittenWordToPictureMatching extends Screen {
-    get components() {
-        setupInstructionHeader('You will see a word.\nThen you will see four pictures.\nTouch the picture that matches the word.', {
-            writtenMode: true,
-            videoUrl: WRITTEN_INSTRUCTION_VIDEO_URL
-        })
-
-        setWordToPictureImages({
-            topleft: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/swim.jpeg',
-            topright: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/run.jpeg',
-            botleft: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/dance.jpeg',
-            botright: 'https://crlabgeorgetown.github.io/behavioral/static/writtenWordtoPictureMatching/climb.jpeg'
-        })
-        setWordToPictureCresp('climb', 'base-text large-text word-to-picture-cresp')
-        setWordToPictureImagesVisible(true)
-        return new Map([
-            [PUBLIC_INSTRUCTION_HEADER, {}],
-            [VIDEO_CONTAINER, { addClass: 'public-instruction-video' }],
-            [PUBLIC_INSTRUCTION_TEXT, {}],
-            [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container-instruction'}],
-            [INSTRUCTION_BUTTON_CONTAINER, {}]
-        ])
-    }
-
-    get clickHandlers() {
-        return {
-            publicWrittenInstructionReplayButton: () => this.replayInstructionVideo(),
-            nextButton: () => {
-                pauseInstructionVideo()
-                jQuery('#publicWrittenInstructionReplayButton').hide()
-                this.orchestrator.next()
-            },
-            previousButton: () => {
-                pauseInstructionVideo()
-                jQuery('#publicWrittenInstructionReplayButton').hide()
-                this.orchestrator.previous()
-            }
-        }
-    }
-
-    setTimeouts() {
-        super.setTimeouts()
-        bindInstructionReplayBehavior()
-        playInstructionVideoFromStart()
-    }
-
-    replayInstructionVideo() {
-        playInstructionVideoFromStart()
+class PublicInstructionWrittenWordToPictureMatching extends PublicInstructionWordToPictureMatchingBase {
+    get instructionConfig() {
+        return WRITTEN_WTP_INSTRUCTION
     }
 }
 
@@ -455,54 +453,111 @@ function createAnalysisBlock(analysis, { showSectionTitle = false } = {}) {
     return block
 }
 
+function ensurePublicClientSubmitted(orchestrator) {
+    if (!orchestrator.client.hasSubmitted) {
+        orchestrator.client.submit(orchestrator.root)
+    }
+}
+
+function createCompletionRoot(title) {
+    const completionRoot = jQuery('<div/>', {
+        id: 'publicCompletionRoot',
+        class: 'public-completion-root'
+    })
+
+    const titleEl = jQuery('<div/>', {
+        text: title,
+        class: 'public-completion-title'
+    })
+
+    completionRoot.append(titleEl)
+    return completionRoot
+}
+
+function createSummaryRows(summary) {
+    return [
+        ['Task', summary.task],
+        ['Participant ID', summary.participantId],
+        ['Age', summary.age],
+        ['Education', summary.education],
+        ['Input Device', summary.inputDevice],
+        ['Completed At', summary.completedAt],
+        ['Trials Completed', summary.trialsCompleted]
+    ]
+}
+
+function appendSummaryRows(summaryCard, summaryRows) {
+    summaryRows.forEach(([label, value], index) => {
+        summaryCard.append(createPublicInfoRow({
+            label,
+            value,
+            rowClass: 'public-summary-row',
+            labelClass: 'public-summary-label',
+            valueClass: 'public-summary-value',
+            removeBorder: index === summaryRows.length - 1
+        }))
+    })
+}
+
+function getAnalysisData(client) {
+    const analysis = client.getTaskAnalysis()
+    const analyses = typeof client.getTaskAnalyses === 'function'
+        ? client.getTaskAnalyses()
+        : [analysis]
+    const hasMultipleAnalyses = Array.isArray(analyses) && analyses.length > 1
+
+    return { analysis, analyses, hasMultipleAnalyses }
+}
+
+function createAnalysisContainer({ analysis, analyses, hasMultipleAnalyses }) {
+    const container = jQuery('<div/>', {
+        class: hasMultipleAnalyses ? 'public-analysis-scroll' : 'public-analysis-content'
+    })
+
+    ;(analyses || [analysis]).forEach((item) => {
+        container.append(createAnalysisBlock(item, {
+            showSectionTitle: hasMultipleAnalyses
+        }))
+    })
+
+    return container
+}
+
+function createPublicCompletionActions() {
+    const actionRow = jQuery('<div/>', {
+        class: 'public-completion-actions'
+    })
+
+    const csvBtn = createPublicButton({
+        id: 'exportCsvButton',
+        className: 'grey-button medium-button-text',
+        text: 'Download CSV'
+    })
+
+    const pdfBtn = createPublicButton({
+        id: 'exportPdfButton',
+        className: 'grey-button medium-button-text',
+        text: 'Export PDF'
+    })
+
+    actionRow.append(csvBtn, pdfBtn)
+    return actionRow
+}
+
 class PublicComplete extends Screen {
     get components() {
-        if (!this.orchestrator.client.hasSubmitted) {
-            this.orchestrator.client.submit(this.orchestrator.root)
-        }
+        ensurePublicClientSubmitted(this.orchestrator)
 
         const summary = this.orchestrator.client.getSummary()
-        const analysis = this.orchestrator.client.getTaskAnalysis()
-        const analyses = typeof this.orchestrator.client.getTaskAnalyses === 'function'
-            ? this.orchestrator.client.getTaskAnalyses()
-            : [analysis]
-        const hasMultipleAnalyses = Array.isArray(analyses) && analyses.length > 1
-
-        const completionRoot = jQuery('<div/>', {
-            id: 'publicCompletionRoot',
-            class: 'public-completion-root'
-        })
-
-        const titleEl = jQuery('<div/>', {
-            text: `You've completed this exercise!`,
-            class: 'public-completion-title'
-        })
+        const { analysis, analyses, hasMultipleAnalyses } = getAnalysisData(this.orchestrator.client)
+        const completionRoot = createCompletionRoot(`You've completed this exercise!`)
 
         const summaryCard = jQuery('<div/>', {
             id: 'publicSummaryCard',
             class: 'public-summary-card'
         })
 
-        const rows = [
-            ['Task', summary.task],
-            ['Participant ID', summary.participantId],
-            ['Age', summary.age],
-            ['Education', summary.education],
-            ['Input Device', summary.inputDevice],
-            ['Completed At', summary.completedAt],
-            ['Trials Completed', summary.trialsCompleted]
-        ]
-
-        rows.forEach(([label, value], index) => {
-            summaryCard.append(createPublicInfoRow({
-                label,
-                value,
-                rowClass: 'public-summary-row',
-                labelClass: 'public-summary-label',
-                valueClass: 'public-summary-value',
-                removeBorder: index === rows.length - 1
-            }))
-        })
+        appendSummaryRows(summaryCard, createSummaryRows(summary))
 
         const analysisTitle = jQuery('<div/>', {
             text: analysis.title || 'Task Analysis',
@@ -510,36 +565,8 @@ class PublicComplete extends Screen {
         })
         summaryCard.append(analysisTitle)
 
-        const analysisContainer = jQuery('<div/>', {
-            class: hasMultipleAnalyses ? 'public-analysis-scroll' : 'public-analysis-content'
-        })
-
-        ;(analyses || [analysis]).forEach((item) => {
-            analysisContainer.append(createAnalysisBlock(item, {
-                showSectionTitle: hasMultipleAnalyses
-            }))
-        })
-
-        summaryCard.append(analysisContainer)
-
-        const actionRow = jQuery('<div/>', {
-            class: 'public-completion-actions'
-        })
-
-        const csvBtn = createPublicButton({
-            id: 'exportCsvButton',
-            className: 'grey-button medium-button-text',
-            text: 'Download CSV'
-        })
-
-        const exportBtn = createPublicButton({
-            id: 'exportPdfButton',
-            className: 'grey-button medium-button-text',
-            text: 'Export PDF'
-        })
-
-        actionRow.append(csvBtn, exportBtn)
-        completionRoot.append(titleEl, summaryCard, actionRow)
+        summaryCard.append(createAnalysisContainer({ analysis, analyses, hasMultipleAnalyses }))
+        completionRoot.append(summaryCard, createPublicCompletionActions())
 
         return new Map([
             [completionRoot, {}]
@@ -567,21 +594,8 @@ class PublicContinueToNextTaskComplete extends Screen {
     }
 
     get components() {
-        if (!this.orchestrator.client.hasSubmitted) {
-            this.orchestrator.client.submit(this.orchestrator.root)
-        }
-
-        const completionRoot = jQuery('<div/>', {
-            id: 'publicCompletionRoot',
-            class: 'public-completion-root'
-        })
-
-        const titleEl = jQuery('<div/>', {
-            text: `Great job! Loading the next task...`,
-            class: 'public-completion-title'
-        })
-
-        completionRoot.append(titleEl)
+        ensurePublicClientSubmitted(this.orchestrator)
+        const completionRoot = createCompletionRoot(`Great job! Loading the next task...`)
 
         return new Map([
             [completionRoot, {}]
@@ -612,9 +626,7 @@ class PublicCombinedComplete extends PublicComplete {
     get components() {
         const combinedClient = this.orchestrator.publicCombinedClient
         if (combinedClient && !this.hasMergedCurrentRun) {
-            if (!this.orchestrator.client.hasSubmitted) {
-                this.orchestrator.client.submit(this.orchestrator.root)
-            }
+            ensurePublicClientSubmitted(this.orchestrator)
 
             const runSummary = this.orchestrator.client.getSummary()
             combinedClient.addRun({

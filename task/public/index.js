@@ -28,8 +28,8 @@ class PublicOrchestrator extends Orchestrator {
 }
 
 
-class Task {
-    constructor(data, VariantClass, metadata = {}, options = {}) {
+class PublicTask {
+    constructor({ data, VariantClass, metadata = {}, options = {} }) {
         jQuery("#Wrapper").append(CONTAINER)
 
         const variant = new VariantClass(metadata)
@@ -55,14 +55,56 @@ class Task {
 }
 
 
-function getDataUrl(key) {
+function buildDataUrl(key) {
     return `https://crlabgeorgetown.github.io/behavioral/static/data/${key}.csv`
 }
 
-function runSingleEntry({ entry, metadata }) {
-    d3.csv(getDataUrl(entry.key)).then((data) => {
-        new Task(data, entry.variantClass, metadata)
+function loadData(key) {
+    return d3.csv(buildDataUrl(key))
+}
+
+function runSingleTask({ key, VariantClass, metadata, options = {} }) {
+    return loadData(key).then((data) => {
+        return new PublicTask({
+            data,
+            VariantClass,
+            metadata,
+            options
+        })
     })
+}
+
+function runSingleEntry({ entry, metadata }) {
+    return runSingleTask({
+        key: entry.key,
+        VariantClass: entry.variantClass,
+        metadata
+    })
+}
+
+function buildSequenceStepOptions({ isLastStep, step, combinedClient, runNextStep }) {
+    return {
+        completeScreenClass: isLastStep ? PublicCombinedComplete : PublicContinueToNextTaskComplete,
+        onRunComplete: (orchestrator) => {
+            combinedClient.addRun({
+                label: step.label,
+                modality: step.modality,
+                client: orchestrator.client
+            })
+
+            runNextStep()
+        },
+        combinedClient: isLastStep ? combinedClient : undefined
+    }
+}
+
+function startEntry({ entry, metadata }) {
+    if (entry.mode === 'sequence') {
+        runWordToPictureSequence({ entry, metadata: { ...metadata, Task: entry.label } })
+        return
+    }
+
+    runSingleEntry({ entry, metadata })
 }
 
 function runWordToPictureSequence({ entry, metadata }) {
@@ -75,24 +117,19 @@ function runWordToPictureSequence({ entry, metadata }) {
         const step = sequence[index]
         if (!step) return
 
-        d3.csv(getDataUrl(step.key)).then((data) => {
-            const isLastStep = index === sequence.length - 1
-
-            new Task(data, step.variantClass, {
+        const isLastStep = index === sequence.length - 1
+        runSingleTask({
+            key: step.key,
+            VariantClass: step.variantClass,
+            metadata: {
                 ...metadata,
                 Task: step.label
-            }, {
-                completeScreenClass: isLastStep ? PublicCombinedComplete : PublicContinueToNextTaskComplete,
-                onRunComplete: (orchestrator) => {
-                    combinedClient.addRun({
-                        label: step.label,
-                        modality: step.modality,
-                        client: orchestrator.client
-                    })
-
-                    runStep(index + 1)
-                },
-                combinedClient: isLastStep ? combinedClient : undefined
+            },
+            options: buildSequenceStepOptions({
+                isLastStep,
+                step,
+                combinedClient,
+                runNextStep: () => runStep(index + 1)
             })
         })
     }
@@ -103,15 +140,8 @@ function runWordToPictureSequence({ entry, metadata }) {
 if (typeof window !== 'undefined') {
     initPublicTaskHub({
         publicTaskRegistry: PUBLIC_TASK_REGISTRY,
-        startTask: ({ entry, metadata }) => {
-            if (entry.mode === 'sequence') {
-                runWordToPictureSequence({ entry, metadata: { ...metadata, Task: entry.label } })
-                return
-            }
-
-            runSingleEntry({ entry, metadata })
-        }
+        startTask: ({ entry, metadata }) => startEntry({ entry, metadata })
     })
 }
 
-export { Task, PUBLIC_TASK_REGISTRY, initPublicTaskHub }
+export { PublicTask as Task, PUBLIC_TASK_REGISTRY, initPublicTaskHub }

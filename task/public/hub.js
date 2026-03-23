@@ -2,8 +2,65 @@ import { createPublicScreen, createSingleActionButtonContainer } from "../../sha
 import { createDemographicsForm, createTaskSelectionForm } from "./components/hubForms"
 
 
-function getDataUrl(key) {
-    return `https://crlabgeorgetown.github.io/behavioral/static/data/${key}.csv`
+const AGE_INPUT_SELECTOR = '#ageInput'
+const EDUCATION_INPUT_SELECTOR = '#educationInput'
+const PARTICIPANT_INPUT_SELECTOR = '#participantInput'
+const TASK_VARIANT_SELECTOR = 'input[name="taskVariant"]:checked'
+const HUB_ERROR_1_SELECTOR = '#hubError1'
+const HUB_ERROR_2_SELECTOR = '#hubError2'
+
+
+function readTrimmedValue(selector) {
+    return jQuery(selector).val().trim()
+}
+
+function readValue(selector) {
+    return jQuery(selector).val()
+}
+
+
+function validateDemographics() {
+    const age = readTrimmedValue(AGE_INPUT_SELECTOR)
+    const education = readValue(EDUCATION_INPUT_SELECTOR)
+
+    if (!age) {
+        jQuery(HUB_ERROR_1_SELECTOR).text('Age is required.')
+        return false
+    }
+
+    if (!education) {
+        jQuery(HUB_ERROR_1_SELECTOR).text('Education is required.')
+        return false
+    }
+
+    jQuery(HUB_ERROR_1_SELECTOR).text('')
+    return true
+}
+
+function buildMetadata(entry) {
+    return {
+        SubjectID: readTrimmedValue(PARTICIPANT_INPUT_SELECTOR) || 'XXX',
+        Age: readTrimmedValue(AGE_INPUT_SELECTOR),
+        Education: readValue(EDUCATION_INPUT_SELECTOR),
+        Task: entry.label
+    }
+}
+
+function getSelectedTaskEntry(publicTaskRegistry) {
+    const key = readValue(TASK_VARIANT_SELECTOR)
+    if (!key) {
+        jQuery(HUB_ERROR_2_SELECTOR).text('Please choose a task.')
+        return null
+    }
+
+    const entry = publicTaskRegistry.find((candidate) => candidate.key === key)
+    if (!entry) {
+        jQuery(HUB_ERROR_2_SELECTOR).text('Selected task is unavailable.')
+        return null
+    }
+
+    jQuery(HUB_ERROR_2_SELECTOR).text('')
+    return entry
 }
 
 
@@ -23,20 +80,10 @@ function initPublicTaskHub({ publicTaskRegistry, startTask }) {
         buttonId: 'toScreen2Button',
         text: 'BEGIN>',
         clickHandler: () => {
-            const age = jQuery('#ageInput').val().trim()
-            const education = jQuery('#educationInput').val()
-
-            if (!age) {
-                jQuery('#hubError1').text('Age is required.')
+            if (!validateDemographics()) {
                 return
             }
 
-            if (!education) {
-                jQuery('#hubError1').text('Education is required.')
-                return
-            }
-
-            jQuery('#hubError1').text('')
             screen1.hide()
             screen2.show()
         }
@@ -46,29 +93,17 @@ function initPublicTaskHub({ publicTaskRegistry, startTask }) {
         buttonId: 'startTaskButton',
         text: 'START',
         clickHandler: () => {
-            const key = jQuery('input[name="taskVariant"]:checked').val()
-            if (!key) {
-                jQuery('#hubError2').text('Please choose a task.')
-                return
-            }
+            const entry = getSelectedTaskEntry(publicTaskRegistry)
+            if (!entry) return
 
-            jQuery('#hubError2').text('')
-
-            const entry = publicTaskRegistry.find((candidate) => candidate.key === key)
-            const metadata = {
-                SubjectID: jQuery('#participantInput').val().trim() || 'XXX',
-                Age: jQuery('#ageInput').val().trim(),
-                Education: jQuery('#educationInput').val(),
-                Task: entry.label
-            }
+            const metadata = buildMetadata(entry)
 
             screen2.hide()
             wrapper.css('display', 'block')
 
             startTask({
                 entry,
-                metadata,
-                getDataUrl
+                metadata
             })
         }
     })
