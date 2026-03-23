@@ -129,6 +129,7 @@ const wordToPictureAnalysisProfile = {
 
         const rows = buildAnalyzableRows(trialData)
         const overall = computeEfficiencyStats(rows)
+        const radarValues = {}
 
         const tableRows = [
             {
@@ -161,6 +162,8 @@ const wordToPictureAnalysisProfile = {
                 ? (metrics.efficiency - norm.mean) / norm.stdev
                 : null
 
+            radarValues[rowConfig.normKey] = efficiencyZ
+
             tableRows.push({
                 type: 'data',
                 cells: [
@@ -182,7 +185,12 @@ const wordToPictureAnalysisProfile = {
 
         return {
             title,
+            modality,
             metrics,
+            radar: {
+                modality,
+                values: radarValues
+            },
             table: {
                 columns: ['', '', 'Accuracy (%)', 'RT (ms)', 'Efficiency', 'EfficiencyZ'],
                 rows: tableRows

@@ -1,4 +1,6 @@
 import { jsPDF } from "jspdf"
+import { buildRadarPayloadFromAnalyses } from "./analysis/radar"
+import { renderRadarChartToDataUrl } from "./charts/radar"
 
 
 export default class CombinedWordToPictureClient {
@@ -141,6 +143,16 @@ export default class CombinedWordToPictureClient {
     exportPdf() {
         const doc = new jsPDF({ unit: 'pt', format: 'letter' })
         const summary = this.getSummary()
+        const analyses = this.getTaskAnalyses()
+        let radarImage = null
+        try {
+            const radarPayload = buildRadarPayloadFromAnalyses(analyses)
+            radarImage = radarPayload
+                ? renderRadarChartToDataUrl(radarPayload, { title: 'Performance' })
+                : null
+        } catch (error) {
+            console.error('Failed to render radar chart for combined PDF export:', error)
+        }
 
         doc.setFontSize(16)
         doc.text('Cognitive Recovery Lab — Task Summary', 40, 50)
@@ -158,7 +170,17 @@ export default class CombinedWordToPictureClient {
 
         lines.forEach((line, index) => doc.text(line, 40, 90 + index * 20))
 
-        let cursorY = 90 + lines.length * 20 + 24
+        if (radarImage) {
+            try {
+                doc.addImage(radarImage, 'PNG', 314, 80, 250, 194)
+            } catch (error) {
+                console.error('Failed to embed radar image in combined PDF:', error)
+                radarImage = null
+            }
+        }
+
+        const chartBottomY = radarImage ? 80 + 194 + 16 : 0
+        let cursorY = Math.max(90 + lines.length * 20 + 24, chartBottomY)
         const pageHeight = doc.internal.pageSize.getHeight()
 
         const ensurePageSpace = (neededHeight = 24) => {
@@ -167,7 +189,7 @@ export default class CombinedWordToPictureClient {
             cursorY = 50
         }
 
-        this.getTaskAnalyses().forEach((analysis) => {
+        analyses.forEach((analysis) => {
             ensurePageSpace(64)
 
             doc.setFontSize(13)

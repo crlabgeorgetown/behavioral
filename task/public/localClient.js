@@ -1,5 +1,7 @@
 import { jsPDF } from "jspdf"
 import { defaultTaskAnalysisProfile } from "./analysis/default"
+import { buildRadarPayloadFromAnalyses } from "./analysis/radar"
+import { renderRadarChartToDataUrl } from "./charts/radar"
 
 export default class LocalClient {
     constructor(variant) {
@@ -89,6 +91,15 @@ export default class LocalClient {
     exportPdf() {
         const s = this.getSummary()
         const analysis = this.getTaskAnalysis()
+        let radarImage = null
+        try {
+            const radarPayload = buildRadarPayloadFromAnalyses([analysis])
+            radarImage = radarPayload
+                ? renderRadarChartToDataUrl(radarPayload, { title: 'Performance' })
+                : null
+        } catch (error) {
+            console.error('Failed to render radar chart for PDF export:', error)
+        }
         const doc = new jsPDF({ unit: 'pt', format: 'letter' })
 
         doc.setFontSize(16)
@@ -109,7 +120,17 @@ export default class LocalClient {
 
         lines.forEach((line, i) => doc.text(line, 40, 90 + i * 20))
 
-        let cursorY = 90 + lines.length * 20 + 24
+        if (radarImage) {
+            try {
+                doc.addImage(radarImage, 'PNG', 314, 80, 250, 194)
+            } catch (error) {
+                console.error('Failed to embed radar image in PDF:', error)
+                radarImage = null
+            }
+        }
+
+        const chartBottomY = radarImage ? 80 + 194 + 16 : 0
+        let cursorY = Math.max(90 + lines.length * 20 + 24, chartBottomY)
         doc.setFontSize(13)
         doc.text(analysis.title || 'Task Analysis', 40, cursorY)
         cursorY += 20

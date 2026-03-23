@@ -78,7 +78,7 @@ function initPublicTaskHub({ publicTaskRegistry, startTask }) {
 
     const toScreen2ButtonContainer = createSingleActionButtonContainer({
         buttonId: 'toScreen2Button',
-        text: 'BEGIN>',
+        text: 'BEGIN>>',
         clickHandler: () => {
             if (!validateDemographics()) {
                 return

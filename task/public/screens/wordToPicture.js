@@ -12,6 +12,8 @@ import {
     setWordToPictureCresp,
     setWordToPictureImagesVisible
 } from "../../../shared/components/imageContainer"
+import { buildRadarPayloadFromAnalyses } from "../analysis/radar"
+import { createRadarChart } from "../charts/radar"
 
 
 const PUBLIC_INSTRUCTION_HEADER = jQuery('<div/>', {
@@ -517,6 +519,65 @@ function createSummaryRows(summary) {
     ]
 }
 
+function getRadarModeLabel(payload) {
+    if (payload.hasWritten && payload.hasAuditory) return 'Written + Auditory'
+    if (payload.hasWritten) return 'Written only'
+    if (payload.hasAuditory) return 'Auditory only'
+    return ''
+}
+
+function createPublicRadarPanel(analyses) {
+    const payload = buildRadarPayloadFromAnalyses(analyses)
+    if (!payload) return null
+
+    const panel = jQuery('<div/>', {
+        class: 'public-radar-panel'
+    })
+
+    const modeLabel = getRadarModeLabel(payload)
+    if (modeLabel) {
+        panel.append(jQuery('<div/>', {
+            class: 'public-radar-mode-label',
+            text: modeLabel
+        }))
+    }
+
+    const chartWrap = jQuery('<div/>', {
+        class: 'public-radar-canvas-wrap'
+    })
+    const canvas = jQuery('<canvas/>', {
+        class: 'public-radar-canvas'
+    })
+
+    chartWrap.append(canvas)
+    panel.append(chartWrap)
+
+    createRadarChart(canvas.get(0), payload, {
+        title: 'Performance'
+    })
+
+    return panel
+}
+
+function createSummaryTopSection(summaryRows, analyses) {
+    const section = jQuery('<div/>', {
+        class: 'public-summary-top'
+    })
+
+    const meta = jQuery('<div/>', {
+        class: 'public-summary-metadata'
+    })
+    appendSummaryRows(meta, summaryRows)
+    section.append(meta)
+
+    const radarPanel = createPublicRadarPanel(analyses)
+    if (radarPanel) {
+        section.append(radarPanel)
+    }
+
+    return section
+}
+
 function appendSummaryRows(summaryCard, summaryRows) {
     summaryRows.forEach(([label, value], index) => {
         summaryCard.append(createPublicInfoRow({
@@ -588,7 +649,7 @@ class PublicComplete extends Screen {
             class: 'public-summary-card'
         })
 
-        appendSummaryRows(summaryCard, createSummaryRows(summary))
+        summaryCard.append(createSummaryTopSection(createSummaryRows(summary), analyses || [analysis]))
 
         const analysisTitle = jQuery('<div/>', {
             text: analysis.title || 'Task Analysis',
