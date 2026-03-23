@@ -11,6 +11,49 @@ import {
 } from 'chart.js'
 import { RADAR_RANGE } from '../analysis/radar'
 
+const RADAR_START_ANGLE_DEGREES = -22.5
+
+const fixedRadarTickLabelsPlugin = {
+    id: 'fixedRadarTickLabels',
+    afterDraw(chart, _args, pluginOptions) {
+        const radialScale = chart.scales?.r
+        if (!radialScale || !pluginOptions?.enabled) return
+
+        const {
+            color = '#5a5f66',
+            fontSize = 11,
+            fontWeight = '400',
+            fontFamily = 'Arial',
+            xOffset = 0,
+            yOffset = 0
+        } = pluginOptions
+
+        const min = Number(radialScale.min)
+        const max = Number(radialScale.max)
+        const step = Number(radialScale.options?.ticks?.stepSize || 1)
+        if (!Number.isFinite(min) || !Number.isFinite(max) || !Number.isFinite(step) || step <= 0) return
+
+        const ctx = chart.ctx
+        ctx.save()
+        ctx.fillStyle = color
+        ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'middle'
+
+        for (let value = min; value <= max + 1e-9; value += step) {
+            const rounded = Math.round(value)
+            if (Math.abs(rounded % 2) !== 0) continue
+
+            const distance = radialScale.getDistanceFromCenterForValue(rounded)
+            const x = radialScale.xCenter + xOffset
+            const y = radialScale.yCenter - distance + yOffset
+            ctx.fillText(String(rounded), x, y)
+        }
+
+        ctx.restore()
+    }
+}
+
 Chart.register(
     RadarController,
     RadialLinearScale,
@@ -19,7 +62,8 @@ Chart.register(
     Filler,
     Tooltip,
     Legend,
-    Title
+    Title,
+    fixedRadarTickLabelsPlugin
 )
 
 function createRadarChart(
@@ -60,6 +104,13 @@ function createRadarChart(
                 legend: {
                     display: false
                 },
+                fixedRadarTickLabels: {
+                    enabled: true,
+                    color: '#5a5f66',
+                    fontSize: 11,
+                    xOffset: 0,
+                    yOffset: 0
+                },
                 title: {
                     display: true,
                     text: title,
@@ -85,9 +136,14 @@ function createRadarChart(
             },
             scales: {
                 r: {
+                    // Keep axis orientation stable across browser/PDF rendering.
+                    // 0 places the first label at the top, then proceeds clockwise.
+                    startAngle: RADAR_START_ANGLE_DEGREES,
+                    reverse: false,
                     min: RADAR_RANGE.min,
                     max: RADAR_RANGE.max,
                     ticks: {
+                        display: false,
                         stepSize: 1,
                         color: '#5a5f66',
                         backdropColor: 'transparent',
