@@ -45,8 +45,8 @@ function createInstructionPairIcon({
     rightIcon,
     leftIconClass = 'public-pre-instruction-icon',
     rightIconClass = 'public-pre-instruction-icon',
-    leftMark = `${INSTRUCTION_BASE_URL}/greenCheck.png`,
-    rightMark = `${INSTRUCTION_BASE_URL}/redX.png`
+    leftMark = `${INSTRUCTION_BASE_URL}/greenCheckNoBack.png`,
+    rightMark = `${INSTRUCTION_BASE_URL}/redXNoBack.png`
 }) {
     const pair = jQuery('<div/>', {
         class: 'public-pre-instruction-pair'
@@ -104,6 +104,38 @@ function createInstructionSingleIcon({ icon, alt }) {
 }
 
 
+function createInstructionSingleSplitIconWithLeftCheck({
+    icon,
+    alt,
+    leftMark = `${INSTRUCTION_BASE_URL}/greenCheckNoBack.png`,
+    rightMark = `${INSTRUCTION_BASE_URL}/redXNoBack.png`
+}) {
+    return jQuery('<div/>', {
+        class: 'public-pre-instruction-split public-pre-instruction-split--hands'
+    }).append(
+        jQuery('<div/>', {
+            class: 'public-pre-instruction-split-marks public-pre-instruction-split-marks--hands'
+        }).append(
+            jQuery('<img/>', {
+                class: 'public-pre-instruction-mark',
+                src: leftMark,
+                alt: 'Correct'
+            }),
+            jQuery('<img/>', {
+                class: 'public-pre-instruction-mark',
+                src: rightMark,
+                alt: 'Not recommended'
+            })
+        ),
+        jQuery('<img/>', {
+            class: 'public-pre-instruction-icon public-pre-instruction-icon--split',
+            src: icon,
+            alt
+        })
+    )
+}
+
+
 class PublicInstructionReminderScreen extends Screen {
     get instructionText() { return '' }
 
@@ -144,8 +176,8 @@ class PublicInstructionLandscape extends PublicInstructionReminderScreen {
 
     get contentElement() {
         return createInstructionPairIcon({
-            leftIcon: `${INSTRUCTION_BASE_URL}/tablet.png`,
-            rightIcon: `${INSTRUCTION_BASE_URL}/tablet.png`,
+            leftIcon: `${INSTRUCTION_BASE_URL}/tabletNoBack.png`,
+            rightIcon: `${INSTRUCTION_BASE_URL}/tabletNoBack.png`,
             rightIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--portrait'
         })
     }
@@ -158,10 +190,9 @@ class PublicInstructionLeftHand extends PublicInstructionReminderScreen {
     }
 
     get contentElement() {
-        return createInstructionPairIcon({
-            leftIcon: `${INSTRUCTION_BASE_URL}/hands.png`,
-            rightIcon: `${INSTRUCTION_BASE_URL}/hands.png`,
-            rightIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--mirror'
+        return createInstructionSingleSplitIconWithLeftCheck({
+            icon: `${INSTRUCTION_BASE_URL}/handsNoBack.png`,
+            alt: 'Use your left hand'
         })
     }
 }
@@ -174,7 +205,7 @@ class PublicInstructionHeadphones extends PublicInstructionReminderScreen {
 
     get contentElement() {
         return createInstructionSingleIcon({
-            icon: `${INSTRUCTION_BASE_URL}/headphones.png`,
+            icon: `${INSTRUCTION_BASE_URL}/headphonesNoBack.png`,
             alt: 'Headphones'
         })
     }

@@ -222,6 +222,10 @@
     width: clamp(210px, 26vw, 360px);
 }
 
+.public-pre-instruction-split--hands {
+    margin-top: clamp(56px, 8vh, 120px);
+}
+
 .public-pre-instruction-split-marks {
     position: absolute;
     top: 8%;
@@ -234,6 +238,14 @@
     padding-right: 13%;
     z-index: 2;
     pointer-events: none;
+}
+
+.public-pre-instruction-split-marks--hands {
+    top: clamp(-24px, -2vh, -12px);
+}
+
+.public-pre-instruction-split-marks--single-left {
+    justify-content: flex-start;
 }
 
 .public-pre-instruction-icon--split {
@@ -332,7 +344,7 @@
 
 .public-analysis-scroll {
     margin-top: 8px;
-    max-height: min(52vh, 560px);
+    max-height: min(34vh, 360px);
     overflow-y: auto;
     padding-right: 6px;
 }
