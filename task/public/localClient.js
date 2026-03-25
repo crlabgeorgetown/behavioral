@@ -44,16 +44,17 @@ export default class LocalClient {
 
     getSummary() {
         const accuracyValues = (this.trialData.Accuracy || []).filter((v) => v !== null && v !== undefined && v !== '')
-        const rtValues = (this.trialData.RT || [])
-            .map((v) => Number(v))
-            .filter((v) => Number.isFinite(v) && v >= 0)
+        const correctRtValues = (this.trialData.RT || [])
+            .map((rt, index) => ({ rt: Number(rt), accuracy: Number((this.trialData.Accuracy || [])[index]) }))
+            .filter(({ rt, accuracy }) => Number.isFinite(rt) && rt >= 0 && accuracy === 1)
+            .map(({ rt }) => rt)
 
         const trialsCompleted = accuracyValues.length
         const accuracyPct = trialsCompleted > 0
             ? ((accuracyValues.reduce((sum, v) => sum + Number(v), 0) / trialsCompleted) * 100).toFixed(1)
             : 'N/A'
-        const avgRT = rtValues.length > 0
-            ? (rtValues.reduce((sum, v) => sum + v, 0) / rtValues.length).toFixed(0)
+        const avgRT = correctRtValues.length > 0
+            ? (correctRtValues.reduce((sum, v) => sum + v, 0) / correctRtValues.length).toFixed(0)
             : 'N/A'
 
         return {
