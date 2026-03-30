@@ -351,6 +351,7 @@ export default class LocalClient {
             'ItemNum',
             'Date',
             'Time',
+            'SubjectID',
             'Item',
             'CRESP',
             'RT',
@@ -368,7 +369,8 @@ export default class LocalClient {
             'TrialWasAdministered',
             'BuildTestID',
             'EPrimeTemplateID',
-            'Volume'
+            'Volume',
+            'ExperimentNameShort'
         ])
 
         const unmappedTrialKeys = trialColumns.filter((key) => !mappedTrialKeys.has(key))

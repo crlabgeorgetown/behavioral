@@ -217,6 +217,7 @@ export default class CombinedWordToPictureClient {
             'ItemNum',
             'Date',
             'Time',
+            'SubjectID',
             'Item',
             'CRESP',
             'RT',
@@ -234,7 +235,8 @@ export default class CombinedWordToPictureClient {
             'TrialWasAdministered',
             'BuildTestID',
             'EPrimeTemplateID',
-            'Volume'
+            'Volume',
+            'ExperimentNameShort'
         ])
 
         const csvLines = []
