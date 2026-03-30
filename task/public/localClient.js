@@ -3,6 +3,139 @@ import { defaultTaskAnalysisProfile } from "./analysis/default"
 import { buildRadarPayloadFromAnalyses } from "./analysis/radar"
 import { renderRadarChartToDataUrl } from "./charts/radar"
 
+const WRITTEN_BUILD_COLUMNS = [
+    'ItemNum',
+    'Date',
+    'Time',
+    'SubjectID',
+    'Item',
+    'RT',
+    'TrialType',
+    'TimedOut',
+    'TargetLocation',
+    'ResponseLocation',
+    'Accuracy',
+    'Repetitions',
+    'Response',
+    'WordType',
+    'PartOfSpeech',
+    'TrialWasAdministered',
+    'BuildTestID',
+    'EPrimeTemplateID',
+    'Volume',
+    'ExperimentNameShort'
+]
+
+const AUDITORY_BUILD_COLUMNS = [
+    'ItemNum',
+    'Date',
+    'Time',
+    'SubjectID',
+    'Item',
+    'RT',
+    'TimedOut',
+    'TargetLocation',
+    'ResponseLocation',
+    'Accuracy',
+    'Repetitions',
+    'Response',
+    'TrialType',
+    'WordType',
+    'PartOfSpeech',
+    'TrialWasAdministered',
+    'BuildTestID',
+    'EPrimeTemplateID',
+    'Volume',
+    'ExperimentNameShort'
+]
+
+const BUILD_DEFAULTS = {
+    written: {
+        BuildTestID: 201,
+        EPrimeTemplateID: 72,
+        Volume: -1000
+    },
+    auditory: {
+        BuildTestID: 203,
+        EPrimeTemplateID: 74,
+        Volume: -1000
+    }
+}
+
+function detectModalityFromText(text = '') {
+    const value = String(text || '').toLowerCase()
+    if (value.includes('written')) return 'written'
+    if (value.includes('auditory')) return 'auditory'
+    return null
+}
+
+function detectBuildModality(metaData = {}, summary = {}) {
+    return detectModalityFromText(metaData.Task)
+        || detectModalityFromText(metaData.ExperimentNameShort)
+        || detectModalityFromText(summary.task)
+        || 'auditory'
+}
+
+function toBuildBoolean(value) {
+    if (value === true || value === 'true' || value === 'True' || value === 1 || value === '1') return 'True'
+    return 'False'
+}
+
+function toBuildTrialType(value) {
+    const text = String(value || '').trim().toLowerCase()
+    if (!text) return ''
+    if (text === 'practice') return 'Practice'
+    if (text === 'real') return 'Real'
+    return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+function pickTrialValue(trialData, key, index) {
+    const values = trialData[key] || []
+    return values[index]
+}
+
+function getBuildDefaults({ modality, variant }) {
+    const defaults = BUILD_DEFAULTS[modality] || BUILD_DEFAULTS.auditory
+    return {
+        BuildTestID: variant?.buildTestID ?? defaults.BuildTestID,
+        EPrimeTemplateID: defaults.EPrimeTemplateID,
+        Volume: defaults.Volume
+    }
+}
+
+function buildRowFromTrial({ trialData, metaData, variant, modality, index }) {
+    const defaults = getBuildDefaults({ modality, variant })
+    const response = pickTrialValue(trialData, 'Response', index)
+    const cresp = pickTrialValue(trialData, 'CRESP', index)
+
+    return {
+        ItemNum: pickTrialValue(trialData, 'ItemNum', index) ?? index + 1,
+        Date: pickTrialValue(trialData, 'Date', index) ?? '',
+        Time: pickTrialValue(trialData, 'Time', index) ?? '',
+        SubjectID: metaData.SubjectID || 'XXX',
+        Item: pickTrialValue(trialData, 'Item', index) ?? cresp ?? response ?? '',
+        RT: pickTrialValue(trialData, 'RT', index) ?? '',
+        TrialType: toBuildTrialType(pickTrialValue(trialData, 'TrialType', index)),
+        TimedOut: toBuildBoolean(pickTrialValue(trialData, 'TimedOut', index)),
+        TargetLocation: pickTrialValue(trialData, 'TargetLocation', index) ?? '',
+        ResponseLocation: pickTrialValue(trialData, 'ResponseLocation', index) ?? '',
+        Accuracy: pickTrialValue(trialData, 'Accuracy', index) ?? '',
+        Repetitions: pickTrialValue(trialData, 'Repetitions', index) ?? 0,
+        Response: response ?? '',
+        WordType: pickTrialValue(trialData, 'WordType', index) ?? pickTrialValue(trialData, 'ResponseWordType', index) ?? '',
+        PartOfSpeech: pickTrialValue(trialData, 'PartOfSpeech', index) ?? pickTrialValue(trialData, 'PartofSpeech', index) ?? '',
+        TrialWasAdministered: pickTrialValue(trialData, 'TrialWasAdministered', index) ?? 1,
+        BuildTestID: pickTrialValue(trialData, 'BuildTestID', index) ?? metaData.BuildTestID ?? defaults.BuildTestID,
+        EPrimeTemplateID: pickTrialValue(trialData, 'EPrimeTemplateID', index) ?? metaData.EPrimeTemplateID ?? defaults.EPrimeTemplateID,
+        Volume: pickTrialValue(trialData, 'Volume', index) ?? metaData.Volume ?? defaults.Volume,
+        ExperimentNameShort: metaData.ExperimentNameShort || metaData.Task || ''
+    }
+}
+
+function getBuildLikeColumns(modality) {
+    return modality === 'written' ? WRITTEN_BUILD_COLUMNS : AUDITORY_BUILD_COLUMNS
+}
+
 export default class LocalClient {
     constructor(variant) {
         this.variant = variant
@@ -204,16 +337,66 @@ export default class LocalClient {
             return stringValue
         }
 
-        const metadataRows = Object.entries(this.metaData).map(([key, value]) => [key, value])
-        if (this.submittedAt) {
-            metadataRows.push(['CompletedAt', this.submittedAt.toISOString()])
-        }
+        const summary = this.getSummary()
+        const modality = detectBuildModality(this.metaData, summary)
+        const buildColumns = getBuildLikeColumns(modality)
 
         const trialColumns = Object.keys(this.trialData)
         const trialRowCount = trialColumns.reduce((max, key) => {
             const values = this.trialData[key] || []
             return Math.max(max, values.length)
         }, 0)
+
+        const mappedTrialKeys = new Set([
+            'ItemNum',
+            'Date',
+            'Time',
+            'Item',
+            'CRESP',
+            'RT',
+            'TrialType',
+            'TimedOut',
+            'TargetLocation',
+            'ResponseLocation',
+            'Accuracy',
+            'Repetitions',
+            'Response',
+            'WordType',
+            'ResponseWordType',
+            'PartOfSpeech',
+            'PartofSpeech',
+            'TrialWasAdministered',
+            'BuildTestID',
+            'EPrimeTemplateID',
+            'Volume'
+        ])
+
+        const unmappedTrialKeys = trialColumns.filter((key) => !mappedTrialKeys.has(key))
+
+        const metadataRows = Object.entries(this.metaData).map(([key, value]) => [key, value])
+        if (this.submittedAt) {
+            metadataRows.push(['CompletedAt', this.submittedAt.toISOString()])
+        }
+        metadataRows.push(['BuildLikeSchema', modality])
+        metadataRows.push(['BuildLikeTrialDelimiter', 'COMMA'])
+        metadataRows.push(['BuildLikeTrialColumns', buildColumns.join(';')])
+        metadataRows.push(['UnmappedTrialColumns', unmappedTrialKeys.join(';') || ''])
+
+        unmappedTrialKeys.forEach((key) => {
+            const values = (this.trialData[key] || []).map((value) => String(value ?? ''))
+            metadataRows.push([`Unmapped:${key}`, values.join(';')])
+        })
+
+        const buildRows = []
+        for (let index = 0; index < trialRowCount; index++) {
+            buildRows.push(buildRowFromTrial({
+                trialData: this.trialData,
+                metaData: this.metaData,
+                variant: this.variant,
+                modality,
+                index
+            }))
+        }
 
         const csvLines = []
         csvLines.push('MetadataKey,MetadataValue')
@@ -222,15 +405,12 @@ export default class LocalClient {
         })
         csvLines.push('')
 
-        if (trialColumns.length > 0) {
-            csvLines.push(trialColumns.map(escapeCsv).join(','))
-            for (let index = 0; index < trialRowCount; index++) {
-                const row = trialColumns.map((key) => {
-                    const columnValues = this.trialData[key] || []
-                    return escapeCsv(columnValues[index])
-                })
-                csvLines.push(row.join(','))
-            }
+        if (buildRows.length > 0) {
+            csvLines.push(buildColumns.map(escapeCsv).join(','))
+            csvLines.push('')
+            buildRows.forEach((row) => {
+                csvLines.push(buildColumns.map((column) => escapeCsv(row[column])).join(','))
+            })
         } else {
             csvLines.push('No trial data available')
         }
@@ -238,7 +418,6 @@ export default class LocalClient {
         const blob = new Blob([csvLines.join('\n')], { type: 'text/csv;charset=utf-8;' })
         const url = URL.createObjectURL(blob)
 
-        const summary = this.getSummary()
         const safeName = String(summary.task).replace(/[^a-zA-Z0-9_-]/g, '_')
 
         const link = document.createElement('a')

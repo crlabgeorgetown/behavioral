@@ -2,6 +2,134 @@ import { jsPDF } from "jspdf"
 import { buildRadarPayloadFromAnalyses } from "./analysis/radar"
 import { renderRadarChartToDataUrl } from "./charts/radar"
 
+const WRITTEN_BUILD_COLUMNS = [
+    'ItemNum',
+    'Date',
+    'Time',
+    'SubjectID',
+    'Item',
+    'RT',
+    'TrialType',
+    'TimedOut',
+    'TargetLocation',
+    'ResponseLocation',
+    'Accuracy',
+    'Repetitions',
+    'Response',
+    'WordType',
+    'PartOfSpeech',
+    'TrialWasAdministered',
+    'BuildTestID',
+    'EPrimeTemplateID',
+    'Volume',
+    'ExperimentNameShort'
+]
+
+const AUDITORY_BUILD_COLUMNS = [
+    'ItemNum',
+    'Date',
+    'Time',
+    'SubjectID',
+    'Item',
+    'RT',
+    'TimedOut',
+    'TargetLocation',
+    'ResponseLocation',
+    'Accuracy',
+    'Repetitions',
+    'Response',
+    'TrialType',
+    'WordType',
+    'PartOfSpeech',
+    'TrialWasAdministered',
+    'BuildTestID',
+    'EPrimeTemplateID',
+    'Volume',
+    'ExperimentNameShort'
+]
+
+const BUILD_DEFAULTS = {
+    written: {
+        BuildTestID: 201,
+        EPrimeTemplateID: 72,
+        Volume: -1000
+    },
+    auditory: {
+        BuildTestID: 203,
+        EPrimeTemplateID: 74,
+        Volume: -1000
+    }
+}
+
+function detectModalityFromText(text = '') {
+    const value = String(text || '').toLowerCase()
+    if (value.includes('written')) return 'written'
+    if (value.includes('auditory')) return 'auditory'
+    return null
+}
+
+function detectBuildModality(metaData = {}, summary = {}) {
+    return detectModalityFromText(metaData.Task)
+        || detectModalityFromText(metaData.ExperimentNameShort)
+        || detectModalityFromText(summary.task)
+        || 'auditory'
+}
+
+function getBuildLikeColumns(modality) {
+    return modality === 'written' ? WRITTEN_BUILD_COLUMNS : AUDITORY_BUILD_COLUMNS
+}
+
+function toBuildBoolean(value) {
+    if (value === true || value === 'true' || value === 'True' || value === 1 || value === '1') return 'True'
+    return 'False'
+}
+
+function toBuildTrialType(value) {
+    const text = String(value || '').trim().toLowerCase()
+    if (!text) return ''
+    if (text === 'practice') return 'Practice'
+    if (text === 'real') return 'Real'
+    return text.charAt(0).toUpperCase() + text.slice(1)
+}
+
+function pickTrialValue(trialData, key, index) {
+    const values = trialData[key] || []
+    return values[index]
+}
+
+function getBuildDefaults(modality) {
+    return BUILD_DEFAULTS[modality] || BUILD_DEFAULTS.auditory
+}
+
+function buildRowFromTrial({ trialData, metaData, modality, index }) {
+    const defaults = getBuildDefaults(modality)
+    const response = pickTrialValue(trialData, 'Response', index)
+    const cresp = pickTrialValue(trialData, 'CRESP', index)
+
+    return {
+        ItemNum: pickTrialValue(trialData, 'ItemNum', index) ?? index + 1,
+        Date: pickTrialValue(trialData, 'Date', index) ?? '',
+        Time: pickTrialValue(trialData, 'Time', index) ?? '',
+        SubjectID: metaData.SubjectID || 'XXX',
+        Item: pickTrialValue(trialData, 'Item', index) ?? cresp ?? response ?? '',
+        RT: pickTrialValue(trialData, 'RT', index) ?? '',
+        TrialType: toBuildTrialType(pickTrialValue(trialData, 'TrialType', index)),
+        TimedOut: toBuildBoolean(pickTrialValue(trialData, 'TimedOut', index)),
+        TargetLocation: pickTrialValue(trialData, 'TargetLocation', index) ?? '',
+        ResponseLocation: pickTrialValue(trialData, 'ResponseLocation', index) ?? '',
+        Accuracy: pickTrialValue(trialData, 'Accuracy', index) ?? '',
+        Repetitions: pickTrialValue(trialData, 'Repetitions', index) ?? 0,
+        Response: response ?? '',
+        WordType: pickTrialValue(trialData, 'WordType', index) ?? pickTrialValue(trialData, 'ResponseWordType', index) ?? '',
+        PartOfSpeech: pickTrialValue(trialData, 'PartOfSpeech', index) ?? pickTrialValue(trialData, 'PartofSpeech', index) ?? '',
+        TrialWasAdministered: pickTrialValue(trialData, 'TrialWasAdministered', index) ?? 1,
+        BuildTestID: pickTrialValue(trialData, 'BuildTestID', index) ?? metaData.BuildTestID ?? defaults.BuildTestID,
+        EPrimeTemplateID: pickTrialValue(trialData, 'EPrimeTemplateID', index) ?? metaData.EPrimeTemplateID ?? defaults.EPrimeTemplateID,
+        Volume: pickTrialValue(trialData, 'Volume', index) ?? metaData.Volume ?? defaults.Volume,
+        ExperimentNameShort: metaData.ExperimentNameShort || metaData.Task || ''
+    }
+}
+
 
 export default class CombinedWordToPictureClient {
     constructor(metadata = {}) {
@@ -85,6 +213,30 @@ export default class CombinedWordToPictureClient {
             return stringValue
         }
 
+        const mappedTrialKeys = new Set([
+            'ItemNum',
+            'Date',
+            'Time',
+            'Item',
+            'CRESP',
+            'RT',
+            'TrialType',
+            'TimedOut',
+            'TargetLocation',
+            'ResponseLocation',
+            'Accuracy',
+            'Repetitions',
+            'Response',
+            'WordType',
+            'ResponseWordType',
+            'PartOfSpeech',
+            'PartofSpeech',
+            'TrialWasAdministered',
+            'BuildTestID',
+            'EPrimeTemplateID',
+            'Volume'
+        ])
+
         const csvLines = []
         csvLines.push('MetadataKey,MetadataValue')
 
@@ -92,37 +244,52 @@ export default class CombinedWordToPictureClient {
             csvLines.push(`${escapeCsv(key)},${escapeCsv(value)}`)
         })
 
+        csvLines.push(`BuildLikeTrialDelimiter,COMMA`)
+
         this.runs.forEach((run, index) => {
             csvLines.push(`${escapeCsv(`Run${index + 1}`)},${escapeCsv(run.label)}`)
             if (run.submittedAt) {
                 csvLines.push(`${escapeCsv(`Run${index + 1}CompletedAt`)},${escapeCsv(run.submittedAt.toISOString())}`)
             }
+
+            const modality = detectBuildModality(run.metaData, run.summary)
+            const runColumns = Object.keys(run.trialData || {})
+            const unmappedRunColumns = runColumns.filter((key) => !mappedTrialKeys.has(key))
+
+            csvLines.push(`${escapeCsv(`Run${index + 1}BuildLikeSchema`)},${escapeCsv(modality)}`)
+            csvLines.push(`${escapeCsv(`Run${index + 1}BuildLikeTrialColumns`)},${escapeCsv(getBuildLikeColumns(modality).join(';'))}`)
+            csvLines.push(`${escapeCsv(`Run${index + 1}UnmappedTrialColumns`)},${escapeCsv(unmappedRunColumns.join(';'))}`)
+
+            unmappedRunColumns.forEach((key) => {
+                const values = (run.trialData?.[key] || []).map((value) => String(value ?? ''))
+                csvLines.push(`${escapeCsv(`Run${index + 1}Unmapped:${key}`)},${escapeCsv(values.join(';'))}`)
+            })
         })
 
         csvLines.push('')
 
-        const unifiedColumns = new Set(['TaskSegment'])
         this.runs.forEach((run) => {
-            Object.keys(run.trialData || {}).forEach((key) => unifiedColumns.add(key))
-        })
-
-        const columns = [...unifiedColumns]
-        csvLines.push(columns.map(escapeCsv).join(','))
-
-        this.runs.forEach((run) => {
+            const modality = detectBuildModality(run.metaData, run.summary)
+            const buildColumns = getBuildLikeColumns(modality)
             const trialColumns = Object.keys(run.trialData || {})
             const rowCount = trialColumns.reduce((max, key) => {
                 return Math.max(max, (run.trialData[key] || []).length)
             }, 0)
 
+              csvLines.push(buildColumns.map(escapeCsv).join(','))
+            csvLines.push('')
+
             for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-                const row = columns.map((column) => {
-                    if (column === 'TaskSegment') return escapeCsv(run.label)
-                    const columnValues = run.trialData[column] || []
-                    return escapeCsv(columnValues[rowIndex])
+                const row = buildRowFromTrial({
+                    trialData: run.trialData || {},
+                    metaData: run.metaData || {},
+                    modality,
+                    index: rowIndex
                 })
-                csvLines.push(row.join(','))
+                  csvLines.push(buildColumns.map((column) => escapeCsv(row[column])).join(','))
             }
+
+            csvLines.push('')
         })
 
         const blob = new Blob([csvLines.join('\n')], { type: 'text/csv;charset=utf-8;' })
