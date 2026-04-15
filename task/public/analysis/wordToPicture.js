@@ -34,6 +34,46 @@ const formatPercent = (value) => (Number.isFinite(value) ? `${(value * 100).toFi
 const formatRT = (value) => (Number.isFinite(value) ? `${Math.round(value)}` : 'N/A')
 const formatScore = (value) => (Number.isFinite(value) ? value.toFixed(4) : '')
 
+const toBoolean = (value) => {
+    if (value === true || value === 1) return true
+    const text = String(value ?? '').trim().toLowerCase()
+    return text === 'true' || text === '1'
+}
+
+const toNumericAccuracy = (value) => {
+    if (value === null || value === undefined || value === '') return NaN
+    if (value === true) return 1
+    if (value === false) return 0
+
+    const text = String(value).trim().toLowerCase()
+    if (text === 'true') return 1
+    if (text === 'false') return 0
+
+    const numeric = Number(value)
+    return Number.isFinite(numeric) ? numeric : NaN
+}
+
+const finiteMean = (values) => {
+    const finiteValues = values.filter((value) => Number.isFinite(value))
+    if (!finiteValues.length) return NaN
+    return finiteValues.reduce((sum, value) => sum + value, 0) / finiteValues.length
+}
+
+const deriveGuessingAccuracy = (trialData) => {
+    const explicit = Number(trialData?.GuessingAccuracy?.[0])
+    if (Number.isFinite(explicit) && explicit > 0 && explicit < 1) return explicit
+
+    const targetLocations = (trialData?.TargetLocation || [])
+        .map((value) => String(value ?? '').trim())
+        .filter((value) => value !== '')
+    const uniqueTargets = new Set(targetLocations)
+    if (uniqueTargets.size > 1) {
+        return 1 / uniqueTargets.size
+    }
+
+    return 0.25
+}
+
 const toWordTypeParts = (wordTypeValue) => {
     const value = String(wordTypeValue || '').trim().toLowerCase()
     if (!value) return null
@@ -46,35 +86,20 @@ const toWordTypeParts = (wordTypeValue) => {
 }
 
 const computeEfficiencyStats = (rows) => {
-    const accuracyValues = rows
-        .map((row) => Number(row.accuracy))
-        .filter((value) => Number.isFinite(value))
-
-    const total = accuracyValues.length
-    if (!total) {
-        return {
-            accuracy: null,
-            medianRT: null,
-            efficiency: null
-        }
-    }
-
-    const correct = accuracyValues.reduce((sum, value) => sum + value, 0)
-    const accuracy = correct / total
+    const accuracy = finiteMean(rows.map((row) => row.accuracy))
 
     const accurateRTs = rows
-        .filter((row) => Number(row.accuracy) === 1)
+        .filter((row) => row.accuracy === 1)
         .map((row) => Number(row.rt))
-        .filter((value) => Number.isFinite(value) && value >= 0)
+        .filter((value) => Number.isFinite(value))
 
     const medianRT = median(accurateRTs)
-    const efficiency = Number.isFinite(medianRT) && medianRT > 0
-        ? (1000 * accuracy) / medianRT
-        : null
+    const rawEfficiency = (1000 * accuracy) / medianRT
+    const efficiency = Number.isFinite(rawEfficiency) ? rawEfficiency : 0
 
     return {
-        accuracy,
-        medianRT,
+        accuracy: Number.isFinite(accuracy) ? accuracy : null,
+        medianRT: Number.isFinite(medianRT) ? medianRT : null,
         efficiency
     }
 }
@@ -97,6 +122,9 @@ const buildAnalyzableRows = (trialData) => {
     const rtValues = trialData.RT || []
     const wordTypes = trialData.WordType || []
     const trialTypes = trialData.TrialType || []
+    const timedOutValues = trialData.TimedOut || []
+
+    const guessingAccuracy = deriveGuessingAccuracy(trialData)
 
     const rowCount = Math.max(
         accuracyValues.length,
@@ -110,8 +138,14 @@ const buildAnalyzableRows = (trialData) => {
         const trialType = String(trialTypes[index] || '').trim().toLowerCase()
         if (trialType === 'practice') continue
 
+        let accuracy = toNumericAccuracy(accuracyValues[index])
+        const timedOut = toBoolean(timedOutValues[index])
+        if (timedOut && Number.isFinite(guessingAccuracy) && guessingAccuracy > 0 && guessingAccuracy < 1) {
+            accuracy = guessingAccuracy
+        }
+
         rows.push({
-            accuracy: accuracyValues[index],
+            accuracy,
             rt: rtValues[index],
             wordType: wordTypes[index]
         })
