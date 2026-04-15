@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Public Validation Harness</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232f5d9b'/%3E%3Cpath d='M8 9h16v14H8z' fill='%23fff'/%3E%3Cpath d='M10 12h12M10 16h12M10 20h8' stroke='%232f5d9b' stroke-width='2'/%3E%3C/svg%3E" />
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 20px;
+      max-width: 1040px;
+      line-height: 1.35;
+    }
+
+    h1 { margin-bottom: 8px; }
+
+    .row {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    label {
+      min-width: 200px;
+      font-weight: 600;
+    }
+
+    input[type="text"], input[type="file"] {
+      min-width: 320px;
+      max-width: 700px;
+      width: 100%;
+      flex: 1;
+    }
+
+    button {
+      padding: 8px 12px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+
+    #status {
+      margin-top: 14px;
+      padding: 10px;
+      border: 1px solid #d4d4d4;
+      background: #f7f7f7;
+      white-space: pre-wrap;
+    }
+
+    #summary {
+      margin-top: 12px;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+    }
+
+    #radarWrap {
+      margin-top: 16px;
+      width: min(640px, 100%);
+      border: 1px solid #ddd;
+      padding: 8px;
+      background: #fff;
+    }
+
+    .ok { color: #0b5e20; }
+    .warn { color: #8a4b00; }
+    .err { color: #a40000; }
+  </style>
+</head>
+<body>
+  <h1>Validation Harness (Public)</h1>
+  <p>Load one or two .build files for a participant, run the existing analysis, then export CSV/PDF.</p>
+
+  <div class="row">
+    <label for="buildFiles">Build file(s)</label>
+    <input id="buildFiles" type="file" accept=".build,.txt" multiple />
+  </div>
+
+  <div class="row">
+    <label for="age">Age (optional)</label>
+    <input id="age" type="text" placeholder="N/A" />
+  </div>
+
+  <div class="row">
+    <label for="education">Education (optional)</label>
+    <input id="education" type="text" placeholder="N/A" />
+  </div>
+
+  <div class="row">
+    <button id="prepareBtn">Prepare Analysis</button>
+    <button id="exportCsvBtn" disabled>Download CSV</button>
+    <button id="exportPdfBtn" disabled>Export PDF</button>
+  </div>
+
+  <div id="status">Loading validation app...</div>
+  <div id="summary"></div>
+
+  <div id="radarWrap" hidden>
+    <canvas id="radarCanvas" width="620" height="460"></canvas>
+  </div>
+
+  <script src="../../../node_modules/chart.js/dist/chart.umd.min.js"></script>
+  <script src="../../../node_modules/jspdf/dist/jspdf.umd.min.js"></script>
+  <script type="module">
+    const statusEl = document.getElementById("status")
+    const setStatus = (text, cls = "") => {
+      statusEl.className = cls
+      statusEl.textContent = text
+    }
+
+    window.addEventListener("error", (event) => {
+      setStatus(`Runtime error: ${event.message}`, "err")
+    })
+
+    try {
+      await import("./app.js")
+    } catch (error) {
+      setStatus(`Module load failed: ${error instanceof Error ? error.message : String(error)}`, "err")
+      console.error("[ValidationHarness] app bootstrap failed", error)
+    }
+  </script>
+</body>
+</html>

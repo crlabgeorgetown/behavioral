@@ -129,7 +129,7 @@ function createRadarChart(
                         label(context) {
                             const raw = Number(context.raw)
                             if (!Number.isFinite(raw)) return `${context.label}: N/A`
-                            return `${context.label}: ${raw.toFixed(2)}`
+                            return `${context.label}: ${raw.toFixed(4)}`
                         }
                     }
                 }

@@ -32,7 +32,7 @@ const median = (values) => {
 
 const formatPercent = (value) => (Number.isFinite(value) ? `${(value * 100).toFixed(1)}%` : 'N/A')
 const formatRT = (value) => (Number.isFinite(value) ? `${Math.round(value)}` : 'N/A')
-const formatScore = (value) => (Number.isFinite(value) ? value.toFixed(2) : '')
+const formatScore = (value) => (Number.isFinite(value) ? value.toFixed(4) : '')
 
 const toWordTypeParts = (wordTypeValue) => {
     const value = String(wordTypeValue || '').trim().toLowerCase()
