@@ -85,17 +85,25 @@ const toWordTypeParts = (wordTypeValue) => {
     return { frequency, regularity }
 }
 
-const computeEfficiencyStats = (rows) => {
-    const accuracy = finiteMean(rows.map((row) => row.accuracy))
+const computeEfficiencyStats = (rows, debugLabel = '') => {
+    const accuracyValues = rows.map((row) => row.accuracy)
+    const accuracy = finiteMean(accuracyValues)
 
-    const accurateRTs = rows
-        .filter((row) => row.accuracy === 1)
+    // Filter to only rows with perfect accuracy (accuracy === 1)
+    const accurateRows = rows.filter((row) => row.accuracy === 1)
+    const accurateRTs = accurateRows
         .map((row) => Number(row.rt))
         .filter((value) => Number.isFinite(value))
 
     const medianRT = median(accurateRTs)
     const rawEfficiency = (1000 * accuracy) / medianRT
     const efficiency = Number.isFinite(rawEfficiency) ? rawEfficiency : 0
+
+    // Debug logging (only in development)
+    if (debugLabel && typeof window !== 'undefined' && window.__DEBUG_ANALYSIS) {
+        console.log(`[${debugLabel}] Total rows: ${rows.length}, Accurate rows: ${accurateRows.length}, Accurate RTs: ${accurateRTs.length}`)
+        console.log(`[${debugLabel}] Mean accuracy: ${accuracy}, Median RT (accurate only): ${medianRT}, Efficiency: ${efficiency}`)
+    }
 
     return {
         accuracy: Number.isFinite(accuracy) ? accuracy : null,
@@ -162,7 +170,7 @@ const wordToPictureAnalysisProfile = {
         const controlNorms = CONTROL_EFFICIENCY_NORMS[modality] || CONTROL_EFFICIENCY_NORMS.auditory
 
         const rows = buildAnalyzableRows(trialData)
-        const overall = computeEfficiencyStats(rows)
+        const overall = computeEfficiencyStats(rows, 'OVERALL')
         const radarValues = {}
 
         const tableRows = [
@@ -190,7 +198,7 @@ const wordToPictureAnalysisProfile = {
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            const metrics = computeEfficiencyStats(groupedRows)
+            const metrics = computeEfficiencyStats(groupedRows, `${rowConfig.normKey}`)
             const norm = controlNorms[rowConfig.normKey]
             const efficiencyZ = Number.isFinite(metrics.efficiency) && norm && Number.isFinite(norm.mean) && Number.isFinite(norm.stdev) && norm.stdev > 0
                 ? (metrics.efficiency - norm.mean) / norm.stdev
