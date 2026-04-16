@@ -30,6 +30,20 @@ const median = (values) => {
     return sorted[middle]
 }
 
+const percentile = (values, p) => {
+    if (!values.length) return NaN
+    const sorted = [...values].sort((a, b) => a - b)
+    if (sorted.length === 1) return sorted[0]
+
+    const position = (sorted.length - 1) * p
+    const lower = Math.floor(position)
+    const upper = Math.ceil(position)
+    if (lower === upper) return sorted[lower]
+
+    const weight = position - lower
+    return sorted[lower] * (1 - weight) + sorted[upper] * weight
+}
+
 const formatPercent = (value) => (Number.isFinite(value) ? `${(value * 100).toFixed(1)}%` : 'N/A')
 const formatRT = (value) => (Number.isFinite(value) ? `${Math.round(value)}` : 'N/A')
 const formatScore = (value) => (Number.isFinite(value) ? value.toFixed(4) : '')
@@ -75,6 +89,42 @@ const deriveGuessingAccuracy = (trialData) => {
     }
 
     return 0.25
+}
+
+const removeRtOutliersStandard2ByWordType = (rows) => {
+    const groups = new Map()
+
+    rows.forEach((row, index) => {
+        const key = String(row.wordType ?? '')
+        if (!groups.has(key)) groups.set(key, [])
+        groups.get(key).push({ row, index })
+    })
+
+    const excluded = new Set()
+
+    groups.forEach((entries) => {
+        const rts = entries
+            .map((entry) => Number(entry.row.rt))
+            .filter((value) => Number.isFinite(value))
+
+        if (rts.length < 4) return
+
+        const q1 = percentile(rts, 0.25)
+        const q3 = percentile(rts, 0.75)
+        const iqr = q3 - q1
+        const minRt = q1 - (3 * iqr)
+        const maxRt = q3 + (3 * iqr)
+
+        entries.forEach((entry) => {
+            const rt = Number(entry.row.rt)
+            if (!Number.isFinite(rt)) return
+            if (rt < minRt || rt > maxRt) {
+                excluded.add(entry.index)
+            }
+        })
+    })
+
+    return rows.filter((_, index) => !excluded.has(index))
 }
 
 const toWordTypeParts = (wordTypeValue) => {
@@ -173,7 +223,8 @@ const wordToPictureAnalysisProfile = {
         const controlNorms = CONTROL_EFFICIENCY_NORMS[modality] || CONTROL_EFFICIENCY_NORMS.auditory
 
         const rows = buildAnalyzableRows(trialData)
-        const overall = computeEfficiencyStats(rows, 'OVERALL')
+        const filteredRows = removeRtOutliersStandard2ByWordType(rows)
+        const overall = computeEfficiencyStats(filteredRows, 'OVERALL')
         const radarValues = {}
 
         const tableRows = [
@@ -195,7 +246,7 @@ const wordToPictureAnalysisProfile = {
         ]
 
         WORD_TYPE_ROWS.forEach((rowConfig) => {
-            const groupedRows = rows.filter((row) => {
+            const groupedRows = filteredRows.filter((row) => {
                 const parts = toWordTypeParts(row.wordType)
                 if (!parts) return false
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
