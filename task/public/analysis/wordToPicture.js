@@ -14,10 +14,10 @@ const CONTROL_EFFICIENCY_NORMS = {
 }
 
 const WORD_TYPE_ROWS = [
-    { regularity: 'Regular', frequency: 'High', normKey: 'R_HF' },
-    { regularity: 'Regular', frequency: 'Low', normKey: 'R_LF' },
-    { regularity: 'Irregular', frequency: 'High', normKey: 'Ir_HF' },
-    { regularity: 'Irregular', frequency: 'Low', normKey: 'Ir_LF' }
+    { regularity: 'Irregular', frequency: 'High', normKey: 'Ir_HF', displayKey: 'HI' },
+    { regularity: 'Regular', frequency: 'High', normKey: 'R_HF', displayKey: 'HR' },
+    { regularity: 'Irregular', frequency: 'Low', normKey: 'Ir_LF', displayKey: 'LI' },
+    { regularity: 'Regular', frequency: 'Low', normKey: 'R_LF', displayKey: 'LR' }
 ]
 
 const HARD_MINIMUM_RT_MS = 200
@@ -94,18 +94,12 @@ const deriveGuessingAccuracy = (trialData) => {
 }
 
 const removeRtOutliersStandard = (rows) => {
-    const rts = rows
-        .map((row) => Number(row.rt))
-        .filter((rt) => Number.isFinite(rt))
+    const rowsWithFiniteRt = rows.filter((row) => Number.isFinite(Number(row.rt)))
+    if (!rowsWithFiniteRt.length) return []
 
-    if (!rts.length) return rows
-
+    const rts = rowsWithFiniteRt.map((row) => Number(row.rt))
     if (rts.length < 4) {
-        return rows.filter((row) => {
-            const rt = Number(row.rt)
-            if (!Number.isFinite(rt)) return true
-            return rt >= HARD_MINIMUM_RT_MS
-        })
+        return rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
     }
 
     const q1 = percentile(rts, 0.25)
@@ -114,19 +108,22 @@ const removeRtOutliersStandard = (rows) => {
     const minRt = q1 - (1.5 * iqr)
     const maxRt = q3 + (1.5 * iqr)
 
-    return rows.filter((row) => {
+    return rowsWithFiniteRt.filter((row) => {
         const rt = Number(row.rt)
-        if (!Number.isFinite(rt)) return true
         return rt >= HARD_MINIMUM_RT_MS && rt >= minRt && rt <= maxRt
     })
 }
 
 const toWordTypeParts = (wordTypeValue) => {
-    const value = String(wordTypeValue || '').trim().toLowerCase()
+    const value = String(wordTypeValue || '').trim()
     if (!value) return null
 
-    const frequency = value.includes('_hf_') ? 'High' : value.includes('_lf_') ? 'Low' : null
-    const regularity = value.endsWith('_reg') ? 'Regular' : value.endsWith('_irr') ? 'Irregular' : null
+    // Format: HI_HF_Reg or HI_LF_Irr, etc.
+    const parts = value.split('_')
+    if (parts.length < 3) return null
+
+    const frequency = parts[1]?.toUpperCase() === 'HF' ? 'High' : parts[1]?.toUpperCase() === 'LF' ? 'Low' : null
+    const regularity = parts[2]?.toLowerCase() === 'reg' ? 'Regular' : parts[2]?.toLowerCase() === 'irr' ? 'Irregular' : null
 
     if (!frequency || !regularity) return null
     return { frequency, regularity }
@@ -253,6 +250,22 @@ const wordToPictureAnalysisProfile = {
                 : null
 
             radarValues[rowConfig.normKey] = efficiencyZ
+
+            // Debug: Store row data for analysis
+            const debugInfo = {
+                config: rowConfig,
+                filteredCount: groupedRows.length,
+                accuracy: metrics.accuracy,
+                medianRT: metrics.medianRT,
+                efficiency: metrics.efficiency
+            }
+
+            if (typeof window !== 'undefined' && !window.__ANALYSIS_DEBUG) {
+                window.__ANALYSIS_DEBUG = {}
+            }
+            if (typeof window !== 'undefined') {
+                window.__ANALYSIS_DEBUG[`${rowConfig.frequency[0]}${rowConfig.regularity[0]}`] = debugInfo
+            }
 
             tableRows.push({
                 type: 'data',
