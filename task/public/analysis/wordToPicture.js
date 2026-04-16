@@ -37,7 +37,10 @@ const formatScore = (value) => (Number.isFinite(value) ? value.toFixed(4) : '')
 const toBoolean = (value) => {
     if (value === true || value === 1) return true
     const text = String(value ?? '').trim().toLowerCase()
-    return text === 'true' || text === '1'
+    if (text === 'true' || text === '1') return true
+
+    const numeric = Number(value)
+    return Number.isFinite(numeric) && numeric === 1
 }
 
 const toNumericAccuracy = (value) => {
