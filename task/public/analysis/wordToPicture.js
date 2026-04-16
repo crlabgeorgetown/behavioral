@@ -210,7 +210,8 @@ const wordToPictureAnalysisProfile = {
         const controlNorms = CONTROL_EFFICIENCY_NORMS[modality] || CONTROL_EFFICIENCY_NORMS.auditory
 
         const rows = buildAnalyzableRows(trialData)
-        const overall = computeEfficiencyStats(removeRtOutliersStandard(rows), 'OVERALL')
+        const filteredRows = removeRtOutliersStandard(rows)
+        const overall = computeEfficiencyStats(filteredRows, 'OVERALL')
         const radarValues = {}
 
         const tableRows = [
@@ -232,13 +233,13 @@ const wordToPictureAnalysisProfile = {
         ]
 
         WORD_TYPE_ROWS.forEach((rowConfig) => {
-            const groupedRows = rows.filter((row) => {
+            const groupedRows = filteredRows.filter((row) => {
                 const parts = toWordTypeParts(row.wordType)
                 if (!parts) return false
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            const metrics = computeEfficiencyStats(removeRtOutliersStandard(groupedRows), `${rowConfig.normKey}`)
+            const metrics = computeEfficiencyStats(groupedRows, `${rowConfig.normKey}`)
             const norm = controlNorms[rowConfig.normKey]
             const efficiencyZ = Number.isFinite(metrics.efficiency) && norm && Number.isFinite(norm.mean) && Number.isFinite(norm.stdev) && norm.stdev > 0
                 ? (metrics.efficiency - norm.mean) / norm.stdev
