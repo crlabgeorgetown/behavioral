@@ -94,12 +94,18 @@ const deriveGuessingAccuracy = (trialData) => {
 }
 
 const removeRtOutliersStandard = (rows) => {
-    const rowsWithFiniteRt = rows.filter((row) => Number.isFinite(Number(row.rt)))
-    if (!rowsWithFiniteRt.length) return []
+    const rts = rows
+        .map((row) => Number(row.rt))
+        .filter((rt) => Number.isFinite(rt))
 
-    const rts = rowsWithFiniteRt.map((row) => Number(row.rt))
+    if (!rts.length) return rows
+
     if (rts.length < 4) {
-        return rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
+        return rows.filter((row) => {
+            const rt = Number(row.rt)
+            if (!Number.isFinite(rt)) return true
+            return rt >= HARD_MINIMUM_RT_MS
+        })
     }
 
     const q1 = percentile(rts, 0.25)
@@ -108,8 +114,9 @@ const removeRtOutliersStandard = (rows) => {
     const minRt = q1 - (1.5 * iqr)
     const maxRt = q3 + (1.5 * iqr)
 
-    return rowsWithFiniteRt.filter((row) => {
+    return rows.filter((row) => {
         const rt = Number(row.rt)
+        if (!Number.isFinite(rt)) return true
         return rt >= HARD_MINIMUM_RT_MS && rt >= minRt && rt <= maxRt
     })
 }
