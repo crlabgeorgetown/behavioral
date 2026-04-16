@@ -91,7 +91,7 @@ const deriveGuessingAccuracy = (trialData) => {
     return 0.25
 }
 
-const removeRtOutliersStandard2ByWordType = (rows) => {
+const removeRtOutliersStandard2 = (rows) => {
     const groups = new Map()
 
     rows.forEach((row, index) => {
@@ -223,8 +223,7 @@ const wordToPictureAnalysisProfile = {
         const controlNorms = CONTROL_EFFICIENCY_NORMS[modality] || CONTROL_EFFICIENCY_NORMS.auditory
 
         const rows = buildAnalyzableRows(trialData)
-        const filteredRows = removeRtOutliersStandard2ByWordType(rows)
-        const overall = computeEfficiencyStats(filteredRows, 'OVERALL')
+        const overall = computeEfficiencyStats(removeRtOutliersStandard2(rows), 'OVERALL')
         const radarValues = {}
 
         const tableRows = [
@@ -246,13 +245,13 @@ const wordToPictureAnalysisProfile = {
         ]
 
         WORD_TYPE_ROWS.forEach((rowConfig) => {
-            const groupedRows = filteredRows.filter((row) => {
+            const groupedRows = rows.filter((row) => {
                 const parts = toWordTypeParts(row.wordType)
                 if (!parts) return false
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            const metrics = computeEfficiencyStats(groupedRows, `${rowConfig.normKey}`)
+            const metrics = computeEfficiencyStats(removeRtOutliersStandard2(groupedRows), `${rowConfig.normKey}`)
             const norm = controlNorms[rowConfig.normKey]
             const efficiencyZ = Number.isFinite(metrics.efficiency) && norm && Number.isFinite(norm.mean) && Number.isFinite(norm.stdev) && norm.stdev > 0
                 ? (metrics.efficiency - norm.mean) / norm.stdev
