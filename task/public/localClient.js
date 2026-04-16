@@ -98,7 +98,7 @@ function getBuildDefaults({ modality, variant }) {
     const defaults = BUILD_DEFAULTS[modality] || BUILD_DEFAULTS.auditory
     return {
         BuildTestID: variant?.buildTestID ?? defaults.BuildTestID,
-        EPrimeTemplateID: defaults.EPrimeTemplateID,
+        EPrimeTemplateID: variant?.ePrimeTemplateID ?? defaults.EPrimeTemplateID,
         Volume: defaults.Volume
     }
 }
@@ -144,6 +144,9 @@ export default class LocalClient {
         this.submittedAt = null
         this.metaData = {
             ExperimentNameShort: variant.testNameShort,
+            BuildTestID: variant.buildTestID,
+            EPrimeTemplateID: variant.ePrimeTemplateID,
+            Volume: -1000,
             SubjectID: 'XXX'
         }
     }

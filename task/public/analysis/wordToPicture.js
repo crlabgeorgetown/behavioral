@@ -20,6 +20,8 @@ const WORD_TYPE_ROWS = [
     { regularity: 'Irregular', frequency: 'Low', normKey: 'Ir_LF' }
 ]
 
+const HARD_MINIMUM_RT_MS = 200
+
 const median = (values) => {
     if (!values.length) return null
     const sorted = [...values].sort((a, b) => a - b)
@@ -91,40 +93,25 @@ const deriveGuessingAccuracy = (trialData) => {
     return 0.25
 }
 
-const removeRtOutliersStandard2 = (rows) => {
-    const groups = new Map()
+const removeRtOutliersStandard = (rows) => {
+    const rowsWithFiniteRt = rows.filter((row) => Number.isFinite(Number(row.rt)))
+    if (!rowsWithFiniteRt.length) return []
 
-    rows.forEach((row, index) => {
-        const key = String(row.wordType ?? '')
-        if (!groups.has(key)) groups.set(key, [])
-        groups.get(key).push({ row, index })
+    const rts = rowsWithFiniteRt.map((row) => Number(row.rt))
+    if (rts.length < 4) {
+        return rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
+    }
+
+    const q1 = percentile(rts, 0.25)
+    const q3 = percentile(rts, 0.75)
+    const iqr = q3 - q1
+    const minRt = q1 - (1.5 * iqr)
+    const maxRt = q3 + (1.5 * iqr)
+
+    return rowsWithFiniteRt.filter((row) => {
+        const rt = Number(row.rt)
+        return rt >= HARD_MINIMUM_RT_MS && rt >= minRt && rt <= maxRt
     })
-
-    const excluded = new Set()
-
-    groups.forEach((entries) => {
-        const rts = entries
-            .map((entry) => Number(entry.row.rt))
-            .filter((value) => Number.isFinite(value))
-
-        if (rts.length < 4) return
-
-        const q1 = percentile(rts, 0.25)
-        const q3 = percentile(rts, 0.75)
-        const iqr = q3 - q1
-        const minRt = q1 - (3 * iqr)
-        const maxRt = q3 + (3 * iqr)
-
-        entries.forEach((entry) => {
-            const rt = Number(entry.row.rt)
-            if (!Number.isFinite(rt)) return
-            if (rt < minRt || rt > maxRt) {
-                excluded.add(entry.index)
-            }
-        })
-    })
-
-    return rows.filter((_, index) => !excluded.has(index))
 }
 
 const toWordTypeParts = (wordTypeValue) => {
@@ -223,7 +210,7 @@ const wordToPictureAnalysisProfile = {
         const controlNorms = CONTROL_EFFICIENCY_NORMS[modality] || CONTROL_EFFICIENCY_NORMS.auditory
 
         const rows = buildAnalyzableRows(trialData)
-        const overall = computeEfficiencyStats(removeRtOutliersStandard2(rows), 'OVERALL')
+        const overall = computeEfficiencyStats(removeRtOutliersStandard(rows), 'OVERALL')
         const radarValues = {}
 
         const tableRows = [
@@ -251,7 +238,7 @@ const wordToPictureAnalysisProfile = {
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            const metrics = computeEfficiencyStats(removeRtOutliersStandard2(groupedRows), `${rowConfig.normKey}`)
+            const metrics = computeEfficiencyStats(removeRtOutliersStandard(groupedRows), `${rowConfig.normKey}`)
             const norm = controlNorms[rowConfig.normKey]
             const efficiencyZ = Number.isFinite(metrics.efficiency) && norm && Number.isFinite(norm.mean) && Number.isFinite(norm.stdev) && norm.stdev > 0
                 ? (metrics.efficiency - norm.mean) / norm.stdev
