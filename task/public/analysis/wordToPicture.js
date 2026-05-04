@@ -256,6 +256,8 @@ const wordToPictureAnalysisProfile = {
             // Step 5c: Compute efficiency on the filtered condition subset
             const metrics = computeEfficiencyStats(filteredConditionRows, `${rowConfig.normKey}`)
 
+            console.log(`[${rowConfig.normKey}] Before: ${conditionRows.length} rows, After: ${filteredConditionRows.length} rows | Accuracy: ${metrics.accuracy}, MedianRT: ${metrics.medianRT}, Efficiency: ${metrics.efficiency}`)
+
             // Step 6: Z-score each condition efficiency against hardcoded norms
             const norm = controlNorms[rowConfig.normKey]
             const efficiencyZ = Number.isFinite(metrics.efficiency) && norm && Number.isFinite(norm.mean) && Number.isFinite(norm.stdev) && norm.stdev > 0
