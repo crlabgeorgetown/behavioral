@@ -1,10 +1,28 @@
+import {
+  Chart,
+  RadarController,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+  Title
+} from "../../../node_modules/chart.js/dist/chart.js"
+import { jsPDF } from "../../../node_modules/jspdf/dist/jspdf.es.min.js"
 import { wordToPictureAnalysisProfile } from "../analysis/wordToPicture.js"
 import { buildRadarPayloadFromAnalyses, RADAR_RANGE } from "../analysis/radar.js"
 
-const Chart = globalThis.Chart
-if (!Chart) {
-  throw new Error("Chart.js UMD failed to load (globalThis.Chart missing)")
-}
+Chart.register(
+  RadarController,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+  Title
+)
 
 const DEBUG_PREFIX = "[ValidationHarness]"
 
@@ -368,12 +386,7 @@ function exportCsv() {
 
 function exportPdf() {
   log("exportPdf:start", { runCount: state.runs.length })
-  const jsPDFClass = window?.jspdf?.jsPDF
-  if (!jsPDFClass) {
-    throw new Error("jsPDF UMD failed to load (window.jspdf.jsPDF missing)")
-  }
-
-  const doc = new jsPDFClass({ unit: "pt", format: "letter" })
+  const doc = new jsPDF({ unit: "pt", format: "letter" })
   const summary = {
     task: state.baseMetadata.Task,
     participantId: state.baseMetadata.SubjectID,
