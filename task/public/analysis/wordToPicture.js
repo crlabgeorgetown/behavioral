@@ -152,8 +152,6 @@ const computeEfficiencyStats = (rows, debugLabel = '') => {
 
     // Debug logging (only in development)
     if (debugLabel && typeof window !== 'undefined' && window.__DEBUG_ANALYSIS) {
-        console.log(`[${debugLabel}] Total rows: ${rows.length}, Accurate rows: ${accurateRows.length}, Accurate RTs: ${accurateRTs.length}`)
-        console.log(`[${debugLabel}] Mean accuracy: ${accuracy}, Median RT (accurate only): ${medianRT}, Efficiency: ${efficiency}`)
     }
 
     return {
@@ -259,7 +257,6 @@ const wordToPictureAnalysisProfile = {
                 .map(r => Number(r.rt))
                 .filter(v => Number.isFinite(v))
                 .sort((a, b) => a - b)
-            console.log(`[${rowConfig.normKey}] Input RTs:`, sortedRTs)
 
             // Step 5b: Run IQR outlier removal on ONLY that condition's trials
             const filteredConditionRows = removeRtOutliersStandard(conditionRows)
@@ -267,7 +264,7 @@ const wordToPictureAnalysisProfile = {
             // Step 5c: Compute efficiency on the filtered condition subset
             const metrics = computeEfficiencyStats(filteredConditionRows, `${rowConfig.normKey}`)
 
-            console.log(`[${rowConfig.normKey}] Before: ${conditionRows.length} rows, After: ${filteredConditionRows.length} rows | Accuracy: ${metrics.accuracy}, MedianRT: ${metrics.medianRT}, Efficiency: ${metrics.efficiency}`)
+            
 
             // Step 6: Z-score each condition efficiency against hardcoded norms
             const norm = controlNorms[rowConfig.normKey]
