@@ -37,6 +37,7 @@ const REGULARITY_FREQUENCY_TO_KEY = {
 }
 
 const normalizeRadarValue = (value) => {
+    if (value === null || value === undefined) return null  
     const numeric = Number(value)
     if (!Number.isFinite(numeric)) return null
     if (numeric > RADAR_RANGE.max) return RADAR_RANGE.max
