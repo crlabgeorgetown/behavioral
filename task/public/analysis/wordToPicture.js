@@ -136,8 +136,8 @@ const toWordTypeParts = (wordTypeValue) => {
     return { frequency, regularity }
 }
 
-const computeEfficiencyStats = (rows, debugLabel = '') => {
-    const accuracyValues = rows.map((row) => row.accuracy)
+const computeEfficiencyStats = (rows, accuracyRows = rows, debugLabel = '') => {
+    const accuracyValues = accuracyRows.map((row) => row.accuracy)
     const accuracy = finiteMean(accuracyValues)
 
     // Filter to only rows with perfect accuracy (accuracy === 1)
@@ -223,7 +223,7 @@ const wordToPictureAnalysisProfile = {
 
         // Step 4: Overall score - run IQR outlier removal on ALL real trials pooled
         const overallFilteredRows = removeRtOutliersStandard(allRows)
-        const overall = computeEfficiencyStats(overallFilteredRows, 'OVERALL')
+        const overall = computeEfficiencyStats(overallFilteredRows, allRows, 'OVERALL')
         const radarValues = {}
 
         const tableRows = [
@@ -262,7 +262,7 @@ const wordToPictureAnalysisProfile = {
             const filteredConditionRows = removeRtOutliersStandard(conditionRows)
 
             // Step 5c: Compute efficiency on the filtered condition subset
-            const metrics = computeEfficiencyStats(filteredConditionRows, `${rowConfig.normKey}`)
+            const metrics = computeEfficiencyStats(filteredConditionRows, conditionRows, `${rowConfig.normKey}`)
 
             
 
