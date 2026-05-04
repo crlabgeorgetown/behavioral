@@ -95,22 +95,24 @@ const deriveGuessingAccuracy = (trialData) => {
 
 const removeRtOutliersStandard = (rows) => {
     const rowsWithFiniteRt = rows.filter((row) => Number.isFinite(Number(row.rt)))
-    if (!rowsWithFiniteRt.length) return []
 
-    const rts = rowsWithFiniteRt.map((row) => Number(row.rt))
-    if (rts.length < 4) {
-        return rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
-    }
+    // Apply hard floor FIRST, matching Matlab's applyHardMinimumRTCutoff order
+    const rowsAboveFloor = rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
 
+    if (rowsAboveFloor.length < 4) {
+        return rowsAboveFloor 
+        }
+
+    const rts = rowsAboveFloor.map((row) => Number(row.rt)) // IQR computed on floored set
     const q1 = percentile(rts, 0.25)
     const q3 = percentile(rts, 0.75)
     const iqr = q3 - q1
     const minRt = q1 - (1.5 * iqr)
     const maxRt = q3 + (1.5 * iqr)
 
-    return rowsWithFiniteRt.filter((row) => {
+    return rowsAboveFloor.filter((row) => {
         const rt = Number(row.rt)
-        return rt >= HARD_MINIMUM_RT_MS && rt >= minRt && rt <= maxRt
+        return rt >= minRt && rt <= maxRt // floor already satisfied by rowsAboveFloor
     })
 }
 
