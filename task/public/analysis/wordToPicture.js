@@ -148,7 +148,7 @@ const computeEfficiencyStats = (rows, accuracyRows = rows, debugLabel = '') => {
 
     const medianRT = median(accurateRTs)
     const rawEfficiency = (1000 * accuracy) / medianRT
-    const efficiency = Number.isFinite(rawEfficiency) ? rawEfficiency : 0
+    const efficiency = Number.isFinite(rawEfficiency) ? rawEfficiency : null
 
     // Debug logging (only in development)
     if (debugLabel && typeof window !== 'undefined' && window.__DEBUG_ANALYSIS) {
