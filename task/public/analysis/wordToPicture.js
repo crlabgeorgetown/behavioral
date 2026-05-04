@@ -35,13 +35,18 @@ const median = (values) => {
 const percentile = (values, p) => {
     if (!values.length) return NaN
     const sorted = [...values].sort((a, b) => a - b)
-    if (sorted.length === 1) return sorted[0]
+    const n = sorted.length
+    if (n === 1) return sorted[0]
 
-    const position = (sorted.length + 1) * p - 1
+    const position = p * n - 0.5
+    
+    if (position <= 0) return sorted[0]
+    if (position >= n - 1) return sorted[n - 1]
+    
     const lower = Math.floor(position)
     const upper = Math.ceil(position)
     if (lower === upper) return sorted[lower]
-
+    
     const weight = position - lower
     return sorted[lower] * (1 - weight) + sorted[upper] * weight
 }
