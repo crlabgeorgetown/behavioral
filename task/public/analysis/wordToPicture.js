@@ -243,7 +243,8 @@ const wordToPictureAnalysisProfile = {
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            const metrics = computeEfficiencyStats(groupedRows, `${rowConfig.normKey}`)
+            const filteredGroupedRows = removeRtOutliersStandard(groupedRows)
+            const metrics = computeEfficiencyStats(filteredGroupedRows, `${rowConfig.normKey}`)
             const norm = controlNorms[rowConfig.normKey]
             const efficiencyZ = Number.isFinite(metrics.efficiency) && norm && Number.isFinite(norm.mean) && Number.isFinite(norm.stdev) && norm.stdev > 0
                 ? (metrics.efficiency - norm.mean) / norm.stdev
@@ -254,7 +255,7 @@ const wordToPictureAnalysisProfile = {
             // Debug: Store row data for analysis
             const debugInfo = {
                 config: rowConfig,
-                filteredCount: groupedRows.length,
+                filteredCount: filteredGroupedRows.length,
                 accuracy: metrics.accuracy,
                 medianRT: metrics.medianRT,
                 efficiency: metrics.efficiency
