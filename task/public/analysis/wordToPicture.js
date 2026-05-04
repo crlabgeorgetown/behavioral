@@ -224,6 +224,12 @@ const wordToPictureAnalysisProfile = {
         // Step 4: Overall score - run IQR outlier removal on ALL real trials pooled
         const overallFilteredRows = removeRtOutliersStandard(allRows)
         const overall = computeEfficiencyStats(overallFilteredRows, allRows, 'OVERALL')
+        console.log('[OVERALL RAW]', {
+            accuracyRaw: overall.accuracy,
+            medianRTRaw: overall.medianRT,
+            efficiencyRaw: overall.efficiency,
+            efficiencyFormatted: overall.efficiency?.toFixed(4)
+        })
         const radarValues = {}
 
         const tableRows = [
