@@ -250,6 +250,12 @@ const wordToPictureAnalysisProfile = {
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
+            const sortedRTs = conditionRows
+                .map(r => Number(r.rt))
+                .filter(v => Number.isFinite(v))
+                .sort((a, b) => a - b)
+            console.log(`[${rowConfig.normKey}] Input RTs:`, sortedRTs)
+
             // Step 5b: Run IQR outlier removal on ONLY that condition's trials
             const filteredConditionRows = removeRtOutliersStandard(conditionRows)
 
