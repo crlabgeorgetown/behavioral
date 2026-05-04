@@ -213,9 +213,12 @@ const wordToPictureAnalysisProfile = {
         const title = getTaskTitle(modality)
         const controlNorms = CONTROL_EFFICIENCY_NORMS[modality] || CONTROL_EFFICIENCY_NORMS.auditory
 
-        const rows = buildAnalyzableRows(trialData)
-        const filteredRows = removeRtOutliersStandard(rows)
-        const overall = computeEfficiencyStats(filteredRows, 'OVERALL')
+        // Build analyzable rows (removes practice trials, converts accuracy, handles timed-out)
+        const allRows = buildAnalyzableRows(trialData)
+
+        // Step 4: Overall score - run IQR outlier removal on ALL real trials pooled
+        const overallFilteredRows = removeRtOutliersStandard(allRows)
+        const overall = computeEfficiencyStats(overallFilteredRows, 'OVERALL')
         const radarValues = {}
 
         const tableRows = [
@@ -236,15 +239,22 @@ const wordToPictureAnalysisProfile = {
             }
         ]
 
+        // Step 5: For each condition, compute efficiency on filtered condition subset
         WORD_TYPE_ROWS.forEach((rowConfig) => {
-            const groupedRows = filteredRows.filter((row) => {
+            // Step 5a: Filter raw trials to that condition
+            const conditionRows = allRows.filter((row) => {
                 const parts = toWordTypeParts(row.wordType)
                 if (!parts) return false
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            const filteredGroupedRows = removeRtOutliersStandard(groupedRows)
-            const metrics = computeEfficiencyStats(filteredGroupedRows, `${rowConfig.normKey}`)
+            // Step 5b: Run IQR outlier removal on ONLY that condition's trials
+            const filteredConditionRows = removeRtOutliersStandard(conditionRows)
+
+            // Step 5c: Compute efficiency on the filtered condition subset
+            const metrics = computeEfficiencyStats(filteredConditionRows, `${rowConfig.normKey}`)
+
+            // Step 6: Z-score each condition efficiency against hardcoded norms
             const norm = controlNorms[rowConfig.normKey]
             const efficiencyZ = Number.isFinite(metrics.efficiency) && norm && Number.isFinite(norm.mean) && Number.isFinite(norm.stdev) && norm.stdev > 0
                 ? (metrics.efficiency - norm.mean) / norm.stdev
@@ -255,7 +265,7 @@ const wordToPictureAnalysisProfile = {
             // Debug: Store row data for analysis
             const debugInfo = {
                 config: rowConfig,
-                filteredCount: filteredGroupedRows.length,
+                filteredCount: filteredConditionRows.length,
                 accuracy: metrics.accuracy,
                 medianRT: metrics.medianRT,
                 efficiency: metrics.efficiency
@@ -281,6 +291,7 @@ const wordToPictureAnalysisProfile = {
             })
         })
 
+        // Step 7: Return same shape as current implementation
         const metrics = [
             { label: 'Overall Accuracy', value: formatPercent(overall.accuracy) },
             { label: 'Median RT for Accurate Items (ms)', value: formatRT(overall.medianRT) },
