@@ -283,9 +283,6 @@ const wordToPictureAnalysisProfile = {
             if (typeof window !== 'undefined' && !window.__ANALYSIS_DEBUG) {
                 window.__ANALYSIS_DEBUG = {}
             }
-            if (typeof window !== 'undefined') {
-                window.__ANALYSIS_DEBUG[`${rowConfig.frequency[0]}${rowConfig.regularity[0]}`] = debugInfo
-            }
 
             tableRows.push({
                 type: 'data',
