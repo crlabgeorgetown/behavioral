@@ -262,6 +262,11 @@ const wordToPictureAnalysisProfile = {
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
+            console.log(`[COND ${rowConfig.normKey}] conditionRows.length =`, 
+                conditionRows.length,
+                'sample wordTypes =', conditionRows.slice(0,3).map(r => r.wordType))
+
+
             //const displayAccuracy = finiteMean(conditionRows.map((row) => row.accuracy))
 
             // Step 5b: Run IQR outlier removal on ONLY that condition's trials
@@ -270,7 +275,7 @@ const wordToPictureAnalysisProfile = {
             // Step 5c: Compute efficiency on the filtered condition subset
             const metrics = computeEfficiencyStats(filteredConditionRows, conditionRows, `${rowConfig.normKey}`)
 
-            
+
 
             // Step 6: Z-score each condition efficiency against hardcoded norms
             const norm = controlNorms[rowConfig.normKey]
