@@ -3,6 +3,8 @@ import { defaultTaskAnalysisProfile } from "./analysis/default"
 import { buildRadarPayloadFromAnalyses } from "./analysis/radar"
 import { renderRadarChartToDataUrl } from "./charts/radar"
 
+import { Analytics } from './internal/plausibleAnalytics'
+
 const WRITTEN_BUILD_COLUMNS = [
     'ItemNum',
     'Date',

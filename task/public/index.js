@@ -6,6 +6,8 @@ import { PUBLIC_TASK_REGISTRY } from "./variants/index"
 import { initPublicTaskHub } from "./hub"
 import { PublicCombinedComplete, PublicContinueToNextTaskComplete } from "./screens/wordToPicture"
 
+import { Analytics } from './internal/plausibleAnalytics'
+
 
 // Thin subclass: replaces the shared Complete screen with the variant's
 // completeScreenClass, and seeds metadata from the variant's initialMetadata.
@@ -51,6 +53,7 @@ class PublicTask {
         this.variant = variant
         this.orchestrator.initialize(data)
         this.orchestrator.render()
+        Analytics.testStarted({ testName: metadata.Task, version: variant.version })
     }
 }
 
