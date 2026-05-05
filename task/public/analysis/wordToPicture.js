@@ -235,9 +235,6 @@ const wordToPictureAnalysisProfile = {
         const overall = computeEfficiencyStats(overallFilteredRows, allRows, 'OVERALL')
         const radarValues = {}
 
-        console.log(`[TABLE ${rowConfig.normKey}] metrics.accuracy =`, 
-            metrics.accuracy, 
-            'formatted =', formatPercent(metrics.accuracy))
         const tableRows = [
             {
                 type: 'overall',
@@ -298,6 +295,10 @@ const wordToPictureAnalysisProfile = {
             if (typeof window !== 'undefined') {
                 window.__ANALYSIS_DEBUG[`${rowConfig.frequency[0]}${rowConfig.regularity[0]}`] = debugInfo
             }
+
+            console.log(`[TABLE ${rowConfig.normKey}] metrics.accuracy =`, 
+                metrics.accuracy, 
+                'formatted =', formatPercent(metrics.accuracy))
 
             tableRows.push({
                 type: 'data',
