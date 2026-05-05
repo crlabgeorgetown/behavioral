@@ -284,7 +284,7 @@ const wordToPictureAnalysisProfile = {
             const debugInfo = {
                 config: rowConfig,
                 filteredCount: filteredConditionRows.length,
-                accuracy: displayAccuracy,
+                accuracy: metrics.accuracy,
                 medianRT: metrics.medianRT,
                 efficiency: metrics.efficiency
             }
