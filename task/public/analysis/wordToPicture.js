@@ -104,16 +104,16 @@ const removeRtOutliersStandard = (rows) => {
         return rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
     }
 
-    const rts = rowsAboveFloor.map((row) => Number(row.rt)) // IQR computed on floored set
+    const rts = rowsWithFiniteRt.map((row) => Number(row.rt)) // IQR computed on floored set
     const q1 = percentile(rts, 0.25)
     const q3 = percentile(rts, 0.75)
     const iqr = q3 - q1
     const minRt = q1 - (1.5 * iqr)
     const maxRt = q3 + (1.5 * iqr)
 
-    return rowsAboveFloor.filter((row) => {
+    return rowsWithFiniteRt.filter((row) => {
         const rt = Number(row.rt)
-        return rt >= minRt && rt <= maxRt // floor already satisfied by rowsAboveFloor
+        return rt >= minRt && rt <= maxRt // floor already satisfied by rowsWithFiniteRt
     })
 }
 
