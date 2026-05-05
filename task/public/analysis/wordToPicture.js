@@ -136,7 +136,10 @@ const toWordTypeParts = (wordTypeValue) => {
     return { frequency, regularity }
 }
 
-const computeEfficiencyStats = (rows, debugLabel = '') => {
+const computeEfficiencyStats = (rows, accuracyRows = rows, debugLabel = '') => {
+    const displayAccuracyValues = accuracyRows.map((row) => row.accuracy)
+    const displayAccuracy = finiteMean(displayAccuracyValues)
+
     const accuracyValues = rows.map((row) => row.accuracy)
     const accuracy = finiteMean(accuracyValues)
     
@@ -161,7 +164,7 @@ const computeEfficiencyStats = (rows, debugLabel = '') => {
     }
 
     return {
-        accuracy: Number.isFinite(accuracy) ? accuracy : null,
+        accuracy: Number.isFinite(displayAccuracy) ? displayAccuracy : null,
         medianRT: Number.isFinite(medianRTDisplay) ? medianRTDisplay : null,
         efficiency
     }
@@ -229,7 +232,7 @@ const wordToPictureAnalysisProfile = {
 
         // Step 4: Overall score - run IQR outlier removal on ALL real trials pooled
         const overallFilteredRows = removeRtOutliersStandard(allRows)
-        const overall = computeEfficiencyStats(overallFilteredRows, 'OVERALL')
+        const overall = computeEfficiencyStats(overallFilteredRows, allRows, 'OVERALL')
         const radarValues = {}
 
         const tableRows = [
@@ -259,13 +262,13 @@ const wordToPictureAnalysisProfile = {
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            const displayAccuracy = finiteMean(conditionRows.map((row) => row.accuracy))
+            //const displayAccuracy = finiteMean(conditionRows.map((row) => row.accuracy))
 
             // Step 5b: Run IQR outlier removal on ONLY that condition's trials
             const filteredConditionRows = removeRtOutliersStandard(conditionRows)
 
             // Step 5c: Compute efficiency on the filtered condition subset
-            const metrics = computeEfficiencyStats(filteredConditionRows, `${rowConfig.normKey}`)
+            const metrics = computeEfficiencyStats(filteredConditionRows, conditionRows, `${rowConfig.normKey}`)
 
             
 
@@ -276,15 +279,6 @@ const wordToPictureAnalysisProfile = {
                 : null
 
             radarValues[rowConfig.normKey] = efficiencyZ
-
-            // Debug: Store row data for analysis
-            const debugInfo = {
-                config: rowConfig,
-                filteredCount: filteredConditionRows.length,
-                accuracy: displayAccuracy,
-                medianRT: metrics.medianRT,
-                efficiency: metrics.efficiency
-            }
 
             if (typeof window !== 'undefined' && !window.__ANALYSIS_DEBUG) {
                 window.__ANALYSIS_DEBUG = {}
@@ -298,7 +292,7 @@ const wordToPictureAnalysisProfile = {
                 cells: [
                     rowConfig.regularity,
                     rowConfig.frequency,
-                    formatPercent(displayAccuracy),
+                    formatPercent(metrics.accuracy),
                     formatRT(metrics.medianRT),
                     formatScore(metrics.efficiency),
                     formatScore(efficiencyZ)
