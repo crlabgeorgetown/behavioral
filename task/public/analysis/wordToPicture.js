@@ -235,6 +235,9 @@ const wordToPictureAnalysisProfile = {
         const overall = computeEfficiencyStats(overallFilteredRows, allRows, 'OVERALL')
         const radarValues = {}
 
+        console.log(`[TABLE ${rowConfig.normKey}] metrics.accuracy =`, 
+            metrics.accuracy, 
+            'formatted =', formatPercent(metrics.accuracy))
         const tableRows = [
             {
                 type: 'overall',
