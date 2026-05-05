@@ -280,8 +280,20 @@ const wordToPictureAnalysisProfile = {
 
             radarValues[rowConfig.normKey] = efficiencyZ
 
+            // Debug: Store row data for analysis
+            const debugInfo = {
+                config: rowConfig,
+                filteredCount: filteredConditionRows.length,
+                accuracy: displayAccuracy,
+                medianRT: metrics.medianRT,
+                efficiency: metrics.efficiency
+            }
+
             if (typeof window !== 'undefined' && !window.__ANALYSIS_DEBUG) {
                 window.__ANALYSIS_DEBUG = {}
+            }
+            if (typeof window !== 'undefined') {
+                window.__ANALYSIS_DEBUG[`${rowConfig.frequency[0]}${rowConfig.regularity[0]}`] = debugInfo
             }
 
             tableRows.push({
