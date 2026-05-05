@@ -98,11 +98,11 @@ const removeRtOutliersStandard = (rows) => {
     const rowsWithFiniteRt = rows.filter((row) => Number.isFinite(Number(row.rt)))
 
     // Apply hard floor FIRST, matching Matlab's applyHardMinimumRTCutoff order
-    const rowsAboveFloor = rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
+    //const rowsAboveFloor = rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
 
     if (rowsAboveFloor.length < 4) {
-        return rowsAboveFloor 
-        }
+        return rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
+    }
 
     const rts = rowsAboveFloor.map((row) => Number(row.rt)) // IQR computed on floored set
     const q1 = percentile(rts, 0.25)
