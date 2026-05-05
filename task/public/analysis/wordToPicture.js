@@ -137,6 +137,12 @@ const toWordTypeParts = (wordTypeValue) => {
 }
 
 const computeEfficiencyStats = (rows, accuracyRows = rows, debugLabel = '') => {
+    if (debugLabel && debugLabel !== 'OVERALL') {
+        console.log(`[INSIDE ${debugLabel}] accuracyRows.length =`, 
+            accuracyRows.length,
+            'displayAccuracyValues sample =', 
+            accuracyRows.slice(0,3).map(r => r.accuracy))
+        }
     const displayAccuracyValues = accuracyRows.map((row) => row.accuracy)
     const displayAccuracy = finiteMean(displayAccuracyValues)
 
