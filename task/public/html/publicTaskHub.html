@@ -11,6 +11,26 @@
         src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
         crossorigin="anonymous"></script>
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-uLpagAkC-8HqrAKNhrPRc.js"></script>
+    <script>
+        window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+        plausible.init()
+    </script>
+    <!-- Plausible Analytics — fails silently if offline -->
+    <script
+        defer
+        data-domain="crlabgeorgetown.github.io"
+        src="https://plausible.io/js/script.tagged-events.js"
+        onerror="window.plausible = function(){}"
+    ></script>
+    <!-- Fallback stub in case script doesn't load -->
+    <script>
+        window.plausible = window.plausible || function() {
+            (window.plausible.q = window.plausible.q || []).push(arguments);
+        };
+    </script>
+
 </head>
 <body>
     <div id="publicTaskHubRoot"></div>
