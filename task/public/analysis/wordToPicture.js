@@ -1,12 +1,12 @@
 const CONTROL_EFFICIENCY_NORMS = {
     written: {
-        R_HF: { mean: 0.69, stdev: 0.17 },
+        R_HF: { mean: 0.78, stdev: 0.18 },
         Ir_HF: { mean: 0.72, stdev: 0.19 },
         R_LF: { mean: 0.66, stdev: 0.20 },
         Ir_LF: { mean: 0.61, stdev: 0.15 }
     },
     auditory: {
-        R_HF: { mean: 0.72, stdev: 0.14 },
+        R_HF: { mean: 0.77, stdev: 0.17 },
         Ir_HF: { mean: 0.73, stdev: 0.15 },
         R_LF: { mean: 0.69, stdev: 0.15 },
         Ir_LF: { mean: 0.70, stdev: 0.15 }
