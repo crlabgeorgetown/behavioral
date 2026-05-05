@@ -139,6 +139,10 @@ const toWordTypeParts = (wordTypeValue) => {
 const computeEfficiencyStats = (rows, debugLabel = '') => {
     const accuracyValues = rows.map((row) => row.accuracy)
     const accuracy = finiteMean(accuracyValues)
+    
+    // medianRT to display: finite RT
+    const allFiniteRTs = rows.map((row) => Number(row.rt)).filter((value) => Number.isFinite(value))
+    const medianRTDisplay = median(allFiniteRTs)
 
     // Filter to only rows with perfect accuracy (accuracy === 1)
     const accurateRows = rows.filter((row) => row.accuracy === 1)
@@ -146,6 +150,8 @@ const computeEfficiencyStats = (rows, debugLabel = '') => {
         .map((row) => Number(row.rt))
         .filter((value) => Number.isFinite(value))
 
+
+    // medianRT for efficiency calculation: only accurate trials with finite RT
     const medianRT = median(accurateRTs)
     const rawEfficiency = (1000 * accuracy) / medianRT
     const efficiency = Number.isFinite(rawEfficiency) ? rawEfficiency : null
@@ -156,7 +162,7 @@ const computeEfficiencyStats = (rows, debugLabel = '') => {
 
     return {
         accuracy: Number.isFinite(accuracy) ? accuracy : null,
-        medianRT: Number.isFinite(medianRT) ? medianRT : null,
+        medianRT: Number.isFinite(medianRTDisplay) ? medianRTDisplay : null,
         efficiency
     }
 }
@@ -220,16 +226,11 @@ const wordToPictureAnalysisProfile = {
 
         // Build analyzable rows (removes practice trials, converts accuracy, handles timed-out)
         const allRows = buildAnalyzableRows(trialData)
+        const overallDisplayAccuracy = finiteMean(allRows.map((row) => row.accuracy))
 
         // Step 4: Overall score - run IQR outlier removal on ALL real trials pooled
         const overallFilteredRows = removeRtOutliersStandard(allRows)
         const overall = computeEfficiencyStats(overallFilteredRows, 'OVERALL')
-        console.log('[OVERALL RAW]', {
-            accuracyRaw: overall.accuracy,
-            medianRTRaw: overall.medianRT,
-            efficiencyRaw: overall.efficiency,
-            efficiencyFormatted: overall.efficiency?.toFixed(4)
-        })
         const radarValues = {}
 
         const tableRows = [
@@ -238,7 +239,7 @@ const wordToPictureAnalysisProfile = {
                 cells: [
                     'Overall',
                     '',
-                    formatPercent(overall.accuracy),
+                    formatPercent(overallDisplayAccuracy),
                     formatRT(overall.medianRT),
                     formatScore(overall.efficiency),
                     ''
@@ -259,10 +260,7 @@ const wordToPictureAnalysisProfile = {
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            const sortedRTs = conditionRows
-                .map(r => Number(r.rt))
-                .filter(v => Number.isFinite(v))
-                .sort((a, b) => a - b)
+            const displayAccuracy = finiteMean(conditionRows.map((row) => row.accuracy))
 
             // Step 5b: Run IQR outlier removal on ONLY that condition's trials
             const filteredConditionRows = removeRtOutliersStandard(conditionRows)
@@ -284,7 +282,7 @@ const wordToPictureAnalysisProfile = {
             const debugInfo = {
                 config: rowConfig,
                 filteredCount: filteredConditionRows.length,
-                accuracy: metrics.accuracy,
+                accuracy: displayAccuracy,
                 medianRT: metrics.medianRT,
                 efficiency: metrics.efficiency
             }
@@ -301,7 +299,7 @@ const wordToPictureAnalysisProfile = {
                 cells: [
                     rowConfig.regularity,
                     rowConfig.frequency,
-                    formatPercent(metrics.accuracy),
+                    formatPercent(displayAccuracy),
                     formatRT(metrics.medianRT),
                     formatScore(metrics.efficiency),
                     formatScore(efficiencyZ)
