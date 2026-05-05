@@ -226,7 +226,6 @@ const wordToPictureAnalysisProfile = {
 
         // Build analyzable rows (removes practice trials, converts accuracy, handles timed-out)
         const allRows = buildAnalyzableRows(trialData)
-        const overallDisplayAccuracy = finiteMean(allRows.map((row) => row.accuracy))
 
         // Step 4: Overall score - run IQR outlier removal on ALL real trials pooled
         const overallFilteredRows = removeRtOutliersStandard(allRows)
@@ -239,7 +238,7 @@ const wordToPictureAnalysisProfile = {
                 cells: [
                     'Overall',
                     '',
-                    formatPercent(overallDisplayAccuracy),
+                    formatPercent(overall.accuracy),
                     formatRT(overall.medianRT),
                     formatScore(overall.efficiency),
                     ''
