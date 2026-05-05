@@ -144,7 +144,7 @@ const computeEfficiencyStats = (rows, accuracyRows = rows, debugLabel = '') => {
     const accuracy = finiteMean(accuracyValues)
     
     // medianRT to display: finite RT
-    const allFiniteRTs = rows.map((row) => Number(row.rt)).filter((value) => Number.isFinite(value))
+    const allFiniteRTs = accuracyRows.map((row) => Number(row.rt)).filter((value) => Number.isFinite(value))
     const medianRTDisplay = median(allFiniteRTs)
 
     // Filter to only rows with perfect accuracy (accuracy === 1)
