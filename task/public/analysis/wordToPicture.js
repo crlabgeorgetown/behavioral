@@ -100,7 +100,7 @@ const removeRtOutliersStandard = (rows) => {
     // Apply hard floor FIRST, matching Matlab's applyHardMinimumRTCutoff order
     //const rowsAboveFloor = rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
 
-    if (rowsAboveFloor.length < 4) {
+    if (rowsWithFiniteRt.length < 4) {
         return rowsWithFiniteRt.filter((row) => Number(row.rt) >= HARD_MINIMUM_RT_MS)
     }
 
