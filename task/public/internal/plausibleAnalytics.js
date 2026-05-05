@@ -1,9 +1,3 @@
-import { init } from '@plausible-analytics/tracker'
-
-init({
-    domain: 'crlabgeorgetown.github.io/behavioral/task/public/html/publicTaskHub.html',
-})
-
 const SESSION_ID_KEY = 'darn_session_id';
 
 function getSessionId() {
@@ -42,5 +36,5 @@ export const Analytics = {
   reportGenerated:   (meta = {}) => trackEvent('report_generated',     meta),
   pdfDownloaded:     (meta = {}) => trackEvent('pdf_downloaded',       meta),
   printDialogOpened: (meta = {}) => trackEvent('print_dialog_opened',  meta),
-  cvsDownloaded:     (meta = {}) => trackEvent('csv_downloaded',       meta),
+  csvDownloaded:     (meta = {}) => trackEvent('csv_downloaded',       meta),
 };
