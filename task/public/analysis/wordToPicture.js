@@ -84,18 +84,14 @@ const finiteMean = (values) => {
 }
 
 const deriveGuessingAccuracy = (trialData) => {
-    const explicit = Number(trialData?.GuessingAccuracy?.[0])
-    if (Number.isFinite(explicit) && explicit > 0 && explicit < 1) return explicit
 
-    const targetLocations = (trialData?.TargetLocation || [])
-        .map((value) => String(value ?? '').trim())
-        .filter((value) => value !== '')
-    const uniqueTargets = new Set(targetLocations)
-    if (uniqueTargets.size > 1) {
-        return 1 / uniqueTargets.size
+    const explicit = trialData.GuessingAccuracy?.[0]
+    if (explicit !== undefined && Number.isFinite(Number(explicit))) {
+        return Number(explicit)
     }
-
-    return 0.25
+    // Default to 0 — matches Matlab behavior when NumResponseChoices 
+    // is empty in the reference spreadsheet
+    return 0
 }
 
 const removeRtOutliersStandard = (rows) => {
@@ -268,9 +264,9 @@ const wordToPictureAnalysisProfile = {
                 return parts.regularity === rowConfig.regularity && parts.frequency === rowConfig.frequency
             })
 
-            console.log(`[COND ${rowConfig.normKey}] conditionRows.length =`, 
-                conditionRows.length,
-                'sample wordTypes =', conditionRows.slice(0,3).map(r => r.wordType))
+            // console.log(`[COND ${rowConfig.normKey}] conditionRows.length =`, 
+            //     conditionRows.length,
+            //     'sample wordTypes =', conditionRows.slice(0,3).map(r => r.wordType))
 
 
             //const displayAccuracy = finiteMean(conditionRows.map((row) => row.accuracy))
@@ -307,9 +303,9 @@ const wordToPictureAnalysisProfile = {
                 window.__ANALYSIS_DEBUG[`${rowConfig.frequency[0]}${rowConfig.regularity[0]}`] = debugInfo
             }
 
-            console.log(`[TABLE ${rowConfig.normKey}] metrics.accuracy =`, 
-                metrics.accuracy, 
-                'formatted =', formatPercent(metrics.accuracy))
+            // console.log(`[TABLE ${rowConfig.normKey}] metrics.accuracy =`, 
+            //     metrics.accuracy, 
+            //     'formatted =', formatPercent(metrics.accuracy))
 
             tableRows.push({
                 type: 'data',
