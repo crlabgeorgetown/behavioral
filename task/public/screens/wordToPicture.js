@@ -15,7 +15,7 @@ import {
 import { buildRadarPayloadFromAnalyses } from "../analysis/radar"
 import { createRadarChart } from "../charts/radar"
 
-import { Analytics } from './internal/plausibleAnalytics'
+import { Analytics } from '../internal/plausibleAnalytics'
 
 
 const PUBLIC_INSTRUCTION_HEADER = jQuery('<div/>', {
