@@ -19,19 +19,19 @@
         plausible.init()
     </script>
 -->
-    <!-- Plausible Analytics — fails silently if offline -->
-    <script
-        defer
-        data-domain="crlabgeorgetown.github.io"
-        src="https://plausible.io/js/pa-uLpagAkC-8HqrAKNhrPRc.js"
-        onerror="window.plausible = function(){}"
-    ></script>
     <!-- Fallback stub in case script doesn't load -->
     <script>
         window.plausible = window.plausible || function() {
             (window.plausible.q = window.plausible.q || []).push(arguments);
         };
     </script>
+    <!-- Plausible Analytics — fails silently if offline -->
+    <script
+        defer
+        data-domain="crlabgeorgetown.github.io"
+        src="https://plausible.io/js/pa-uLpagAkC-8HqrAKNhrPRc.tagged-events.js"
+        onerror="window.plausible = function(){}"
+    ></script>
 
 </head>
 <body>
