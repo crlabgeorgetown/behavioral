@@ -15,6 +15,8 @@ import {
 import { buildRadarPayloadFromAnalyses } from "../analysis/radar"
 import { createRadarChart } from "../charts/radar"
 
+import { Analytics } from './internal/plausibleAnalytics'
+
 
 const PUBLIC_INSTRUCTION_HEADER = jQuery('<div/>', {
     id: 'publicInstructionHeader',
@@ -640,6 +642,13 @@ class PublicComplete extends Screen {
     get components() {
         ensurePublicClientSubmitted(this.orchestrator)
 
+        Analytics.testCompleted({
+            testName: this.orchestrator.client.getSummary()?.task || document.title,
+            version: '1.0',
+            hasAuditory: !!this.orchestrator.client.getTaskAnalysis()?.auditoryMetrics,
+            hasWritten: !!this.orchestrator.client.getTaskAnalysis()?.writtenMetrics
+        })
+
         const summary = this.orchestrator.client.getSummary()
         const { analysis, analyses, hasMultipleAnalyses } = getAnalysisData(this.orchestrator.client)
         const completionRoot = createCompletionRoot(`You've completed this exercise!`)
@@ -667,8 +676,20 @@ class PublicComplete extends Screen {
 
     get clickHandlers() {
         return {
-            exportCsvButton: () => this.orchestrator.client.exportCsv(),
-            exportPdfButton: () => this.orchestrator.client.exportPdf()
+            exportCsvButton: () => {
+                Analytics.csvDownloaded({
+                    testName: this.orchestrator.client.getSummary()?.task || document.title,
+                    version: '1.0'
+                }),
+                this.orchestrator.client.exportCsv()
+            },
+            exportPdfButton: () => {
+                Analytics.pdfDownloaded({
+                    testName: this.orchestrator.client.getSummary()?.task || document.title,
+                    version: '1.0'
+                }),
+                this.orchestrator.client.exportPdf()
+            }
         }
     }
 
