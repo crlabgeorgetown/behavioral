@@ -187,8 +187,6 @@ export default class CombinedWordToPictureClient {
             inputDevice,
             completedAt: lastRun?.summary?.completedAt || 'N/A',
             trialsCompleted: totalTrials,
-            accuracyPct: 'N/A',
-            averageRT: 'N/A'
         }
     }
 
