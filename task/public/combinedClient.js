@@ -114,27 +114,39 @@ function renderInterpretationSection(doc, interpretation, currentY, pageHeight) 
 
     const contentWidth = doc.internal.pageSize.getWidth() - 80
     const leftX = 40
+    const topMargin = 50
     const bottomMargin = 40
-    const estimatedHeight = estimateInterpretationHeight(doc, normalized, contentWidth)
-    let renderY = pageHeight - estimatedHeight - bottomMargin
+    const lineHeight = 16
 
-    if (renderY < currentY + 18) {
+    let renderY = (typeof currentY === 'number' ? currentY : topMargin) + 12
+
+    // Title
+    const title = normalized.title || 'Understanding the Results'
+    if (renderY + lineHeight > pageHeight - bottomMargin) {
         doc.addPage()
-        renderY = pageHeight - estimatedHeight - bottomMargin
+        renderY = topMargin
     }
 
     doc.setFont(undefined, 'bold')
-    doc.text(normalized.title || 'Understanding the Results', leftX, renderY)
-    renderY += 18
+    doc.text(title, leftX, renderY)
+    renderY += lineHeight
 
-    doc.setFont(undefined, 'normal');
-    (Array.isArray(normalized.items) ? normalized.items : []).forEach((item) => {
+    doc.setFont(undefined, 'normal')
+    const items = Array.isArray(normalized.items) ? normalized.items : []
+
+    items.forEach((item) => {
         const label = item?.label ? String(item.label).trim() : ''
         const text = item?.text ? String(item.text).trim() : ''
         const bulletX = leftX + 4
         const textX = leftX + 14
         const bodyWidth = label ? contentWidth - doc.getTextWidth(label) - 26 : contentWidth - 18
         const wrapped = doc.splitTextToSize(text, Math.max(160, bodyWidth))
+        const neededHeight = Math.max(lineHeight, wrapped.length * lineHeight) + 6
+
+        if (renderY + neededHeight > pageHeight - bottomMargin) {
+            doc.addPage()
+            renderY = topMargin
+        }
 
         doc.text('•', bulletX, renderY)
         if (label) {
@@ -147,7 +159,7 @@ function renderInterpretationSection(doc, interpretation, currentY, pageHeight) 
             doc.text(wrapped, textX, renderY)
         }
 
-        renderY += Math.max(16, wrapped.length * 16) + 6
+        renderY += neededHeight
     })
 }
 

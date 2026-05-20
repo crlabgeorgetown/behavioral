@@ -728,12 +728,6 @@ class PublicComplete extends Screen {
 
         summaryCard.append(createSummaryTopSection(createSummaryRows(summary), analyses || [analysis]))
 
-        const analysisTitle = jQuery('<div/>', {
-            text: analysis.title || 'Task Analysis',
-            class: 'public-analysis-title'
-        })
-        summaryCard.append(analysisTitle)
-
         summaryCard.append(createAnalysisContainer({ analysis, analyses, hasMultipleAnalyses }))
 
         if (hasMultipleAnalyses) {
