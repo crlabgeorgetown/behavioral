@@ -639,8 +639,24 @@ function createPublicCompletionActions() {
 }
 
 class PublicComplete extends Screen {
+    constructor(orchestrator) {
+        super(orchestrator)
+        this.hasLoggedReportGenerated = false
+    }
+
     get components() {
         ensurePublicClientSubmitted(this.orchestrator)
+
+        if (!this.hasLoggedReportGenerated) {
+            const summary = this.orchestrator.client.getSummary()
+            Analytics.reportGenerated({
+                testName: summary?.task || document.title,
+                version: '1.0',
+                hasAuditory: !!this.orchestrator.client.getTaskAnalysis()?.auditoryMetrics,
+                hasWritten: !!this.orchestrator.client.getTaskAnalysis()?.writtenMetrics
+            })
+            this.hasLoggedReportGenerated = true
+        }
 
         Analytics.testCompleted({
             testName: this.orchestrator.client.getSummary()?.task || document.title,
@@ -677,16 +693,22 @@ class PublicComplete extends Screen {
     get clickHandlers() {
         return {
             exportCsvButton: () => {
+                const summary = this.orchestrator.client.getSummary()
                 Analytics.csvDownloaded({
-                    testName: this.orchestrator.client.getSummary()?.task || document.title,
-                    version: '1.0'
+                    testName: summary?.task || document.title,
+                    version: '1.0',
+                    hasAuditory: !!this.orchestrator.client.getTaskAnalysis()?.auditoryMetrics,
+                    hasWritten: !!this.orchestrator.client.getTaskAnalysis()?.writtenMetrics
                 }),
                 this.orchestrator.client.exportCsv()
             },
             exportPdfButton: () => {
+                const summary = this.orchestrator.client.getSummary()
                 Analytics.pdfDownloaded({
-                    testName: this.orchestrator.client.getSummary()?.task || document.title,
-                    version: '1.0'
+                    testName: summary?.task || document.title,
+                    version: '1.0',
+                    hasAuditory: !!this.orchestrator.client.getTaskAnalysis()?.auditoryMetrics,
+                    hasWritten: !!this.orchestrator.client.getTaskAnalysis()?.writtenMetrics
                 }),
                 this.orchestrator.client.exportPdf()
             }

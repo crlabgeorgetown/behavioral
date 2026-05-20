@@ -1,5 +1,12 @@
 const SESSION_ID_KEY = 'darn_session_id';
 
+if (typeof window !== 'undefined' && !window.__darnPlausiblePrintTrackingInstalled) {
+  window.__darnPlausiblePrintTrackingInstalled = true;
+  window.addEventListener('beforeprint', () => {
+    trackEvent('print_dialog_opened');
+  });
+}
+
 function getSessionId() {
   let id = sessionStorage.getItem(SESSION_ID_KEY);
   if (!id) {
@@ -11,13 +18,25 @@ function getSessionId() {
 
 function trackEvent(eventName, props = {}) {
   try {
+    const {
+      testName,
+      test_name,
+      path,
+      pagePath,
+      page_path,
+      session_id,
+      timestamp,
+      version,
+      ...rest
+    } = props;
+
     const payload = {
-      session_id: getSessionId(),
-      test_name: props.testName || document.title,
-      version: props.version || '1.0',
-      path: window.location.pathname,
-      timestamp: new Date().toISOString(),
-      ...props
+      session_id: session_id || getSessionId(),
+      test_name: testName || test_name || document.title,
+      version: version || '1.0',
+      path: path || pagePath || page_path || window.location.pathname,
+      timestamp: timestamp || new Date().toISOString(),
+      ...rest
     };
 
     if (typeof window.plausible === 'function') {
