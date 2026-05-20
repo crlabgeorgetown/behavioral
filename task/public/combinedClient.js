@@ -100,7 +100,7 @@ function estimateInterpretationHeight(doc, interpretation, contentWidth) {
     items.forEach((item) => {
         const label = item?.label ? String(item.label).trim() : ''
         const text = item?.text ? String(item.text).trim() : ''
-        const labelWidth = label ? doc.getTextWidth(label) + 18 : 0
+        const labelWidth = label ? doc.getTextWidth(`${label}: `) + 18 : 0
         const wrapped = doc.splitTextToSize(text, Math.max(160, contentWidth - labelWidth - 18))
         height += Math.max(lineHeight, wrapped.length * lineHeight) + 6
     })
@@ -139,7 +139,8 @@ function renderInterpretationSection(doc, interpretation, currentY, pageHeight) 
         const text = item?.text ? String(item.text).trim() : ''
         const bulletX = leftX + 4
         const textX = leftX + 14
-        const bodyWidth = label ? contentWidth - doc.getTextWidth(label) - 26 : contentWidth - 18
+        const labelWithColon = label ? `${label}: ` : ''
+        const bodyWidth = label ? contentWidth - doc.getTextWidth(labelWithColon) - 26 : contentWidth - 18
         const wrapped = doc.splitTextToSize(text, Math.max(160, bodyWidth))
         const neededHeight = Math.max(lineHeight, wrapped.length * lineHeight) + 6
 
@@ -151,10 +152,10 @@ function renderInterpretationSection(doc, interpretation, currentY, pageHeight) 
         doc.text('•', bulletX, renderY)
         if (label) {
             doc.setFont(undefined, 'bold')
-            doc.text(label, textX, renderY)
+            doc.text(labelWithColon, textX, renderY)
             doc.setFont(undefined, 'normal')
-            const labelWidth = doc.getTextWidth(label)
-            doc.text(wrapped, textX + labelWidth + 4, renderY)
+            const labelWidth = doc.getTextWidth(labelWithColon)
+            doc.text(wrapped, textX + labelWidth + 2, renderY)
         } else {
             doc.text(wrapped, textX, renderY)
         }

@@ -384,11 +384,14 @@
 
 .public-analysis-content {
     margin-top: 8px;
+    max-height: min(22vh, 220px);
+    overflow-y: auto;
+    padding-right: 6px;
 }
 
 .public-analysis-scroll {
     margin-top: 8px;
-    max-height: min(24vh, 250px);
+    max-height: min(22vh, 220px);
     overflow-y: auto;
     padding-right: 6px;
 }
