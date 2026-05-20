@@ -478,10 +478,6 @@ function createAnalysisBlock(analysis, { showSectionTitle = false } = {}) {
         block.append(refContainer)
     }
 
-    if (analysis.interpretation && !showSectionTitle) {
-        block.append(createInterpretationBlock(analysis.interpretation))
-    }
-
     return block
 }
 
@@ -602,7 +598,7 @@ function getAnalysisData(client) {
 
 function createAnalysisContainer({ analysis, analyses, hasMultipleAnalyses }) {
     const container = jQuery('<div/>', {
-        class: hasMultipleAnalyses ? 'public-analysis-scroll' : 'public-analysis-content'
+        class: 'public-analysis-scroll'
     })
 
     ;(analyses || [analysis]).forEach((item) => {
@@ -730,9 +726,7 @@ class PublicComplete extends Screen {
 
         summaryCard.append(createAnalysisContainer({ analysis, analyses, hasMultipleAnalyses }))
 
-        if (hasMultipleAnalyses) {
-            summaryCard.append(createSharedInterpretationBlock(analyses))
-        }
+        summaryCard.append(createSharedInterpretationBlock(analyses))
         completionRoot.append(summaryCard, createPublicCompletionActions())
 
         return new Map([
