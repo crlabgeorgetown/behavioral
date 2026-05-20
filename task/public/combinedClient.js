@@ -127,7 +127,7 @@ function renderInterpretationSection(doc, interpretation, currentY, pageHeight) 
     doc.text(normalized.title || 'Understanding the Results', leftX, renderY)
     renderY += 18
 
-    doc.setFont(undefined, 'normal')
+    doc.setFont(undefined, 'normal');
     (Array.isArray(normalized.items) ? normalized.items : []).forEach((item) => {
         const label = item?.label ? String(item.label).trim() : ''
         const text = item?.text ? String(item.text).trim() : ''
