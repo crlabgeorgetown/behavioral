@@ -349,6 +349,7 @@ export default class CombinedWordToPictureClient {
         const chartBottomY = radarImage ? 80 + 194 + 16 : 0
         let cursorY = Math.max(90 + lines.length * 20 + 24, chartBottomY)
         const pageHeight = doc.internal.pageSize.getHeight()
+        let hasPrintedInterpretation = false
 
         const ensurePageSpace = (neededHeight = 24) => {
             if (cursorY + neededHeight <= pageHeight - 40) return
@@ -405,11 +406,12 @@ export default class CombinedWordToPictureClient {
                 })
             }
 
-            if (analysis.interpretation) {
+            if (analysis.interpretation && !hasPrintedInterpretation) {
                 const wrappedInterpretation = doc.splitTextToSize(`Interpretation: ${analysis.interpretation}`, 530)
                 ensurePageSpace(wrappedInterpretation.length * 16 + 8)
                 doc.text(wrappedInterpretation, 40, cursorY)
                 cursorY += wrappedInterpretation.length * 16
+                hasPrintedInterpretation = true
             }
 
             if (analysis.reference && analysis.reference.label) {

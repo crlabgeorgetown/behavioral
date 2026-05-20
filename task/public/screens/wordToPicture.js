@@ -478,7 +478,7 @@ function createAnalysisBlock(analysis, { showSectionTitle = false } = {}) {
         block.append(refContainer)
     }
 
-    if (analysis.interpretation) {
+    if (analysis.interpretation && !showSectionTitle) {
         block.append(jQuery('<div/>', {
             text: `Interpretation: ${analysis.interpretation}`,
             class: 'public-analysis-interpretation'
@@ -617,6 +617,16 @@ function createAnalysisContainer({ analysis, analyses, hasMultipleAnalyses }) {
     return container
 }
 
+function createSharedInterpretationBlock(analyses) {
+    const analysis = (Array.isArray(analyses) ? analyses : [analyses]).find((item) => item?.interpretation)
+    if (!analysis?.interpretation) return null
+
+    return jQuery('<div/>', {
+        text: `Interpretation: ${analysis.interpretation}`,
+        class: 'public-analysis-interpretation'
+    })
+}
+
 function createPublicCompletionActions() {
     const actionRow = jQuery('<div/>', {
         class: 'public-completion-actions'
@@ -683,6 +693,10 @@ class PublicComplete extends Screen {
         summaryCard.append(analysisTitle)
 
         summaryCard.append(createAnalysisContainer({ analysis, analyses, hasMultipleAnalyses }))
+
+        if (hasMultipleAnalyses) {
+            summaryCard.append(createSharedInterpretationBlock(analyses))
+        }
         completionRoot.append(summaryCard, createPublicCompletionActions())
 
         return new Map([
