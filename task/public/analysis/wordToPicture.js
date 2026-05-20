@@ -327,7 +327,16 @@ const wordToPictureAnalysisProfile = {
             { label: 'Overall Efficiency', value: formatScore(overall.efficiency) }
         ]
 
-        const interpretation = 'Understanding the Results\nReaction Time (RT): A faster reaction time is better.\nEfficiency: Efficiency is a measure of how quickly and accurately someone can respond. A higher efficiency is better.\nEfficiency Z: Z scores allow you to compare the efficiency score to a normative sample. For example, a Z score of -2 indicates 2 standard deviations below the normative sample mean.\nRegularity: Regularity is whether a word adheres to spelling-sound rules of a language. A regular word adheres to the rules (e.g., sink), while irregular words do not (e.g., yacht).\nFrequency: Frequency is how common a word is. A high frequency word is common, while a low frequency word is uncommon.'
+        const interpretation = {
+            title: 'Understanding the Results',
+            items: [
+                { label: 'Reaction Time (RT):', text: 'A faster reaction time is better.' },
+                { label: 'Efficiency:', text: 'Efficiency is a measure of how quickly and accurately someone can respond. A higher efficiency is better.' },
+                { label: 'Efficiency Z:', text: 'Z scores allow you to compare the efficiency score to a normative sample. For example, a Z score of -2 indicates 2 standard deviations below the normative sample mean.' },
+                { label: 'Regularity:', text: 'Regularity is whether a word adheres to spelling-sound rules of a language. A regular word adheres to the rules (e.g., sink), while irregular words do not (e.g., yacht).' },
+                { label: 'Frequency:', text: 'Frequency is how common a word is. A high frequency word is common, while a low frequency word is uncommon.' }
+            ]
+        }
 
         return {
             title,

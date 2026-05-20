@@ -388,7 +388,7 @@
 
 .public-analysis-scroll {
     margin-top: 8px;
-    max-height: min(34vh, 360px);
+    max-height: min(24vh, 250px);
     overflow-y: auto;
     padding-right: 6px;
 }
@@ -451,6 +451,24 @@
     line-height: 1.35;
     color: #333333;
     margin-top: 8px;
+}
+
+.public-analysis-interpretation-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.public-analysis-interpretation-list {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.public-analysis-interpretation-item {
+    margin: 0 0 6px 0;
+}
+
+.public-analysis-interpretation-item strong {
+    font-weight: 700;
 }
 
 .public-analysis-reference {

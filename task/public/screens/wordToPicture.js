@@ -479,10 +479,7 @@ function createAnalysisBlock(analysis, { showSectionTitle = false } = {}) {
     }
 
     if (analysis.interpretation && !showSectionTitle) {
-        block.append(jQuery('<div/>', {
-            text: `Interpretation: ${analysis.interpretation}`,
-            class: 'public-analysis-interpretation'
-        }))
+        block.append(createInterpretationBlock(analysis.interpretation))
     }
 
     return block
@@ -621,10 +618,55 @@ function createSharedInterpretationBlock(analyses) {
     const analysis = (Array.isArray(analyses) ? analyses : [analyses]).find((item) => item?.interpretation)
     if (!analysis?.interpretation) return null
 
-    return jQuery('<div/>', {
-        text: `Interpretation: ${analysis.interpretation}`,
+    return createInterpretationBlock(analysis.interpretation)
+}
+
+function createInterpretationBlock(interpretation) {
+    const wrapper = jQuery('<div/>', {
         class: 'public-analysis-interpretation'
     })
+
+    if (typeof interpretation === 'string') {
+        interpretation.split('\n').filter(Boolean).forEach((line, index) => {
+            wrapper.append(jQuery('<div/>', {
+                text: line,
+                class: index === 0 ? 'public-analysis-interpretation-title' : 'public-analysis-interpretation-line'
+            }))
+        })
+        return wrapper
+    }
+
+    if (interpretation?.title) {
+        wrapper.append(jQuery('<div/>', {
+            text: interpretation.title,
+            class: 'public-analysis-interpretation-title'
+        }))
+    }
+
+    const items = Array.isArray(interpretation?.items) ? interpretation.items : []
+    const list = jQuery('<ul/>', {
+        class: 'public-analysis-interpretation-list'
+    })
+
+    items.forEach((item) => {
+        const label = item?.label ? String(item.label) : ''
+        const text = item?.text ? String(item.text) : ''
+        const line = jQuery('<li/>', {
+            class: 'public-analysis-interpretation-item'
+        })
+
+        if (label) {
+            line.append(jQuery('<strong/>', { text: label }))
+        }
+        if (text) {
+            line.append(jQuery('<span/>', { text: label ? ` ${text}` : text }))
+        }
+
+        list.append(line)
+    })
+
+    wrapper.append(list)
+    return wrapper
 }
 
 function createPublicCompletionActions() {

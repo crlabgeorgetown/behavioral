@@ -75,6 +75,82 @@ function detectBuildModality(metaData = {}, summary = {}) {
         || 'auditory'
 }
 
+function normalizeInterpretation(interpretation) {
+    if (!interpretation) return null
+    if (typeof interpretation === 'string') {
+        const lines = interpretation.split('\n').map((line) => line.trim()).filter(Boolean)
+        if (!lines.length) return null
+        return {
+            title: lines[0],
+            items: lines.slice(1).map((line) => ({ label: '', text: line }))
+        }
+    }
+
+    return interpretation
+}
+
+function estimateInterpretationHeight(doc, interpretation, contentWidth) {
+    const normalized = normalizeInterpretation(interpretation)
+    if (!normalized) return 0
+
+    const lineHeight = 16
+    const items = Array.isArray(normalized.items) ? normalized.items : []
+    let height = 18 + 8
+
+    items.forEach((item) => {
+        const label = item?.label ? String(item.label).trim() : ''
+        const text = item?.text ? String(item.text).trim() : ''
+        const labelWidth = label ? doc.getTextWidth(label) + 18 : 0
+        const wrapped = doc.splitTextToSize(text, Math.max(160, contentWidth - labelWidth - 18))
+        height += Math.max(lineHeight, wrapped.length * lineHeight) + 6
+    })
+
+    return height
+}
+
+function renderInterpretationSection(doc, interpretation, currentY, pageHeight) {
+    const normalized = normalizeInterpretation(interpretation)
+    if (!normalized) return
+
+    const contentWidth = doc.internal.pageSize.getWidth() - 80
+    const leftX = 40
+    const bottomMargin = 40
+    const estimatedHeight = estimateInterpretationHeight(doc, normalized, contentWidth)
+    let renderY = pageHeight - estimatedHeight - bottomMargin
+
+    if (renderY < currentY + 18) {
+        doc.addPage()
+        renderY = pageHeight - estimatedHeight - bottomMargin
+    }
+
+    doc.setFont(undefined, 'bold')
+    doc.text(normalized.title || 'Understanding the Results', leftX, renderY)
+    renderY += 18
+
+    doc.setFont(undefined, 'normal')
+    (Array.isArray(normalized.items) ? normalized.items : []).forEach((item) => {
+        const label = item?.label ? String(item.label).trim() : ''
+        const text = item?.text ? String(item.text).trim() : ''
+        const bulletX = leftX + 4
+        const textX = leftX + 14
+        const bodyWidth = label ? contentWidth - doc.getTextWidth(label) - 26 : contentWidth - 18
+        const wrapped = doc.splitTextToSize(text, Math.max(160, bodyWidth))
+
+        doc.text('•', bulletX, renderY)
+        if (label) {
+            doc.setFont(undefined, 'bold')
+            doc.text(label, textX, renderY)
+            doc.setFont(undefined, 'normal')
+            const labelWidth = doc.getTextWidth(label)
+            doc.text(wrapped, textX + labelWidth + 4, renderY)
+        } else {
+            doc.text(wrapped, textX, renderY)
+        }
+
+        renderY += Math.max(16, wrapped.length * 16) + 6
+    })
+}
+
 function getBuildLikeColumns(modality) {
     return modality === 'written' ? WRITTEN_BUILD_COLUMNS : AUDITORY_BUILD_COLUMNS
 }
@@ -349,7 +425,6 @@ export default class CombinedWordToPictureClient {
         const chartBottomY = radarImage ? 80 + 194 + 16 : 0
         let cursorY = Math.max(90 + lines.length * 20 + 24, chartBottomY)
         const pageHeight = doc.internal.pageSize.getHeight()
-        let hasPrintedInterpretation = false
 
         const ensurePageSpace = (neededHeight = 24) => {
             if (cursorY + neededHeight <= pageHeight - 40) return
@@ -406,14 +481,6 @@ export default class CombinedWordToPictureClient {
                 })
             }
 
-            if (analysis.interpretation && !hasPrintedInterpretation) {
-                const wrappedInterpretation = doc.splitTextToSize(`Interpretation: ${analysis.interpretation}`, 530)
-                ensurePageSpace(wrappedInterpretation.length * 16 + 8)
-                doc.text(wrappedInterpretation, 40, cursorY)
-                cursorY += wrappedInterpretation.length * 16
-                hasPrintedInterpretation = true
-            }
-
             if (analysis.reference && analysis.reference.label) {
                 const refText = analysis.reference.url
                     ? `Reference: ${analysis.reference.label} (${analysis.reference.url})`
@@ -426,6 +493,11 @@ export default class CombinedWordToPictureClient {
 
             cursorY += 12
         })
+
+        const sharedInterpretation = analyses.find((analysis) => analysis?.interpretation)?.interpretation
+        if (sharedInterpretation) {
+            renderInterpretationSection(doc, sharedInterpretation, cursorY, pageHeight)
+        }
 
         const safeName = String(summary.task).replace(/[^a-zA-Z0-9_-]/g, '_')
         doc.save(`${safeName}_summary.pdf`)
