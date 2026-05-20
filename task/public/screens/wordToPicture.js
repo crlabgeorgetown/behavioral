@@ -457,18 +457,11 @@ function createAnalysisBlock(analysis, { showSectionTitle = false } = {}) {
         })
     }
 
-    if (analysis.interpretation) {
-        block.append(jQuery('<div/>', {
-            text: `Interpretation: ${analysis.interpretation}`,
-            class: 'public-analysis-interpretation'
-        }))
-    }
-
     if (analysis.reference && analysis.reference.label) {
         const refContainer = jQuery('<div/>', {
             class: 'public-analysis-reference'
         })
-
+        
         if (analysis.reference.url) {
             refContainer.append(
                 jQuery('<a/>', {
@@ -481,8 +474,15 @@ function createAnalysisBlock(analysis, { showSectionTitle = false } = {}) {
         } else {
             refContainer.text(analysis.reference.label)
         }
-
+        
         block.append(refContainer)
+    }
+
+    if (analysis.interpretation) {
+        block.append(jQuery('<div/>', {
+            text: `Interpretation: ${analysis.interpretation}`,
+            class: 'public-analysis-interpretation'
+        }))
     }
 
     return block
