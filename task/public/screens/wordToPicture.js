@@ -727,7 +727,8 @@ class PublicComplete extends Screen {
         summaryCard.append(createAnalysisContainer({ analysis, analyses, hasMultipleAnalyses }))
 
         summaryCard.append(createSharedInterpretationBlock(analyses))
-        completionRoot.append(summaryCard, createPublicCompletionActions())
+        summaryCard.append(createPublicCompletionActions())
+        completionRoot.append(summaryCard)
 
         return new Map([
             [completionRoot, {}]

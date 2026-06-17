@@ -76,7 +76,8 @@
     width: 100vw;
     height: 100vh;
     z-index: 100;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .public-practice-video-stack {
@@ -273,7 +274,7 @@
     gap: 16px;
     padding: 32px 0 28px;
     box-sizing: border-box;
-    overflow-y: auto;
+    overflow: visible;
     font-family: Arial;
 }
 
@@ -384,15 +385,11 @@
 
 .public-analysis-content {
     margin-top: 8px;
-    max-height: min(22vh, 220px);
-    overflow-y: auto;
     padding-right: 6px;
 }
 
 .public-analysis-scroll {
     margin-top: 8px;
-    max-height: min(22vh, 220px);
-    overflow-y: auto;
     padding-right: 6px;
 }
 
@@ -484,8 +481,9 @@
     justify-content: center;
     gap: 18px;
     width: 100%;
-    margin-top: 0;
-    padding-bottom: 4px;
+    margin-top: 16px;
+    padding: 14px 0 6px;
+    border-top: 1px solid rgba(168, 168, 168, 0.45);
 }
 
 @media (max-width: 1024px) {
