@@ -182,7 +182,7 @@ class PublicInstructionLandscape extends PublicInstructionReminderScreen {
         return createInstructionPairIcon({
             leftIcon: `${INSTRUCTION_BASE_URL}/tabletNoBack.png`,
             rightIcon: `${INSTRUCTION_BASE_URL}/tabletNoBack.png`,
-            rightIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--portrait'
+            leftIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--portrait'
         })
     }
 }
