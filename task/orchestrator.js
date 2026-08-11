@@ -17,6 +17,10 @@ export default class Orchestrator {
         this.incorrectScreen = new Incorrect(this)
         this.timeoutScreen = new TimeOut(this)
         this.trialScreen = new variant.trialScreenClass(this)
+        this.interStimulusDuration = this.variant.hasOwnProperty('interStimulusDuration')
+            ? this.variant.interStimulusDuration
+            : 100
+        this.advanceTimeoutID = null
     }
 
     get currentTrial() {
@@ -118,9 +122,12 @@ export default class Orchestrator {
     }
 
     next() {
-        this.currentScreen = this.currentScreen.next
-        this.render()
-        if (this.currentScreen.trial !== null) this.currentScreen.screen.startTrial()
+        clearTimeout(this.advanceTimeoutID)
+        this.advanceTimeoutID = setTimeout(() => {
+            this.currentScreen = this.currentScreen.next
+            this.render()
+            if (this.currentScreen.trial !== null) this.currentScreen.screen.startTrial()
+        }, this.interStimulusDuration)
     }
 
     previous() {

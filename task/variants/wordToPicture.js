@@ -19,6 +19,7 @@ class AuditoryWordToPictureMatchingReadMap {
         this.fixationDuration = 100
         this.timeToTimeout = 10000
         this.waitDuration = 500
+        this.interStimulusDuration = 100
 
         this.trialClass = AuditoryWordToPictureMatchingReadMapTrial
         this.trialScreenClass = AuditoryWordToPictureMatchingReadMapTrialScreen
@@ -40,6 +41,7 @@ class WrittenWordToPictureMatchingReadMap {
         this.fixationDuration = 100
         this.timeToTimeout = 10000
         this.waitDuration = 500
+        this.interStimulusDuration = 100
 
         this.trialClass = WrittenWordToPictureMatchingReadMapTrial
         this.trialScreenClass = WrittenWordToPictureMatchingReadMapTrialScreen
