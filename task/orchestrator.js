@@ -123,11 +123,17 @@ export default class Orchestrator {
 
     next() {
         clearTimeout(this.advanceTimeoutID)
+        this.showTransitionBackground()
         this.advanceTimeoutID = setTimeout(() => {
             this.currentScreen = this.currentScreen.next
             this.render()
             if (this.currentScreen.trial !== null) this.currentScreen.screen.startTrial()
         }, this.interStimulusDuration)
+    }
+
+    showTransitionBackground() {
+        CONTAINER.children().detach()
+        CONTAINER.addClass('response-pending')
     }
 
     previous() {
@@ -136,6 +142,7 @@ export default class Orchestrator {
     }
 
     render() {
+        CONTAINER.removeClass('response-pending')
         CONTAINER.children().detach()
         for (const [component, ] of this.currentScreen.screen.components.entries()) {
             CONTAINER.append(component)
