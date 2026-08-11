@@ -1,6 +1,8 @@
 import { CONTAINER } from "../shared/components/container"
 import { Begin, Break, Complete, Incorrect, TimeOut } from "./screens/transition"
 import SequenceNode from "./sequenceNode"
+import { preloadImageSource } from "../shared/components/imageContainer"
+import { preloadAudioSource } from "../shared/components/audioContainer"
 
 
 export default class Orchestrator {
@@ -20,7 +22,11 @@ export default class Orchestrator {
         this.interStimulusDuration = this.variant.hasOwnProperty('interStimulusDuration')
             ? this.variant.interStimulusDuration
             : 100
+        this.prebufferNodeResources = this.variant.hasOwnProperty('prebufferNodeResources')
+            ? this.variant.prebufferNodeResources
+            : 0
         this.advanceTimeoutID = null
+        this.resourceManifest = []
     }
 
     get currentTrial() {
@@ -86,6 +92,70 @@ export default class Orchestrator {
         })
 
         current.next = new SequenceNode(this.completeScreen)
+        this.resourceManifest = this.buildResourceManifest()
+    }
+
+    buildResourceManifest() {
+        const manifest = []
+        let node = this.root
+        let index = 0
+
+        while (node) {
+            const resources = this.getNodeResources(node)
+            if (resources.length > 0) {
+                manifest.push({ index, node, resources })
+            }
+
+            node = node.next
+            index += 1
+        }
+
+        return manifest
+    }
+
+    getNodeResources(node) {
+        if (!node || !node.screen || typeof node.screen.resourceManifest !== 'function') {
+            return []
+        }
+
+        const resources = node.screen.resourceManifest()
+        return Array.isArray(resources) ? resources : []
+    }
+
+    preloadResources(resources) {
+        resources.forEach((resource) => {
+            if (!resource || !resource.source) return
+
+            if (resource.type === 'audio') {
+                preloadAudioSource(resource.source)
+            } else if (resource.type === 'image') {
+                preloadImageSource(resource.source)
+            }
+        })
+    }
+
+    prebufferUpcomingResources() {
+        if (!this.prebufferNodeResources) return
+
+        const currentIndex = this.getCurrentNodeIndex()
+        for (let offset = 1; offset <= this.prebufferNodeResources; offset += 1) {
+            const entry = this.resourceManifest.find((item) => item.index === currentIndex + offset)
+            if (entry) {
+                this.preloadResources(entry.resources)
+            }
+        }
+    }
+
+    getCurrentNodeIndex() {
+        let node = this.root
+        let index = 0
+
+        while (node && node !== this.currentScreen) {
+            node = node.next
+            index += 1
+        }
+
+        return index
     }
 
     collectMetadata(key, value) {
@@ -123,6 +193,7 @@ export default class Orchestrator {
 
     next() {
         clearTimeout(this.advanceTimeoutID)
+        this.prebufferUpcomingResources()
         this.showTransitionBackground()
         this.advanceTimeoutID = setTimeout(() => {
             this.currentScreen = this.currentScreen.next

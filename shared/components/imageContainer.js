@@ -57,6 +57,14 @@ function setWordToPictureImagesVisible(visible) {
     botrightImage.css('visibility', visibility)
 }
 
+function preloadImageSource(source) {
+    if (!source) return null
+
+    const image = new Image()
+    image.src = source
+    return image
+}
+
 const WORD_TO_PICTURE_CONTAINER = FOUR_IMAGE_CONTAINER
 const WORD_TO_PICTURE_CRESP = TEXT_CRESP_CONTAINER
 
@@ -127,5 +135,6 @@ NAVS_PIC_CONTAINER.append(PicLeft, PicRight)
 export { IMAGE_CONTAINER, FOUR_IMAGE_CONTAINER, TEXT_CRESP_CONTAINER, WORD_TO_PICTURE_CONTAINER, WORD_TO_PICTURE_CRESP,
     topleftImage, toprightImage, botleftImage, botrightImage,
     setWordToPictureImages, setWordToPictureCresp, setWordToPictureImagesVisible,
+    preloadImageSource,
     ARIZONA_IMAGE_CONTAINER, ArizonatopleftImage, ArizonatoprightImage, Arizonatargetimage, ArizonabottomleftImage, ArizonabottomrightImage,
     ONE_IMAGE_CONTAINER, topimage, PicLeft, PicRight, NAVS_PIC_CONTAINER }
