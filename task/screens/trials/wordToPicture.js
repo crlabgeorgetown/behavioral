@@ -14,6 +14,18 @@ import {
 } from "../../../shared/components/imageContainer";
 
 class AuditoryWordToPictureMatchingReadMapTrialScreen extends Screen {
+    resourceManifest(trial) {
+        if (!trial) return []
+
+        return [
+            { type: 'image', source: trial.getTopLeft(), label: 'topleft' },
+            { type: 'image', source: trial.getTopRight(), label: 'topright' },
+            { type: 'image', source: trial.getBotLeft(), label: 'botleft' },
+            { type: 'image', source: trial.getBotRight(), label: 'botright' },
+            { type: 'audio', source: trial.audioSource(), label: 'audio' }
+        ]
+    }
+
     get components() {
         return new Map([
             [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container'}],
@@ -105,6 +117,17 @@ class AuditoryWordToPictureMatchingReadMapTrialScreen extends Screen {
 }
 
 class WrittenWordToPictureMatchingReadMapTrialScreen extends Screen {
+    resourceManifest(trial) {
+        if (!trial) return []
+
+        return [
+            { type: 'image', source: trial.getTopLeft(), label: 'topleft' },
+            { type: 'image', source: trial.getTopRight(), label: 'topright' },
+            { type: 'image', source: trial.getBotLeft(), label: 'botleft' },
+            { type: 'image', source: trial.getBotRight(), label: 'botright' }
+        ]
+    }
+
     get components() {
         return new Map([
             [FOUR_IMAGE_CONTAINER, {addClass: 'four-image-container'}],
