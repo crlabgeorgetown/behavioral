@@ -51,6 +51,16 @@ class PublicLetsPractice extends Screen {
         ])
     }
 
+    resourceManifest() {
+        return [
+            {
+                type: 'video',
+                source: 'https://crlabgeorgetown.github.io/behavioral/static/instruction/LetsPractice.MP4',
+                label: 'practiceVideo'
+            }
+        ]
+    }
+
     get clickHandlers() {
         return {
             publicPracticeReplayButton: () => this.replayVideo(),

@@ -147,6 +147,10 @@ class PublicInstructionReminderScreen extends Screen {
         return jQuery('<div/>')
     }
 
+    resourceManifest() {
+        return []
+    }
+
     get components() {
         const root = jQuery('<div/>', {
             class: 'public-pre-instruction-root'
@@ -185,6 +189,14 @@ class PublicInstructionLandscape extends PublicInstructionReminderScreen {
             leftIconClass: 'public-pre-instruction-icon public-pre-instruction-icon--portrait'
         })
     }
+
+    resourceManifest() {
+        const icon = `${INSTRUCTION_BASE_URL}/tabletNoBack.png`
+        return [
+            { type: 'image', source: icon, label: 'leftIcon' },
+            { type: 'image', source: icon, label: 'rightIcon' }
+        ]
+    }
 }
 
 
@@ -199,6 +211,14 @@ class PublicInstructionLeftHand extends PublicInstructionReminderScreen {
             alt: 'Use your left hand'
         })
     }
+
+    resourceManifest() {
+        return [
+            { type: 'image', source: `${INSTRUCTION_BASE_URL}/greenCheckNoBack.png`, label: 'leftMark' },
+            { type: 'image', source: `${INSTRUCTION_BASE_URL}/redXNoBack.png`, label: 'rightMark' },
+            { type: 'image', source: `${INSTRUCTION_BASE_URL}/handsNoBack.png`, label: 'icon' }
+        ]
+    }
 }
 
 
@@ -212,6 +232,12 @@ class PublicInstructionHeadphones extends PublicInstructionReminderScreen {
             icon: `${INSTRUCTION_BASE_URL}/headphonesNoBack.png`,
             alt: 'Headphones'
         })
+    }
+
+    resourceManifest() {
+        return [
+            { type: 'image', source: `${INSTRUCTION_BASE_URL}/headphonesNoBack.png`, label: 'icon' }
+        ]
     }
 }
 
@@ -319,6 +345,17 @@ const WRITTEN_WTP_INSTRUCTION = {
 class PublicInstructionWordToPictureMatchingBase extends Screen {
     get instructionConfig() {
         return AUDITORY_WTP_INSTRUCTION
+    }
+
+    resourceManifest() {
+        const config = this.instructionConfig
+        return [
+            { type: 'video', source: config.videoUrl, label: 'instructionVideo' },
+            { type: 'image', source: config.images.topleft, label: 'topleft' },
+            { type: 'image', source: config.images.topright, label: 'topright' },
+            { type: 'image', source: config.images.botleft, label: 'botleft' },
+            { type: 'image', source: config.images.botright, label: 'botright' }
+        ]
     }
 
     get components() {

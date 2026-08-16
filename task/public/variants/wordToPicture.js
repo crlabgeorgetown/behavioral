@@ -29,6 +29,9 @@ class PublicAuditoryWordToPictureMatchingReadMap {
         this.fixationDuration = 100
         this.timeToTimeout = 10000
         this.waitDuration = 500
+        this.interStimulusDuration = 100
+        this.prebufferNodeResources = 3
+        this.preloadInstructionResourcesAtInit = true
 
         this.trialClass = AuditoryWordToPictureMatchingReadMapTrial
         this.trialScreenClass = AuditoryWordToPictureMatchingReadMapTrialScreen
@@ -56,6 +59,9 @@ class PublicWrittenWordToPictureMatchingReadMap {
         this.fixationDuration = 100
         this.timeToTimeout = 10000
         this.waitDuration = 500
+        this.interStimulusDuration = 100
+        this.prebufferNodeResources = 3
+        this.preloadInstructionResourcesAtInit = true
 
         this.trialClass = WrittenWordToPictureMatchingReadMapTrial
         this.trialScreenClass = WrittenWordToPictureMatchingReadMapTrialScreen

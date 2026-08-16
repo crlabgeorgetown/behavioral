@@ -1,6 +1,9 @@
 import { CONTAINER } from "../shared/components/container"
 import { Begin, Break, Complete, Incorrect, TimeOut } from "./screens/transition"
 import SequenceNode from "./sequenceNode"
+import { preloadImageSource } from "../shared/components/imageContainer"
+import { preloadAudioSource } from "../shared/components/audioContainer"
+import { preloadVideoSource } from "../shared/components/videoContainer"
 
 
 export default class Orchestrator {
@@ -17,6 +20,18 @@ export default class Orchestrator {
         this.incorrectScreen = new Incorrect(this)
         this.timeoutScreen = new TimeOut(this)
         this.trialScreen = new variant.trialScreenClass(this)
+        this.interStimulusDuration = this.variant.hasOwnProperty('interStimulusDuration')
+            ? this.variant.interStimulusDuration
+            : 100
+        this.prebufferNodeResources = this.variant.hasOwnProperty('prebufferNodeResources')
+            ? this.variant.prebufferNodeResources
+            : 0
+        this.preloadInstructionResourcesAtInit = this.variant.hasOwnProperty('preloadInstructionResourcesAtInit')
+            ? this.variant.preloadInstructionResourcesAtInit
+            : false
+        this.advanceTimeoutID = null
+        this.preloadedResources = []
+        this.preloadedSources = new Set()
     }
 
     get currentTrial() {
@@ -82,6 +97,55 @@ export default class Orchestrator {
         })
 
         current.next = new SequenceNode(this.completeScreen)
+        this.preloadInstructionResourcesIfEnabled()
+    }
+
+    preloadInstructionResourcesIfEnabled() {
+        if (!this.preloadInstructionResourcesAtInit) return
+
+        let node = this.root
+        for (let i = 0; i < this.variant.screens.length && node; i += 1) {
+            this.preloadResources(this.getNodeResources(node))
+            node = node.next
+        }
+    }
+
+    getNodeResources(node) {
+        if (!node || !node.screen || typeof node.screen.resourceManifest !== 'function') {
+            return []
+        }
+
+        const resources = node.screen.resourceManifest(node.trial)
+        return Array.isArray(resources) ? resources : []
+    }
+
+    preloadResources(resources) {
+        resources.forEach((resource) => {
+            if (!resource || !resource.source) return
+            if (this.preloadedSources.has(resource.source)) return
+            this.preloadedSources.add(resource.source)
+
+            let element = null
+            if (resource.type === 'audio') {
+                element = preloadAudioSource(resource.source)
+            } else if (resource.type === 'image') {
+                element = preloadImageSource(resource.source)
+            } else if (resource.type === 'video') {
+                element = preloadVideoSource(resource.source)
+            }
+
+            if (element) this.preloadedResources.push(element)
+        })
+    }
+
+    prebufferUpcomingResources() {
+        if (!this.prebufferNodeResources) return
+
+        let node = this.currentScreen
+        for (let offset = 0; offset < this.prebufferNodeResources && node; offset += 1) {
+            node = node.next
+            if (node) this.preloadResources(this.getNodeResources(node))
+        }
     }
 
     collectMetadata(key, value) {
@@ -118,9 +182,19 @@ export default class Orchestrator {
     }
 
     next() {
-        this.currentScreen = this.currentScreen.next
-        this.render()
-        if (this.currentScreen.trial !== null) this.currentScreen.screen.startTrial()
+        clearTimeout(this.advanceTimeoutID)
+        this.prebufferUpcomingResources()
+        this.showTransitionBackground()
+        this.advanceTimeoutID = setTimeout(() => {
+            this.currentScreen = this.currentScreen.next
+            this.render()
+            if (this.currentScreen.trial !== null) this.currentScreen.screen.startTrial()
+        }, this.interStimulusDuration)
+    }
+
+    showTransitionBackground() {
+        CONTAINER.children().detach()
+        CONTAINER.addClass('response-pending')
     }
 
     previous() {
@@ -129,6 +203,7 @@ export default class Orchestrator {
     }
 
     render() {
+        CONTAINER.removeClass('response-pending')
         CONTAINER.children().detach()
         for (const [component, ] of this.currentScreen.screen.components.entries()) {
             CONTAINER.append(component)

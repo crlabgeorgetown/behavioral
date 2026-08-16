@@ -20,6 +20,10 @@ video {
     border: 2px solid;
 }
 
+.response-pending {
+    background: #ffffff;
+}
+
 .typing-container {
     display: flex;
 }
