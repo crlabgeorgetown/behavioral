@@ -3,6 +3,7 @@ import { Begin, Break, Complete, Incorrect, TimeOut } from "./screens/transition
 import SequenceNode from "./sequenceNode"
 import { preloadImageSource } from "../shared/components/imageContainer"
 import { preloadAudioSource } from "../shared/components/audioContainer"
+import { preloadVideoSource } from "../shared/components/videoContainer"
 
 
 export default class Orchestrator {
@@ -25,6 +26,9 @@ export default class Orchestrator {
         this.prebufferNodeResources = this.variant.hasOwnProperty('prebufferNodeResources')
             ? this.variant.prebufferNodeResources
             : 0
+        this.preloadInstructionResourcesAtInit = this.variant.hasOwnProperty('preloadInstructionResourcesAtInit')
+            ? this.variant.preloadInstructionResourcesAtInit
+            : false
         this.advanceTimeoutID = null
         this.resourceManifest = []
     }
@@ -93,6 +97,15 @@ export default class Orchestrator {
 
         current.next = new SequenceNode(this.completeScreen)
         this.resourceManifest = this.buildResourceManifest()
+        this.preloadInstructionResourcesIfEnabled()
+    }
+
+    preloadInstructionResourcesIfEnabled() {
+        if (!this.preloadInstructionResourcesAtInit) return
+
+        this.resourceManifest
+            .filter((entry) => entry.index < this.variant.screens.length)
+            .forEach((entry) => this.preloadResources(entry.resources))
     }
 
     buildResourceManifest() {
@@ -130,6 +143,8 @@ export default class Orchestrator {
                 preloadAudioSource(resource.source)
             } else if (resource.type === 'image') {
                 preloadImageSource(resource.source)
+            } else if (resource.type === 'video') {
+                preloadVideoSource(resource.source)
             }
         })
     }
