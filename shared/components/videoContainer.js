@@ -3,8 +3,12 @@ const VIDEO_SOURCE = jQuery("<source/>", {id: 'videoSource', type: 'video/mp4'})
 
 VIDEO_CONTAINER.append(VIDEO_SOURCE)
 
+const preloadedVideoSources = new Set()
+
 function preloadVideoSource(source) {
 	if (!source) return null
+	if (preloadedVideoSources.has(source)) return null
+	preloadedVideoSources.add(source)
 
 	// video.preload="auto" is only a hint and browsers often buffer just the
 	// start of the file when the element never plays. Force the full file

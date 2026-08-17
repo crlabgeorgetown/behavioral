@@ -31,7 +31,6 @@ export default class Orchestrator {
             : false
         this.advanceTimeoutID = null
         this.preloadedResources = []
-        this.preloadedSources = new Set()
     }
 
     get currentTrial() {
@@ -122,8 +121,6 @@ export default class Orchestrator {
     preloadResources(resources) {
         resources.forEach((resource) => {
             if (!resource || !resource.source) return
-            if (this.preloadedSources.has(resource.source)) return
-            this.preloadedSources.add(resource.source)
 
             let element = null
             if (resource.type === 'audio') {

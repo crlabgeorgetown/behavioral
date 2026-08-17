@@ -5,6 +5,9 @@ import Orchestrator from "../orchestrator"
 import { PUBLIC_TASK_REGISTRY } from "./variants/index"
 import { initPublicTaskHub } from "./hub"
 import { PublicCombinedComplete, PublicContinueToNextTaskComplete } from "./screens/wordToPicture"
+import { preloadImageSource } from "../../shared/components/imageContainer"
+import { preloadAudioSource } from "../../shared/components/audioContainer"
+import { preloadVideoSource } from "../../shared/components/videoContainer"
 
 import { Analytics } from './internal/plausibleAnalytics'
 
@@ -66,8 +69,31 @@ function loadData(key) {
     return d3.csv(buildDataUrl(key))
 }
 
-function runSingleTask({ key, VariantClass, metadata, options = {} }) {
-    return loadData(key).then((data) => {
+// Fixed instruction screens (video, icons) don't depend on trial CSV data,
+// so their resources can be warmed the moment we know a variant is coming up,
+// well before its own Orchestrator gets a chance to preload them itself.
+function preloadFixedScreenResources(VariantClass, metadata) {
+    const variant = new VariantClass(metadata)
+
+    variant.screens.forEach((ScreenClass) => {
+        const screen = new ScreenClass({})
+        if (typeof screen.resourceManifest !== 'function') return
+
+        const resources = screen.resourceManifest()
+        if (!Array.isArray(resources)) return
+
+        resources.forEach((resource) => {
+            if (!resource || !resource.source) return
+
+            if (resource.type === 'audio') preloadAudioSource(resource.source)
+            else if (resource.type === 'image') preloadImageSource(resource.source)
+            else if (resource.type === 'video') preloadVideoSource(resource.source)
+        })
+    })
+}
+
+function runSingleTask({ key, VariantClass, metadata, options = {}, dataPromise }) {
+    return (dataPromise || loadData(key)).then((data) => {
         return new PublicTask({
             data,
             VariantClass,
@@ -116,6 +142,12 @@ function runWordToPictureSequence({ entry, metadata }) {
 
     const combinedClient = new CombinedWordToPictureClient(metadata)
 
+    // Give every step's video/icons the full duration of earlier steps to
+    // download in the background, instead of only the brief gap between one
+    // step ending and the next beginning.
+    sequence.forEach((step) => preloadFixedScreenResources(step.variantClass, metadata))
+    const dataPromises = sequence.map((step) => loadData(step.key))
+
     const runStep = (index) => {
         const step = sequence[index]
         if (!step) return
@@ -128,6 +160,7 @@ function runWordToPictureSequence({ entry, metadata }) {
                 ...metadata,
                 Task: step.label
             },
+            dataPromise: dataPromises[index],
             options: buildSequenceStepOptions({
                 isLastStep,
                 step,

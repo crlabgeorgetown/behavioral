@@ -57,8 +57,12 @@ function setWordToPictureImagesVisible(visible) {
     botrightImage.css('visibility', visibility)
 }
 
+const preloadedImageSources = new Set()
+
 function preloadImageSource(source) {
     if (!source) return null
+    if (preloadedImageSources.has(source)) return null
+    preloadedImageSources.add(source)
 
     const image = new Image()
     image.src = source
