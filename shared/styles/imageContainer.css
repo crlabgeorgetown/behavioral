@@ -114,7 +114,11 @@
 @media (max-width: 620px) {
     .four-image-container{
         width: min(96vw, 1400px);
+        /* vh over-reports on mobile Safari/Chrome when the toolbar is
+           showing; dvh tracks the actually-visible height. vh stays as a
+           fallback for browsers without dvh support. */
         height: min(64vh, 700px);
+        height: min(64dvh, 700px);
         column-gap: clamp(16px, 6vw, 60px);
         row-gap: clamp(16px, 6vw, 72px);
         padding: clamp(6px, 1.5vw, 18px);
@@ -126,9 +130,12 @@
 @media (max-height: 480px) and (orientation: landscape) {
     .four-image-container{
         height: min(92vh, 900px);
+        height: min(92dvh, 900px);
         row-gap: clamp(10px, 5vh, 72px);
+        row-gap: clamp(10px, 5dvh, 72px);
         column-gap: clamp(16px, 4vw, 240px);
         padding: clamp(4px, 1vh, 18px);
+        padding: clamp(4px, 1dvh, 18px);
     }
 }
 

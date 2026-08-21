@@ -13,7 +13,12 @@
 
 #publicTaskHubRoot {
     width: 100%;
+    /* iOS Safari's 100vh includes the space behind the collapsible toolbar,
+       which isn't actually visible - that pushes content (esp. the Begin
+       button) past what the user can see. 100dvh tracks the real visible
+       area; vh stays as a fallback for browsers without dvh support. */
     height: 100vh;
+    height: 100dvh;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -22,6 +27,14 @@
 .hub-screen {
     width: 100%;
     justify-content: flex-start !important;
+    /* .hub-screen is a clone of the shared CONTAINER, which sets an inline
+       min-height:100vh - only !important can beat an inline style. Without
+       overriding this too, the screen stays phantom-tall even once its
+       scroll parent (#publicTaskHubRoot) is sized correctly, and .hub-form's
+       auto margins (below) center it inside that oversized space, pushing
+       the Begin button down past what's actually visible. */
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
 }
 
 .hub-form {
@@ -102,13 +115,23 @@
     text-align: center;
 }
 
+/* #container (CONTAINER) sets an inline min-height:100vh and is reused by
+   every instruction/trial screen. This file is only ever loaded by the
+   public hub HTML, so this override can't reach internal/admin tasks. */
+#container {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+}
+
 #Wrapper {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
+    /* Same iOS Safari toolbar issue as #publicTaskHubRoot above. */
     height: 100vh;
+    height: 100dvh;
     z-index: 100;
     overflow-y: auto;
     overflow-x: hidden;
@@ -202,6 +225,7 @@
 .public-pre-instruction-root {
     width: min(95vw, 1100px);
     margin-top: clamp(52px, 8vh, 110px);
+    margin-top: clamp(52px, 8dvh, 110px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -259,6 +283,7 @@
 
 .public-pre-instruction-split--hands {
     margin-top: clamp(56px, 8vh, 120px);
+    margin-top: clamp(56px, 8dvh, 120px);
 }
 
 .public-pre-instruction-split-marks {
@@ -277,6 +302,7 @@
 
 .public-pre-instruction-split-marks--hands {
     top: clamp(-24px, -2vh, -12px);
+    top: clamp(-24px, -2dvh, -12px);
 }
 
 .public-pre-instruction-split-marks--single-left {
@@ -295,12 +321,14 @@
     line-height: 1.25;
     font-size: clamp(34px, 3.15vw, 58px);
     margin-top: clamp(20px, 3vh, 34px);
+    margin-top: clamp(20px, 3dvh, 34px);
     margin-bottom: 0;
 }
 
 .public-completion-root {
     width: 100%;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -363,6 +391,7 @@
 .public-radar-canvas-wrap {
     width: 100%;
     height: min(34vh, 300px);
+    height: min(34dvh, 300px);
     min-height: 220px;
     flex: 1;
 }
@@ -611,12 +640,17 @@
         margin-top: 12px;
     }
 
+    /* Each vh-based rule below is duplicated with dvh - vh is the fallback
+       for browsers without dvh support, dvh is what actually matches the
+       visible area on iOS/Android Safari with a collapsible toolbar. */
     .public-pre-instruction-icon {
         width: clamp(120px, 20vh, 210px);
+        width: clamp(120px, 20dvh, 210px);
     }
 
     .public-pre-instruction-mark {
         width: clamp(36px, 6vh, 56px);
+        width: clamp(36px, 6dvh, 56px);
     }
 
     .public-pre-instruction-split--hands {
@@ -625,16 +659,19 @@
 
     .public-pre-instruction-text {
         font-size: clamp(22px, 4vh, 34px);
+        font-size: clamp(22px, 4dvh, 34px);
         margin-top: 10px;
     }
 
     .public-instruction-video,
     .public-instruction-video--written {
         width: clamp(140px, 30vh, 220px);
+        width: clamp(140px, 30dvh, 220px);
     }
 
     .public-radar-canvas-wrap {
         height: min(180px, 32vh);
+        height: min(180px, 32dvh);
         min-height: 140px;
     }
 }

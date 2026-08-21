@@ -96,13 +96,16 @@
 @media (max-height: 480px) and (orientation: landscape) {
     .extra-large-text {
         font-size: clamp(24pt, 14vh, 60pt);
+        font-size: clamp(24pt, 14dvh, 60pt);
     }
 
     .large-text {
         font-size: clamp(20pt, 11vh, 44pt);
+        font-size: clamp(20pt, 11dvh, 44pt);
     }
 
     .medium-text {
         font-size: clamp(16pt, 9vh, 33pt);
+        font-size: clamp(16pt, 9dvh, 33pt);
     }
 }
