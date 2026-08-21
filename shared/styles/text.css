@@ -70,3 +70,39 @@
         font-size: 27pt;
     }
 }
+
+/* Phone widths: the queries above only ever matched iPad-class devices, so
+   phones got no font scaling at all. Additive only. */
+@media (max-width: 620px) {
+    .extra-large-text {
+        font-size: clamp(28pt, 11vw, 60pt);
+    }
+
+    .large-text {
+        font-size: clamp(22pt, 8vw, 44pt);
+    }
+
+    .medium-text {
+        font-size: clamp(18pt, 6vw, 33pt);
+    }
+
+    .small-text {
+        font-size: clamp(13pt, 4.5vw, 20pt);
+    }
+}
+
+/* Short-height viewports: phones in landscape need font size tied to
+   available height, not just width, or text overflows the stimulus area. */
+@media (max-height: 480px) and (orientation: landscape) {
+    .extra-large-text {
+        font-size: clamp(24pt, 14vh, 60pt);
+    }
+
+    .large-text {
+        font-size: clamp(20pt, 11vh, 44pt);
+    }
+
+    .medium-text {
+        font-size: clamp(16pt, 9vh, 33pt);
+    }
+}

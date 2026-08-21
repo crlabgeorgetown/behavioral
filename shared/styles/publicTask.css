@@ -1,3 +1,24 @@
+:root {
+    /* Mirror the trial screens' existing hardcoded values so the hub/selector
+       feels like the same product instead of inventing a second palette. */
+    --pub-text: #000000;
+    --pub-bg: #f0f0f0;
+    --pub-button-bg: #a8a8a8;
+    --pub-button-bg-hover: #B0B0B0;
+    --pub-accent: #e9d700;
+    --pub-border: #ccc;
+    --pub-red: #FF0000;
+    --pub-font: Arial, sans-serif;
+}
+
+#publicTaskHubRoot {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
 .hub-screen {
     width: 100%;
     justify-content: flex-start !important;
@@ -5,7 +26,7 @@
 
 .hub-form {
     width: 60%;
-    min-width: 360px;
+    min-width: 0;
     max-width: 680px;
     margin-top: auto;
     margin-bottom: auto;
@@ -23,7 +44,7 @@
     margin-left: 0;
     width: 200px;
     text-align: right;
-    color: #909090;
+    color: var(--pub-text);
 }
 
 .hub-form .participant-id-input {
@@ -41,14 +62,27 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 2px solid #b0b0b0;
+    border: 2px solid var(--pub-border);
     background: #ffffff;
     padding: 14px 22px;
     cursor: pointer;
-    font-family: Arial;
+    font-family: var(--pub-font);
     font-size: 22pt;
-    color: #333333;
+    color: var(--pub-text);
     user-select: none;
+    touch-action: manipulation;
+}
+
+.hub-task-option:active,
+.hub-task-option:has(input:checked) {
+    background: #d8d8d8;
+    border-color: var(--pub-accent);
+}
+
+@media (hover: hover) {
+    .hub-task-option:hover {
+        border-color: #000000;
+    }
 }
 
 .hub-task-option input[type="radio"] {
@@ -57,13 +91,13 @@
     margin-right: 22px;
     flex-shrink: 0;
     cursor: pointer;
-    accent-color: #333333;
+    accent-color: var(--pub-text);
 }
 
 .hub-error {
     min-height: 28px;
-    color: #a00000;
-    font-family: Arial;
+    color: var(--pub-red);
+    font-family: var(--pub-font);
     font-size: 15pt;
     text-align: center;
 }
@@ -418,6 +452,18 @@
     table-layout: fixed;
 }
 
+@media (max-width: 480px) {
+    .public-analysis-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .public-analysis-table {
+        table-layout: auto;
+        min-width: 420px;
+    }
+}
+
 .public-analysis-table th,
 .public-analysis-table td {
     padding: 6px 4px;
@@ -497,5 +543,98 @@
 
     .public-radar-canvas-wrap {
         height: 280px;
+    }
+}
+
+/* Phone widths (portrait phones and most landscape phones) */
+@media (max-width: 620px) {
+    .hub-form {
+        width: 92%;
+    }
+
+    .hub-form .participant-id-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hub-form .participant-id-label {
+        width: auto;
+        text-align: left;
+        margin-right: 0;
+        margin-bottom: 6px;
+    }
+
+    .hub-task-option {
+        font-size: 18pt;
+        padding: 12px 16px;
+    }
+
+    .public-instruction-header,
+    .public-instruction-header--written {
+        flex-direction: column;
+        align-items: center;
+        width: min(94vw, 560px);
+        gap: 14px;
+    }
+
+    .public-instruction-video,
+    .public-instruction-video--written {
+        width: min(78vw, 360px);
+        max-width: 78vw;
+    }
+
+    .public-instruction-text,
+    .public-instruction-text--written {
+        text-align: center;
+        max-width: none;
+    }
+
+    .public-pre-instruction-pair {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+
+    .public-pre-instruction-icon,
+    .public-pre-instruction-icon--single,
+    .public-pre-instruction-icon--split,
+    .public-pre-instruction-split {
+        width: min(60vw, 280px);
+    }
+}
+
+/* Short-height viewports: phones in landscape (the orientation the app
+   itself instructs participants into) have very little vertical room, so
+   vh-based sizing needs its own floor independent of width. */
+@media (max-height: 480px) and (orientation: landscape) {
+    .public-pre-instruction-root {
+        margin-top: 12px;
+    }
+
+    .public-pre-instruction-icon {
+        width: clamp(120px, 20vh, 210px);
+    }
+
+    .public-pre-instruction-mark {
+        width: clamp(36px, 6vh, 56px);
+    }
+
+    .public-pre-instruction-split--hands {
+        margin-top: 20px;
+    }
+
+    .public-pre-instruction-text {
+        font-size: clamp(22px, 4vh, 34px);
+        margin-top: 10px;
+    }
+
+    .public-instruction-video,
+    .public-instruction-video--written {
+        width: clamp(140px, 30vh, 220px);
+    }
+
+    .public-radar-canvas-wrap {
+        height: min(180px, 32vh);
+        min-height: 140px;
     }
 }

@@ -107,6 +107,31 @@
     background-color: #ccc;
 }
 
+/* Phone widths: the trial grid's gap floors (60px/72px) are larger than the
+   instruction-preview grid's (24px), leaving very little room for the actual
+   images on a narrow screen. Additive only - desktop/tablet sizing above is
+   untouched. */
+@media (max-width: 620px) {
+    .four-image-container{
+        width: min(96vw, 1400px);
+        height: min(64vh, 700px);
+        column-gap: clamp(16px, 6vw, 60px);
+        row-gap: clamp(16px, 6vw, 72px);
+        padding: clamp(6px, 1.5vw, 18px);
+    }
+}
+
+/* Short-height viewports: phones in landscape (the orientation the app
+   instructs participants into) have very little vertical room. */
+@media (max-height: 480px) and (orientation: landscape) {
+    .four-image-container{
+        height: min(92vh, 900px);
+        row-gap: clamp(10px, 5vh, 72px);
+        column-gap: clamp(16px, 4vw, 240px);
+        padding: clamp(4px, 1vh, 18px);
+    }
+}
+
 #text-cresp-container{
     position: absolute;
     left: 50%;

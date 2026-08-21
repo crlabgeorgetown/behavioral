@@ -43,3 +43,17 @@
         font-size: 25px;
     }
 }
+
+/* Phone widths: 15%-of-container icons can shrink below the ~44px touch
+   target guideline on a narrow screen. Additive only. */
+@media (max-width: 480px) {
+    .device-button {
+        width: 20%;
+        min-width: 44px;
+    }
+
+    .device-label {
+        width: 20%;
+        font-size: clamp(12px, 4vw, 20px);
+    }
+}
