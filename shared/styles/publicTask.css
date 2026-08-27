@@ -640,6 +640,12 @@
         margin-top: 12px;
     }
 
+    .public-instruction-header,
+    .public-instruction-header--written {
+        margin-top: 4px;
+        margin-bottom: 2px;
+    }
+
     /* Each vh-based rule below is duplicated with dvh - vh is the fallback
        for browsers without dvh support, dvh is what actually matches the
        visible area on iOS/Android Safari with a collapsible toolbar. */

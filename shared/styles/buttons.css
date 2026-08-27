@@ -100,12 +100,30 @@
 }
 
 /* Portrait */
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (orientation: portrait) 
+@media only screen
+  and (min-device-width: 768px)
+  and (max-device-width: 1024px)
+  and (orientation: portrait)
   and (-webkit-min-device-pixel-ratio: 2) {
     .instruction-button-container {
         margin-bottom: 8vh;
+    }
+}
+
+/* Short-height viewports: phones in landscape have very little vertical
+   room, and 4vh of margin-bottom (tuned for a taller viewport) is enough
+   on its own to push content past the visible area. Additive only. */
+@media (max-height: 480px) and (orientation: landscape) {
+    .instruction-button-container {
+        margin-bottom: 6px;
+        padding: 6px 12px;
+    }
+
+    .grey-button {
+        padding: 6px 12px;
+    }
+
+    .medium-button-text {
+        font-size: 16pt;
     }
 }

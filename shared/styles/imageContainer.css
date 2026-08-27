@@ -137,6 +137,20 @@
         padding: clamp(4px, 1vh, 18px);
         padding: clamp(4px, 1dvh, 18px);
     }
+
+    /* The instruction-preview grid sits below a video+text header on the
+       same short screen, so it needs a tighter padding floor than the live
+       trial grid above - this was missed in the first pass, which is why
+       the instruction screen (video+text+grid+buttons) still overflowed. */
+    .four-image-container-instruction{
+        height: min(50vh, 560px);
+        height: min(50dvh, 560px);
+        row-gap: clamp(6px, 3vh, 84px);
+        row-gap: clamp(6px, 3dvh, 84px);
+        column-gap: clamp(16px, 4vw, 84px);
+        padding: clamp(2px, 0.6vh, 20px);
+        padding: clamp(2px, 0.6dvh, 20px);
+    }
 }
 
 #text-cresp-container{
