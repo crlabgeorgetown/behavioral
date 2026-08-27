@@ -13,6 +13,82 @@ import {
     setWordToPictureImagesVisible
 } from "../../../shared/components/imageContainer";
 
+// ============================================================
+// TEMP DIAGNOSTICS (field testing) — START
+// Only active when orchestrator.collectDiagnostics is true (public variants
+// only, see task/public/variants/wordToPicture.js). Purely observational -
+// event listeners and Performance API reads, never adds delay to the trial
+// itself. Remove this whole block, and every block below marked
+// "TEMP DIAGNOSTICS call site", once field testing is done.
+// ============================================================
+
+function earliestResourceRequestTime(url) {
+    const entries = performance.getEntriesByName(url)
+    if (entries.length === 0) return null
+    return Math.min(...entries.map((entry) => entry.startTime))
+}
+
+function recordDeviceDiagnostics(trial) {
+    trial.Diag_ViewportWidth = window.innerWidth
+    trial.Diag_ViewportHeight = window.innerHeight
+    trial.Diag_Orientation = window.innerWidth >= window.innerHeight ? 'landscape' : 'portrait'
+    trial.Diag_DevicePixelRatio = window.devicePixelRatio || ''
+    trial.Diag_UserAgent = navigator.userAgent || ''
+    trial.Diag_ConnectionType = (navigator.connection && navigator.connection.effectiveType) || ''
+}
+
+function recordImageDiagnostics(trial, revealDelayMs) {
+    const images = [
+        { el: topleftImage, src: trial.getTopLeft() },
+        { el: toprightImage, src: trial.getTopRight() },
+        { el: botleftImage, src: trial.getBotLeft() },
+        { el: botrightImage, src: trial.getBotRight() }
+    ]
+    const srcSetAt = performance.now()
+    const loadTimes = []
+    const leadTimes = images
+        .map((image) => earliestResourceRequestTime(image.src))
+        .filter((time) => time !== null)
+        .map((time) => srcSetAt - time)
+
+    images.forEach((image, index) => {
+        image.el.one('load', () => {
+            loadTimes[index] = performance.now() - srcSetAt
+        })
+    })
+
+    setTimeout(() => {
+        const finishedCount = loadTimes.filter(Number.isFinite).length
+        trial.Diag_SlowestImageLoadMs = finishedCount > 0
+            ? Math.round(Math.max(...loadTimes.filter(Number.isFinite)))
+            : null
+        trial.Diag_ImagesAllLoadedBeforeReveal = finishedCount === images.length
+        trial.Diag_MinImagePrebufferLeadMs = leadTimes.length > 0 ? Math.round(Math.min(...leadTimes)) : 0
+    }, revealDelayMs)
+}
+
+function recordAudioDiagnostics(trial, audioUrl) {
+    const el = AUDIO_CONTAINER[0]
+    const playAt = performance.now()
+
+    const firstRequestedAt = earliestResourceRequestTime(audioUrl)
+    trial.Diag_AudioPrebufferLeadMs = firstRequestedAt !== null ? Math.round(playAt - firstRequestedAt) : 0
+    trial.Diag_AudioStallCount = 0
+
+    const onWaiting = () => { trial.Diag_AudioStallCount += 1 }
+    const onPlaying = () => {
+        trial.Diag_AudioPlayToAudibleMs = Math.round(performance.now() - playAt)
+        el.removeEventListener('waiting', onWaiting)
+        el.removeEventListener('playing', onPlaying)
+    }
+
+    el.addEventListener('waiting', onWaiting)
+    el.addEventListener('playing', onPlaying, { once: true })
+}
+// ============================================================
+// TEMP DIAGNOSTICS (field testing) — END
+// ============================================================
+
 class AuditoryWordToPictureMatchingReadMapTrialScreen extends Screen {
     resourceManifest(trial) {
         if (!trial) return []
@@ -74,9 +150,24 @@ class AuditoryWordToPictureMatchingReadMapTrialScreen extends Screen {
             botright: this.orchestrator.currentTrial.getBotRight()
         })
 
+        // ---- TEMP DIAGNOSTICS call site (see block above) ----
+        if (this.orchestrator.collectDiagnostics) {
+            recordDeviceDiagnostics(this.orchestrator.currentTrial)
+            recordImageDiagnostics(
+                this.orchestrator.currentTrial,
+                this.orchestrator.variant.fixationDuration + this.orchestrator.variant.waitDuration
+            )
+        }
+        // ---- end TEMP DIAGNOSTICS call site ----
+
         setTimeout(() => {
             AUDIO_SOURCE.attr('src', this.orchestrator.currentTrial.audioSource())
             AUDIO_CONTAINER[0].load()
+            // ---- TEMP DIAGNOSTICS call site (see block above) ----
+            if (this.orchestrator.collectDiagnostics) {
+                recordAudioDiagnostics(this.orchestrator.currentTrial, this.orchestrator.currentTrial.audioSource())
+            }
+            // ---- end TEMP DIAGNOSTICS call site ----
             AUDIO_CONTAINER[0].play()
             setTimeout(() => {
                 TEXT_CONTAINER.hide()
@@ -172,6 +263,16 @@ class WrittenWordToPictureMatchingReadMapTrialScreen extends Screen {
         })
         setWordToPictureCresp(this.orchestrator.currentTrial.CRESP, 'base-text extra-large-text word-to-picture-cresp')
         setWordToPictureImagesVisible(false)
+
+        // ---- TEMP DIAGNOSTICS call site (see block above) ----
+        if (this.orchestrator.collectDiagnostics) {
+            recordDeviceDiagnostics(this.orchestrator.currentTrial)
+            recordImageDiagnostics(
+                this.orchestrator.currentTrial,
+                this.orchestrator.variant.fixationDuration + this.orchestrator.variant.waitDuration
+            )
+        }
+        // ---- end TEMP DIAGNOSTICS call site ----
 
         setTimeout(() => {
             TEXT_CONTAINER.hide()

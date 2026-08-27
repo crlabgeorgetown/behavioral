@@ -29,6 +29,11 @@ export default class Orchestrator {
         this.preloadInstructionResourcesAtInit = this.variant.hasOwnProperty('preloadInstructionResourcesAtInit')
             ? this.variant.preloadInstructionResourcesAtInit
             : false
+        // ---- TEMP DIAGNOSTICS (field testing) — see task/screens/trials/wordToPicture.js ----
+        this.collectDiagnostics = this.variant.hasOwnProperty('collectDiagnostics')
+            ? this.variant.collectDiagnostics
+            : false
+        // ---- end TEMP DIAGNOSTICS ----
         this.advanceTimeoutID = null
         this.preloadedResources = []
     }
@@ -97,6 +102,15 @@ export default class Orchestrator {
 
         current.next = new SequenceNode(this.completeScreen)
         this.preloadInstructionResourcesIfEnabled()
+
+        // ---- TEMP DIAGNOSTICS (field testing) — see task/screens/trials/wordToPicture.js ----
+        // The default Resource Timing buffer (250 entries) can silently drop
+        // older entries well before a ~50-trial task finishes, breaking the
+        // prebuffer-lead-time diagnostics that read it.
+        if (this.collectDiagnostics && typeof performance.setResourceTimingBufferSize === 'function') {
+            performance.setResourceTimingBufferSize(3000)
+        }
+        // ---- end TEMP DIAGNOSTICS ----
     }
 
     preloadInstructionResourcesIfEnabled() {

@@ -32,6 +32,9 @@ class PublicAuditoryWordToPictureMatchingReadMap {
         this.interStimulusDuration = 100
         this.prebufferNodeResources = 3
         this.preloadInstructionResourcesAtInit = true
+        // ---- TEMP DIAGNOSTICS (field testing) — remove once diagnosis is done ----
+        this.collectDiagnostics = true
+        // ---- end TEMP DIAGNOSTICS ----
 
         this.trialClass = AuditoryWordToPictureMatchingReadMapTrial
         this.trialScreenClass = AuditoryWordToPictureMatchingReadMapTrialScreen
@@ -62,6 +65,9 @@ class PublicWrittenWordToPictureMatchingReadMap {
         this.interStimulusDuration = 100
         this.prebufferNodeResources = 3
         this.preloadInstructionResourcesAtInit = true
+        // ---- TEMP DIAGNOSTICS (field testing) — remove once diagnosis is done ----
+        this.collectDiagnostics = true
+        // ---- end TEMP DIAGNOSTICS ----
 
         this.trialClass = WrittenWordToPictureMatchingReadMapTrial
         this.trialScreenClass = WrittenWordToPictureMatchingReadMapTrialScreen
