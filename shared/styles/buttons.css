@@ -8,6 +8,13 @@
     font-family: Arial;
     text-align: center;
     padding: 12px;
+    /* Without border-box, min-width:100% + padding adds 24px beyond the
+       container's own width - invisible on desktop (masked by margin/
+       clipping headroom) but a real, width-independent horizontal overflow
+       on narrow phones (clips the Next/Previous/Begin/Start button, since
+       overflow-x is hidden). Fixes the box model everywhere; does not
+       change visual size/position at any existing (wider) viewport. */
+    box-sizing: border-box;
 }
 
 .image-button {
