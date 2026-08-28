@@ -159,6 +159,10 @@
     z-index: 100;
     overflow-y: auto;
     overflow-x: hidden;
+    /* #publicTaskHubRoot has this but #Wrapper was missing it - some WebKit-
+       based browsers won't enable touch-scrolling on a position:fixed
+       container with overflow-y:auto unless this is set explicitly. */
+    -webkit-overflow-scrolling: touch;
     /* Same reasoning as #publicTaskHubRoot's background above. */
     background: var(--pub-bg);
 }
