@@ -149,19 +149,20 @@
 
 #Wrapper {
     display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
+    /* Used to be position:fixed (to overlay #publicTaskHubRoot, which was
+       never hidden - only its inner screens were). Some WKWebView-based iOS
+       browsers (e.g. DuckDuckGo) don't reliably deliver touch-scroll to a
+       position:fixed + overflow-y:auto container, even with
+       -webkit-overflow-scrolling:touch set. hub.js now hides mountPoint
+       (#publicTaskHubRoot) itself when the task starts, so #Wrapper no
+       longer needs to float above it - it can be a plain block and scroll
+       the same way #publicTaskHubRoot already does successfully. */
+    width: 100%;
     /* Same iOS Safari toolbar issue as #publicTaskHubRoot above. */
     height: 100vh;
     height: 100dvh;
-    z-index: 100;
     overflow-y: auto;
     overflow-x: hidden;
-    /* #publicTaskHubRoot has this but #Wrapper was missing it - some WebKit-
-       based browsers won't enable touch-scrolling on a position:fixed
-       container with overflow-y:auto unless this is set explicitly. */
     -webkit-overflow-scrolling: touch;
     /* Same reasoning as #publicTaskHubRoot's background above. */
     background: var(--pub-bg);

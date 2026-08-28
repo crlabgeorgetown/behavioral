@@ -98,7 +98,13 @@ function initPublicTaskHub({ publicTaskRegistry, startTask }) {
 
             const metadata = buildMetadata(entry)
 
-            screen2.hide()
+            // mountPoint is hidden (not just screen2) so #Wrapper can drop
+            // position:fixed and scroll the same plain way mountPoint does -
+            // some WKWebView-based iOS browsers (e.g. DuckDuckGo) don't
+            // reliably deliver touch-scroll to a position:fixed container
+            // with overflow-y:auto, even with -webkit-overflow-scrolling:
+            // touch set.
+            mountPoint.hide()
             wrapper.css('display', 'block')
 
             startTask({
