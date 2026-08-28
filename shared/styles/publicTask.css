@@ -607,13 +607,28 @@
        per-element tuning below - not a replacement for it. Zoom shrinks
        layout footprint (not just paint), so it composes correctly with the
        vw/vh-based sizing throughout this file instead of leaving gaps. */
-    #container,
+    #container {
+        zoom: var(--mobile-zoom);
+        /* Unlike .hub-screen below, #container does NOT get its min-height
+           compensated - #container centers its content (justify-content:
+           center) with the button row pinned to the bottom via margin-top:
+           auto, so inflating min-height to force it back to a full 100dvh
+           just grows the empty gap between the content and the buttons
+           (content doesn't grow to match). Leaving min-height as-is keeps
+           trial/instruction screens the compact size they were before this
+           scale-down; the #Wrapper background-color below still covers any
+           leftover space in the app's gray instead of white. */
+    }
+
     .hub-screen {
         zoom: var(--mobile-zoom);
         /* min-height:100dvh (set above/inline) computes BEFORE zoom shrinks
            the rendered result, so a screen with no extra content ends up
            dvh * zoom tall - leaving a gap below it. Scaling the minimum up
-           by 1/zoom first means the shrunk result fills the viewport again. */
+           by 1/zoom first means the shrunk result fills the viewport again.
+           This is safe here (unlike #container above) because .hub-screen's
+           content (the demographics form / task selector) is meant to feel
+           anchored across the full viewport, not tightly compact. */
         min-height: calc(100dvh / var(--mobile-zoom)) !important;
     }
 
@@ -679,7 +694,12 @@
     /* Same uniform safety-margin scale-down as the max-width query above -
        repeated here since a wide-but-short landscape phone (e.g. ~874px
        wide) can hit this query without ever matching the width one. */
-    #container,
+    #container {
+        zoom: var(--mobile-zoom);
+        /* Same reasoning as the max-width query above: no min-height
+           compensation for #container, only for .hub-screen. */
+    }
+
     .hub-screen {
         zoom: var(--mobile-zoom);
         /* Same min-height compensation as the max-width query above. */
