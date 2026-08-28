@@ -9,6 +9,10 @@
     --pub-border: #ccc;
     --pub-red: #FF0000;
     --pub-font: Arial, sans-serif;
+    /* Uniform mobile safety-margin scale-down (see the two mobile @media
+       blocks below that apply it) - a single tunable knob instead of
+       hand-tuning every element's sizing individually. */
+    --mobile-zoom: 0.78;
 }
 
 #publicTaskHubRoot {
@@ -577,6 +581,15 @@
 
 /* Phone widths (portrait phones and most landscape phones) */
 @media (max-width: 620px) {
+    /* Uniform safety-margin scale-down, layered on top of all the
+       per-element tuning below - not a replacement for it. Zoom shrinks
+       layout footprint (not just paint), so it composes correctly with the
+       vw/vh-based sizing throughout this file instead of leaving gaps. */
+    #container,
+    .hub-screen {
+        zoom: var(--mobile-zoom);
+    }
+
     .hub-form {
         width: 92%;
     }
@@ -636,6 +649,14 @@
    itself instructs participants into) have very little vertical room, so
    vh-based sizing needs its own floor independent of width. */
 @media (max-height: 480px) and (orientation: landscape) {
+    /* Same uniform safety-margin scale-down as the max-width query above -
+       repeated here since a wide-but-short landscape phone (e.g. ~874px
+       wide) can hit this query without ever matching the width one. */
+    #container,
+    .hub-screen {
+        zoom: var(--mobile-zoom);
+    }
+
     .public-pre-instruction-root {
         margin-top: 12px;
     }

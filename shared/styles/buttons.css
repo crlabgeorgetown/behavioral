@@ -126,11 +126,10 @@
         padding: 6px 12px;
     }
 
-    .grey-button {
-        padding: 6px 12px;
-    }
-
-    .medium-button-text {
-        font-size: 16pt;
-    }
+    /* Button size itself is intentionally NOT shrunk here anymore - the
+       uniform --mobile-zoom scale-down (shared/styles/publicTask.css)
+       already shrinks it. Also reducing padding/font-size here on top of
+       that compounded into a sub-44px tap target (measured ~31px tall) -
+       letting zoom be the only shrink factor keeps it comfortably tappable
+       (~48px) while still ending up meaningfully smaller than desktop. */
 }
