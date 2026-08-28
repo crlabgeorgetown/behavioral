@@ -71,41 +71,10 @@
     }
 }
 
-/* Phone widths: the queries above only ever matched iPad-class devices, so
-   phones got no font scaling at all. Additive only. */
-@media (max-width: 620px) {
-    .extra-large-text {
-        font-size: clamp(28pt, 11vw, 60pt);
-    }
-
-    .large-text {
-        font-size: clamp(22pt, 8vw, 44pt);
-    }
-
-    .medium-text {
-        font-size: clamp(18pt, 6vw, 33pt);
-    }
-
-    .small-text {
-        font-size: clamp(13pt, 4.5vw, 20pt);
-    }
-}
-
-/* Short-height viewports: phones in landscape need font size tied to
-   available height, not just width, or text overflows the stimulus area. */
-@media (max-height: 480px) and (orientation: landscape) {
-    .extra-large-text {
-        font-size: clamp(24pt, 14vh, 60pt);
-        font-size: clamp(24pt, 14dvh, 60pt);
-    }
-
-    .large-text {
-        font-size: clamp(20pt, 11vh, 44pt);
-        font-size: clamp(20pt, 11dvh, 44pt);
-    }
-
-    .medium-text {
-        font-size: clamp(16pt, 9vh, 33pt);
-        font-size: clamp(16pt, 9dvh, 33pt);
-    }
-}
+/* Phone widths/heights used to get their own font-size reductions here, but
+   shared/styles/publicTask.css now applies a uniform --mobile-zoom scale-down
+   to the whole public page at these same breakpoints. Reducing font-size
+   here too compounded with that zoom (double-shrink) - and since the two
+   breakpoints below reduced by different amounts, text ended up visibly
+   different sizes between portrait and landscape. Removed; zoom is now the
+   single source of "smaller" for these breakpoints. */

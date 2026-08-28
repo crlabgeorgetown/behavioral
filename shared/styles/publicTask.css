@@ -26,6 +26,10 @@
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
+    /* Once --mobile-zoom shrinks .hub-screen's rendered footprint, any
+       leftover space below it would otherwise show through to the page's
+       background - keep it the same gray instead of a jarring white bar. */
+    background: var(--pub-bg);
 }
 
 .hub-screen {
@@ -67,6 +71,22 @@
 .hub-form .participant-id-input {
     width: auto;
     flex: 1;
+    box-sizing: border-box;
+}
+
+/* The Education <select> renders with the OS's native form-control chrome
+   (a grayish fill, different internal padding than a text <input>) unless
+   appearance is reset - that's why it looked visually different in size and
+   color from the Age/Code fields even though all three share this class. */
+.hub-form select.participant-id-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='16'%20height='16'%20viewBox='0%200%2016%2016'%3E%3Cpath%20d='M4%206l4%204%204-4'%20stroke='%23333333'%20stroke-width='2'%20fill='none'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
 }
 
 .hub-task-options {
@@ -139,6 +159,8 @@
     z-index: 100;
     overflow-y: auto;
     overflow-x: hidden;
+    /* Same reasoning as #publicTaskHubRoot's background above. */
+    background: var(--pub-bg);
 }
 
 .public-practice-video-stack {
@@ -588,6 +610,11 @@
     #container,
     .hub-screen {
         zoom: var(--mobile-zoom);
+        /* min-height:100dvh (set above/inline) computes BEFORE zoom shrinks
+           the rendered result, so a screen with no extra content ends up
+           dvh * zoom tall - leaving a gap below it. Scaling the minimum up
+           by 1/zoom first means the shrunk result fills the viewport again. */
+        min-height: calc(100dvh / var(--mobile-zoom)) !important;
     }
 
     .hub-form {
@@ -606,10 +633,10 @@
         margin-bottom: 6px;
     }
 
-    .hub-task-option {
-        font-size: 18pt;
-        padding: 12px 16px;
-    }
+    /* .hub-task-option keeps its full default size here now - the
+       --mobile-zoom scale-down above already shrinks it. Reducing font-size/
+       padding here too compounded into noticeably smaller text than the
+       landscape breakpoint got, which only had zoom applied. */
 
     .public-instruction-header,
     .public-instruction-header--written {
@@ -655,6 +682,8 @@
     #container,
     .hub-screen {
         zoom: var(--mobile-zoom);
+        /* Same min-height compensation as the max-width query above. */
+        min-height: calc(100dvh / var(--mobile-zoom)) !important;
     }
 
     .public-pre-instruction-root {
