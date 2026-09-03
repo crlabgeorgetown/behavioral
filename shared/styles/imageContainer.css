@@ -120,17 +120,28 @@
         height: min(64vh, 700px);
         height: min(64dvh, 700px);
         column-gap: clamp(16px, 6vw, 60px);
-        row-gap: clamp(16px, 6vw, 72px);
+        --cresp-row-gap: clamp(16px, 6vw, 72px);
+        row-gap: var(--cresp-row-gap);
         padding: clamp(6px, 1.5vw, 18px);
     }
 
-    /* The cresp word sits absolutely centered in the row-gap above. At this
-       breakpoint the gap shrinks well below the word's normal (large/extra-
-       large-text) size, so it overlaps the images unless shrunk too. ID
-       selector wins over the .large-text/.extra-large-text class regardless
-       of which one's applied. */
+    /* This breakpoint doesn't otherwise touch the instruction-preview grid's
+       sizing, so mirror its unmodified row-gap (see the base rule above)
+       here just so the word below can track it too. */
+    .four-image-container-instruction{
+        --cresp-row-gap: clamp(24px, 5vh, 84px);
+    }
+
+    /* The cresp word sits absolutely centered in the row-gap above. Tie its
+       size to that actual gap (a custom property inherited from whichever
+       grid variant is active) instead of guessing a fixed number - it was
+       overlapping the images before this fix, then too small after a first
+       pass that just picked a smaller fixed size. Sizing it relative to the
+       gap means it always uses the room that's actually there. ID selector
+       wins over the .large-text/.extra-large-text class regardless of which
+       one's applied. */
     #text-cresp-container {
-        font-size: 18pt;
+        font-size: clamp(14px, calc(var(--cresp-row-gap) * 0.85), 40px);
     }
 }
 
@@ -140,8 +151,9 @@
     .four-image-container{
         height: min(92vh, 900px);
         height: min(92dvh, 900px);
-        row-gap: clamp(10px, 5vh, 72px);
-        row-gap: clamp(10px, 5dvh, 72px);
+        --cresp-row-gap: clamp(10px, 5vh, 72px);
+        --cresp-row-gap: clamp(10px, 5dvh, 72px);
+        row-gap: var(--cresp-row-gap);
         column-gap: clamp(16px, 4vw, 240px);
         padding: clamp(4px, 1vh, 18px);
         padding: clamp(4px, 1dvh, 18px);
@@ -154,17 +166,19 @@
     .four-image-container-instruction{
         height: min(50vh, 560px);
         height: min(50dvh, 560px);
-        row-gap: clamp(6px, 3vh, 84px);
-        row-gap: clamp(6px, 3dvh, 84px);
+        --cresp-row-gap: clamp(6px, 3vh, 84px);
+        --cresp-row-gap: clamp(6px, 3dvh, 84px);
+        row-gap: var(--cresp-row-gap);
         column-gap: clamp(16px, 4vw, 84px);
         padding: clamp(2px, 0.6vh, 20px);
         padding: clamp(2px, 0.6dvh, 20px);
     }
 
-    /* Same reasoning as the max-width query above - the row-gap here is
-       even tighter, so the word needs to be a bit smaller still. */
+    /* Same reasoning as the max-width query above - track whichever grid
+       variant (trial vs instruction-preview) is actually active, since they
+       have different gaps. */
     #text-cresp-container {
-        font-size: 16pt;
+        font-size: clamp(14px, calc(var(--cresp-row-gap) * 0.85), 40px);
     }
 }
 
