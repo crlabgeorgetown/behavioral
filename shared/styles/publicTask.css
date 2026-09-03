@@ -614,16 +614,32 @@
        vw/vh-based sizing throughout this file instead of leaving gaps. */
     #container {
         zoom: var(--mobile-zoom);
-        /* Unlike .hub-screen below, #container does NOT get its min-height
-           compensated - #container centers its content (justify-content:
-           center) with the button row pinned to the bottom via margin-top:
-           auto, so inflating min-height to force it back to a full 100dvh
-           just grows the empty gap between the content and the buttons
-           (content doesn't grow to match). Leaving min-height as-is keeps
-           trial/instruction screens the compact size they were before this
-           scale-down; the #Wrapper background-color below still covers any
-           leftover space in the app's gray instead of white. */
     }
+
+    /* Real trial screens (tap-to-respond, no Next/Previous row) have no
+       auto-margin item, so #container's content just centers within
+       #container's own box - and if that box is left at its shrunk
+       (post-zoom) height, it only fills ~78% of the viewport, leaving a
+       permanent blank strip below even though the content itself is
+       correctly centered inside it. Compensating min-height here fixes
+       that by making the box (and so the centering) span the full
+       viewport again - confirmed via getBoundingClientRect: the grid was
+       sitting with equal ~123px above and below WITHIN its box, just the
+       box itself was short. Screens WITH a button row deliberately do NOT
+       get this - see the comment below. */
+    #container:not(:has(.instruction-button-container)) {
+        min-height: calc(100dvh / var(--mobile-zoom)) !important;
+    }
+
+    /* Instruction/practice-preview screens DO have a button row, and that
+       row's margin-top:auto eats all recovered space by itself instead of
+       it being shared as symmetric centering room - compensating min-height
+       for these just grows the gap between the content and the buttons
+       instead of helping. Left uncompensated on purpose (the :not() rule
+       above simply doesn't match them, so the plain min-height:100dvh
+       !important set outside this media query stands); the #Wrapper
+       background-color below still covers any leftover space in the app's
+       gray instead of white. */
 
     .hub-screen {
         zoom: var(--mobile-zoom);
@@ -701,8 +717,14 @@
        wide) can hit this query without ever matching the width one. */
     #container {
         zoom: var(--mobile-zoom);
-        /* Same reasoning as the max-width query above: no min-height
-           compensation for #container, only for .hub-screen. */
+    }
+
+    /* Same reasoning as the max-width query above: compensate min-height
+       only for #container instances with no button row (real trial
+       screens), not for instruction/practice-preview screens (which have
+       one, pinned via margin-top:auto). */
+    #container:not(:has(.instruction-button-container)) {
+        min-height: calc(100dvh / var(--mobile-zoom)) !important;
     }
 
     .hub-screen {
