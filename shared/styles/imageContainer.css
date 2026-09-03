@@ -123,6 +123,15 @@
         row-gap: clamp(16px, 6vw, 72px);
         padding: clamp(6px, 1.5vw, 18px);
     }
+
+    /* The cresp word sits absolutely centered in the row-gap above. At this
+       breakpoint the gap shrinks well below the word's normal (large/extra-
+       large-text) size, so it overlaps the images unless shrunk too. ID
+       selector wins over the .large-text/.extra-large-text class regardless
+       of which one's applied. */
+    #text-cresp-container {
+        font-size: 18pt;
+    }
 }
 
 /* Short-height viewports: phones in landscape (the orientation the app
@@ -150,6 +159,12 @@
         column-gap: clamp(16px, 4vw, 84px);
         padding: clamp(2px, 0.6vh, 20px);
         padding: clamp(2px, 0.6dvh, 20px);
+    }
+
+    /* Same reasoning as the max-width query above - the row-gap here is
+       even tighter, so the word needs to be a bit smaller still. */
+    #text-cresp-container {
+        font-size: 16pt;
     }
 }
 
