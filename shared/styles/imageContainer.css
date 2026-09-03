@@ -120,7 +120,10 @@
         height: min(64vh, 700px);
         height: min(64dvh, 700px);
         column-gap: clamp(16px, 6vw, 60px);
-        --cresp-row-gap: clamp(16px, 6vw, 72px);
+        /* Was clamp(16px, 6vw, 72px) - matched to the instruction-preview
+           grid's row-gap below instead, so the cresp word ends up the same
+           size in both (previously 20.5px here vs 37.1px there). */
+        --cresp-row-gap: clamp(24px, 5vh, 84px);
         row-gap: var(--cresp-row-gap);
         padding: clamp(6px, 1.5vw, 18px);
     }
@@ -141,7 +144,7 @@
        wins over the .large-text/.extra-large-text class regardless of which
        one's applied. */
     #text-cresp-container {
-        font-size: clamp(14px, calc(var(--cresp-row-gap) * 0.85), 40px);
+        font-size: clamp(14px, calc(var(--cresp-row-gap) * 1), 48px);
     }
 }
 
@@ -171,9 +174,11 @@
     .four-image-container-instruction{
         height: min(50vh, 560px);
         height: min(50dvh, 560px);
-        /* Same reasoning as .four-image-container's row-gap bump above. */
-        --cresp-row-gap: clamp(10px, 5vh, 84px);
-        --cresp-row-gap: clamp(10px, 5dvh, 84px);
+        /* Was clamp(10px, 5vh, 84px) - matched to the trial grid's row-gap
+           above instead, so the cresp word ends up the same size in both
+           (previously 22.1px here vs 35.4px there). */
+        --cresp-row-gap: clamp(16px, 8vh, 72px);
+        --cresp-row-gap: clamp(16px, 8dvh, 72px);
         row-gap: var(--cresp-row-gap);
         column-gap: clamp(16px, 4vw, 84px);
         padding: clamp(2px, 0.6vh, 20px);
@@ -182,12 +187,12 @@
 
     /* Same reasoning as the max-width query above - track whichever grid
        variant (trial vs instruction-preview) is actually active, since they
-       have different gaps. Ratio here is bigger (1.1 vs 0.85) because a
-       word's actual ink is shorter than its nominal font-size/line-height
-       box - desktop already relies on that same slack (60pt text sitting in
-       a ~72-90px gap and never overlapping). */
+       have different gaps. Ratio here is bigger than the max-width query's
+       (1.3 vs 1) because a word's actual ink is shorter than its nominal
+       font-size/line-height box - desktop already relies on that same slack
+       (60pt text sitting in a ~72-90px gap and never overlapping). */
     #text-cresp-container {
-        font-size: clamp(18px, calc(var(--cresp-row-gap) * 1.1), 44px);
+        font-size: clamp(18px, calc(var(--cresp-row-gap) * 1.3), 52px);
     }
 }
 
